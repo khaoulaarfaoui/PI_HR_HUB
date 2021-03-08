@@ -81,14 +81,6 @@ export default function Navbar(props) {
                 </a>
               </li>
 
-              <li className="flex items-center">
-                <button
-                  className="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  <i className="fas fa-arrow-alt-circle-down"></i> Download
-                </button>
-              </li>
             </ul>
           </div>
         </div>
