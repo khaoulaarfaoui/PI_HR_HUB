@@ -41,7 +41,7 @@ export default function FooterAdmin() {
                     href="http://blog.creative-tim.com?ref=nr-footer-admin"
                     className="text-gray-700 hover:text-gray-900 text-sm font-semibold block py-1 px-3"
                   >
-                    Blog
+                    Blog AMir yazidi !!! hello 4twi4 
                   </a>
                 </li>
                 <li>
