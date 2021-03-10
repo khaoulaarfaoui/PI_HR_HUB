@@ -22,7 +22,7 @@ export default function Index() {
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
-              <h2 className="font-semibold text-4xl text-gray-700">
+              <h2 className="text-black font-semibold text-4xl">
                 Recruitment made easier.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-gray-600">
@@ -55,7 +55,6 @@ export default function Index() {
             <img src={image3} className="sliderimg" alt="" />
             <img src={image4} alt="" />
             <img src={image5} className="sliderimg" alt="" />
-            <img src={image4} alt="" />
             <img src={image6} className="sliderimg" alt="" />
             <img src={image7} className="sliderimg" alt="" />
           </AliceCarousel>
@@ -69,19 +68,19 @@ export default function Index() {
               <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                 <i className="fas fa-briefcase text-xl"></i>
               </div>
-              <h3 className="text-3xl mb-2 font-semibold leading-normal">
+              <h3 className="text-3xl mb-2 text-black font-semibold leading-normal">
                 HR HUB for Employers
               </h3>
-              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
+              <p className="mt-4 text-lg leading-relaxed text-gray-600">
                 We aim to help HR cabinets & headhunters to have the best
-                recruitment experience.
+                recruitment experience.<br></br>
               </p>
               <div className="block pb-6">
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                   Chatbot
                 </span>
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
-                  BI
+                  Business Intelligence
                 </span>
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                   Smart testing
@@ -102,7 +101,7 @@ export default function Index() {
               <a
                 href="https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=nr-index"
                 target="_blank"
-                className="font-bold text-gray-800 hover:text-gray-600 ease-linear transition-all duration-150"
+                className="font-bold text-blue-300 hover:text-gray-600 ease-linear transition-all duration-150"
               >
                 Learn more{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
@@ -240,10 +239,10 @@ export default function Index() {
               <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                 <i className="fas fa-user-friends text-xl"></i>
               </div>
-              <h3 className="text-3xl mb-2 font-semibold leading-normal">
+              <h3 className="text-3xl mb-2 text-black font-semibold leading-normal">
                 HR HUB for Candidates
               </h3>
-              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
+              <p className="mt-4 text-lg leading-relaxed text-gray-600">
                 We provide for our candidates a recommendation system and an
                 E-learning side to improve their skills for a better future.
               </p>
@@ -251,7 +250,7 @@ export default function Index() {
               <a
                 href="https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=nr-index"
                 target="_blank"
-                className="font-bold text-gray-800 hover:text-gray-600 ease-linear transition-all duration-150"
+                className="font-bold text-blue-300 hover:text-gray-600 ease-linear transition-all duration-150"
               >
                 Learn more{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
