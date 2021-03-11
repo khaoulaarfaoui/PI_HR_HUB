@@ -81,9 +81,6 @@ export default function Navbar(props) {
                   <span className="lg:hidden inline-block ml-2">Star</span>
                 </a>
               </li>
-
-<<<<<<< HEAD
-=======
               <li className="flex items-center">
                 <Link to="/auth/login">
                   <button
@@ -94,7 +91,6 @@ export default function Navbar(props) {
                   </button>{" "}
                 </Link>
               </li>
->>>>>>> arfaoui
             </ul>
           </div>
         </div>
