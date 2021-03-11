@@ -22,7 +22,7 @@ export default function Index() {
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
-              <h2 className="text-HR-title font-semibold text-4xl">
+              <h2 className=" titlelightmode text-HR-title font-semibold text-4xl">
                 Recruitment made easier.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-gray-600">
@@ -67,7 +67,7 @@ export default function Index() {
                 <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                   <i className="fas fa-briefcase text-xl"></i>
                 </div>
-                <h3 className="text-3xl mb-2 text-blue-600 font-semibold leading-normal">
+                <h3 className="titlelightmode text-3xl mb-2 text-blue-600 font-semibold leading-normal">
                   HR HUB for Employers
                 </h3>
                 <p className="mt-4 text-lg leading-relaxed text-gray-600">
@@ -221,7 +221,7 @@ export default function Index() {
                 <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                   <i className="fas fa-user-friends text-xl"></i>
                 </div>
-                <h3 className="text-3xl mb-2 text-blue-600 font-semibold leading-normal">
+                <h3 className=" titlelightmode text-3xl mb-2 text-blue-600 font-semibold leading-normal">
                   HR HUB for Candidates
                 </h3>
                 <p className="mt-4 text-lg leading-relaxed text-gray-600">
@@ -242,7 +242,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="pb-16 bg-gray-300 relative pt-32">
+      <section className="  pb-16 bg-gray-300 relative pt-32">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
@@ -263,8 +263,8 @@ export default function Index() {
           </svg>
         </div>
 
-        <div className="container mx-auto">
-          <div className="flex flex-wrap justify-center bg-white shadow-xl rounded-lg -mt-64 py-16 px-12 relative z-10">
+        <div className=" container mx-auto">
+          <div className=" bannerdarkmode flex flex-wrap justify-center bg-white shadow-xl rounded-lg -mt-64 py-16 px-12 relative z-10">
             <div className="w-full text-center lg:w-8/12">
               <p className="text-4xl text-center">
                 <span role="img" aria-label="love">
