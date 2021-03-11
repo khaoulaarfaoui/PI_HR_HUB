@@ -28,7 +28,7 @@ export default function Footer() {
             <div className="w-full lg:w-6/12 px-4">
               <h4 className="text-3xl font-semibold">Let's keep in touch!</h4>
               <h5 className="text-lg mt-0 mb-2 text-gray-700">
-                Find us on any of these platforms, we respond 1-2 business days.
+                Find us on any of these platforms, we want to conenect with you.
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
@@ -93,7 +93,7 @@ export default function Footer() {
                         className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
                         href="https://www.creative-tim.com/bootstrap-themes/free?ref=nr-footer"
                       >
-                        Free Products
+                        Free Trail
                       </a>
                     </li>
                   </ul>
@@ -144,12 +144,12 @@ export default function Footer() {
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-4/12 px-4 mx-auto text-center">
               <div className="text-sm text-gray-600 font-semibold py-1">
-                Copyright © {new Date().getFullYear()} Notus React by{" "}
+                Copyright © {new Date().getFullYear()} Created With Love By{" "}
                 <a
                   href="https://www.creative-tim.com?ref=nr-footer"
                   className="text-gray-600 hover:text-gray-900"
                 >
-                  Creative Tim
+                  HR HUB
                 </a>
                 .
               </div>
