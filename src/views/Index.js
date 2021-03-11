@@ -22,7 +22,7 @@ export default function Index() {
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
-              <h2 className="text-black font-semibold text-4xl">
+              <h2 className="text-HR-title font-semibold text-4xl">
                 Recruitment made easier.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-gray-600">
@@ -67,39 +67,40 @@ export default function Index() {
                 <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                   <i className="fas fa-briefcase text-xl"></i>
                 </div>
-                <h3 className="text-3xl mb-2 text-black font-semibold leading-normal">
+                <h3 className="text-3xl mb-2 text-blue-600 font-semibold leading-normal">
                   HR HUB for Employers
                 </h3>
                 <p className="mt-4 text-lg leading-relaxed text-gray-600">
                   We aim to help HR cabinets & headhunters to have the best
-                  recruitment experience.<br></br>
+                  recruitment experience.
                 </p>
-                <div className="block pb-6">
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
+                <br />
+                <div className=" block pb-6">
+                  <span className="text-xs shadow-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                     Chatbot
                   </span>
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
+                  <span className="text-xs shadow-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                     Business Intelligence
                   </span>
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
+                  <span className="text-xs shadow-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                     Smart testing
                   </span>
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
+                  <span className="text-xs shadow-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                     Evaluation
                   </span>
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
+                  <span className="text-xs shadow-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                     Notes
                   </span>
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
+                  <span className="text-xs shadow-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                     Video-Conf
                   </span>
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
+                  <span className="text-xs shadow-lg font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-white uppercase last:mr-0 mr-2 mt-2">
                     Virtual events
                   </span>
                 </div>
                 <a
                   target="_blank"
-                  className="font-bold text-blue-300 hover:text-gray-600 ease-linear transition-all duration-150"
+                  className="font-bold text-blue-400 hover:text-blue-600 ease-linear transition-all duration-150"
                 >
                   Learn more{" "}
                   <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
@@ -220,7 +221,7 @@ export default function Index() {
                 <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                   <i className="fas fa-user-friends text-xl"></i>
                 </div>
-                <h3 className="text-3xl mb-2 text-black font-semibold leading-normal">
+                <h3 className="text-3xl mb-2 text-blue-600 font-semibold leading-normal">
                   HR HUB for Candidates
                 </h3>
                 <p className="mt-4 text-lg leading-relaxed text-gray-600">
@@ -230,7 +231,7 @@ export default function Index() {
 
                 <a
                   target="_blank"
-                  className="font-bold text-blue-300 hover:text-gray-600 ease-linear transition-all duration-150"
+                  className="font-bold text-blue-400 hover:text-blue-600 ease-linear transition-all duration-150"
                 >
                   Learn more{" "}
                   <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
