@@ -4,7 +4,6 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { Link } from "react-router-dom";
 import image1 from "../assets/img/cvs.svg";
-import image2 from "../assets/img/teamwork.svg";
 import image3 from "../assets/img/team.svg";
 import image4 from "../assets/img/teamwork.svg";
 import image5 from "../assets/img/collab.svg";

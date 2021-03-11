@@ -961,7 +961,14 @@ video {
   background-color: #4a5568;
   background-color: rgba(74, 85, 104, var(--bg-opacity));
 }
-
+.bg-gray-400 {
+  --bg-opacity: 1;
+  background-color: #94a3b8;
+}
+.bg-gray-600 {
+  --bg-opacity: 1;
+  background-color: #4b5563;
+}
 .bg-gray-800 {
   --bg-opacity: 1;
   background-color: #2d3748;
