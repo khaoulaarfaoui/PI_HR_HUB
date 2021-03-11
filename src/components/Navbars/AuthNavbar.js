@@ -14,11 +14,7 @@ export default function Navbar(props) {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link to="/">
-              <img
-                alt="..."
-                src={require("assets/img/HRHUB.png")}
-                className="mx-auto"
-              />
+              <img alt="..." className="mx-auto" />
             </Link>
           </div>
         </div>
