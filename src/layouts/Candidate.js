@@ -16,7 +16,7 @@ import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
 
-export default function Admin() {
+export default function Candidate() {
   return (
     <>
       <SidebarCandidate />
