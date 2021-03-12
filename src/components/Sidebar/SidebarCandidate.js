@@ -2,40 +2,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import NotificationDropdown from "components/Dropdowns/CandidateDropDowns/NotificationDropdown";
-import UserDropdown from "components/Dropdowns/CandidateDropDowns/UserDropdown";
-
 export default function SidebarCandidate() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-2 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-no-wrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
-          {/* Toggler */}
-          {/* <button
-            className="cursor-pointer text-black opacity-100  px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-            type="button"
-            onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}
-          >
-            <i className="fas fa-bars"></i>
-          </button> */}
-          {/* Brand */}
-          {/* <Link
-            className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-            to="/"
-          >
-            Notus React
-          </Link> */}
-          {/* User */}
-          {/* <ul className="md:hidden items-center flex flex-wrap list-none">
-            <li className="inline-block relative">
-              <NotificationDropdown />
-            </li>
-            <li className="inline-block relative">
-              <UserDropdown />
-            </li>
-          </ul> */}
-          {/* Collapse */}
           <div className="md:block text-left md:pb-2  text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0">
             <img
               className="w-28 mx-auto mb-3"
@@ -89,7 +61,27 @@ export default function SidebarCandidate() {
                   Dashboard
                 </Link>
               </li>
-
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/candidate/tests") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/candidate/tests"
+                >
+                  <i
+                    className={
+                      "fas fa-file-alt mr-2 text-sm " +
+                      (window.location.href.indexOf("/candidate/tests") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Tests
+                </Link>
+              </li>
               <li className="items-center">
                 <Link
                   className={
