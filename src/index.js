@@ -15,6 +15,7 @@ import Auth from "layouts/Auth.js";
 import Landing from "views/Landing.js";
 import Profile from "views/Profile.js";
 import Index from "views/Index.js";
+import EventView from "views/EventView.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -25,6 +26,7 @@ ReactDOM.render(
       {/* add routes without layouts */}
       <Route path="/landing" exact component={Landing} />
       <Route path="/profile" exact component={Profile} />
+      <Route path="/EventView" exact component={EventView}></Route>
       <Route path="/" exact component={Index} />
       {/* add redirect for first page */}
       <Redirect from="*" to="/" />
