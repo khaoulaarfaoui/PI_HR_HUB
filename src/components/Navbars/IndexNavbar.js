@@ -4,8 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
 // components
 
-import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
-
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
