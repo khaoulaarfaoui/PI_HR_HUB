@@ -2,9 +2,9 @@ import React from "react";
 
 // components
 
-import CardStats from "components/Cards/CardsHR/CardStats.js";
+import CardStats from "components/Cards/CardsCandidate/CardStats.js";
 
-export default function HeaderStats() {
+export default function HeaderStatsCandidate() {
   return (
     <>
       {/* Header */}

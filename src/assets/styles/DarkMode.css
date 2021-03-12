@@ -21,7 +21,7 @@
   outline: 0px;
 }
 :root {
-  --blue: rgb(26, 57, 87);
+  --blue: #0d1117;
   --white: rgb(236, 236, 236);
 }
 body.light {
@@ -35,7 +35,7 @@ body.dark {
   --font-weight: 500;
 }
 body.dark nav {
-  background-color: #1a3957;
+  background-color: #161b22;
 }
 body {
   background: var(--background-color);
