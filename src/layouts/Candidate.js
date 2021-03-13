@@ -8,14 +8,15 @@ import HeaderStats from "components/Headers/HeaderStatsCandidate.js";
 import FooterAdmin from "components/Footers/FooterCandidate.js";
 
 // views
-
+import Profile from "views/candidate/Profile.js";
 import Dashboard from "views/candidate/Dashboard.js";
+import Tests from "views/candidate/Tests.js";
 import Maps from "views/candidate/Maps.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
 
-export default function Admin() {
+export default function Candidate() {
   return (
     <>
       <SidebarCandidate />
@@ -26,6 +27,8 @@ export default function Admin() {
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
           <Switch>
             <Route path="/candidate/dashboard" exact component={Dashboard} />
+            <Route path="/candidate/profile" exact component={Profile} />
+            <Route path="/candidate/tests" exact component={Tests} />
             <Route path="/candidate/maps" exact component={Maps} />
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
