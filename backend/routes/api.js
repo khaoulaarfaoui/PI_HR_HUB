@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const db = "mongodb://localhost:27017/HRHUBdb";
+const db =
+  "mongodb+srv://HR_HUB:root2021@cluster0.1ymld.mongodb.net/HRHUB?retryWrites=true&w=majority";
 const Jobs = require("../models/jobs");
 
 mongoose.connect(db, (err) => {

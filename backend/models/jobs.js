@@ -7,6 +7,8 @@ const jobSchema = new Schema({
   description: String,
   salary: Number,
   requirement: String,
+  //Candidate: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
+
   date: {
     type: Date,
     default: Date.now,
