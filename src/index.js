@@ -16,7 +16,7 @@ import Auth from "layouts/Auth.js";
 import Landing from "views/Landing.js";
 import Profile from "views/Profile.js";
 import Index from "views/Index.js";
-import EventView from "views/EventView.js";
+import EventView from "views/EventManagement/EventView.js";
 
 ReactDOM.render(
   <BrowserRouter>

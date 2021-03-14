@@ -11,10 +11,10 @@ import FooterAdmin from "components/Footers/FooterCandidate.js";
 import Profile from "views/candidate/Profile.js";
 import Dashboard from "views/candidate/Dashboard.js";
 import Tests from "views/candidate/Tests.js";
-import Maps from "views/candidate/Maps.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
+import EventView from "views/EventManagement/EventView.js";
 
 export default function Candidate() {
   return (
@@ -29,10 +29,10 @@ export default function Candidate() {
             <Route path="/candidate/dashboard" exact component={Dashboard} />
             <Route path="/candidate/profile" exact component={Profile} />
             <Route path="/candidate/tests" exact component={Tests} />
-            <Route path="/candidate/maps" exact component={Maps} />
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
             <Redirect from="/candidate" to="/candidate/dashboard" />
+            <Route path="/EventView" exact component={EventView}></Route>
           </Switch>
           <FooterAdmin />
         </div>

@@ -9,6 +9,7 @@
     "@popperjs/core": "2.5.1",
     "@tailwindcss/custom-forms": "0.2.1",
     "chart.js": "2.9.3",
+    "drei": "^2.2.21",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "react": "16.13.1",
@@ -19,9 +20,13 @@
     "react-reveal": "^1.2.2",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^4.0.3",
+    "react-spring": "^8.0.27",
+    "react-three-fiber": "^5.3.19",
+    "sass": "^1.32.8",
     "styled-components": "^5.2.1",
-    "tailwindcss": "1.8.10"
+    "tailwindcss": "1.8.10",
+    "three": "^0.126.1"
   },
   "scripts": {
     "start": "react-scripts start",
