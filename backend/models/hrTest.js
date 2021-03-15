@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const customisedTestSchema = new Schema({
+const hrTestSchema = new Schema({
   title: String,
   description: String,
   type: String,
@@ -12,12 +12,8 @@ const customisedTestSchema = new Schema({
   color: String,
   startDate: Date,
   endDate: Date,
-  category: String,
+
   //Candidate: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
 });
 
-module.exports = mongoose.model(
-  "customisedTest",
-  customisedTestSchema,
-  "customisedTests"
-);
+module.exports = mongoose.model("hrTest", hrTestSchema, "hrTest");

@@ -13,6 +13,11 @@ const jobSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+
+  hr: {
+    type: Schema.Types.ObjectId,
+    ref: "HR",
+  },
 });
 
-module.exports = mongoose.model("Job", jobSchema, "Jobs");
+module.exports = mongoose.model("job", jobSchema, "job");
