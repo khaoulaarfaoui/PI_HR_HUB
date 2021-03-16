@@ -10,8 +10,10 @@ const candidateTestSchema = new Schema({
   result: Number,
   startDate: Date,
   endDate: Date,
-
-  //Candidate: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
+  candidate: {
+    type: Schema.Types.ObjectId,
+    ref: "Candidate",
+  },
 });
 
 module.exports = mongoose.model(

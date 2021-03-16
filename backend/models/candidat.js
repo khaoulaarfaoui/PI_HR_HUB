@@ -36,7 +36,7 @@ const candidateSchema = new Schema({
   tests: [
     {
       type: Schema.Types.ObjectId,
-      ref: "test",
+      ref: "candidateTest",
     },
   ],
   teams: [
