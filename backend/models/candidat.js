@@ -3,6 +3,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const candidateSchema = new Schema({
+  fullName: String,
+  username: String,
+  password: String,
+  profilePhoto: File,
+  birthday: Date,
+  email: String,
+  phoneNumber: Number,
+  location: String,
   education: String,
   experience: String,
   states: String,
@@ -12,10 +20,31 @@ const candidateSchema = new Schema({
   teamStatus: Boolean,
   cv: File,
   title: String,
-  ElearningTest: [{ type: mongoose.Schema.ObjectId, ref: "ElearningTest" }],
+  jobs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "job",
+    },
+  ],
+  events: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "event",
+    },
+  ],
 
-  customisedTest: [{ type: mongoose.Schema.ObjectId, ref: "customisedTest" }],
-  Job: [{ type: mongoose.Schema.ObjectId, ref: "Job" }],
+  tests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "test",
+    },
+  ],
+  teams: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "teams",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Candidate", candidateSchema, "Candidate");
