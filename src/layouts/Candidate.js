@@ -21,7 +21,6 @@ export default function Candidate() {
     <>
       <SidebarCandidate />
       <div className="relative md:ml-64 bg-gray-200">
-        <CandidateNavbar />
         {/* Header */}
         <HeaderStats />
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
