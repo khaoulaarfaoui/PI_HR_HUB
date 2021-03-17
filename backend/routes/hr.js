@@ -1,7 +1,15 @@
 const express = require("express");
+const hrController=require("../controllers/hrController")
 const router = express.Router();
-const mongoose = require("mongoose");
 
+router.post("/",hrController.create)
+router.delete("/:id",hrController.delete)
+router.put("/:id",hrController.update)
+router.get("/",hrController.findAll)
+
+
+/*
+const mongoose = require("mongoose");
 const dbe = "mongodb://localhost:27017/job";
 const Jobs = require("../models/jobs");
 const hr = require("../models/hr");
@@ -116,5 +124,5 @@ router.post("/add/:id", async (req, res) => {
   await userById.save();
 
   return res.send(userById);
-});
+});*/
 module.exports = router;

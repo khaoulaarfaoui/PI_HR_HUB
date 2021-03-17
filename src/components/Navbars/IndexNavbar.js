@@ -3,11 +3,8 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
 // components
-<<<<<<< HEAD
-// si Amir jjdjdjd
-import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
-=======
->>>>>>> Mehdy
+
+
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
