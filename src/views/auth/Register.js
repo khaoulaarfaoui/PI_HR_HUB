@@ -1,12 +1,14 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DropdownList from "react-widgets/lib/DropdownList";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-
 import { register } from "../../Redux/actions/user/auth";
+
+let colors = ["admin", "user"];
 
 const required = (value) => {
   if (!value) {
@@ -43,6 +45,8 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [roles, setRole] = useState("");
+
   const [successful, setSuccessful] = useState(false);
 
   const { message } = useSelector((state) => state.message);
@@ -56,6 +60,10 @@ const Register = () => {
   const onChangeEmail = (e) => {
     const email = e.target.value;
     setEmail(email);
+  };
+  const onChangeRole = (e) => {
+    const roles = e;
+    setRole(roles);
   };
 
   const onChangePassword = (e) => {
@@ -71,7 +79,7 @@ const Register = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(username, email, password))
+      dispatch(register(username, email, password, roles))
         .then(() => {
           setSuccessful(true);
         })
@@ -165,6 +173,17 @@ const Register = () => {
                         value={password}
                         onChange={onChangePassword}
                         validations={[required, vpassword]}
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
+                        ROLE
+                      </label>
+                      <DropdownList
+                        data={colors}
+                        defaultValue={"user"}
+                        value={roles}
+                        onChange={onChangeRole}
                       />
                     </div>
                     <div>

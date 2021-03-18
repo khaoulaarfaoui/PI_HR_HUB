@@ -60,11 +60,8 @@ const App = () => {
         <Route path="/user" component={BoardUser} />
         <Route path="/admin" component={BoardAdmin} />
 
-        {currentUser ? (
-          <Route path="/candidate" component={Candidate} />
-        ) : (
-          <Redirect to="/" />
-        )}
+        <Route path="/candidate" component={Candidate} />
+
         <Route path="/" component={Index} />
         <Redirect from="*" to="/" />
       </Switch>
