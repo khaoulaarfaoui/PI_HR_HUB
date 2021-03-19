@@ -37,7 +37,12 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.send({ message: "User was registered successfully!" });
+            res.send({
+              id: user._id,
+              username: user.username,
+              email: user.email,
+              roles: "user",
+            });
           });
         }
       );
@@ -54,8 +59,6 @@ exports.signup = (req, res) => {
             res.status(500).send({ message: err });
             return;
           }
-
-          res.send({ message: "User was registered successfully!" });
         });
       });
     }

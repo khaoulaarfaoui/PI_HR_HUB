@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-const UserSchema = require("./user").CustomerSchema;
+const UserSchema = require("./user");
 
 const candidateSchema = new Schema({
   user: UserSchema,

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const dbe = "mongodb://localhost:27017/job";
+const dbe = "mongodb://localhost:27017/HR_HUB/hr";
 
 const Jobs = require("../models/jobs");
 const hr = require("../models/hr");
@@ -59,7 +59,7 @@ router.post("/add_HR", function (req, res) {
   var newHR = new hr();
 
   newHR.fullName = req.body.fullName;
-  newHR.username = req.body.username;
+  newHR.user = req.body.user;
 
   newHR.save(function (err, insertedHR) {
     if (err) {

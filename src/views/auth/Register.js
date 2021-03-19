@@ -7,8 +7,9 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { register } from "../../Redux/actions/user/auth";
+import { Link } from "react-router-dom";
 
-let colors = ["admin", "user"];
+let authority = ["admin", "user"];
 
 const required = (value) => {
   if (!value) {
@@ -127,7 +128,7 @@ const Register = () => {
                         className="block uppercase text-gray-700 text-xs font-bold mb-2"
                         htmlFor="grid-password"
                       >
-                        Name
+                        UserName
                       </label>
                       <Input
                         type="text"
@@ -180,7 +181,7 @@ const Register = () => {
                         ROLE
                       </label>
                       <DropdownList
-                        data={colors}
+                        data={authority}
                         defaultValue={"user"}
                         value={roles}
                         onChange={onChangeRole}

@@ -18,7 +18,7 @@ export const register = (username, email, password, roles) => (dispatch) => {
 
       dispatch({
         type: SET_MESSAGE,
-        payload: response.data.message,
+        payload: response.data,
       });
 
       return Promise.resolve();
