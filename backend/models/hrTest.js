@@ -12,8 +12,10 @@ const hrTestSchema = new Schema({
   color: String,
   startDate: Date,
   endDate: Date,
-
-  //Candidate: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
+  hr: {
+    type: Schema.Types.ObjectId,
+    ref: "HR",
+  },
 });
 
 module.exports = mongoose.model("hrTest", hrTestSchema, "hrTest");

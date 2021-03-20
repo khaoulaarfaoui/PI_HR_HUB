@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
+const UserSchema = require("./user");
 
 const hrSchema = new Schema({
+  user: UserSchema,
   fullName: String,
-  username: String,
-  password: String,
   profilePhoto: String,
   birthday: Date,
-  email: String,
   phoneNumber: Number,
   location: String,
   company: String,
@@ -31,7 +30,7 @@ const hrSchema = new Schema({
   tests: [
     {
       type: Schema.Types.ObjectId,
-      ref: "test",
+      ref: "hrTest",
     },
   ],
 

@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
+const UserSchema = require("./user");
 
 const candidateSchema = new Schema({
+  user: UserSchema,
   fullName: String,
-  username: String,
-  password: String,
   profilePhoto: File,
   birthday: Date,
-  email: String,
   phoneNumber: Number,
   location: String,
   education: String,
@@ -36,7 +35,7 @@ const candidateSchema = new Schema({
   tests: [
     {
       type: Schema.Types.ObjectId,
-      ref: "test",
+      ref: "candidateTest",
     },
   ],
   teams: [
