@@ -6,7 +6,7 @@ const candidateSchema = new Schema({
   fullName: String,
   username: String,
   password: String,
-  profilePhoto: File,
+  profilePhoto: String,
   birthday: Date,
   email: String,
   phoneNumber: Number,
@@ -18,7 +18,7 @@ const candidateSchema = new Schema({
   SubmittedJobs: Array,
   ratio: Number,
   teamStatus: Boolean,
-  cv: File,
+  cv: String,
   title: String,
   jobs: [
     {
