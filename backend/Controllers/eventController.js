@@ -1,6 +1,29 @@
 const eventsmodel = require("../models/events.js");
+const express = require("express");
+const router = express.Router();
 
 
+router.post("/addEvents", function (req, res) {
+  
+  const newEv = new eventsmodel({
+    eventName: req.body.eventName,
+    eventDate: req.body.eventDate,
+    description: req.body.description,
+  });
+
+  newEv.save(function (err, ev) {
+    if (err) {
+      console.log("Error");
+    } else {
+      res.json(ev);
+      console.log(ev);
+    }
+  });
+});
+
+module.exports = router;
+
+/*
 exports.create = (req, res) => {
     
     //var newEv = new eventsmodel(req.body);
@@ -21,7 +44,7 @@ exports.create = (req, res) => {
   }
 
 
-/*
+
   update: function (req, res) {
     eventsmodel.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function(err,item){
       if (err) {
@@ -59,3 +82,4 @@ exports.create = (req, res) => {
   }
 
 */
+

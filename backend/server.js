@@ -7,7 +7,7 @@ const Role = require("./models/Role");
 const db = require("./models");
 const dbConfig = require("./config/DBconfig");
 
-const eventsmodel = require("./models/events.js");
+const eventsmodel = require("./Controllers/eventController");
 
 const app = express();
 var corsOptions = {
@@ -18,19 +18,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
 
-app.use("/job", job);
-
-// parse requests of content-type - application/json
-
-// parse requests of content-type - application/x-www-form-urlencoded
+//app.use("/job", job);
+app.use("/events",eventsmodel);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8088;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-require("../../PI/backend/routes/User/auth")(app);
-require("../../PI/backend/routes/User/userRoute")(app);
+
+require("./routes/User/auth")(app);
+require("./routes/User/userRoute")(app);
 
 // simple route
 app.get("/", (req, res) => {
