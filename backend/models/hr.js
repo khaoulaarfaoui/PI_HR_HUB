@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-const UserSchema = require("./user");
+//const UserSchema = require("./user");
 
 const hrSchema = new Schema({
-  user: UserSchema,
+  //user: UserSchema,
   fullName: String,
   profilePhoto: String,
   birthday: Date,

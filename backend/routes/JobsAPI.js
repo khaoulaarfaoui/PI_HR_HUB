@@ -2,46 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const dbe = "mongodb://localhost:27017/HR_HUB/hr";
-
 const Jobs = require("../models/jobs");
-const hr = require("../models/hr");
-
-mongoose.connect(dbe, (err) => {
-  if (err) {
-    console.error("Error!" + err);
-  } else {
-    console.log("Connected to mongodb");
-  }
-});
-
-router.post("/add_job/:id", function (req, res) {
-  console.log("post a job");
-
-  let user = req.params;
-  let id = user.id;
-
-  var newJob = new Jobs();
-
-  newJob.description = req.body.description;
-
-  newJob.salary = req.body.salary;
-
-  newJob.requirement = req.body.requirement;
-  newJob.save(function (err, insertedJob) {
-    if (err) {
-      console.log("Error saving  job");
-    } else {
-      res.json(insertedJob);
-      console.log(insertedJob);
-    }
-  });
-  const userById = hr.findById(id);
-
-  userById.jobs.push(newJob);
-  userById.save();
-  res.send(userById);
-});
+const hr = require("../models/user");
 
 router.get("/jobs", function (req, res) {
   console.log("Get request for all jobs");
@@ -59,7 +21,7 @@ router.post("/add_HR", function (req, res) {
   var newHR = new hr();
 
   newHR.fullName = req.body.fullName;
-  newHR.user = req.body.user;
+  console.log(newHR.fullName);
 
   newHR.save(function (err, insertedHR) {
     if (err) {
@@ -114,3 +76,5 @@ router.post("/add/:id", async (req, res) => {
 
   return res.send(userById);
 });
+
+module.exports = router;
