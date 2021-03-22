@@ -5,6 +5,8 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Role = require("../../PI/backend/models/Role");
 const db = require("../../PI/backend/models");
+const candidate = require("./routes/Candidate/CandidateAPI");
+const hr = require("./routes/HR/HRAPI");
 const dbConfig = require("./config/DBconfig");
 
 const app = express();
@@ -21,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
@@ -32,7 +34,8 @@ require("../../PI/backend/routes/User/userRoute")(app);
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
-
+app.use("/candidate", candidate);
+app.use("/hr", hr);
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,

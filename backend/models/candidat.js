@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-const UserSchema = require("./user");
 
 const candidateSchema = new Schema({
-  user: UserSchema,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   fullName: String,
-  profilePhoto: File,
+  profilePhoto: String,
   birthday: Date,
   phoneNumber: Number,
   location: String,
@@ -17,7 +19,7 @@ const candidateSchema = new Schema({
   SubmittedJobs: Array,
   ratio: Number,
   teamStatus: Boolean,
-  cv: File,
+  cv: String,
   title: String,
   jobs: [
     {

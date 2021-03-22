@@ -21,6 +21,7 @@ import { logout } from "./Redux/actions/user/auth";
 import { clearMessage } from "./Redux/actions/user/message";
 
 import { history } from "./helpers/history";
+import RegisterCandidate from "views/auth/RegisterCandidate";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -54,6 +55,7 @@ const App = () => {
 
       <Switch>
         <Route path="/admin" component={Admin} />
+        <Route path="/candidateadd" component={RegisterCandidate} />
         <Route path="/auth" component={Auth} />
         {/* add routes without layouts */}
 
