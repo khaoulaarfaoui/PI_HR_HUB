@@ -3,30 +3,34 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Role = require("../../PI/backend/models/Role");
-const db = require("../../PI/backend/models");
+const Role = require("../../PI_HR_HUB/backend/models/Role");
+const db = require("../../PI_HR_HUB/backend/models");
 const dbConfig = require("./config/DBconfig");
+
+const job = require("./routes/JobsAPI");
 
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
 };
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
 
+app.use("/job", job);
+
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-require("../../PI/backend/routes/User/auth")(app);
-require("../../PI/backend/routes/User/userRoute")(app);
+require("../../PI_HR_HUB/backend/routes/User/auth")(app);
+require("../../PI_HR_HUB/backend/routes/User/userRoute")(app);
 
 // simple route
 app.get("/", (req, res) => {
