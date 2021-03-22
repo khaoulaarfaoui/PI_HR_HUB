@@ -3,9 +3,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Role = require("../../PI/backend/models/Role");
-const db = require("../../PI/backend/models");
+const Role = require("./models/Role");
+const db = require("./models");
 const dbConfig = require("./config/DBconfig");
+
+const eventsmodel = require("./models/events.js");
 
 const app = express();
 var corsOptions = {
@@ -21,12 +23,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8088;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-require("../../PI/backend/routes/User/auth")(app);
-require("../../PI/backend/routes/User/userRoute")(app);
+require("./routes/User/auth")(app);
+require("./routes/User/userRoute")(app);
 
 // simple route
 app.get("/", (req, res) => {
@@ -46,6 +48,8 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+
+
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
