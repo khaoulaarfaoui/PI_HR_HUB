@@ -6,6 +6,7 @@ import { Router, Switch, Route, Redirect } from "react-router-dom";
 import NavbarCandidate from "./components/Navbars/CandidateNavbar";
 
 // layouts
+import ChatBotRobot from "./components/Chatbot/Chatbot.compoenent";
 
 import Admin from "layouts/Admin";
 import Candidate from "layouts/Candidate";
