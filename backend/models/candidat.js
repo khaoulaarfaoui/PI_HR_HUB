@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = require("./user");
 
 const candidateSchema = new Schema({
-  user: UserSchema,
+  //user: UserSchema,
   fullName: String,
   profilePhoto: File,
   birthday: Date,
