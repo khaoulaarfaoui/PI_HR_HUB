@@ -2,7 +2,7 @@
 import React from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import image1 from "../assets/img/cvs.svg";
 import image3 from "../assets/img/team.svg";
 import image4 from "../assets/img/teamwork.svg";
@@ -13,6 +13,7 @@ import image7 from "../assets/img/linkedin.svg";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import Fade from "react-reveal/Fade";
+
 export default function Index() {
   return (
     <>

@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 // components
 
-import CandidateNavbar from "components/Navbars/CandidateNavbar";
+//import CandidateNavbar from "components/Navbars/CandidateNavbar";
 import HeaderStats from "components/Headers/HeaderStatsCandidate.js";
 import FooterAdmin from "components/Footers/FooterCandidate.js";
 
@@ -14,7 +14,7 @@ import Tests from "views/candidate/Tests.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
-import EventView from "views/EventManagement/EventView.js";
+
 
 export default function Candidate() {
   return (
@@ -31,7 +31,7 @@ export default function Candidate() {
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
             <Redirect from="/candidate" to="/candidate/dashboard" />
-            <Route path="/EventView" exact component={EventView}></Route>
+            
           </Switch>
           <FooterAdmin />
         </div>

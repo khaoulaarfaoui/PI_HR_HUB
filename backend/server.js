@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const Role = require("./models/Role");
 const db = require("./models");
 const dbConfig = require("./config/DBconfig");
-
-const eventsmodel = require("./Controllers/eventController");
+const job = require("./routes/JobsAPI");
+const eventsmodel = require("./Controllers/events/eventController");
 
 const app = express();
 var corsOptions = {
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
 
-//app.use("/job", job);
+app.use("/job", job);
 app.use("/events",eventsmodel);
 
 // set port, listen for requests

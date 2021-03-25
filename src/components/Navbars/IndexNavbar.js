@@ -18,7 +18,7 @@ export default function Navbar(props) {
             >
               <img
                 alt="..."
-                src={require("assets/img/hrnavlogo.png")}
+                src={require("assets/img/hrhub.png")}
                 className="mr-4"
               />
             </Link>
