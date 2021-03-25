@@ -1,6 +1,9 @@
 import React from "react";
 
 export default function Register() {
+
+
+   
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -49,20 +52,6 @@ export default function Register() {
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Name
-                    </label>
-                    <input
-                      type="email"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="Name"
-                    />
-                  </div>
-
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
                       Email
                     </label>
                     <input
@@ -86,123 +75,7 @@ export default function Register() {
                     />
                   </div>
 
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      profilePhoto
-                    </label>
-                    <input
-                      type="file"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="profilePhoto"
-                    />
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      birthday
-                    </label>
-                    <input
-                      type="date"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="birthday"
-                    />
-                  </div>
-                  
-
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      phoneNumber
-                    </label>
-                    <input
-                      type="password"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="phoneNumber"
-                    />
-                  </div>
-
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      location
-                    </label>
-                    <input
-                      type="text"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="location"
-                    />
-                  </div>
-
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      company
-                    </label>
-                    <input
-                      type="text"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="company"
-                    />
-                  </div>
-
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      companyLogo
-                    </label>
-                    <input
-                      type="file"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="companyLogo"
-                    />
-                  </div>
-
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      companyPhotos
-                    </label>
-                    <input
-                      type="file"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="companyPhotos"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        id="customCheckLogin"
-                        type="checkbox"
-                        className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                      />
-                      <span className="ml-2 text-sm font-semibold text-gray-700">
-                        I agree with the{" "}
-                        <a
-                          href="#pablo"
-                          className="text-blue-500"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Privacy Policy
-                        </a>
-                      </span>
-                    </label>
-                  </div>
+             
 
                   <div className="text-center mt-6">
                     <button
