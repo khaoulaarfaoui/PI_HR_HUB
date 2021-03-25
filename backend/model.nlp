@@ -1,8 +1,10 @@
 {
   "settings": {
     "languages": [
-      "en"
+      "en",
+      "fr"
     ],
+    "forceNER": true,
     "tag": "nlp",
     "threshold": 0.5,
     "autoLoad": true,
@@ -15,7 +17,8 @@
       "tag": "nlu-manager"
     },
     "locales": [
-      "en"
+      "en",
+      "fr"
     ],
     "languageNames": {},
     "domainManagers": {
@@ -296,6 +299,189 @@
             }
           }
         }
+      },
+      "fr": {
+        "settings": {
+          "locale": "fr",
+          "trainByDomain": false,
+          "tag": "domain-manager-fr",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "salut": {
+            "intent": "salut",
+            "domain": "default"
+          },
+          "hey": {
+            "intent": "salut",
+            "domain": "default"
+          },
+          "bonjour": {
+            "intent": "salut",
+            "domain": "default"
+          },
+          "ca,comment,salut,va": {
+            "intent": "salut.question",
+            "domain": "default"
+          },
+          "bonjour,comment,vas-tu": {
+            "intent": "salut.question",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "salut": "default",
+          "salut.question": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "Salut",
+            "intent": "salut"
+          },
+          {
+            "domain": "default",
+            "utterance": "Hey",
+            "intent": "salut"
+          },
+          {
+            "domain": "default",
+            "utterance": "Bonjour",
+            "intent": "salut"
+          },
+          {
+            "domain": "default",
+            "utterance": "Salut, Comment ca va?",
+            "intent": "salut.question"
+          },
+          {
+            "domain": "default",
+            "utterance": "Bonjour, Comment vas-tu?",
+            "intent": "salut.question"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "fr",
+              "tag": "nlu-fr",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "salut": 1,
+              "hey": 1,
+              "bonjour": 1,
+              "comment": 1,
+              "ca": 1,
+              "va": 1,
+              "vas-tu": 1
+            },
+            "intents": {
+              "salut": 1,
+              "salut.question": 1
+            },
+            "intentFeatures": {
+              "salut": {
+                "salut": 1,
+                "hey": 1,
+                "bonjour": 1
+              },
+              "salut.question": {
+                "salut": 1,
+                "comment": 1,
+                "ca": 1,
+                "va": 1,
+                "bonjour": 1,
+                "vas-tu": 1
+              }
+            },
+            "featuresToIntent": {
+              "salut": [
+                "salut",
+                "salut.question"
+              ],
+              "hey": [
+                "salut"
+              ],
+              "bonjour": [
+                "salut",
+                "salut.question"
+              ],
+              "comment": [
+                "salut.question"
+              ],
+              "ca": [
+                "salut.question"
+              ],
+              "va": [
+                "salut.question"
+              ],
+              "vas-tu": [
+                "salut.question"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "fr",
+                "tag": "nlu-fr",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "salut",
+                "hey",
+                "bonjour",
+                "comment",
+                "ca",
+                "va",
+                "vas-tu"
+              ],
+              "intents": [
+                "salut",
+                "salut.question"
+              ],
+              "perceptrons": [
+                [
+                  5.75874662399292,
+                  5.813814163208008,
+                  5.5216474533081055,
+                  -8.509382247924805,
+                  -3.033658742904663,
+                  -3.033658742904663,
+                  -5.474762439727783,
+                  8.543703851176723
+                ],
+                [
+                  -0.014995475299656391,
+                  -0.742426335811615,
+                  0.3483565151691437,
+                  8.544692993164062,
+                  2.9955592155456543,
+                  2.9955592155456543,
+                  5.547549724578857,
+                  -0.2175578101780552
+                ]
+              ]
+            }
+          }
+        }
       }
     },
     "intentDomains": {},
@@ -331,6 +517,26 @@
       [
         "en",
         "howdy"
+      ],
+      [
+        "fr",
+        "Salut"
+      ],
+      [
+        "fr",
+        "Hey"
+      ],
+      [
+        "fr",
+        "Bonjour"
+      ],
+      [
+        "fr",
+        "Salut, Comment ca va?"
+      ],
+      [
+        "fr",
+        "Bonjour, Comment vas-tu?"
       ]
     ]
   },
@@ -362,6 +568,24 @@
           },
           {
             "answer": "Greetings!"
+          }
+        ]
+      },
+      "fr": {
+        "salut": [
+          {
+            "answer": "Salut"
+          },
+          {
+            "answer": "Bonjour!"
+          }
+        ],
+        "salut.question": [
+          {
+            "answer": "Très bien, merci"
+          },
+          {
+            "answer": "Comme ci, Comme ca"
           }
         ]
       }

@@ -14,7 +14,7 @@ class ChatBotRobot extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this._sendMessage("Hey there !");
+    this._sendMessage("Welcome to HR HUB BOT! How can we help you ?");
   }
 
   componentDidMount() {
@@ -63,9 +63,8 @@ class ChatBotRobot extends React.Component {
       <div id="chatbox" className="chatbox">
         <Launcher
           agentProfile={{
-            teamName: "Chatbot",
-            imageUrl:
-              "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+            teamName: "HR HUB AGENT",
+            imageUrl: "https://i.ibb.co/kxdYQ3Q/image-1.png",
           }}
           onMessageWasSent={this._onMessageWasSent.bind(this)}
           messageList={this.state.messageList}
