@@ -6,7 +6,7 @@ const UserSchema = require("./user");
 const candidateSchema = new Schema({
   //user: UserSchema,
   fullName: String,
-  profilePhoto: File,
+  profilePhoto: String,
   birthday: Date,
   phoneNumber: Number,
   location: String,

@@ -1,19 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 
-const dbe = "mongodb://localhost:27017/HR_HUB/hr";
+
 
 const Jobs = require("../models/jobs");
 const hr = require("../models/hr");
 
-mongoose.connect(dbe, (err) => {
-  if (err) {
-    console.error("Error!" + err);
-  } else {
-    console.log("Connected to mongodb");
-  }
-});
+
 
 router.post("/add_job/:id", function (req, res) {
   console.log("post a job");
@@ -95,6 +88,7 @@ router.get("/jobs/:id", function (req, res) {
     });
 });
 
+
 router.post("/add/:id", async (req, res) => {
   console.log(req.params);
   let user = req.params;
@@ -114,3 +108,6 @@ router.post("/add/:id", async (req, res) => {
 
   return res.send(userById);
 });
+
+module.exports = router;
+

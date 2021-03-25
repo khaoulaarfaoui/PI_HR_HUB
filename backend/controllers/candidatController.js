@@ -2,9 +2,8 @@ const candidate = require("../models/candidat.js");
 
 module.exports = {
   create: function (req, res) {
-    console.log("postHR");
+    console.log("postCandidat");
     var newCandidate = new candidate(req.body);
-
 
     newCandidate.save(function (err, item) {
       if (err) {
