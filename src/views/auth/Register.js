@@ -86,6 +86,104 @@ export default function Register() {
                     />
                   </div>
 
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      profilePhoto
+                    </label>
+                    <input
+                      type="file"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      placeholder="profilePhoto"
+                    />
+                  </div>
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      birthday
+                    </label>
+                    <input
+                      type="date"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      placeholder="birthday"
+                    />
+                  </div>
+                  
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      phoneNumber
+                    </label>
+                    <input
+                      type="password"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      placeholder="phoneNumber"
+                    />
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      location
+                    </label>
+                    <input
+                      type="text"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      placeholder="location"
+                    />
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      company
+                    </label>
+                    <input
+                      type="text"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      placeholder="company"
+                    />
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      companyLogo
+                    </label>
+                    <input
+                      type="file"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      placeholder="companyLogo"
+                    />
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      companyPhotos
+                    </label>
+                    <input
+                      type="file"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      placeholder="companyPhotos"
+                    />
+                  </div>
+
                   <div>
                     <label className="inline-flex items-center cursor-pointer">
                       <input

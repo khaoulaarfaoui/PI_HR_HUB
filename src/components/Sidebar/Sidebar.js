@@ -188,9 +188,10 @@ export default function Sidebar() {
                   to="/auth/login"
                 >
                   <i className="fas fa-fingerprint text-gray-500 mr-2 text-sm"></i>{" "}
-                  Login
+                  Login  Link
                 </Link>
               </li>
+
 
               <li className="items-center">
                 <Link

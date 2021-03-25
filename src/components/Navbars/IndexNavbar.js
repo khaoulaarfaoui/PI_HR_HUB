@@ -92,6 +92,17 @@ export default function Navbar(props) {
                   </button>{" "}
                 </Link>
               </li>
+              <li className="flex items-center">
+              <Link to="/admin">
+                <a
+                  className="hover:text-gray-600 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                  target="_blank"
+                >
+                  <i className="text-gray-500 fas fa-user text-lg leading-lg " />
+                  <span className="lg:hidden inline-block ml-2">Star</span>
+                </a>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

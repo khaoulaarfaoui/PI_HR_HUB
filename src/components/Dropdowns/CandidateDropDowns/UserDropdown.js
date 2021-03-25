@@ -50,7 +50,7 @@ const UserDropdown = () => {
           }
           onClick={(e) => e.preventDefault()}
         >
-          Action
+         Profile
         </a>
         <a
           href="#pablo"
