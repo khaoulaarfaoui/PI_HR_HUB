@@ -13,6 +13,7 @@ import image7 from "../assets/img/linkedin.svg";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import Fade from "react-reveal/Fade";
+
 export default function Index() {
   return (
     <>

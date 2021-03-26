@@ -1,13 +1,14 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DropdownList from "react-widgets/lib/DropdownList";
+import { useHistory, Link } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { register } from "../../Redux/actions/user/auth";
-import { Link } from "react-router-dom";
+import Admin from "layouts/Admin";
 
 let authority = ["admin", "user"];
 
@@ -40,6 +41,7 @@ const vpassword = (value) => {
 };
 
 const Register = () => {
+  const history = useHistory();
   const form = useRef();
   const checkBtn = useRef();
 
@@ -87,6 +89,8 @@ const Register = () => {
         .catch(() => {
           setSuccessful(false);
         });
+      if (roles === "admin") history.push("/hradd");
+      if (roles === "user") history.push("/candidate");
     }
   };
 

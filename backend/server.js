@@ -36,7 +36,8 @@ require("../../PI_HR_HUB/backend/routes/User/userRoute")(app);
 app.get("/", (req, res) => {
   res.json({ message: "Welcome  to  HR HUB" });
 });
-
+app.use("/candidate", candidate);
+app.use("/hr", hr);
 db.mongoose
     .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
       useNewUrlParser: true,
