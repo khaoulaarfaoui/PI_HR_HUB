@@ -23,7 +23,7 @@ import { clearMessage } from "./Redux/actions/user/message";
 
 import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
-
+import RegisterHR from "views/auth/RegisterHR";
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
@@ -64,7 +64,7 @@ const App = () => {
         <Route path="/admin" component={BoardAdmin} />
 
         <Route path="/candidate" component={Candidate} />
-
+        <Route path="/hradd" component={RegisterHR} />
         <Route path="/" component={Index} />
         <Redirect from="*" to="/" />
       </Switch>

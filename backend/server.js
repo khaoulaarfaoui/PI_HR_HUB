@@ -8,7 +8,8 @@ const db = require("../../PI/backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
 const hr = require("./routes/HR/HRAPI");
 const dbConfig = require("./config/DBconfig");
-
+const multer = require("multer");
+var path = require("path");
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -49,6 +50,30 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
+  },
+});
+
+var upload = multer({ storage: storage });
+app.get("/", function (req, res) {
+  res.send("Hello HR HUB");
+});
+app.post("/uploadfile", upload.single("file"), (req, res, next) => {
+  const file = req.file;
+  if (!file) {
+    const error = new Error("Please upload a file");
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  res.send(file);
+});
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {

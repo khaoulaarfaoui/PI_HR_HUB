@@ -15,6 +15,9 @@ async function trainChatBotIA() {
     manager.addDocument("en", "hello", "greetings.hello");
     manager.addDocument("en", "hi", "greetings.hello");
     manager.addDocument("en", "howdy", "greetings.hello");
+    //hr hub general questions in english
+    manager.addDocument("en", "whats hr hub", "hrhub.definition");
+    manager.addDocument("en", "hr hub for candidates", "hrhub.candidates");
     // French data
     manager.addDocument("fr", "Salut", "salut");
     manager.addDocument("fr", "Hey", "salut");
@@ -26,6 +29,17 @@ async function trainChatBotIA() {
     manager.addAnswer("en", "greetings.bye", "see you soon!");
     manager.addAnswer("en", "greetings.hello", "Hey there!");
     manager.addAnswer("en", "greetings.hello", "Greetings!");
+    //hr hub general answers in english
+    manager.addAnswer(
+      "en",
+      "hrhub.definition",
+      "We aim to help HR cabinets & headhunters to have the best recruitment experience!"
+    );
+    manager.addAnswer(
+      "en",
+      "hrhub.candidates",
+      "We provide for our candidates a recommendation system and an E-learning side to improve their skills for a better future."
+    );
     manager.addAnswer("fr", "salut", "Salut");
     manager.addAnswer("fr", "salut", "Bonjour!");
     manager.addAnswer("fr", "salut.question", "Très bien, merci");

@@ -89,7 +89,7 @@ const Register = () => {
         .catch(() => {
           setSuccessful(false);
         });
-      if (roles === "admin") history.push("/admin");
+      if (roles === "admin") history.push("/hradd");
       if (roles === "user") history.push("/candidate");
     }
   };
