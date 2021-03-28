@@ -1,9 +1,12 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/hr/";
+const API_URL = "http://localhost:3001/hr/";
 
 const register = (fullName, username, password, profilePhoto,birthday,email,phoneNumber,
   location,company,companyLogo,companyPhotos) => {
+
+    console.log(fullName, username, password, profilePhoto,birthday,email,phoneNumber,
+      location,company,companyLogo,companyPhotos)
   return axios
     .post(API_URL, {
       fullName: fullName,

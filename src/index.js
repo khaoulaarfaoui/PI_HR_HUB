@@ -5,6 +5,9 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
 
+import { Provider } from "react-redux";
+import store from "./Redux/store/store"; 
+
 // layouts
 
 import Admin from "layouts/Admin.js";
@@ -19,6 +22,7 @@ import Index from "views/Index.js";
 import Settings from "views/admin/Settings";
 
 ReactDOM.render(
+  <Provider store={store}>
   <BrowserRouter>
     <Switch>
       {/* add routes with layouts */}
@@ -34,6 +38,7 @@ ReactDOM.render(
       {/* add redirect for first page */}
       <Redirect from="*" to="/" />
     </Switch>
-  </BrowserRouter>,
+  </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );

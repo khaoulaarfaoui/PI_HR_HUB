@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 const bodyParser = require("body-parser");
 
@@ -9,6 +10,7 @@ const event = require("./routes/event");
 const candidat = require("./routes/candidat");
 const db=require("./config/database")
 const app = express();
+app.use(cors())
 app.use(bodyParser.json());
 const multer = require('multer');
 var path = require('path')

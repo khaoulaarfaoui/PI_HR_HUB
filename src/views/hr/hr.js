@@ -1,7 +1,110 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import { register } from "../../Redux/actions/hr/hr";
+import { useHistory, Link } from "react-router-dom";
 
-export default function HR() {
+const HR = (props) => {
 
+  const required = (value) => {
+    if (!value) {
+      return <div>This field is required!</div>;
+    }
+  };
+  const history = useHistory();
+
+  const form = useRef();
+  const checkBtn = useRef();
+
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState("");
+  const [location, setLocation] = useState("");
+  const [company, setCompany] = useState("");
+  const [companyPhotos, setCompanyPhotos] = useState("");
+  const [companyLogo, setCampanyLogo] = useState("");
+  const [birthday, setBirthday] = useState("");
+  
+
+
+
+  const [loading, setLoading] = useState(false);
+
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.message);
+
+  const dispatch = useDispatch();
+
+
+  const onChangeName = (e) => {
+    const Name = e.target.value;
+    setName(Name);
+  };
+
+  const onChangeEmail = (e) => {
+    const email = e.target.value;
+    setEmail(email);
+  };
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+  const onChangeProfilePhoto = (e) => {
+    const profilePhoto = e.target.value;
+    setProfilePhoto(profilePhoto);
+  };
+  const onChangeBirthday = (e) => {
+    const birthday = e.target.value;
+    setBirthday(birthday);
+  };
+  const onChangePhoneNumber = (e) => {
+    const phoneNumber = e.target.value;
+    setPhoneNumber(phoneNumber);
+  };
+  const onChangeLocation = (e) => {
+    const location = e.target.value;
+    setLocation(location);
+  };
+  const onChangeCampany = (e) => {
+    const campany = e.target.value;
+    setCompany(campany);
+  };
+
+  const onChangeCampanyLogo = (e) => {
+    const campanyLogo = e.target.value;
+    setCampanyLogo(campanyLogo);
+    
+  };
+  const onChangeCompanyPhotos = (e) => {
+    const campanyPhotos = e.target.value;
+    setCompanyPhotos(campanyPhotos);
+  };
+
+
+
+
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+
+
+
+    console.log("okkkkkkkk is register HR",email,password)
+    dispatch(register(name, name, password, profilePhoto,birthday,email,phoneNumber,
+      location,company,companyLogo,companyPhotos))
+    .then(() => {
+      //setSuccessful(true);
+      history.push("/");
+    })
+    .catch(() => {
+      //setSuccessful(false);
+    });
+  }
    
   return (
     <>
@@ -45,7 +148,7 @@ export default function HR() {
                 <div className="text-gray-500 text-center mb-3 font-bold">
                   <small>Or sign up with credentials</small>
                 </div>
-                <form>
+                <Form onSubmit={handleRegister} ref={form}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -53,10 +156,14 @@ export default function HR() {
                     >
                       Name
                     </label>
-                    <input
-                      type="email"
+                    <Input
+                      type="text"
+                      name="name"
+                      value={name}
+                      onChange={onChangeName}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="Name"
+
                     />
                   </div>
 
@@ -67,8 +174,11 @@ export default function HR() {
                     >
                       Email
                     </label>
-                    <input
-                      type="email"
+                    <Input
+                      type="text"
+                      name="email"
+                      value={email}
+                      onChange={onChangeEmail}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="Email"
                     />
@@ -81,8 +191,11 @@ export default function HR() {
                     >
                       Password
                     </label>
-                    <input
+                    <Input
                       type="password"
+                      name="password"
+                      value={password}
+                      onChange={onChangePassword}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="Password"
                     />
@@ -95,8 +208,11 @@ export default function HR() {
                     >
                       profilePhoto
                     </label>
-                    <input
+                    <Input
                       type="file"
+                      name="profilePhoto"
+                      value={profilePhoto}
+                      onChange={onChangeProfilePhoto}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="profilePhoto"
                     />
@@ -108,8 +224,11 @@ export default function HR() {
                     >
                       birthday
                     </label>
-                    <input
+                    <Input
                       type="date"
+                      name="birthday"
+                      value={birthday}
+                      onChange={onChangeBirthday}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="birthday"
                     />
@@ -123,8 +242,11 @@ export default function HR() {
                     >
                       phoneNumber
                     </label>
-                    <input
-                      type="password"
+                    <Input
+                      type="number"
+                      name="phoneNumber"
+                      value={phoneNumber}
+                      onChange={onChangePhoneNumber}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="phoneNumber"
                     />
@@ -137,8 +259,11 @@ export default function HR() {
                     >
                       location
                     </label>
-                    <input
+                    <Input
                       type="text"
+                      name="location"
+                      value={location}
+                      onChange={onChangeLocation}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="location"
                     />
@@ -151,8 +276,11 @@ export default function HR() {
                     >
                       company
                     </label>
-                    <input
+                    <Input
                       type="text"
+                      name="company"
+                      value={company}
+                      onChange={onChangeCampany}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="company"
                     />
@@ -165,8 +293,11 @@ export default function HR() {
                     >
                       companyLogo
                     </label>
-                    <input
+                    <Input
                       type="file"
+                      name="companyLogo"
+                      value={companyLogo}
+                      onChange={onChangeCampanyLogo}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="companyLogo"
                     />
@@ -179,8 +310,11 @@ export default function HR() {
                     >
                       companyPhotos
                     </label>
-                    <input
+                    <Input
                       type="file"
+                      name="companyPhotos"
+                      value={companyPhotos}
+                      onChange={onChangeCompanyPhotos}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="companyPhotos"
                     />
@@ -209,12 +343,12 @@ export default function HR() {
                   <div className="text-center mt-6">
                     <button
                       className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
+                      
                     >
                       Create Account
                     </button>
                   </div>
-                </form>
+                </Form>
               </div>
             </div>
           </div>
@@ -223,3 +357,5 @@ export default function HR() {
     </>
   );
 }
+export default HR
+
