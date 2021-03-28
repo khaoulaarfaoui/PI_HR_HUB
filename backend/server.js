@@ -10,6 +10,10 @@ const hr = require("./routes/HR/HRAPI");
 const dbConfig = require("./config/DBconfig");
 const multer = require("multer");
 var path = require("path");
+var debug = require("debug")("server:server");
+var http = require("http");
+var socket = require("socket.io");
+var connectIo = require("./chatbotService");
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -28,12 +32,13 @@ const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
 require("../../PI/backend/routes/User/auth")(app);
 require("../../PI/backend/routes/User/userRoute")(app);
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to hrbub application." });
 });
 app.use("/candidate", candidate);
 app.use("/hr", hr);

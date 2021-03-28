@@ -1,19 +1,19 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DropdownList } from "react-widgets";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { register } from "../../Redux/actions/user/auth";
-import Admin from "layouts/Admin";
+
 import Select from "react-select";
 
 const authority = [
   { value: "admin", label: "Admin" },
   { value: "user", label: "User" },
 ];
+/* FORM VALIDATORS */
 const required = (value) => {
   if (!value) {
     return <div role="alert">This field is required!</div>;
@@ -92,7 +92,7 @@ const Register = () => {
           setSuccessful(false);
         });
       if (roles === "admin") history.push("/hradd");
-      if (roles === "user") history.push("/candidate");
+      if (roles === "user") history.push("/candidateadd");
     }
   };
 
@@ -182,17 +182,7 @@ const Register = () => {
                         validations={[required, vpassword]}
                       />
                     </div>
-                    {/* <div className="relative w-full mb-3">
-                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
-                        ROLE
-                      </label>
-                      <DropdownList
-                        data={authority}
-                        defaultValue={"user"}
-                        value={roles}
-                        onChange={onChangeRole}
-                      />
-                    </div> */}
+
                     <div className="relative w-full mb-3">
                       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
                         ROLE
