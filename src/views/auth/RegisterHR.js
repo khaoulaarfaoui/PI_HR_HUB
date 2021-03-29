@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -8,8 +9,10 @@ import AuthService from "../../service/HRservice/authservice";
 
 export default function HR() {
   const form = useRef();
+  const history = useHistory();
+
   const checkBtn = useRef();
-  const { user: currentUser } = useSelector((state) => state.auth);
+  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
   const [fullName, setFullName] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -94,6 +97,7 @@ export default function HR() {
           setSuccessful(false);
         }
       );
+      history.push("/admin");
     }
   };
   return (
@@ -128,6 +132,7 @@ export default function HR() {
                         <Input
                           type="text"
                           name="user"
+                          disabled={true}
                           value={user}
                           onChange={onChangeUser}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"

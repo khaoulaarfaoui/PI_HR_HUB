@@ -16,7 +16,7 @@ const candidateSchema = new Schema({
   education: String,
   experience: String,
   states: String,
-  skills: String,
+  skills: [{}],
   SubmittedJobs: Array,
   ratio: Number,
   teamStatus: Boolean,

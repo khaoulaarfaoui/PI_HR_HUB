@@ -24,11 +24,13 @@ import { clearMessage } from "./Redux/actions/user/message";
 import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
+
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
 
-  const { user: currentUser } = useSelector((state) => state.auth);
+  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
