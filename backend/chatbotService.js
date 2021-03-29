@@ -18,6 +18,7 @@ async function trainChatBotIA() {
     //hr hub general questions in english
     manager.addDocument("en", "whats hr hub", "hrhub.definition");
     manager.addDocument("en", "hr hub for candidates", "hrhub.candidates");
+
     // French data
     manager.addDocument("fr", "Salut", "salut");
     manager.addDocument("fr", "Hey", "salut");
@@ -29,6 +30,7 @@ async function trainChatBotIA() {
     manager.addAnswer("en", "greetings.bye", "see you soon!");
     manager.addAnswer("en", "greetings.hello", "Hey there!");
     manager.addAnswer("en", "greetings.hello", "Greetings!");
+
     //hr hub general answers in english
     manager.addAnswer(
       "en",

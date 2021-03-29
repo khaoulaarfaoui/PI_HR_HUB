@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -12,9 +13,11 @@ export default function CandidateRegister() {
     { value: "reactjs", label: "React JS" },
     { value: "nodejs", label: "Node JS" },
   ];
+  const history = useHistory();
+
   const form = useRef();
   const checkBtn = useRef();
-  const { user: currentUser } = useSelector((state) => state.auth);
+  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
   const [fullName, setFullName] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -35,7 +38,7 @@ export default function CandidateRegister() {
   };
   const onChangeExperience = (e) => {
     const experience = e.target.value;
-    setEducation(experience);
+    setExperience(experience);
   };
   const onChangeSkills = (e) => {
     const skills = e;
@@ -107,6 +110,7 @@ export default function CandidateRegister() {
           setSuccessful(false);
         }
       );
+      history.push("/candidate");
     }
   };
   return (

@@ -53,7 +53,7 @@ const Register = () => {
   const [roles, setRole] = useState("");
   const [successful, setSuccessful] = useState(false);
 
-  const { message } = useSelector((state) => state.message);
+  const { message } = useSelector((state) => state.userReducer.auth);
   const dispatch = useDispatch();
 
   const onChangeUsername = (e) => {

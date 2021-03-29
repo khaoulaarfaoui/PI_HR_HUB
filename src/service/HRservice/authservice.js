@@ -13,17 +13,23 @@ const register = (
   companyPhotos,
   user
 ) => {
-  return axios.post(API_URL + "/addHR", {
-    fullName: fullName,
-    profilePhoto: profilePhoto,
-    birthday: birthday,
-    phoneNumber: phoneNumber,
-    location: location,
-    company: company,
-    companyLogo: companyLogo,
-    companyPhotos: companyPhotos,
-    user: user,
-  });
+  return axios
+    .post(API_URL + "/addHR", {
+      fullName: fullName,
+      profilePhoto: profilePhoto,
+      birthday: birthday,
+      phoneNumber: phoneNumber,
+      location: location,
+      company: company,
+      companyLogo: companyLogo,
+      companyPhotos: companyPhotos,
+      user: user,
+    })
+    .then((response) => {
+      if (response.data) {
+        localStorage.setItem("hr", JSON.stringify(response.data));
+      }
+    });
 };
 
 export default {

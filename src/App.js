@@ -29,7 +29,8 @@ const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
 
-  const { user: currentUser } = useSelector((state) => state.auth);
+  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
