@@ -8,7 +8,7 @@ const db = require("../../PI_HR_HUB/backend/models");
 const dbConfig = require("./config/DBconfig");
 
 const job = require("./routes/JobsAPI");
-
+const cv = require("./cv/app");
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
 app.use("/job", job);
-
+app.use("/cv", cv);
 // parse requests of content-type - application/json
 
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -34,7 +34,7 @@ require("../../PI_HR_HUB/backend/routes/User/userRoute")(app);
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to HR_HUB application." });
 });
 
 db.mongoose
