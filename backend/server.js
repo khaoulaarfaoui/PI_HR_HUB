@@ -26,7 +26,7 @@ var storage = multer.diskStorage({
     cb(null, 'uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+    cb(null,file.originalname) //Appending extension
   }
 })
  
@@ -44,6 +44,10 @@ app.post('/uploadfile', upload.single('file'), (req, res, next) => {
     res.send(file)
   
 })
+app.get("/file/:image", function (req, res) {
+  res.sendFile(__dirname+"/uploads/"+req.params.image);
+}); 
+
 app.listen(PORT, function () {
   console.log("server running on loclalhost" + PORT);
 });

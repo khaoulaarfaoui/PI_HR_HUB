@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:3001/hr/";
+const API_URL_UPLOAD = "http://localhost:3001/uploadfile";
 
 const register = (fullName, username, password, profilePhoto,birthday,email,phoneNumber,
   location,company,companyLogo,companyPhotos) => {
@@ -24,7 +25,9 @@ const register = (fullName, username, password, profilePhoto,birthday,email,phon
       )
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+
+        window.location.href="/"
+        localStorage.setItem("user", JSON.stringify(response.data.data));
       }
     });
 };
@@ -48,7 +51,7 @@ const update = (id,fullName, username, password, profilePhoto,birthday,email,pho
       )
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("user", JSON.stringify(response.data.data));
       }
     });
 };
@@ -74,9 +77,23 @@ const findallHr =() => {
     });
 };
 
+
+const uploadFile =(file) => {
+  const formData = new FormData();       
+   formData.append('file', file);
+  return axios
+    .post(API_URL_UPLOAD,formData)
+    .then((response) => {
+      if (response.data) {
+     ///   localStorage.setItem("user", JSON.stringify(response.data));
+      }
+    });
+};
+
 export default {
   register,
   update,
   deleteHr,
   findallHr,
+  uploadFile,
 };

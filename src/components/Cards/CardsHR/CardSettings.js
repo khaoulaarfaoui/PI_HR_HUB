@@ -1,8 +1,13 @@
 import React from "react";
+//import CardSettings from "../CardsCandidate/CardSettings";
 
 // components
 
-export default function CardSettings() {
+const CardSettings = (props) => {
+
+
+   console.log("user",JSON.parse(localStorage.getItem("user")))
+   
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
@@ -34,7 +39,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="lucky.jesse"
+                    defaultValue={JSON.parse(localStorage.getItem("user")).fullName}
                   />
                 </div>
               </div>
@@ -49,7 +54,7 @@ export default function CardSettings() {
                   <input
                     type="email"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="jesse@example.com"
+                    defaultValue={JSON.parse(localStorage.getItem("user")).email}
                   />
                 </div>
               </div>
@@ -64,8 +69,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Lucky"
-                  />
+                    defaultValue={JSON.parse(localStorage.getItem("user")).username}                  />
                 </div>
               </div>
               <div className="w-full lg:w-6/12 px-4">
@@ -182,3 +186,5 @@ export default function CardSettings() {
     </>
   );
 }
+
+export default CardSettings

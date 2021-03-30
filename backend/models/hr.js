@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var bcrypt = require("bcryptjs");
 
 const Schema = mongoose.Schema;
 
@@ -48,6 +49,12 @@ const hrSchema = new Schema({
       ref: "teams",
     },
   ],
+});
+
+// hash user password before saving into database
+hrSchema.pre("save", function (next) {
+  this.password = bcrypt.hashSync(this.password, 10);
+  next();
 });
 
 module.exports = mongoose.model("HR", hrSchema, "HR");

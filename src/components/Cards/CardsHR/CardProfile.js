@@ -1,8 +1,12 @@
 import React from "react";
 
 // components
+const CardProfile = (props) => {
 
-export default function CardProfile() {
+
+   console.log("photo : ",JSON.parse(localStorage.getItem("user")).profilePhoto)
+   
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -12,7 +16,7 @@ export default function CardProfile() {
               <div className="relative">
                 <img
                   alt="..."
-                  src={require("assets/img/team-2-800x800.jpg")}
+                  src={"http://localhost:3001/file/"+JSON.parse(localStorage.getItem("user")).profilePhoto}
                   className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                 />
               </div>
@@ -82,3 +86,5 @@ export default function CardProfile() {
     </>
   );
 }
+
+export default CardProfile;

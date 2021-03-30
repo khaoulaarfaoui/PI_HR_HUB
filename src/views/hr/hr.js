@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import { register } from "../../Redux/actions/hr/hr";
+import { register,uploadFile } from "../../Redux/actions/hr/hr";
 import { useHistory, Link } from "react-router-dom";
 
 const HR = (props) => {
@@ -16,7 +16,7 @@ const HR = (props) => {
   const history = useHistory();
 
   const form = useRef();
-  const checkBtn = useRef();
+  const photofile = useRef();
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ const HR = (props) => {
   const [companyPhotos, setCompanyPhotos] = useState("");
   const [companyLogo, setCampanyLogo] = useState("");
   const [birthday, setBirthday] = useState("");
-  
+  const [file, setFile] = useState('');
 
 
 
@@ -75,31 +75,54 @@ const HR = (props) => {
   };
 
   const onChangeCampanyLogo = (e) => {
-    const campanyLogo = e.target.value;
-    setCampanyLogo(campanyLogo);
+    const file = e.target.files[0]; // accesing file
+    setCampanyLogo(file);
     
   };
   const onChangeCompanyPhotos = (e) => {
-    const campanyPhotos = e.target.value;
-    setCompanyPhotos(campanyPhotos);
+    const file = e.target.files[0]; // accesing file
+    setCompanyPhotos(file);
   };
-
-
-
-
+  const handleChangefile = (e) => {
+    const file = e.target.files[0]; // accesing file
+    console.log(file);
+    setFile(file); // storing file
+}
 
   const handleRegister = (e) => {
     e.preventDefault();
 
+    dispatch(uploadFile(file)).then(()=> {
+      
+    }).catch(() => {
+      //setSuccessful(false);
+    });
 
 
+    
+    dispatch(uploadFile(companyLogo)).then(()=> {
+      
+    }).catch(() => {
+      //setSuccessful(false);
+    }); 
+
+
+    dispatch(uploadFile(companyPhotos)).then(()=> {
+      
+    }).catch(() => {
+      //setSuccessful(false);
+    });
+    
+    
+    
 
     console.log("okkkkkkkk is register HR",email,password)
-    dispatch(register(name, name, password, profilePhoto,birthday,email,phoneNumber,
-      location,company,companyLogo,companyPhotos))
+    dispatch(register(name, name, password, file.name,birthday,email,phoneNumber,
+      location,company,companyLogo.name,companyPhotos.name))
     .then(() => {
       //setSuccessful(true);
-      history.push("/");
+      console.log("okkkkkkkkk register ")
+      history.push("/hr");
     })
     .catch(() => {
       //setSuccessful(false);
@@ -211,8 +234,7 @@ const HR = (props) => {
                     <Input
                       type="file"
                       name="profilePhoto"
-                      value={profilePhoto}
-                      onChange={onChangeProfilePhoto}
+                      onChange={handleChangefile}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="profilePhoto"
                     />
@@ -296,7 +318,6 @@ const HR = (props) => {
                     <Input
                       type="file"
                       name="companyLogo"
-                      value={companyLogo}
                       onChange={onChangeCampanyLogo}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="companyLogo"
@@ -308,12 +329,11 @@ const HR = (props) => {
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      companyPhotos
+                      Company Photo
                     </label>
                     <Input
                       type="file"
                       name="companyPhotos"
-                      value={companyPhotos}
                       onChange={onChangeCompanyPhotos}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="companyPhotos"
