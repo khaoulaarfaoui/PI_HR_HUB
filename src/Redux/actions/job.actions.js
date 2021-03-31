@@ -19,11 +19,10 @@ let id = str.slice(12);
 
 console.log(id);
 const user = JSON.parse(localStorage.getItem("user"));
-console.log(user.id);
-const GET_URL = "http://localhost:8080/job/jobs/605f25b1b98fa02b9875aaf8";
-const ADD_URL = "http://localhost:8080/job/add/605f25b1b98fa02b9875aaf8";
-const UPDATE_URL = "http://localhost:8080/job/job/" + id;
-const DELETE_URL = "http://localhost:8080/job/deleteJob" + id;
+const GET_URL = "http://localhost:8082/job/jobs/605f25b1b98fa02b9875aaf8";
+const ADD_URL = "http://localhost:8082/job/add/605f25b1b98fa02b9875aaf8";
+const UPDATE_URL = "http://localhost:8082/job/job/" + id;
+const DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
 
 //CREATE------------------------------------------------------------------------------------------------------------------------------------------------
 

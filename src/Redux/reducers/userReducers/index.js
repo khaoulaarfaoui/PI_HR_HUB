@@ -7,5 +7,4 @@ import events from "../eventReducers/EventReducer";
 export default combineReducers({
   auth,
   message,
-  jobData: jobs,
 });

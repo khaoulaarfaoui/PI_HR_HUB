@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
 app.use("/job", job);
+app.use("/cv", cv);
 app.use("/events", eventsmodel);
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
