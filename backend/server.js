@@ -3,13 +3,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Role = require("../../PI/backend/models/Role");
-const db = require("../../PI/backend/models");
+const Role = require("../backend/models/Role");
+const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
 const hr = require("./routes/HR/HRAPI");
 const dbConfig = require("./config/DBconfig");
 const multer = require("multer");
 var path = require("path");
+var job = require("../backend/routes/JobsAPI");
 var debug = require("debug")("server:server");
 var http = require("http");
 var socket = require("socket.io");
@@ -25,15 +26,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
 app.use("/job", job);
-app.use("/events",eventsmodel);
+app.use("/events", eventsmodel);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-require("../../PI/backend/routes/User/auth")(app);
-require("../../PI/backend/routes/User/userRoute")(app);
+require("../backend/routes/User/auth")(app);
+require("../backend/routes/User/userRoute")(app);
 
 require("./routes/User/auth")(app);
 require("./routes/User/userRoute")(app);
@@ -59,10 +60,11 @@ db.mongoose
   });
 // SET STORAGE
 
+// SET STORAGE
 var storage = multer.diskStorage({
-  },
-    cb(null, "uploads");
   destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
   },
@@ -74,7 +76,7 @@ app.get("/", function (req, res) {
 });
 app.post("/uploadfile", upload.single("file"), (req, res, next) => {
   const file = req.file;
-    const error = new Error("Please upload a file");
+  const error = new Error("Please upload a file");
   if (!file) {
     error.httpStatusCode = 400;
     return next(error);
