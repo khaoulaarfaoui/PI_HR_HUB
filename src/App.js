@@ -36,7 +36,7 @@ const App = () => {
       dispatch(clearMessage()); // clear message when changing location
     });
   }, [dispatch]);
-
+  
   useEffect(() => {
     if (currentUser) {
       setShowUserBoard(currentUser.roles.includes("ROLE_USER"));
@@ -70,6 +70,7 @@ const App = () => {
         <Redirect from="*" to="/" />
       </Switch>
     </Router>
+    
   );
 };
 

@@ -16,6 +16,7 @@ import Settings from "views/admin/Settings.js";
 import Tables from "views/admin/Tables.js";
 import Profile from "views/admin/Profile";
 import Tests from "views/admin/Tests";
+import Events from "views/EventManagement/EventsView";
 
 export default function Admin() {
   return (
@@ -33,6 +34,7 @@ export default function Admin() {
             <Route path="/admin/maps" exact component={Maps} />
             <Route path="/admin/settings" exact component={Settings} />
             <Route path="/admin/tables" exact component={Tables} />
+            <Route path="/admin/event" exact component={Events} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />

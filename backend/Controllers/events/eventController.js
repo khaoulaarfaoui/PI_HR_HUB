@@ -38,72 +38,46 @@ router.get("/allEvents", function (req,res) {
 });
 
 //Update Event
-router.put("updateEvent/:id", async (req, res) => {
-  const {id: _id} = req.params;
-  const event = req.body;
-  const err = req.error;
-  const updateEvent = await eventsmodel.findByIdAndUpdate(_id, event, { new: true});
-  //eventsmodel.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function(err,item){
-    if (err) {
-      console.log("Nop",err);
-      res.json({status:"error", message: "Nop for update", data:null});
-    } else {
-      res.json(updateEvent)
-      res.json({status:"success", message: "Event Updated <3"});
-    }
-     
-  })
+router.put("/updateEvent/:id", function (req, res) {
+    console.log("update Event");
+    eventsmodel.findByIdAndUpdate(req.params.id,
+      {
+        $set: {
+          eventName: req.body.eventName,
+          eventDate: req.body.eventDate,
+          description: req.body.description
+        },
+      },
+  
+      {
+        new: true,
+      },
+      function (err, updated) {
+        if (err) {
+          res.send("Error updating");
+        } else {
+          res.json(updated);
+          console.log("Event updated ++");
+        }
+      }
+    );
+  });
+
+
+//Delete Event
+  router.delete("/deleteEvent/:id", function (req, res) {
+
+    console.log("Event deleted -- ");
+    eventsmodel.findOneAndDelete(req.params.id, function (err, deleted) {
+      if (err) {
+        res.send("error deleting");
+      } else {
+        res.json(deleted);
+      }
+    });
+
+  });
 
 
 module.exports = router;
-
-/*
-exports.create = (req, res) => {
-    
-    //var newEv = new eventsmodel(req.body);
-    const newEv = new eventsmodel({
-      eventName: req.body.eventName,
-      eventDate: req.body.eventDate,
-      description: req.body.description,
-    });
-
-    newEv.save(function (err, newEv) {
-      if (err) {
-        console.log("Error Add ",err);
-        res.json({status:"error", message: "Zab", data:null});
-      } else {
-        res.json({status:"success", message: "+ GOAL +", data:newEv});
-      }
-    });
-  }
-
-
-
-  update: function (req, res) {
-    eventsmodel.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function(err,item){
-      if (err) {
-        console.log("Nop",err);
-        res.json({status:"error", message: "Nop", data:null});
-      } else {
-        res.json({status:"success", message: "Updated <3", data:item});
-      }
-       
-    })
-  },
-
-  delete: function (req, res) {
-    eventsmodel.findByIdAndDelete({_id:req.params.id},function(err,item){
-      if (err) {
-        console.log("Error",err);
-        res.json({status:"error", message: "Nop for Delete", data:null});
-      } else {
-        res.json({status:"success", message: "Bye <3", data:item});
-      }
-      
-    })
-  },
-
-
-
-*/
 

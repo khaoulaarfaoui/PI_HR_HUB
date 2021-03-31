@@ -1,12 +1,10 @@
 import {
     ADD_EV_SUCCESS,
-    ADD_EV_ERR,
     FETCH_EV_SUCCESS,
-    FETCH_EV_ERR,
     EDIT_EV_SUCCESS,
-    EDIT_EV_ERR,
     DELETE_EV_SUCCESS,
-    DELETE_EV_ERR,
+
+
 } from "./types"
 
 import axios from 'axios';
@@ -14,39 +12,21 @@ import axios from 'axios';
 const URL = 'http://localhost:8088/events/';
 export const FetchEvents = () => axios.get(URL + "allEvents");
 export const AddEvents = ( () => axios.post(URL + "addEvents"));
+export const UpdateEv = ( (id, updatedEvent) => axios.put(URL + "updateEvent/"+ id, updatedEvent));
+export const DeleteEv = ( (id) => axios.delete(URL + "deleteEvent/" + id));
 
 //FETCH-------------------
-export const FetchEventsSuccess = (data) => {
-    return{
+export const AllEvents = () => dispatch => {
+    FetchEvents()
+    .then( res => {
+        console.log(res)
+        dispatch({
         type: FETCH_EV_SUCCESS,
-        payload: data,
-    }
-}
-
-const normalizedResponse = (data) => {
-    const a = data.map(item=>{
-        const keys = Object.keys(item);
-        keys.forEach( k => {
-            item[k.toLowerCase()] = item[k];
-            delete item[k];
-        });
-        return item;
-    });
-    return a;
-}
-
-export const AllEvents = () => {
-
-    return (dispatch) => {
-        return axios.get(URL + "allEvents")
-        .then(response =>{
-            const data = normalizedResponse(response.data);
-            dispatch(FetchEventsSuccess(data));
-            console.log("All +"); 
-        }).catch(error => {
-            console.log(error.message); 
-        });
-    };
+        payload: res.data
+        })
+    })
+    .catch(err => console.log(err))
+    
 }
 
 //ADD------------------
@@ -76,8 +56,41 @@ export const CreateEvents = (event) => {
             };
 
             dispatch(createEventSuccess(normalizedData));
+            
         }).catch(error => {
             console.log(error.message); 
         });
     }
 }
+
+
+
+
+//UPDATE-----------------
+export const UpdateEvents = (id,data, onSuccess) => dispatch => {
+    UpdateEv(id,data)
+    .then(res =>{
+        dispatch({
+            type: EDIT_EV_SUCCESS,
+            payload: res.data
+        })
+        onSuccess()
+    })
+    .catch(error => console.log(error))
+
+}
+
+//DELETE-----------------
+export const DeleteEvents = (id, onSuccess) => dispatch => {
+    DeleteEv(id)
+    .then(res =>{
+        dispatch({
+            type: DELETE_EV_SUCCESS,
+            payload: id
+        })
+        onSuccess()
+    })
+    .catch(error => console.log(error))
+
+}
+ 
