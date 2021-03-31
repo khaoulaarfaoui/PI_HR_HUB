@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Canvas, useFrame, extend, useThree } from "react-three-fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useTransition, a } from 'react-spring'
+import { useTransition, a } from 'react-spring';
 import * as THREE from 'three'
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
@@ -78,6 +78,7 @@ const Box = () => {
   }
   
 */
+/*
 function Loading() {
   const [finished, set] = useState(false)
   const [width, setWidth] = useState(0)
@@ -105,6 +106,8 @@ function Loading() {
       ),
   )
 }
+*/
+
 
 export default function EventView(){
 
@@ -126,9 +129,11 @@ export default function EventView(){
               <Room/>
               {/*
               <Box/>
-              <Plane/>*/}
+              <Plane/>
+                
+               <Loading/>*/}
           </Canvas>
-          <Loading/>
+         
           
         </>
       );

@@ -2,6 +2,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
+import image1 from "../../assets/img/hrnavlogo.png";
 // components
 
 export default function Navbar(props) {
@@ -18,7 +19,7 @@ export default function Navbar(props) {
             >
               <img
                 alt="..."
-                src={require("assets/img/hrhub.png")}
+                src={image1}
                 className="mr-4"
               />
             </Link>
