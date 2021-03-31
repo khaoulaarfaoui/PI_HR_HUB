@@ -14,27 +14,29 @@ var debug = require("debug")("server:server");
 var http = require("http");
 var socket = require("socket.io");
 var connectIo = require("./chatbotService");
+const eventsmodel = require("./Controllers/events/eventController");
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
 };
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/job", job);
+app.use("/events",eventsmodel);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
 require("../../PI/backend/routes/User/auth")(app);
 require("../../PI/backend/routes/User/userRoute")(app);
+
+require("./routes/User/auth")(app);
+require("./routes/User/userRoute")(app);
 
 // simple route
 app.get("/", (req, res) => {
@@ -55,12 +57,12 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-
 // SET STORAGE
+
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads");
   },
+    cb(null, "uploads");
+  destination: function (req, file, cb) {
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
   },
@@ -72,8 +74,8 @@ app.get("/", function (req, res) {
 });
 app.post("/uploadfile", upload.single("file"), (req, res, next) => {
   const file = req.file;
-  if (!file) {
     const error = new Error("Please upload a file");
+  if (!file) {
     error.httpStatusCode = 400;
     return next(error);
   }

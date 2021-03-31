@@ -2,7 +2,7 @@
 import React from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import image1 from "../assets/img/cvs.svg";
 import image3 from "../assets/img/team.svg";
 import image4 from "../assets/img/teamwork.svg";
@@ -111,23 +111,23 @@ export default function Index() {
                 <div className="relative flex flex-col min-w-0 w-full mb-0 mt-9  md:mt-0">
                   <img
                     alt="..."
-                    src={require("assets/img//hr_service/data.svg")}
+                    src={require("../assets/img/hr_service/data.svg")}
                     className="w-full align-middle rounded-lg absolute shadow-lg -top-160-px left-260-px max-w-210-px"
                   />
                   <img
                     alt="..."
-                    src={require("assets/img//hr_service/cv.svg")}
+                    src={require("../assets/img/hr_service/cv.svg")}
                     className="w-full align-middle rounded-lg absolute shadow-2xl max-w-200-px left-260-px  top-25-px"
                   />
 
                   <img
                     alt="..."
-                    src={require("assets/img/hr_service/grades.svg")}
+                    src={require("../assets/img/hr_service/grades.svg")}
                     className="w-full align-middle rounded-lg absolute shadow-lg max-w-180-px left-20-px -top-160-px  z-2"
                   />
                   <img
                     alt="..."
-                    src={require("assets/img/hr_service/connect.svg")}
+                    src={require("../assets/img/hr_service/connect.svg")}
                     className="w-full align-middle rounded-lg absolute shadow-2xl max-w-200-px -left-50-px top-25-px"
                   />
                 </div>

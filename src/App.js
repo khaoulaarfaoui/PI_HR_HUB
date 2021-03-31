@@ -14,7 +14,7 @@ import Auth from "layouts/Auth.js";
 
 // views without layouts
 import Index from "views/Index";
-
+import Event3D from "./views/EventManagement/Event3D";
 import BoardUser from "./views/candidate/BoardUser";
 import BoardAdmin from "./views/candidate/BoardAdmin";
 
@@ -38,7 +38,7 @@ const App = () => {
       dispatch(clearMessage()); // clear message when changing location
     });
   }, [dispatch]);
-
+  
   useEffect(() => {
     if (currentUser) {
       setShowUserBoard(currentUser.roles.includes("ROLE_USER"));
@@ -64,13 +64,14 @@ const App = () => {
 
         <Route path="/user" component={BoardUser} />
         <Route path="/admin" component={BoardAdmin} />
-
+        <Route path="/event3D" component={Event3D} />
         <Route path="/candidate" component={Candidate} />
         <Route path="/hradd" component={RegisterHR} />
         <Route path="/" component={Index} />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>
+    
   );
 };
 

@@ -2,6 +2,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
+import image1 from "../../assets/img/hrnavlogo.png";
 // components
 
 export default function Navbar(props) {
@@ -18,7 +19,7 @@ export default function Navbar(props) {
             >
               <img
                 alt="..."
-                src={require("assets/img/hrnavlogo.png")}
+                src={image1}
                 className="mr-4"
               />
             </Link>
@@ -79,7 +80,6 @@ export default function Navbar(props) {
                   <span className="lg:hidden inline-block ml-2">Star</span>
                 </a>
               </li>
-
               <li className="flex items-center">
                 <Link to="/auth/login">
                   <button

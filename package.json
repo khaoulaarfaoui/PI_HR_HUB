@@ -17,7 +17,9 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.1",
+    "butter-toast": "^3.3.5",
     "chart.js": "2.9.3",
+    "drei": "^2.2.21",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "popper.js": "^1.16.1",
@@ -36,6 +38,8 @@
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.3",
     "react-select": "^4.3.0",
+    "react-spring": "^9.0.0",
+    "react-three-fiber": "^5.3.22",
     "react-validation": "^3.0.7",
     "react-widgets": "^4.6.1",
     "redux": "^4.0.5",
@@ -44,6 +48,7 @@
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.2.1",
     "tailwindcss": "1.8.10",
+    "three": "^0.126.1",
     "validator": "^13.5.2"
   },
   "scripts": {
