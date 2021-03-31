@@ -17,13 +17,14 @@ const required = (value) => {
 const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
+  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { isLoggedIn } = useSelector((state) => state.auth);
-  const { message } = useSelector((state) => state.message);
+  const { isLoggedIn } = useSelector((state) => state.userReducer.auth);
+  const { message } = useSelector((state) => state.userReducer.message);
 
   const dispatch = useDispatch();
 
@@ -47,8 +48,8 @@ const Login = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       dispatch(login(username, password))
         .then(() => {
-          props.history.push("/profile");
-          window.location.reload();
+          //  props.history.push("/profile");
+          // window.location.reload();
         })
         .catch(() => {
           setLoading(false);
@@ -57,9 +58,13 @@ const Login = (props) => {
       setLoading(false);
     }
   };
-
   if (isLoggedIn) {
-    return <Redirect to="/profile" />;
+    if (currentUser.roles.includes("ROLE_ADMIN")) {
+      return <Redirect to="/admin" />;
+    }
+    if (currentUser.roles.includes("ROLE_USER")) {
+      return <Redirect to="/candidate" />;
+    }
   }
 
   return (

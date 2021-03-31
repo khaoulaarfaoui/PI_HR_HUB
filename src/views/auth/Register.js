@@ -1,16 +1,19 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DropdownList from "react-widgets/lib/DropdownList";
-
+import { useHistory } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { register } from "../../Redux/actions/user/auth";
-import { Link } from "react-router-dom";
 
-let authority = ["admin", "user"];
+import Select from "react-select";
 
+const authority = [
+  { value: "admin", label: "Admin" },
+  { value: "user", label: "User" },
+];
+/* FORM VALIDATORS */
 const required = (value) => {
   if (!value) {
     return <div role="alert">This field is required!</div>;
@@ -40,6 +43,7 @@ const vpassword = (value) => {
 };
 
 const Register = () => {
+  const history = useHistory();
   const form = useRef();
   const checkBtn = useRef();
 
@@ -47,10 +51,9 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [roles, setRole] = useState("");
-
   const [successful, setSuccessful] = useState(false);
 
-  const { message } = useSelector((state) => state.message);
+  const { message } = useSelector((state) => state.userReducer.auth);
   const dispatch = useDispatch();
 
   const onChangeUsername = (e) => {
@@ -64,7 +67,8 @@ const Register = () => {
   };
   const onChangeRole = (e) => {
     const roles = e;
-    setRole(roles);
+
+    setRole(roles.value);
   };
 
   const onChangePassword = (e) => {
@@ -87,6 +91,8 @@ const Register = () => {
         .catch(() => {
           setSuccessful(false);
         });
+      if (roles === "admin") history.push("/hradd");
+      if (roles === "user") history.push("/candidateadd");
     }
   };
 
@@ -176,16 +182,12 @@ const Register = () => {
                         validations={[required, vpassword]}
                       />
                     </div>
+
                     <div className="relative w-full mb-3">
                       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
                         ROLE
                       </label>
-                      <DropdownList
-                        data={authority}
-                        defaultValue={"user"}
-                        value={roles}
-                        onChange={onChangeRole}
-                      />
+                      <Select options={authority} onChange={onChangeRole} />
                     </div>
                     <div>
                       <label className="inline-flex items-center cursor-pointer">
@@ -206,7 +208,6 @@ const Register = () => {
                         </span>
                       </label>
                     </div>
-
                     <div className="text-center mt-6">
                       <button className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
                         Create Account

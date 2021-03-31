@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-//const UserSchema = require("./user");
 
 const hrSchema = new Schema({
-  //user: UserSchema,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    index: true,
+  },
   fullName: String,
   profilePhoto: String,
   birthday: Date,
