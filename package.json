@@ -22,6 +22,7 @@
     "drei": "^2.2.21",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
+    "json-api-normalize": "^1.1.5",
     "popper.js": "^1.16.1",
     "prop-types": "15.7.2",
     "react": "16.13.1",
@@ -32,6 +33,7 @@
     "react-dom": "16.13.1",
     "react-dropdown": "^1.9.2",
     "react-google-maps": "9.4.5",
+    "react-js-pagination": "^3.0.3",
     "react-redux": "^7.2.2",
     "react-reveal": "^1.2.2",
     "react-router": "5.2.0",
@@ -52,8 +54,8 @@
     "validator": "^13.5.2"
   },
   "scripts": {
-    "start": "PORT=5000 react-scripts start",
-    "postinstall": "npx patch-package",
+    "start": "set PORT=5000 &&  react-scripts start",
+        "postinstall": "npx patch-package",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

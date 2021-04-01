@@ -101,7 +101,7 @@ export default function SidebarCandidate() {
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Jobs
+                  Profile{" "}
                 </Link>
               </li>
 

@@ -8,9 +8,10 @@ const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
 const hr = require("./routes/HR/HRAPI");
 const dbConfig = require("./config/DBconfig");
+const cv = require("./cv/app");
 const multer = require("multer");
 var path = require("path");
-var job = require("../backend/routes/JobsAPI");
+const job = require("./routes/JobsAPI");
 var debug = require("debug")("server:server");
 var http = require("http");
 var socket = require("socket.io");
@@ -26,8 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
 app.use("/job", job);
+app.use("/cv", cv);
 app.use("/events", eventsmodel);
-
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
