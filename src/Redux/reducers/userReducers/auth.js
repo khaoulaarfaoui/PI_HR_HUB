@@ -8,7 +8,7 @@ import {
 
 const user = JSON.parse(localStorage.getItem("user"));
 
-const initialState = user
+export const initialState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
 

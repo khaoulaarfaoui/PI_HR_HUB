@@ -1,6 +1,10 @@
 import {
   REGISTER_SUCCESS_CANDIDATE,
   REGISTER_FAIL_CANDIDATE,
+  CANDIDATE_FETCHING,
+  CANDIDATE_SUCCESS,
+  CANDIDATE_FAILED,
+  CANDIDATE_CLEAR,
 } from "../../actions/candidate/types";
 
 const candidate = JSON.parse(localStorage.getItem("candidate"));

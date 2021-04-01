@@ -14,7 +14,7 @@ import Pagination from "react-js-pagination";
 class Jobs extends Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props);
     this.state = {
       search: "",
     };

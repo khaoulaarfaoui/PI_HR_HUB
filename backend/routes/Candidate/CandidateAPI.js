@@ -8,7 +8,6 @@ router.post("/addCandidate", async (req, res) => {
     const candidate = new Candidate(req.body);
     await candidate.save();
     const user = await User.findById({ _id: candidate.user });
-    //return new book object, after saving it to Publisher
     res.status(200).json({ success: true, data: candidate });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });

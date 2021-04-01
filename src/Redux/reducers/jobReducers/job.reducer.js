@@ -12,7 +12,7 @@ import {
   FETCH_JOB_SUCCESS,
   FETCH_JOB_LOADING,
   FETCH_JOB_ERROR,
-} from "../actions/user/types";
+} from "../../actions/user/types";
 
 const defaultState = {
   jobs: [],

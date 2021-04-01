@@ -38,11 +38,11 @@ const App = () => {
       dispatch(clearMessage()); // clear message when changing location
     });
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (currentUser) {
-      setShowUserBoard(currentUser.roles.includes("ROLE_USER"));
-      setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+      // setShowUserBoard(currentUser.roles.includes("ROLE_USER"));
+      //  setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
     }
   }, [currentUser]);
 
@@ -55,8 +55,17 @@ const App = () => {
       {currentUser && (
         <NavbarCandidate User={currentUser.username} close={logOut} />
       )}
-
       <Switch>
+        {/* <Route
+          path="/admin"
+          render={() =>
+            currentUser ? (
+              <Redirect to="/admin/jobs" />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          }
+        /> */}
         <Route path="/admin" component={Admin} />
         <Route path="/candidateadd" component={RegisterCandidate} />
         <Route path="/auth" component={Auth} />
@@ -65,13 +74,27 @@ const App = () => {
         <Route path="/user" component={BoardUser} />
         <Route path="/admin" component={BoardAdmin} />
         <Route path="/event3D" component={Event3D} />
-        <Route path="/candidate" component={Candidate} />
+        <Route
+          path="/candidate"
+          render={() =>
+            currentUser ? <Redirect to="/admin" /> : <Redirect to="/auth" />
+          }
+        />
+        <Route
+          path="/admin"
+          render={() =>
+            currentUser ? (
+              <Redirect to="/admin/jobs" />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          }
+        />
         <Route path="/hradd" component={RegisterHR} />
         <Route path="/" component={Index} />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>
-    
   );
 };
 

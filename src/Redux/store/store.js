@@ -7,7 +7,7 @@ import hrReducer from "../reducers/hrReducers";
 import candidateReducer from "../reducers/candidateReducers";
 import { AllEvents } from "../actions/event/EventAction";
 import eventsReducer from "../reducers/eventReducers/EventReducer";
-import jobs from "../jobReducers/job.reducer";
+import jobs from "../reducers/jobReducers/job.reducer";
 
 const middleware = [thunk];
 

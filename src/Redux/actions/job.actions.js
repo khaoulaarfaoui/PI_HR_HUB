@@ -12,15 +12,22 @@ import {
   FETCH_JOB_LOADING,
   FETCH_JOB_ERROR,
 } from "../actions/user/types";
+import { initialState } from "Redux/reducers/userReducers/auth";
+
 import axios from "axios";
 import { history } from "helpers/history";
 var str = window.location.pathname;
 let id = str.slice(12);
-
+//console.log("hrReducer", currentHR);
 console.log(id);
-const user = JSON.parse(localStorage.getItem("user"));
-const GET_URL = "http://localhost:8082/job/jobs/605f25b1b98fa02b9875aaf8";
-const ADD_URL = "http://localhost:8082/job/add/605f25b1b98fa02b9875aaf8";
+console.log("initial", initialState);
+if (initialState.isLoggedIn) {
+  const hr = JSON.parse(localStorage.getItem("hr"));
+  var hrId = hr.data._id;
+  console.log("hr id", hrId);
+}
+const GET_URL = "http://localhost:8082/job/jobs/6058d433e461980052a601cd";
+const ADD_URL = "http://localhost:8082/job/add/6058d433e461980052a601cd";
 const UPDATE_URL = "http://localhost:8082/job/job/" + id;
 const DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
 
@@ -152,6 +159,7 @@ const normalizeResponse = (data) => {
 
 export const fetchJobs = () => {
   let isLoading = true;
+  console.log("biiiiii", isLoading);
   return (dispatch) => {
     dispatch(fetchJobsLoading(isLoading));
     return axios
@@ -165,8 +173,8 @@ export const fetchJobs = () => {
       })
       .catch((error) => {
         const errorPayload = {};
-        errorPayload["message"] = error.response.data.message;
-        errorPayload["status"] = error.response.status;
+        errorPayload["message"] = error.response;
+        errorPayload["status"] = error.response;
         dispatch(fetchJobsError(errorPayload));
         isLoading = false;
         dispatch(fetchJobsLoading(isLoading));
