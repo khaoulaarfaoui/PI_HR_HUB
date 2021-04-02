@@ -29,7 +29,9 @@ router.post(
       const candidate = new Candidate({
         user: req.body.user,
         fullName: req.body.fullName,
-        profilePhoto: req.files.profilePhoto[1],
+        profilePhoto: JSON.parse(JSON.stringify(req.files.profilePhoto[0]))[
+          "path"
+        ],
         birthday: req.body.birthday,
         phoneNumber: req.body.phoneNumber,
         education: req.body.education,
@@ -39,7 +41,7 @@ router.post(
         SubmittedJobs: req.body.SubmittedJobs,
         ratio: req.body.ratio,
         teamStatus: req.body.teamStatus,
-        cv: req.files.cv[1],
+        cv: JSON.parse(JSON.stringify(req.files.cv[0]))["path"],
         title: req.body.title,
         jobs: req.body.jobs,
         events: req.body.events,
