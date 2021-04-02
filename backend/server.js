@@ -59,7 +59,6 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-// SET STORAGE
 
 // SET STORAGE
 var storage = multer.diskStorage({

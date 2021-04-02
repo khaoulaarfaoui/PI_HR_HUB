@@ -1,18 +1,19 @@
 import {
   REGISTER_SUCCESS_CANDIDATE,
   REGISTER_FAIL_CANDIDATE,
-  CANDIDATE_FETCHING,
-  CANDIDATE_SUCCESS,
-  CANDIDATE_FAILED,
-  CANDIDATE_CLEAR,
+  SET_CANDIDATE,
 } from "../../actions/candidate/types";
 
 const candidate = JSON.parse(localStorage.getItem("candidate"));
 console.log(candidate);
-const initialState = candidate
-  ? { isLoggedIn: true, candidate }
-  : { isLoggedIn: false, candidate: null };
-
+const initialState = {
+  state: candidate
+    ? { isLoggedIn: true, candidate }
+    : { isLoggedIn: false, candidate: null },
+  // isFetching: false,
+  // isError: false,
+  // result: null,
+};
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
@@ -28,6 +29,7 @@ export default function (state = initialState, action) {
         ...state,
         isLoggedIn: false,
       };
+
     default:
       return state;
   }

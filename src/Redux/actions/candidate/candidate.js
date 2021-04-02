@@ -2,6 +2,8 @@ import {
   REGISTER_SUCCESS_CANDIDATE,
   REGISTER_FAIL_CANDIDATE,
   SET_MESSAGE_CANDIDATE,
+  SET_CANDIDATE,
+  REMOVE_CANDIDATE,
 } from "./types";
 
 import CandidateService from "../../../service/candidateService/authservice";
@@ -37,7 +39,7 @@ export const register = (
 
       dispatch({
         type: SET_MESSAGE_CANDIDATE,
-        payload: response.data,
+        payload: Promise.all([response.data, response.email]),
       });
 
       return Promise.resolve();
@@ -63,3 +65,16 @@ export const register = (
     }
   );
 };
+export function setCandidate(candidate) {
+  return {
+    type: SET_CANDIDATE,
+    candiate: candidate,
+  };
+}
+
+export function removeCandidate(_id) {
+  return {
+    type: REMOVE_CANDIDATE,
+    _id: _id,
+  };
+}

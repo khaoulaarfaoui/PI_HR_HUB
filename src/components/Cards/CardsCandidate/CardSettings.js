@@ -1,8 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import {
+  setCandidate,
+  removeCandidate,
+} from "../../../Redux/actions/candidate/candidate";
+// components
 
 // components
 
-export default function CardSettings() {
+export default function CardSettings(props) {
+  const candidate = useSelector(
+    (state) => state.candidateReducer.candidate.state.candidate
+  );
+  console.log("candidateeeee", candidate);
+  const dispatch = useDispatch();
+
+  useEffect(
+    function () {
+      axios
+        .get(`http://localhost:8082/candidate/` + candidate._id)
+        .then(function (response) {
+          dispatch(setCandidate(response.data));
+          console.log("waaaaaaaaaaaaaaaaaa", response.data);
+        })
+        .catch(function (error) {
+          console.log("error", error);
+        });
+    },
+    [dispatch, props, candidate._id]
+  );
+
+  function handleDelete() {
+    axios
+      .delete(`/api/articles/${candidate._id}`)
+      .then(function () {
+        dispatch(removeCandidate(candidate._id));
+        props.history.push("/");
+      })
+      .catch(function (error) {
+        console.log("error", error);
+      });
+  }
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
@@ -34,7 +74,7 @@ export default function CardSettings() {
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="lucky.jesse"
+                    value={candidate.data.fullName}
                   />
                 </div>
               </div>
@@ -49,7 +89,7 @@ export default function CardSettings() {
                   <input
                     type="email"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="jesse@example.com"
+                    value={candidate.email}
                   />
                 </div>
               </div>

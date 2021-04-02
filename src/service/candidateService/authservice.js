@@ -29,7 +29,10 @@ const register = (
     })
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("candidate", JSON.stringify(response.data));
+        localStorage.setItem(
+          "candidate",
+          JSON.stringify(response.data, response.email)
+        );
       }
     });
 };

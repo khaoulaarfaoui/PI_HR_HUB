@@ -1,7 +1,5 @@
 import React from "react";
 
-// components
-
 import CardSettings from "components/Cards/CardsCandidate/CardSettings.js";
 import CardProfile from "components/Cards/CardsCandidate/CardProfile.js";
 

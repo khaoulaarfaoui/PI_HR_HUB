@@ -12,7 +12,7 @@ import {
   FETCH_JOB_LOADING,
   FETCH_JOB_ERROR,
 } from "../actions/user/types";
-import { initialState } from "Redux/reducers/userReducers/auth";
+import { initialState } from "Redux/reducers/hrReducers/hr";
 
 import axios from "axios";
 import { history } from "helpers/history";

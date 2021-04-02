@@ -24,6 +24,7 @@ import { clearMessage } from "./Redux/actions/user/message";
 import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
+import Profile from "views/candidate/Settings";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -66,6 +67,7 @@ const App = () => {
             )
           }
         /> */}
+        <Route path="/profile" component={Profile} />
         <Route path="/admin" component={Admin} />
         <Route path="/candidateadd" component={RegisterCandidate} />
         <Route path="/auth" component={Auth} />
