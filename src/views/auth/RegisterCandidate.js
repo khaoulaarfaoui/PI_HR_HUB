@@ -57,7 +57,8 @@ export default function CandidateRegister() {
     setUser(user);
   };
   const onChangeProfilePhoto = (e) => {
-    const ProfilePhoto = e.target.value;
+    const ProfilePhoto = e.target.files[0];
+    console.log(e.target.files[0]);
     setProfilePhoto(ProfilePhoto);
   };
   const onChangeBirthday = (e) => {
