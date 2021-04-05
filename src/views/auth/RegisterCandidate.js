@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-
+import axios from "axios";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -14,8 +14,6 @@ export default function CandidateRegister() {
     { value: "nodejs", label: "Node JS" },
   ];
   const history = useHistory();
-
-  const form = useRef();
   const checkBtn = useRef();
   const { user: currentUser } = useSelector((state) => state.userReducer.auth);
   const [fullName, setFullName] = useState("");
@@ -24,14 +22,13 @@ export default function CandidateRegister() {
   const [location, setLocation] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [experience, setExperience] = useState("");
-
   const [education, setEducation] = useState("");
   const [skills, setSkills] = useState("");
   const [cv, setCV] = useState("");
   const [user, setUser] = useState(currentUser.id);
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
-
+  const [file, setFile] = useState("");
   const onChangeEducation = (e) => {
     const Education = e.target.value;
     setEducation(Education);
@@ -57,9 +54,10 @@ export default function CandidateRegister() {
     setUser(user);
   };
   const onChangeProfilePhoto = (e) => {
-    const ProfilePhoto = e.target.files[0];
-    console.log(e.target.files[0]);
-    setProfilePhoto(ProfilePhoto);
+    const profilePhoto = e.target.files[0];
+    const File = URL.createObjectURL(e.target.files[0]);
+    setProfilePhoto(profilePhoto);
+    setFile(File);
   };
   const onChangeBirthday = (e) => {
     const Birthday = e.target.value;
@@ -79,7 +77,38 @@ export default function CandidateRegister() {
 
     setMessage("");
     setSuccessful(false);
+    const form = new FormData();
+    form.append("user", user);
+    form.append(fullName, "fullName");
+    console.log("lennaaaaa", fullName);
+    form.append("profilePhoto", profilePhoto);
+    console.log("lenaaaaa", profilePhoto);
+    form.append(birthday, "birthday");
+    form.append(phoneNumber, "phoneNumber");
+    form.append(location, "location");
+    form.append(cv, "cv");
+    form.append(location, "location");
+    form.append(education, "education");
+    form.append(skills, "skills");
 
+    console.log("aaaaaaaaaaaa", user);
+
+    axios({
+      method: "post",
+      url: "http://localhost:8082/candidate/addCandidate",
+      data: form,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        //handle success
+        console.log(response);
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response);
+      });
+
+    /*
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
@@ -96,7 +125,7 @@ export default function CandidateRegister() {
         user
       ).then(
         (response) => {
-          setMessage(response.data.message);
+          setMessage(response.data);
           setSuccessful(true);
         },
         (error) => {
@@ -106,13 +135,14 @@ export default function CandidateRegister() {
               error.response.data.message) ||
             error.message ||
             error.toString();
-
+          console.log("errreur react", error);
           setMessage(resMessage);
           setSuccessful(false);
         }
       );
       history.push("/candidate");
     }
+    */
   };
   return (
     <>
@@ -133,7 +163,8 @@ export default function CandidateRegister() {
                 <div className="text-gray-500 text-center mb-3 font-bold">
                   <small>Or sign up with credentials</small>
                 </div>
-                <Form onSubmit={handleRegister} ref={form}>
+                <Form onSubmit={handleRegister}>
+                  {" "}
                   {!successful && (
                     <div>
                       <div className="relative w-full mb-3">
@@ -161,8 +192,8 @@ export default function CandidateRegister() {
                           Name
                         </label>
                         <Input
-                          type="name"
-                          name="name"
+                          type="text"
+                          name="fullName"
                           value={fullName}
                           onChange={onChangefullName}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
@@ -179,12 +210,13 @@ export default function CandidateRegister() {
                         </label>
                         <Input
                           type="file"
-                          name="profilephoto"
-                          value={profilePhoto}
+                          name="profilePhoto"
+                          //value={profilePhoto}
                           onChange={onChangeProfilePhoto}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="profilePhoto"
                         />
+                        <img src={file} />
                       </div>
                       <div className="relative w-full mb-3">
                         <label
@@ -211,7 +243,7 @@ export default function CandidateRegister() {
                         </label>
                         <input
                           type="text"
-                          name="username"
+                          name="phoneNumber"
                           value={phoneNumber}
                           onChange={onChangephoneNumber}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
@@ -276,11 +308,13 @@ export default function CandidateRegister() {
                           CV
                         </label>
                         <input
-                          type="file"
+                          type="text"
+                          name="cv"
                           value={cv}
+                          encType="multipart/form-data"
                           onChange={onChangeCV}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="cv"
+                          // placeholder="cv"
                         />
                       </div>
 
@@ -322,7 +356,6 @@ export default function CandidateRegister() {
                       </div>
                     </div>
                   )}
-
                   {message && (
                     <div className="form-group">
                       <div
