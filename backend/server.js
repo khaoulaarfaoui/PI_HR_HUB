@@ -17,6 +17,8 @@ var http = require("http");
 var socket = require("socket.io");
 var connectIo = require("./chatbotService");
 const eventsmodel = require("./Controllers/events/eventController");
+var dir = path.join(__dirname, "./public");
+
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -29,6 +31,8 @@ app.use(cors(corsOptions));
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
+app.use("/public", express.static(dir));
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {

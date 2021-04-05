@@ -76,12 +76,7 @@ const App = () => {
         <Route path="/user" component={BoardUser} />
         <Route path="/admin" component={BoardAdmin} />
         <Route path="/event3D" component={Event3D} />
-        <Route
-          path="/candidate"
-          render={() =>
-            currentUser ? <Redirect to="/admin" /> : <Redirect to="/auth" />
-          }
-        />
+        <Route path="/candidate" component={Candidate} />
         <Route
           path="/admin"
           render={() =>
