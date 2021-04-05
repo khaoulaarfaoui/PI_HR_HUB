@@ -400,7 +400,9 @@ class Play extends Component {
                             onClick={this.handleButtonClick}>
                                 Next
                             </button>
-                        <button id="quit-button" onClick={this.handleButtonClick}>Quit</button>
+                        <button id="quit-button" onClick={this.handleButtonClick}>
+                            Quit
+                            </button>
                     </div>
                 </div>
             </Fragment>
