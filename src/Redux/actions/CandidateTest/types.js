@@ -1,0 +1,13 @@
+export const ADD_TEST_SUCCESS = "ADD_TEST_SUCCESS";
+export const ADD_TEST_ERR = "ADD_TEST_ERR";
+
+export const DELETE_TEST_SUCCESS = "DELETE_TEST_SUCCESS";
+export const DELETE_TEST_ERR = "DELETE_TEST_ERR";
+
+export const EDIT_TEST_SUCCESS = "EDIT_TEST_SUCCESS";
+export const EDIT_TEST_ERR = "EDIT_TEST_ERR";
+
+export const FETCH_TEST_SUCCESS = "FETCH_TEST_SUCCESS";
+export const FETCH_TEST_ERR = "FETCH_TEST_ERR";
+
+

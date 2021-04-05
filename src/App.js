@@ -14,7 +14,10 @@ import Auth from "layouts/Auth.js";
 
 // views without layouts
 import Index from "views/Index";
-
+import Event3D from "./views/EventManagement/Event3D";
+import TestLibrary from "./views/TestManagement/TestLibrary";
+import Play from "./views/TestManagement/Play";
+import QuizSummary from "./views/TestManagement/QuizSummary";
 import BoardUser from "./views/candidate/BoardUser";
 import BoardAdmin from "./views/candidate/BoardAdmin";
 
@@ -41,8 +44,8 @@ const App = () => {
 
   useEffect(() => {
     if (currentUser) {
-      setShowUserBoard(currentUser.roles.includes("ROLE_USER"));
-      setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+      // setShowUserBoard(currentUser.roles.includes("ROLE_USER"));
+      //  setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
     }
   }, [currentUser]);
 
@@ -55,17 +58,44 @@ const App = () => {
       {currentUser && (
         <NavbarCandidate User={currentUser.username} close={logOut} />
       )}
-
       <Switch>
+        {/* <Route
+          path="/admin"
+          render={() =>
+            currentUser ? (
+              <Redirect to="/admin/jobs" />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          }
+        /> */}
         <Route path="/admin" component={Admin} />
         <Route path="/candidateadd" component={RegisterCandidate} />
+        <Route path="/auth" component={Auth} />
         <Route path="/auth" component={Auth} />
         {/* add routes without layouts */}
 
         <Route path="/user" component={BoardUser} />
         <Route path="/admin" component={BoardAdmin} />
-
-        <Route path="/candidate" component={Candidate} />
+        <Route path="/event3D" component={Event3D} />
+        <Route path ="/TestManagement/TestLibrary" component={TestLibrary} />
+        <Route path="/play/quiz" exact component={Play} />
+        <Route path="/play/quizSummary" exact component={QuizSummary} />
+          path="/candidate"
+          render={() =>
+            currentUser ? <Redirect to="/admin" /> : <Redirect to="/auth" />
+          }
+        />
+        <Route
+          path="/admin"
+          render={() =>
+            currentUser ? (
+              <Redirect to="/admin/jobs" />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          }
+        />
         <Route path="/hradd" component={RegisterHR} />
         <Route path="/" component={Index} />
         <Redirect from="*" to="/" />

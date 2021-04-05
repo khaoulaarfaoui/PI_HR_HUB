@@ -3,43 +3,50 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Role = require("../../PI/backend/models/Role");
-const db = require("../../PI/backend/models");
+const Role = require("../backend/models/Role");
+const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
+const test = require("./Controllers/candidateTests/testController");
 const hr = require("./routes/HR/HRAPI");
 const dbConfig = require("./config/DBconfig");
+const cv = require("./cv/app");
 const multer = require("multer");
-var path = require("path");
-var debug = require("debug")("server:server");
-var http = require("http");
-var socket = require("socket.io");
-var connectIo = require("./chatbotService");
+const path = require("path");
+const job = require("./routes/JobsAPI");
+const debug = require("debug")("server:server");
+const http = require("http");
+const socket = require("socket.io");
+const connectIo = require("./chatbotService");
+const eventsmodel = require("./Controllers/events/eventController");
 const app = express();
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:8081",
 };
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use("/test", test);
+app.use("/job", job);
+app.use("/cv", cv);
+app.use("/events", eventsmodel);
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+require("../backend/routes/User/auth")(app);
+require("../backend/routes/User/userRoute")(app);
 
-require("../../PI/backend/routes/User/auth")(app);
-require("../../PI/backend/routes/User/userRoute")(app);
+require("./routes/User/auth")(app);
+require("./routes/User/userRoute")(app);
 
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to hrbub application." });
 });
+
 app.use("/candidate", candidate);
 app.use("/hr", hr);
 db.mongoose
@@ -55,6 +62,7 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+// SET STORAGE
 
 // SET STORAGE
 var storage = multer.diskStorage({
@@ -72,8 +80,8 @@ app.get("/", function (req, res) {
 });
 app.post("/uploadfile", upload.single("file"), (req, res, next) => {
   const file = req.file;
+  const error = new Error("Please upload a file");
   if (!file) {
-    const error = new Error("Please upload a file");
     error.httpStatusCode = 400;
     return next(error);
   }

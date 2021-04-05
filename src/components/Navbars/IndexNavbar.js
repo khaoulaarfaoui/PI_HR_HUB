@@ -2,9 +2,8 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
+import image1 from "../../assets/img/hrnavlogo.png";
 // components
-
-
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -20,7 +19,7 @@ export default function Navbar(props) {
             >
               <img
                 alt="..."
-                src={require("assets/img/hrnavlogo.png")}
+                src={image1}
                 className="mr-4"
               />
             </Link>
@@ -83,6 +82,17 @@ export default function Navbar(props) {
               </li>
 
               <li className="flex items-center">
+                <Link to="/TestManagement/TestLibrary">
+                  <button
+                    className="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                    type="button"
+                  >
+                    Test library
+                  </button>{" "}
+                </Link>
+              </li>
+
+              <li className="flex items-center">
                 <Link to="/auth/login">
                   <button
                     className="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
@@ -92,6 +102,7 @@ export default function Navbar(props) {
                   </button>{" "}
                 </Link>
               </li>
+             
             </ul>
           </div>
         </div>
