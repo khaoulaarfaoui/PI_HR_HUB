@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -7,12 +7,46 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../../service/candidateService/authservice";
 import Select from "react-select";
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from "react-country-region-selector";
 
 export default function CandidateRegister() {
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios
+        .get(`http://universities.hipolabs.com/search`, {})
+        .then((response) => setEducation(parseStations(response.data)));
+      /*console.log("alooooo", response.data);
+      response.data.map((data) => {
+        const test = { value: data.name, label: data.name };
+        setEducation(test);
+        
+        
+      });*/
+    }
+    fetchData();
+  }, []);
+  function parseStations(stations) {
+    return stations.slice(0, 1000).map((station) => {
+      return { label: station.name, value: station.name };
+    });
+  }
   const skill = [
     { value: "reactjs", label: "React JS" },
     { value: "nodejs", label: "Node JS" },
   ];
+  console.log(skill);
+  const background = [
+    { value: "Infromation Technology", label: "Infromation Technology" },
+    { value: "Business Intelligence", label: "Business Intelligence" },
+    { value: "Web Dev", label: "Web Dev" },
+    { value: "Finance", label: "Finance" },
+    { value: "English", label: "English" },
+  ];
+
   const history = useHistory();
   const checkBtn = useRef();
   const { user: currentUser } = useSelector((state) => state.userReducer.auth);
@@ -22,15 +56,26 @@ export default function CandidateRegister() {
   const [location, setLocation] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [experience, setExperience] = useState("");
-  const [education, setEducation] = useState("");
+  const [education, setEducation] = useState();
   const [skills, setSkills] = useState("");
-  const [cv, setCV] = useState("");
+  const [region, setRegion] = useState("");
   const [user, setUser] = useState(currentUser.id);
   const [successful, setSuccessful] = useState(false);
+  const [aboutMe, setAboutme] = useState("");
   const [message, setMessage] = useState("");
   const [file, setFile] = useState("");
+
+  const onChangeRegion = (e) => {
+    const Region = e;
+    setRegion(Region);
+  };
+
+  const onChangeAboutme = (e) => {
+    const AboutMe = e.target.value;
+    setAboutme(AboutMe);
+  };
   const onChangeEducation = (e) => {
-    const Education = e.target.value;
+    const Education = e;
     setEducation(Education);
   };
   const onChangeExperience = (e) => {
@@ -41,10 +86,7 @@ export default function CandidateRegister() {
     const skills = e;
     setSkills(skills);
   };
-  const onChangeCV = (e) => {
-    const CV = e.target.value;
-    setCV(CV);
-  };
+
   const onChangefullName = (e) => {
     const FullName = e.target.value;
     setFullName(FullName);
@@ -68,7 +110,7 @@ export default function CandidateRegister() {
     setPhoneNumber(PhoneNumber);
   };
   const onChangeLocation = (e) => {
-    const Location = e.target.value;
+    const Location = e;
     setLocation(Location);
   };
 
@@ -87,27 +129,8 @@ export default function CandidateRegister() {
     form.append("location", location);
     form.append("education", education);
     form.append("skills", skills);
-    /*
-    axios({
-      method: "post",
-      url: "http://localhost:8082/candidate/addCandidate",
-      data: form,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-      .then(function (response) {
-        //handle success
-        console.log(response);
-        setSuccessful(true);
-      })
-      .catch(function (response) {
-        //handle error
-        console.log(response);
-        setSuccessful(false);
-      });
+    form.append("aboutMe", aboutMe);
 
-    /*
-    form.current.validateAll();
-*/
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.register(form).then(
         (response) => {
@@ -235,7 +258,22 @@ export default function CandidateRegister() {
                           placeholder="phoneNumber"
                         />
                       </div>
-
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          About Me
+                        </label>
+                        <textarea
+                          type="textarea"
+                          name="aboutMe"
+                          value={aboutMe}
+                          onChange={onChangeAboutme}
+                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                          placeholder="About Me"
+                        />
+                      </div>
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -253,7 +291,7 @@ export default function CandidateRegister() {
                         />
                       </div>
 
-                      <div className="relative w-full mb-3">
+                      {/* <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
@@ -267,7 +305,7 @@ export default function CandidateRegister() {
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="location"
                         />
-                      </div>
+                      </div> */}
 
                       <div className="relative w-full mb-3">
                         <label
@@ -276,30 +314,9 @@ export default function CandidateRegister() {
                         >
                           Education
                         </label>
-                        <input
-                          type="text"
-                          value={education}
+                        <Select
+                          options={education}
                           onChange={onChangeEducation}
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="education"
-                        />
-                      </div>
-
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          CV
-                        </label>
-                        <input
-                          type="text"
-                          name="cv"
-                          value={cv}
-                          encType="multipart/form-data"
-                          onChange={onChangeCV}
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          // placeholder="cv"
                         />
                       </div>
 
@@ -313,7 +330,17 @@ export default function CandidateRegister() {
                           onChange={onChangeSkills}
                         />
                       </div>
-
+                      <div>
+                        <CountryDropdown
+                          value={location}
+                          onChange={onChangeLocation}
+                        />
+                        <RegionDropdown
+                          country={location}
+                          value={region}
+                          onChange={onChangeRegion}
+                        />
+                      </div>
                       <div>
                         <label className="inline-flex items-center cursor-pointer">
                           <input

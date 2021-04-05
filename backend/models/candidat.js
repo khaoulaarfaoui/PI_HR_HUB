@@ -15,6 +15,7 @@ const candidateSchema = new Schema({
   location: String,
   education: String,
   experience: String,
+  aboutMe: String,
   states: String,
   skills: [{}],
   SubmittedJobs: Array,

@@ -12,7 +12,7 @@ const register = (form) => {
     if (response.data) {
       localStorage.setItem(
         "candidate",
-        JSON.stringify(response.data, response.email)
+        JSON.stringify(response.data, response.email, response.username)
       );
     }
   });

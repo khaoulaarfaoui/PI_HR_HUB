@@ -66,6 +66,7 @@ router.post(
         phoneNumber: req.body.phoneNumber,
         education: req.body.education,
         experience: req.body.experience,
+        aboutMe: req.body.aboutMe,
         states: req.body.states,
         skills: req.body.skills,
         SubmittedJobs: req.body.SubmittedJobs,
@@ -83,8 +84,14 @@ router.post(
       const user = await User.findById({ _id: candidate.user });
       console.log(user);
       const email = user.email;
+      const username = user.username;
       console.log("reactttttt", req);
-      res.status(200).json({ success: true, data: candidate, Email: email });
+      res.status(200).json({
+        success: true,
+        data: candidate,
+        email: email,
+        username: username,
+      });
     } catch (err) {
       console.log("errrrrrrrrrr", err);
       console.log("reactttttt", req);
