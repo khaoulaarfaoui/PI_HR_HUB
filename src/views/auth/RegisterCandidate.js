@@ -79,20 +79,15 @@ export default function CandidateRegister() {
     setSuccessful(false);
     const form = new FormData();
     form.append("user", user);
-    form.append(fullName, "fullName");
-    console.log("lennaaaaa", fullName);
+    form.append("fullName", fullName);
     form.append("profilePhoto", profilePhoto);
-    console.log("lenaaaaa", profilePhoto);
-    form.append(birthday, "birthday");
-    form.append(phoneNumber, "phoneNumber");
-    form.append(location, "location");
-    form.append(cv, "cv");
-    form.append(location, "location");
-    form.append(education, "education");
-    form.append(skills, "skills");
-
-    console.log("aaaaaaaaaaaa", user);
-
+    form.append("birthday", birthday);
+    form.append("phoneNumber", phoneNumber);
+    form.append("location", location);
+    form.append("location", location);
+    form.append("education", education);
+    form.append("skills", skills);
+    /*
     axios({
       method: "post",
       url: "http://localhost:8082/candidate/addCandidate",
@@ -102,28 +97,19 @@ export default function CandidateRegister() {
       .then(function (response) {
         //handle success
         console.log(response);
+        setSuccessful(true);
       })
       .catch(function (response) {
         //handle error
         console.log(response);
+        setSuccessful(false);
       });
 
     /*
     form.current.validateAll();
-
+*/
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(
-        fullName,
-        profilePhoto,
-        birthday,
-        phoneNumber,
-        location,
-        cv,
-        education,
-        experience,
-        skills,
-        user
-      ).then(
+      AuthService.register(form).then(
         (response) => {
           setMessage(response.data);
           setSuccessful(true);
@@ -142,7 +128,6 @@ export default function CandidateRegister() {
       );
       history.push("/candidate");
     }
-    */
   };
   return (
     <>
