@@ -53,9 +53,9 @@ const App = () => {
 
   return (
     <Router history={history}>
-      {currentUser && (
+      {/* {currentUser && (
         <NavbarCandidate User={currentUser.username} close={logOut} />
-      )}
+      )} */}
       <Switch>
         {/* <Route
           path="/admin"
