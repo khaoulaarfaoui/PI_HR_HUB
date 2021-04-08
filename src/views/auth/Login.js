@@ -1,13 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-
+import Alert from "react-s-alert";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { Link } from "react-router-dom";
 import { login } from "../../Redux/actions/user/auth";
 import { useHistory } from "react-router-dom";
+import _ from "lodash";
+import ProfileCard from "../../Linkedin/src/components/ProfileCard";
 
 const required = (value) => {
   if (!value) {
@@ -21,21 +23,23 @@ const Login = (props) => {
   let history = useHistory();
 
   const { user: currentUser } = useSelector((state) => state.userReducer.auth);
-
+  useEffect(() => {
+    window.addEventListener("message", handlePostMessage);
+    console.log("waaaaaaaaaaaa", firstName);
+  }, []);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isAuthorized, setisAuthorized] = useState(false);
+  const [firstName, setfirstName] = useState("");
+  const [LastName, setLastName] = useState("");
+  const [pictureURL, setpictureURL] = useState("");
 
   const { isLoggedIn } = useSelector((state) => state.userReducer.auth);
   const { message } = useSelector((state) => state.userReducer.message);
 
   const dispatch = useDispatch();
-  /* const redirect = () => {
-    window.location.href = "http://localhost:4000/";
-    // maybe can add spinner while loading
-    return null;
-  };
-*/
+
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -45,7 +49,51 @@ const Login = (props) => {
     const password = e.target.value;
     setPassword(password);
   };
+  const requestProfile = () => {
+    var oauthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77vfbhloepwrqa&scope=r_liteprofile&state=123456&redirect_uri=http://localhost:8082/callback`;
+    var width = 450,
+      height = 730,
+      left = window.screen.width / 2 - width / 2,
+      top = window.screen.height / 2 - height / 2;
 
+    window.open(
+      oauthUrl,
+      "Linkedin",
+      "menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=" +
+        width +
+        ", height=" +
+        height +
+        ", top=" +
+        top +
+        ", left=" +
+        left
+    );
+  };
+
+  const handlePostMessage = (event) => {
+    if (event.data.type === "profile") {
+      updateProfile(event.data.profile);
+    }
+
+    // history.push({
+    //   pathname: "/profile",
+    //   state: [{ firstName, pictureURL, LastName }],
+    // });
+  };
+
+  const updateProfile = (profile) => {
+    console.log("aaaaaa", profile);
+    setisAuthorized(true);
+    setfirstName(_.get(profile, "localizedFirstName", ""));
+    setLastName(_.get(profile, "localizedLastName", ""));
+    setpictureURL(
+      _.get(
+        _.last(_.get(profile, "profilePicture.displayImage~.elements", "")),
+        "identifiers[0].identifier",
+        ""
+      )
+    );
+  };
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -87,7 +135,10 @@ const Login = (props) => {
                 </h6>
               </div>
               <div className="btn-wrapper text-center">
-                <button className="bg-white active:bg-gray-100 text-gray-800 font-normal  px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150">
+                <button
+                  onClick={requestProfile}
+                  className="bg-white active:bg-gray-100 text-gray-800 font-normal  px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                >
                   <img
                     alt="..."
                     className="w-5 mr-3"
@@ -96,6 +147,11 @@ const Login = (props) => {
                   Connect with linkedIn account
                 </button>
               </div>
+              {isAuthorized &&
+                history.push({
+                  pathname: "/profile",
+                  //  state: data // your data array of objects
+                })}
               <hr className="mt-6 border-b-1 border-gray-400" />
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">

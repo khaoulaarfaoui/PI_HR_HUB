@@ -20,11 +20,13 @@ import BoardAdmin from "./views/candidate/BoardAdmin";
 
 import { logout } from "./Redux/actions/user/auth";
 import { clearMessage } from "./Redux/actions/user/message";
+import Linkedin from "./Linkedin/src/Linkedin";
 
 import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
 import Profile from "views/candidate/Settings";
+import ProfileCard from "./Linkedin/src/components/ProfileCard";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -67,7 +69,7 @@ const App = () => {
             )
           }
         /> */}
-        <Route path="/profile" component={Profile} />
+        <Route path="/profile" component={ProfileCard} />
         <Route path="/admin" component={Admin} />
         <Route path="/candidateadd" component={RegisterCandidate} />
         <Route path="/auth" component={Auth} />
@@ -75,6 +77,7 @@ const App = () => {
 
         <Route path="/user" component={BoardUser} />
         <Route path="/admin" component={BoardAdmin} />
+        <Route path="/linkedin" component={Linkedin} />
         <Route path="/event3D" component={Event3D} />
         <Route path="/candidate" component={Candidate} />
         <Route
