@@ -7,6 +7,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { Link } from "react-router-dom";
 import { login } from "../../Redux/actions/user/auth";
+import { useHistory } from "react-router-dom";
 
 const required = (value) => {
   if (!value) {
@@ -17,6 +18,8 @@ const required = (value) => {
 const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
+  let history = useHistory();
+
   const { user: currentUser } = useSelector((state) => state.userReducer.auth);
 
   const [username, setUsername] = useState("");
@@ -27,7 +30,12 @@ const Login = (props) => {
   const { message } = useSelector((state) => state.userReducer.message);
 
   const dispatch = useDispatch();
-
+  /* const redirect = () => {
+    window.location.href = "http://localhost:4000/";
+    // maybe can add spinner while loading
+    return null;
+  };
+*/
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -79,10 +87,7 @@ const Login = (props) => {
                 </h6>
               </div>
               <div className="btn-wrapper text-center">
-                <button
-                  className="bg-white active:bg-gray-100 text-gray-800 font-normal  px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                  type="button"
-                >
+                <button className="bg-white active:bg-gray-100 text-gray-800 font-normal  px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150">
                   <img
                     alt="..."
                     className="w-5 mr-3"
