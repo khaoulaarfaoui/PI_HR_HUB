@@ -14,10 +14,12 @@ import Tests from "views/candidate/Tests.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
+import NavbarCandidate from "components/Navbars/CandidateNavbar";
 
 export default function Candidate() {
   return (
     <>
+      <NavbarCandidate />
       <SidebarCandidate />
       <div className="relative md:ml-64 bg-gray-200 md:pt-3 pb-32 pt-12">
         {/* Header */}

@@ -34,7 +34,7 @@ const login = (username, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
-  localStorage.removeItem("hr");
+  //localStorage.removeItem("hr");
 };
 
 export default {
