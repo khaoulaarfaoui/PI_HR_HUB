@@ -1,44 +1,45 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
-import { AllEvents, DeleteEvents } from "../../Redux/actions/event/EventAction";
-import AddEvents from "./AddEvents";
+import * as actions from "../../Redux/actions/team/TeamAction";
+import AddTeam from "./AddTeam";
 import ButterToast, { Cinnamon } from "butter-toast";
 
-const ViewEvent = (props) => {
+const ViewTeam = (props) => {
   const [currentId, setCurrentId] = useState(0);
 
   useEffect(() => {
-    props.fetchAllEvents();
+    props.fetchAll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onDelete = (id) => {
-    const onSuccess = () => {
-      ButterToast.raise({
-        content: (
-          <Cinnamon.Crisp
-            title="Delete Notification"
-            content="Deleted successfully"
-            scheme={Cinnamon.Crisp.SCHEME_PURPLE}
-            //icon={<DeleteSweep />}
-          />
-        ),
-      });
-    };
-    if (window.confirm("Are you sure to delete this event ?"))
-      props.deleteEvents(id, onSuccess);
+      const onSuccess = () => {
+        ButterToast.raise({
+          content: (
+            <Cinnamon.Crisp
+              title="Team Deleted Successfully"
+              content="Delete Notification"
+              scheme={Cinnamon.Crisp.SCHEME_PURPLE}
+              //icon={<DeleteSweep />}
+            />
+          ),
+        });
+      };
+      if (window.confirm("Are you sure to delete this Team ?"))
+        props.deleteTeams(id, onSuccess);
   };
 
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-8/12 px-4">
+
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="rounded-t mb-0 px-4 py-3 border-0">
               <div className="flex flex-wrap items-center">
                 <div className="relative w-full px-4 max-w-full flex-grow flex-1">
                   <h3 className="font-semibold text-base text-gray-800">
-                    Events
+                    Teams
                   </h3>
                 </div>
               </div>
@@ -49,10 +50,10 @@ const ViewEvent = (props) => {
                 <thead>
                   <tr>
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                      Name
+                      Team Name
                     </th>
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                      Date
+                      Numbers
                     </th>
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                       Description
@@ -63,24 +64,24 @@ const ViewEvent = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {props.EventsList.map((event, index) => {
+                  {props.TeamsList.map((team, index) => {
                     return (
                       <Fragment key={index}>
                         <tr>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                            {event.eventName}{" "}
+                            {team.teamName}{" "}
                           </th>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                            {event.eventDate}{" "}
+                            {team.participantNumber}{" "}
                           </th>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                            {event.description}{" "}
+                            {team.description}{" "}
                           </th>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                             <button
                               className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                               type="button"
-                              onClick={() => setCurrentId(event._id)}
+                              onClick={() => setCurrentId(team._id)}
                             >
                               Edit
                             </button>{" "}
@@ -89,7 +90,7 @@ const ViewEvent = (props) => {
                             <button
                               className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                               type="button"
-                              onClick={() => onDelete(event._id)}
+                              onClick={() => onDelete(team._id)}
                             >
                               Delete
                             </button>{" "}
@@ -106,20 +107,21 @@ const ViewEvent = (props) => {
         </div>
 
         <div className="w-full lg:w-4/12 px-4">
-          <AddEvents {...{ currentId, setCurrentId }} />
+          <AddTeam {...{ currentId, setCurrentId }} />
         </div>
       </div>
+  
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  EventsList: state.eventsReducer.list,
+  TeamsList: state.teamsReducer.list,
 });
 
 const mapActionToProps = {
-  fetchAllEvents: AllEvents,
-  deleteEvents: DeleteEvents,
+  fetchAll: actions.AllTeams,
+  deleteTeams: actions.DeleteTeams,
 };
 
-export default connect(mapStateToProps, mapActionToProps)(ViewEvent);
+export default connect(mapStateToProps, mapActionToProps)(ViewTeam);

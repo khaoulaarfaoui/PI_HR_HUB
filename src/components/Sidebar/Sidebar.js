@@ -124,28 +124,6 @@ export default function SidebarCandidate() {
                   Notification Center
                 </Link>
               </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/maps") !== -1
-                      ? "text-blue-500 hover:text-blue-600"
-                      : "text-gray-800 hover:text-gray-600")
-                  }
-                  to="/admin/maps"
-                >
-                  <i
-                    className={
-                      "fas fa-calendar-alt mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/maps") !== -1
-                        ? "opacity-75"
-                        : "text-gray-400")
-                    }
-                  ></i>{" "}
-                  Events
-                </Link>
-              </li>
               <li className="items-center">
                 <Link
                   className={
@@ -158,13 +136,32 @@ export default function SidebarCandidate() {
                 >
                   <i
                     className={
-                      "fas fa-newspaper text-gray-500 mr-2 text-sm" +
+                      "fas fa-calendar-alt mr-2 text-sm" +
                       (window.location.href.indexOf("/admin/event") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }
                   ></i>{" "}
                   Event Management
+                </Link>
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/teams") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/admin/teams"
+                >
+                  <i
+                    className={
+                      "fas fa-newspaper text-gray-500 mr-2 text-sm" +
+                      (window.location.href.indexOf("/admin/teams") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Team Management
                 </Link>
               </li>
             </ul>

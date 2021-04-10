@@ -19,8 +19,8 @@ let id = str.slice(12);
 
 console.log(id);
 const user = JSON.parse(localStorage.getItem("user"));
-const GET_URL = "http://localhost:8082/job/jobs/605f25b1b98fa02b9875aaf8";
-const ADD_URL = "http://localhost:8082/job/add/605f25b1b98fa02b9875aaf8";
+const GET_URL = "http://localhost:8082/job/jobs/6065b3c7b26a9a3524b4f1e5";
+const ADD_URL = "http://localhost:8082/job/add/6065b3c7b26a9a3524b4f1e5";
 const UPDATE_URL = "http://localhost:8082/job/job/" + id;
 const DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
 
@@ -165,8 +165,8 @@ export const fetchJobs = () => {
       })
       .catch((error) => {
         const errorPayload = {};
-        errorPayload["message"] = error.response.data.message;
-        errorPayload["status"] = error.response.status;
+        errorPayload["message"] = error.response;
+        errorPayload["status"] = error.response;
         dispatch(fetchJobsError(errorPayload));
         isLoading = false;
         dispatch(fetchJobsLoading(isLoading));

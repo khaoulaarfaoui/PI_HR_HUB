@@ -1,56 +1,83 @@
 const teamsmodel = require("../../models/teams.js");
-//const dbe = require("../../config/DBconfig.js");
+const express = require("express");
+const router = express.Router();
 
-module.exports = {
+//Add team
+router.post("/addTeams", async (req, res) => {
+  
+  const teamName = req.body.teamName;
+  const participantNumber = req.body.participantNumber;
+  const description = req.body.description;
 
-  create: function (req, res) {
-    console.log("postHR");
-    var newEv = new teamsmodel(req.body);
-    newEv.save(function (err, item) {
+  const t = new teamsmodel({
+      teamName: teamName, 
+      participantNumber: participantNumber, 
+      description: description
+  });
+
+  try {
+      await t.save();
+      res.json(t);
+      console.log("Team ++");
+  }catch(err){
+      console.log("Error to add team");
+  }
+
+});
+
+//View All teams
+router.get("/allteams", function (req,res) {
+  console.log("Get all Teams");
+  teamsmodel.find({}).exec(function (err, t) {
+    if (err) {
+      console.log("Error View All teams ");
+    } else {
+      res.json(t);
+    }
+  });
+});
+
+//Update team
+router.put("/updateTeam/:id", function (req, res) {
+    
+    teamsmodel.findByIdAndUpdate(req.params.id,
+      {
+        $set: {
+          teamName: req.body.teamName,
+          participantNumber: req.body.participantNumber,
+          description: req.body.description
+        },
+      },
+  
+      {
+        new: true,
+      },
+      function (err, updated) {
+        if (err) {
+          res.send("Error updating");
+        } else {
+          res.json(updated);
+          console.log("Team updated ++");
+        }
+      }
+    );
+  });
+
+
+//Delete team
+  router.delete("/deleteTeam/:id", function (req, res) {
+
+    console.log("Team deleted -- ");
+    teamsmodel.findOneAndDelete(req.params.id, function (err, deleted) {
       if (err) {
-        console.log("Error Add ",err);
-        res.json({status:"error", message: "Zab", data:null});
+        res.send("error deleting");
       } else {
-        res.json({status:"success", message: "+ GOAL +", data:item});
+        res.json(deleted);
       }
     });
-  },
 
-  update: function (req, res) {
-    teamsmodel.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function(err,item){
-      if (err) {
-        console.log("Nop",err);
-        res.json({status:"error", message: "Nop", data:null});
-      } else {
-        res.json({status:"success", message: "Updated <3", data:item});
-      }
-       
-    })
-  },
-
-  delete: function (req, res) {
-    teamsmodel.findByIdAndDelete({_id:req.params.id},function(err,item){
-      if (err) {
-        console.log("Error",err);
-        res.json({status:"error", message: "Nop for Delete", data:null});
-      } else {
-        res.json({status:"success", message: "Bye <3", data:item});
-      }
-      
-    })
-  },
-
-  findAll: function (req, res) {
-    console.log("Get All Events");
-    teamsmodel.find({}).exec(function (err, items) {
-      if (err) {
-        console.log("Error",err);
-        res.json({status:"error", message: "Nop", data:null});
-      } else {
-        res.json({status:"success", message: "All <3", data:items});
-      }
-    });
-  },
+  });
 
 
-};
+module.exports = router;
+

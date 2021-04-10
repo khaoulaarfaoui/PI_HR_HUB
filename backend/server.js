@@ -17,6 +17,8 @@ var http = require("http");
 var socket = require("socket.io");
 var connectIo = require("./chatbotService");
 const eventsmodel = require("./Controllers/events/eventController");
+const teams = require ("./Controllers/teams/teamsController");
+
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -29,6 +31,7 @@ app.use(cors(corsOptions));
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
+app.use("/teams", teams);
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {

@@ -22,6 +22,7 @@ import CardEditJob from "components/Cards/CardsHR/CardEditJob";
 import CardAddJob from "components/Cards/CardsHR/CardAddJob";
 import TestJob from "components/Cards/CardsHR/testjob";
 import Events from "views/EventManagement/EventsView";
+import Teams from "views/TeamManagement/TeamView";
 export default function Admin() {
   return (
     <>
@@ -42,6 +43,7 @@ export default function Admin() {
             <Route path="/admin/test" exact component={TestJob} />
             <Route path="/admin/edit/:id" exact component={CardEditJob} />
             <Route path="/admin/event" exact component={Events} />
+            <Route path="/admin/teams" exact component={Teams} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />
