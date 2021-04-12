@@ -40,6 +40,7 @@ export const CreateEvents = (event) => {
     eventName: event.eventName,
     eventDate: event.eventDate,
     description: event.description,
+    file: event.file,
   };
 
   return (dispatch) => {
@@ -52,6 +53,7 @@ export const CreateEvents = (event) => {
           eventName: data.eventName,
           eventDate: data.eventDate,
           description: data.description,
+          
         };
 
         dispatch(createEventSuccess(normalizedData));

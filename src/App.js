@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Router, Switch, Route, Redirect } from "react-router-dom";
+import UseAnimations from 'react-useanimations';
 
 //navbars to change based on auth
 import NavbarCandidate from "./components/Navbars/CandidateNavbar";
@@ -26,6 +27,7 @@ import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
 
 const App = () => {
+  
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
 

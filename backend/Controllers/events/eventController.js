@@ -8,11 +8,13 @@ router.post("/addEvents", async (req, res) => {
   const eventName = req.body.eventName;
   const eventDate = req.body.eventDate;
   const description = req.body.description;
+  const file = req.body.file;
 
   const ev = new eventsmodel({
       eventName: eventName, 
       eventDate: eventDate, 
-      description: description
+      description: description,
+      file: file,
   });
 
   try {
@@ -45,7 +47,8 @@ router.put("/updateEvent/:id", function (req, res) {
         $set: {
           eventName: req.body.eventName,
           eventDate: req.body.eventDate,
-          description: req.body.description
+          description: req.body.description,
+          file: req.body.file,
         },
       },
   
