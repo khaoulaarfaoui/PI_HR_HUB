@@ -9,20 +9,6 @@ const path = require("path");
 
 const multer = require("multer");
 
-/*const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(
-      null,
-      `/home/khaoula/Desktop/PI/backend/routes/Candidate/CandidateUploads`
-    );
-  },
-  filename: (req, file, callback) => {
-    callback(null, file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
-*/
-
 const DIR = "./public/";
 
 const storage = multer.diskStorage({
@@ -109,7 +95,33 @@ router.get("/all", function (req, res) {
   });
 });
 
-router.get("/:id", function (req, res) {
+//Update Event
+router.put("/updateCandidate/:id", function (req, res) {
+  console.log("update Candidate");
+  const id = req.params.id;
+  console.log("iddddd", id);
+
+  Candidate.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Candidate with id=${id}. Maybe Candidate was not found!`,
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          data: data,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating Candidate with id=" + id,
+      });
+    });
+});
+
+router.get("/fetch/:id", function (req, res) {
   Candidate.findById(req.params.id, async (err, Candidate) => {
     if (!Candidate) {
       res.status(404).send("No result found");

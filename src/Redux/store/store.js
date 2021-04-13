@@ -18,7 +18,6 @@ const rootReducer = combineReducers({
   candidateReducer,
   eventsReducer,
   jobData: jobs,
-  candidate: candidate,
 });
 const store = createStore(
   rootReducer,

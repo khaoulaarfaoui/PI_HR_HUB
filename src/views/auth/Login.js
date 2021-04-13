@@ -20,21 +20,32 @@ const required = (value) => {
 const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
-  let history = useHistory();
-
+  const history = useHistory();
+  var data = "";
   const { user: currentUser } = useSelector((state) => state.userReducer.auth);
-  useEffect(() => {
-    window.addEventListener("message", handlePostMessage);
-    console.log("waaaaaaaaaaaa", firstName);
-  }, []);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [isAuthorized, setisAuthorized] = useState(false);
   const [firstName, setfirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [pictureURL, setpictureURL] = useState("");
+  const handlePostMessage = (event) => {
+    if (event.data.type === "profile") {
+      updateProfile(event.data.profile);
+      console.log("3&", isAuthorized);
+    }
+  };
 
+  useEffect(() => {
+    let mounted = true;
+
+    window.addEventListener("message", handlePostMessage);
+
+    console.log("waaaaaaaaaaaa", firstName);
+    // return () => window.removeEventListener("message", handlePostMessage);
+  }, []);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.userReducer.auth);
   const { message } = useSelector((state) => state.userReducer.message);
 
@@ -70,20 +81,12 @@ const Login = (props) => {
     );
   };
 
-  const handlePostMessage = (event) => {
-    if (event.data.type === "profile") {
-      updateProfile(event.data.profile);
-    }
-
-    // history.push({
-    //   pathname: "/profile",
-    //   state: [{ firstName, pictureURL, LastName }],
-    // });
-  };
-
   const updateProfile = (profile) => {
     console.log("aaaaaa", profile);
+    data = profile;
     setisAuthorized(true);
+    console.log("2&", isAuthorized);
+
     setfirstName(_.get(profile, "localizedFirstName", ""));
     setLastName(_.get(profile, "localizedLastName", ""));
     setpictureURL(
@@ -147,13 +150,22 @@ const Login = (props) => {
                   Connect with linkedIn account
                 </button>
               </div>
-              {isAuthorized &&
-                history.push({
-                  pathname: "/profile",
-                  //  state: data // your data array of objects
-                })}
               <hr className="mt-6 border-b-1 border-gray-400" />
+              {isAuthorized && (
+                // <Redirect
+                //   to={{
+                //     pathname: "/profile",
+                //     state: { firstName: firstName },
+                //   }}
+                // />
+                <ProfileCard
+                  firstName={firstName}
+                  lastName={LastName}
+                  pictureURL={pictureURL}
+                />
+              )}
             </div>
+
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
               <div className="text-gray-500 text-center mb-3 font-bold">
                 <small>Or sign in with credentials</small>

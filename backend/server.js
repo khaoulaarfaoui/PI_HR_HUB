@@ -56,6 +56,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/candidate", candidate);
+app.use("/hr", hr);
 app.use(express.static(path.join(__dirname, "../build")));
 app.use("/callback", callback);
 
@@ -83,8 +85,6 @@ app.use(function (err, req, res, next) {
 });
 // simple route
 
-app.use("/candidate", candidate);
-app.use("/hr", hr);
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,

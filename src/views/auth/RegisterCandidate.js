@@ -21,11 +21,11 @@ export default function CandidateRegister() {
     async function fetchData() {
       const response = await axios
         .get(`http://universities.hipolabs.com/search`, {})
-        .then((response) => setEducation(parseStations(response.data)));
+        .then((response) => setEducation(parseEducation(response.data)));
     }
     fetchData();
   }, []);
-  function parseStations(stations) {
+  function parseEducation(stations) {
     return stations.slice(0, 1000).map((station) => {
       return { label: station.name, value: station.name };
     });
@@ -34,7 +34,7 @@ export default function CandidateRegister() {
     { value: "reactjs", label: "React JS" },
     { value: "nodejs", label: "Node JS" },
   ];
-  console.log(skill);
+
   const fields = [
     { value: "Infromation Technology", label: "Infromation Technology" },
     { value: "Business Intelligence", label: "Business Intelligence" },
@@ -70,7 +70,9 @@ export default function CandidateRegister() {
   };
   const onChangeBackground = (e) => {
     const Background = e;
-    setBackground(Background);
+    Background.forEach((item) => {
+      setBackground(item.value);
+    });
   };
 
   const onChangeAboutme = (e) => {
@@ -79,12 +81,19 @@ export default function CandidateRegister() {
   };
   const onChangeEducation = (e) => {
     const Education = e;
-    setEducation(Education);
+    // Education.forEach((item) => {
+    //   console.log(item.value);
+
+    //   setEducation(item.value);
+    // });
+    setEducation(Education.value);
   };
 
   const onChangeSkills = (e) => {
     const skills = e;
-    setSkills(skills);
+    skills.forEach((item) => {
+      setSkills(item.value);
+    });
   };
 
   const onChangefullName = (e) => {
@@ -133,7 +142,7 @@ export default function CandidateRegister() {
     form.append("background", background);
     form.append("skills", skills);
     form.append("aboutMe", aboutMe);
-
+    console.log(form);
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.register(form).then(
         (response) => {

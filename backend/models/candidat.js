@@ -19,11 +19,11 @@ const candidateSchema = new Schema({
   /*college*/
   education: String,
   /*speciality*/
-  background: [{}],
-  experience: String,
+  background: Array,
+  experience: Array,
   aboutMe: String,
   states: String,
-  skills: [{}],
+  skills: Array,
   SubmittedJobs: Array,
   ratio: Number,
   teamStatus: Boolean,

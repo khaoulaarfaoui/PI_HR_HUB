@@ -51,6 +51,7 @@
     "react-select": "^4.3.0",
     "react-spring": "^9.0.0",
     "react-three-fiber": "^5.3.22",
+    "react-toast-notifications": "^2.4.3",
     "react-validation": "^3.0.7",
     "react-widgets": "^4.6.1",
     "redux": "^4.0.5",
