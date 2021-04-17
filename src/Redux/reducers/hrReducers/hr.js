@@ -1,10 +1,10 @@
 import { REGISTER_SUCCESS_HR, REGISTER_FAIL_HR } from "../../actions/hr/types";
 
-const user = JSON.parse(localStorage.getItem("user"));
-
-const initialState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
+const hr = JSON.parse(localStorage.getItem("hr"));
+console.log(hr);
+const initialState = hr
+  ? { isLoggedIn: true, hr }
+  : { isLoggedIn: false, hr: null };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoggedIn: true,
-        user: payload.user,
+        hr: payload.hr,
       };
     case REGISTER_FAIL_HR:
       return {

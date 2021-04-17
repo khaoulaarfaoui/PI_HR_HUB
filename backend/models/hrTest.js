@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
+const QuestionSchema = new Schema({
+    titre:String ,
+    response:String 
+})
 const hrTestSchema = new Schema({
   title: String,
   description: String,
@@ -12,8 +15,11 @@ const hrTestSchema = new Schema({
   color: String,
   startDate: Date,
   endDate: Date,
-
-  //Candidate: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
+  hr: {
+    type: Schema.Types.ObjectId,
+    ref: "HR",
+  },
+  questions:[QuestionSchema]
 });
 
 module.exports = mongoose.model("hrTest", hrTestSchema, "hrTest");

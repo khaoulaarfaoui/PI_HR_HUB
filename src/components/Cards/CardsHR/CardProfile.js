@@ -4,7 +4,6 @@ import React from "react";
 const CardProfile = (props) => {
 
 
-   console.log("photo : ",JSON.parse(localStorage.getItem("user")).profilePhoto)
    
 
   return (
@@ -14,10 +13,13 @@ const CardProfile = (props) => {
           <div className="flex flex-wrap justify-center">
             <div className="w-full px-4 flex justify-center">
               <div className="relative">
+                
                 <img
+                 className="w-28 mx-auto mb-3"
                   alt="..."
-                  src={"http://localhost:3001/file/"+JSON.parse(localStorage.getItem("user")).profilePhoto}
-                  className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                  src={"http://localhost:8082/file/"+JSON.parse(localStorage.getItem("hruser")).companyLogo}
+                  height="80"
+                 width="50"
                 />
               </div>
             </div>

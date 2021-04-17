@@ -4,22 +4,23 @@ import React from "react";
 // components
 
 const CardSettings = (props) => {
+  console.log("user", JSON.parse(localStorage.getItem("user")));
+  //console.log("user", JSON.parse(localStorage.getItem("hruser")));
 
-
-   console.log("user",JSON.parse(localStorage.getItem("user")))
-   
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
             <h6 className="text-gray-800 text-xl font-bold">My account</h6>
-            <button
+
+            <a
+              href="/admin/UpdateHr"
               className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-              type="button"
             >
-              Settings
-            </button>
+              {" "}
+              Update HR{" "}
+            </a>
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -39,7 +40,9 @@ const CardSettings = (props) => {
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue={JSON.parse(localStorage.getItem("user")).fullName}
+                    defaultValue={
+                      JSON.parse(localStorage.getItem("user")).username
+                    }
                   />
                 </div>
               </div>
@@ -54,7 +57,9 @@ const CardSettings = (props) => {
                   <input
                     type="email"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue={JSON.parse(localStorage.getItem("user")).email}
+                    defaultValue={
+                      JSON.parse(localStorage.getItem("user")).email
+                    }
                   />
                 </div>
               </div>
@@ -64,12 +69,15 @@ const CardSettings = (props) => {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    First Name
+                     Name
                   </label>
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue={JSON.parse(localStorage.getItem("user")).username}                  />
+                    defaultValue={
+                      JSON.parse(localStorage.getItem("hruser")).fullName
+                    }
+                  />
                 </div>
               </div>
               <div className="w-full lg:w-6/12 px-4">
@@ -78,12 +86,14 @@ const CardSettings = (props) => {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Last Name
+                    Birthday
                   </label>
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Jesse"
+                    defaultValue={
+                      JSON.parse(localStorage.getItem("hruser")).birthday
+                    }
                   />
                 </div>
               </div>
@@ -101,12 +111,14 @@ const CardSettings = (props) => {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Address
+                    Location
                   </label>
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                    defaultValue={
+                      JSON.parse(localStorage.getItem("hruser")).location
+                    }
                   />
                 </div>
               </div>
@@ -116,12 +128,14 @@ const CardSettings = (props) => {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    City
+                    Company
                   </label>
                   <input
                     type="email"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="New York"
+                    defaultValue={
+                      JSON.parse(localStorage.getItem("hruser")).company
+                    }
                   />
                 </div>
               </div>
@@ -131,12 +145,14 @@ const CardSettings = (props) => {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Country
+                    Phone Number
                   </label>
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="United States"
+                    defaultValue={
+                      JSON.parse(localStorage.getItem("hruser")).phoneNumber
+                    }
                   />
                 </div>
               </div>
@@ -185,6 +201,6 @@ const CardSettings = (props) => {
       </div>
     </>
   );
-}
+};
 
-export default CardSettings
+export default CardSettings;

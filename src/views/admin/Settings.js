@@ -2,13 +2,10 @@ import React from "react";
 
 // components
 
-import CardSettings from "components/Cards/CardsHR/CardSettings.js";
+import CardSettings from "components/Cards/CardsHR/CardSettings";
 import CardProfile from "components/Cards/CardsHR/CardProfile.js";
 
 export default function Settings() {
-
-
-   
   return (
     <>
       <div className="flex flex-wrap">

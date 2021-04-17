@@ -43,7 +43,7 @@ const NotificationDropdown = () => {
           }
           onClick={(e) => e.preventDefault()}
         >
-          Profil
+          Action
         </a>
         <a
           href="#pablo"

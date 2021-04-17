@@ -12,8 +12,14 @@ import AuthService from "../../../service/userService/auth.service";
 export const register = (username, email, password, roles) => (dispatch) => {
   return AuthService.register(username, email, password, roles).then(
     (response) => {
+
+       console.log("reponse ",response)
+
+        localStorage.setItem("user",JSON.stringify(response.data))
       dispatch({
         type: REGISTER_SUCCESS,
+        payload: response.data,
+
       });
 
       dispatch({

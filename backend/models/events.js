@@ -6,5 +6,6 @@ const eventsSchema = new Schema({
   eventName: String,
   eventDate: Date,
   description: String,
+
 });
 module.exports = mongoose.model("event", eventsSchema, "event");

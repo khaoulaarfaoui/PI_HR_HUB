@@ -3,18 +3,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const candidateSchema = new Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    index: true,
+  },
   fullName: String,
-  username: String,
-  password: String,
   profilePhoto: String,
   birthday: Date,
-  email: String,
   phoneNumber: Number,
   location: String,
   education: String,
   experience: String,
   states: String,
-  skills: String,
+  skills: [{}],
   SubmittedJobs: Array,
   ratio: Number,
   teamStatus: Boolean,
@@ -36,7 +38,7 @@ const candidateSchema = new Schema({
   tests: [
     {
       type: Schema.Types.ObjectId,
-      ref: "test",
+      ref: "candidateTest",
     },
   ],
   teams: [

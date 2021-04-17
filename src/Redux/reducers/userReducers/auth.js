@@ -8,19 +8,21 @@ import {
 
 const user = JSON.parse(localStorage.getItem("user"));
 
-const initialState = user
+export const initialState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
+  console.log("payload",payload)
+
   switch (type) {
     case REGISTER_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
-        user: payload.user,
+        user: payload,
       };
     case REGISTER_FAIL:
       return {
