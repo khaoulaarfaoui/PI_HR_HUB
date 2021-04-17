@@ -24,8 +24,15 @@ const login = (username, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+      // if (response.data.token) {
+      if (response.data) {
+        console.log(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("hr", JSON.stringify(response.data.hr));
+        localStorage.setItem(
+          "candidate",
+          JSON.stringify(response.data.candidate)
+        );
       }
 
       return response.data;
@@ -34,6 +41,7 @@ const login = (username, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
+  //localStorage.removeItem("hr");
 };
 
 export default {

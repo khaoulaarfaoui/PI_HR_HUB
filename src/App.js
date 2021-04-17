@@ -21,10 +21,13 @@ import BoardAdmin from "./views/candidate/BoardAdmin";
 
 import { logout } from "./Redux/actions/user/auth";
 import { clearMessage } from "./Redux/actions/user/message";
+import Linkedin from "./Linkedin/src/Linkedin";
 
 import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
+import Profile from "views/candidate/Settings";
+import ProfileCard from "./Linkedin/src/components/ProfileCard";
 
 const App = () => {
   
@@ -40,11 +43,11 @@ const App = () => {
       dispatch(clearMessage()); // clear message when changing location
     });
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (currentUser) {
-      setShowUserBoard(currentUser.roles.includes("ROLE_USER"));
-      setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+      // setShowUserBoard(currentUser.roles.includes("ROLE_USER"));
+      //  setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
     }
   }, [currentUser]);
 
@@ -54,11 +57,21 @@ const App = () => {
 
   return (
     <Router history={history}>
-      {currentUser && (
+      {/* {currentUser && (
         <NavbarCandidate User={currentUser.username} close={logOut} />
-      )}
-
+      )} */}
       <Switch>
+        {/* <Route
+          path="/admin"
+          render={() =>
+            currentUser ? (
+              <Redirect to="/admin/jobs" />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          }
+        /> */}
+        <Route path="/profile" component={ProfileCard} />
         <Route path="/admin" component={Admin} />
         <Route path="/candidateadd" component={RegisterCandidate} />
         <Route path="/auth" component={Auth} />
@@ -66,14 +79,24 @@ const App = () => {
 
         <Route path="/user" component={BoardUser} />
         <Route path="/admin" component={BoardAdmin} />
+        <Route path="/linkedin" component={Linkedin} />
         <Route path="/event3D" component={Event3D} />
         <Route path="/candidate" component={Candidate} />
+        <Route
+          path="/admin"
+          render={() =>
+            currentUser ? (
+              <Redirect to="/admin/jobs" />
+            ) : (
+              <Redirect to="/auth" />
+            )
+          }
+        />
         <Route path="/hradd" component={RegisterHR} />
         <Route path="/" component={Index} />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>
-    
   );
 };
 

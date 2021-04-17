@@ -8,8 +8,9 @@ import candidateReducer from "../reducers/candidateReducers";
 //import { AllEvents } from "../actions/event/EventAction";
 //import { AllTeams } from "../actions/team/TeamAction";
 import eventsReducer from "../reducers/eventReducers/EventReducer";
+import jobs from "../reducers/jobReducers/job.reducer";
+import candidate from "../reducers/candidateReducers/candidate";
 import teamsReducer from "../reducers/teamReducers/TeamReducer";
-import jobs from "../jobReducers/job.reducer";
 
 const middleware = [thunk];
 

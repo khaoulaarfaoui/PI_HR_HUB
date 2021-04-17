@@ -14,16 +14,16 @@ import Tests from "views/candidate/Tests.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
-
+import NavbarCandidate from "components/Navbars/CandidateNavbar";
 
 export default function Candidate() {
   return (
     <>
+      <NavbarCandidate />
       <SidebarCandidate />
-      <div className="relative md:ml-64 bg-gray-200">
+      <div className="relative md:ml-64 bg-gray-200 md:pt-3 pb-32 pt-12">
         {/* Header */}
-        <HeaderStats />
-        <div className="px-4 md:px-10 mx-auto w-full -m-24">
+        <div className="px-4 md:px-10 mx-auto w-full mt-20">
           <Switch>
             <Route path="/candidate/dashboard" exact component={Dashboard} />
             <Route path="/candidate/profile" exact component={Profile} />
@@ -31,7 +31,6 @@ export default function Candidate() {
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
             <Redirect from="/candidate" to="/candidate/dashboard" />
-            
           </Switch>
           <FooterAdmin />
         </div>

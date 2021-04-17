@@ -7,6 +7,7 @@ const Role = require("../backend/models/Role");
 const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
 const hr = require("./routes/HR/HRAPI");
+
 const dbConfig = require("./config/DBconfig");
 const cv = require("./cv/app");
 const multer = require("multer");
@@ -18,7 +19,11 @@ var socket = require("socket.io");
 var connectIo = require("./chatbotService");
 const eventsmodel = require("./Controllers/events/eventController");
 const teams = require ("./Controllers/teams/teamsController");
+var dir = path.join(__dirname, "./public");
+var logger = require("morgan");
+var cookieParser = require("cookie-parser");
 
+var callback = require("./routes/callback");
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -31,7 +36,6 @@ app.use(cors(corsOptions));
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
-app.use("/teams", teams);
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
@@ -42,13 +46,44 @@ require("../backend/routes/User/userRoute")(app);
 
 require("./routes/User/auth")(app);
 require("./routes/User/userRoute")(app);
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.use(logger("dev"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to hrbub application." });
-});
 app.use("/candidate", candidate);
 app.use("/hr", hr);
+app.use(express.static(path.join(__dirname, "../build")));
+app.use("/callback", callback);
+
+app.get("/linkedin", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  var err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  console.log(err);
+  res.render("error");
+});
+// simple route
+
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
@@ -62,7 +97,6 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-// SET STORAGE
 
 // SET STORAGE
 var storage = multer.diskStorage({
@@ -124,3 +158,4 @@ function initial() {
 }
 
 module.exports = router;
+

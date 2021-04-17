@@ -12,11 +12,18 @@ const candidateSchema = new Schema({
   profilePhoto: String,
   birthday: Date,
   phoneNumber: Number,
+  /*country*/
   location: String,
+  /*region*/
+  region: String,
+  /*college*/
   education: String,
-  experience: String,
+  /*speciality*/
+  background: Array,
+  experience: Array,
+  aboutMe: String,
   states: String,
-  skills: [{}],
+  skills: Array,
   SubmittedJobs: Array,
   ratio: Number,
   teamStatus: Boolean,
