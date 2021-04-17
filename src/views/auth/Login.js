@@ -23,6 +23,7 @@ const Login = (props) => {
   const history = useHistory();
   var data = "";
   const { user: currentUser } = useSelector((state) => state.userReducer.auth);
+  console.log("current user", currentUser);
   const [isAuthorized, setisAuthorized] = useState(false);
   const [firstName, setfirstName] = useState("");
   const [LastName, setLastName] = useState("");
@@ -118,10 +119,10 @@ const Login = (props) => {
     }
   };
   if (isLoggedIn) {
-    if (currentUser.roles.includes("ROLE_ADMIN")) {
+    if (currentUser.user.roles[0].name === "admin") {
       return <Redirect to="/admin" />;
     }
-    if (currentUser.roles.includes("ROLE_USER")) {
+    if (currentUser.user.roles[0].name === "user") {
       return <Redirect to="/candidate" />;
     }
   }

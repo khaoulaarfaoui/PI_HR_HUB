@@ -135,10 +135,10 @@ export default function CandidateRegister() {
     form.append("fullName", fullName);
     form.append("profilePhoto", profilePhoto);
     form.append("birthday", birthday);
-    form.append("phoneNumber", phoneNumber);
+    //form.append("phoneNumber", phoneNumber);
     form.append("location", location);
     form.append("region", region);
-    form.append("education", education);
+    // form.append("education", education);
     form.append("background", background);
     form.append("skills", skills);
     form.append("aboutMe", aboutMe);

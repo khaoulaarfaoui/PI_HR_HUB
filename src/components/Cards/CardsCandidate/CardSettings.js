@@ -14,7 +14,7 @@ export default function CardSettings(props) {
     (state) => state.candidateReducer.candidate.state.candidate
   );
   const candidate_update = useSelector(
-    (state) => state.candidateReducer.candidateCRUD
+    (state) => state.candidateReducer.candidateCRUD.state.candidate_update
   );
   const dispatch = useDispatch();
 
@@ -79,16 +79,6 @@ export default function CardSettings(props) {
       })
     )
       .then((response) => {
-        ButterToast.raise({
-          content: (
-            <Cinnamon.Crisp
-              title="Candidate Notification"
-              content="Updated successfully"
-              scheme={Cinnamon.Crisp.SCHEME_PURPLE}
-              //icon={<AssignmentTurnedIn />}
-            />
-          ),
-        });
         console.log("lennan", response);
       })
       .catch((e) => {

@@ -69,12 +69,12 @@ router.post(
         teams: req.body.teams,
       });
       candidate.save();
-
+      console.log("aaaaaaaaaaaaaaaaaa", Candidate);
       const user = await User.findById({ _id: candidate.user });
       console.log(user);
       const email = user.email;
       const username = user.username;
-      console.log("reactttttt", req);
+
       res.status(200).json({
         success: true,
         data: candidate,
@@ -82,9 +82,6 @@ router.post(
         username: username,
       });
     } catch (err) {
-      console.log("errrrrrrrrrr", err);
-      console.log("reactttttt", req);
-
       res.status(400).json({ success: false, message: err.message });
     }
   }

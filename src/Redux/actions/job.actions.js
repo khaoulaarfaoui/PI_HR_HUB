@@ -23,8 +23,8 @@ console.log(id);
 console.log("initial", initialState);
 if (initialState.isLoggedIn) {
   const hr = JSON.parse(localStorage.getItem("hr"));
-  var hrId = hr.data._id;
-  console.log("hr id", hrId);
+  //  var hrId = hr.data._id;
+  //console.log("hr id", hrId);
 }
 const GET_URL = "http://localhost:8082/job/jobs/6058d433e461980052a601cd";
 const ADD_URL = "http://localhost:8082/job/add/6058d433e461980052a601cd";

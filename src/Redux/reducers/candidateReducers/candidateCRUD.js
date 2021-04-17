@@ -4,7 +4,11 @@ import {
 } from "../../actions/candidate/types";
 const candidate_update = JSON.parse(localStorage.getItem("candidate_update"));
 const candidate = JSON.parse(localStorage.getItem("candidate"));
-const initialState = candidate_update;
+const initialState = {
+  state: candidate_update
+    ? { candidate_update: candidate_update }
+    : { candidate_update: candidate },
+};
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
