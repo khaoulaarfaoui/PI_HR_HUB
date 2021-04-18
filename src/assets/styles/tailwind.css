@@ -1143,6 +1143,11 @@ video {
   background-color: rgba(49, 130, 206, var(--bg-opacity));
 }
 
+.active\:bg-green-600:active {
+  --bg-opacity: 1;
+  background-color: #48bb78;
+}
+
 .active\:bg-indigo-600:active {
   --bg-opacity: 1;
   background-color: #5a67d8;
@@ -1890,14 +1895,37 @@ video {
   padding-bottom: 2.5rem;
 }
 
+.py-8 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 .px-12 {
   padding-left: 3rem;
   padding-right: 3rem;
 }
 
+.px-20 {
+  padding-left: 6rem;
+}
+.px-30 {
+  padding-left: 25rem;
+  padding-right: 25rem;
+}
+
+.px-40 {
+  padding-left: 55rem;
+}
+
 .py-16 {
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+.py-22 {
+  padding-top: -50px;
 }
 
 .py-20 {
@@ -2216,6 +2244,12 @@ video {
   color: rgba(255, 255, 255, var(--text-opacity));
 }
 
+.text-green-10 {
+  --text-opacity: 1;
+  color: #5ad67d;
+  color: rgba(255, 255, 255, var(--text-opacity));
+}
+
 .text-gray-200 {
   --text-opacity: 1;
   color: #edf2f7;
@@ -2390,6 +2424,10 @@ video {
 
 .w-8 {
   width: 2rem;
+}
+
+.w-9 {
+  width: 70rem;
 }
 
 .w-10 {
@@ -2914,38 +2952,37 @@ video {
   .xl\:w-8\/12 {
     width: 66.666667%;
   }
-/**
+  /**
  * EVENT 3D CSS + LOADER
  */
 
- canvas {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
+  canvas {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-.loading {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background: #171717;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .loading {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #171717;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.loading-bar-container {
-  width: 200px;
-  height: 3px;
-  background: #272727;
-}
+  .loading-bar-container {
+    width: 200px;
+    height: 3px;
+    background: #272727;
+  }
 
-.loading-bar {
-  height: 3px;
-  background: white;
-}
-
+  .loading-bar {
+    height: 3px;
+    background: white;
+  }
 }

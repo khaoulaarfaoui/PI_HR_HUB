@@ -9,7 +9,7 @@ import {
 
 const candidate = JSON.parse(localStorage.getItem("candidate"));
 console.log(candidate);
-const initialState = candidate
+export const initialState = candidate
   ? { isLoggedIn: true, candidate }
   : { isLoggedIn: false, candidate: null };
 

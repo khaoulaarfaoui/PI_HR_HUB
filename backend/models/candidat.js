@@ -28,6 +28,7 @@ const candidateSchema = new Schema({
       ref: "job",
     },
   ],
+
   events: [
     {
       type: Schema.Types.ObjectId,

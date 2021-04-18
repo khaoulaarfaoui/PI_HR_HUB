@@ -3,7 +3,7 @@ import React from "react";
 const Job = ({ job, onEdit, onDelete }) => {
   return (
     <>
-      <div class=" relative xl:w-4/12    px-6 m-8 rounded overflow-hidden shadow-lg">
+      <div class=" relative xl:w-4/12 py-10  px-4 rounded overflow-hidden shadow-lg">
         <img
           class="w-full"
           src="https://tailwindcss-v0.netlify.app//img/card-top.jpg"

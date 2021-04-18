@@ -12,6 +12,9 @@ import {
   FETCH_JOB_SUCCESS,
   FETCH_JOB_LOADING,
   FETCH_JOB_ERROR,
+  FETCH_AllJOB_SUCCESS,
+  FETCH_AllJOB_LOADING,
+  FETCH_AllJOB_ERROR,
 } from "../../actions/user/types";
 
 const defaultState = {
@@ -41,9 +44,17 @@ const jobReducer = (state = defaultState, action) => {
     case FETCH_JOB_SUCCESS:
       return { ...state, jobs: action.payload.reverse() };
 
+    case FETCH_AllJOB_SUCCESS:
+      return { ...state, jobs: action.payload };
+
+    case FETCH_AllJOB_LOADING:
+      return { ...state, isLoading: action.payload };
+
     case FETCH_JOB_LOADING:
       return { ...state, isLoading: action.payload };
 
+    case FETCH_AllJOB_ERROR:
+      return { ...state, error: action.payload };
     case FETCH_JOB_ERROR:
       return { ...state, error: action.payload };
     default:

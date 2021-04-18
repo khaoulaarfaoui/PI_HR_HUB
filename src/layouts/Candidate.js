@@ -13,8 +13,13 @@ import Dashboard from "views/candidate/Dashboard.js";
 import Tests from "views/candidate/Tests.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
-import SidebarCandidate from "components/Sidebar/SidebarCandidate";
 
+import SidebarCandidate from "components/Sidebar/SidebarCandidate";
+import Alljobs from "views/candidate/candidateJob/allJobs";
+import savedJobs from "views/candidate/candidateJob/savedJobs";
+import JobDetails from "views/candidate/candidateJob/JobDetails";
+import AppliedJobs from "views/candidate/candidateJob/AppliedJobs";
+import Maps from "views/candidate/candidateJob/Maps";
 
 export default function Candidate() {
   return (
@@ -30,8 +35,20 @@ export default function Candidate() {
             <Route path="/candidate/tests" exact component={Tests} />
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
+            <Route path="/candidate/tables" exact component={Tables} />
+            <Route path="/candidate/jobs" exact component={Alljobs} />
+            <Route path="/candidate/map" exact component={Maps} />
+
+            <Route path="/candidate/details/:id" exact component={JobDetails} />
+            <Route
+              path="/candidate/submittedJobs"
+              exact
+              component={AppliedJobs}
+            />
+
+            <Route path="/candidate/savedJobs" exact component={savedJobs} />
+
             <Redirect from="/candidate" to="/candidate/dashboard" />
-            
           </Switch>
           <FooterAdmin />
         </div>
