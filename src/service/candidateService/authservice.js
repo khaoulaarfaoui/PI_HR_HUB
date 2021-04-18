@@ -16,6 +16,7 @@ const register = (form) => {
         "candidate",
         JSON.stringify(response.data, response.email, response.username)
       );
+      localStorage.setItem("hr", JSON.stringify(null));
     }
   });
 };

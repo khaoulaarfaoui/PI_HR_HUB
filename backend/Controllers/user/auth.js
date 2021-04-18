@@ -66,12 +66,7 @@ exports.signup = (req, res) => {
     }
   });
 };
-async function findcandidate(user) {
-  const candidate = await candidat.findOne({ user: user });
-}
-async function findHR(user) {
-  const hr = await candidat.findOne({ user: user });
-}
+
 /*
 exports.signin = (req, res) => {
   User.findOne({
@@ -159,9 +154,7 @@ exports.signin = (req, res) => {
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
-      const candidate = findcandidate(user);
-      const hr = findHR(user);
-      console.log("yooooo", candidate);
+
       res.status(200).send({
         id: user._id,
         username: user.username,
