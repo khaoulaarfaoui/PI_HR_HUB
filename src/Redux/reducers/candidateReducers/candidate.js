@@ -2,7 +2,13 @@ import {
   REGISTER_SUCCESS_CANDIDATE,
   REGISTER_FAIL_CANDIDATE,
 } from "../../actions/candidate/types";
-
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+} from "../../actions/user/types";
 const candidate = JSON.parse(localStorage.getItem("candidate"));
 console.log(candidate);
 

@@ -10,26 +10,20 @@ import { updateCandidate } from "../../../Redux/actions/candidate/candidate";
 
 export default function CardSettings(props) {
   const checkBtn = useRef();
-  const candidate = useSelector(
-    (state) => state.candidateReducer.candidate.state.candidate
-  );
+  const candidate = useSelector((state) => state.userReducer.auth.candidate);
   const candidate_update = useSelector(
     (state) => state.candidateReducer.candidateCRUD.state.candidate_update
   );
   const dispatch = useDispatch();
 
   const [successful, setSuccessful] = useState(false);
-  const [fullName, setFullName] = useState(candidate_update.data.fullName);
-  const [location, setLocation] = useState(candidate_update.data.location);
-  const [phoneNumber, setPhoneNumber] = useState(
-    candidate_update.data.phoneNumber
-  );
-  const [education, setEducation] = useState(candidate_update.data.education);
-  const [region, setRegion] = useState(candidate_update.data.region);
-  const [aboutMe, setAboutme] = useState(candidate_update.data.aboutMe);
-  const [background, setBackground] = useState(
-    candidate_update.data.background
-  );
+  const [fullName, setFullName] = useState(candidate_update.fullName);
+  const [location, setLocation] = useState(candidate_update.location);
+  const [phoneNumber, setPhoneNumber] = useState(candidate_update.phoneNumber);
+  const [education, setEducation] = useState(candidate_update.education);
+  const [region, setRegion] = useState(candidate_update.region);
+  const [aboutMe, setAboutme] = useState(candidate_update.aboutMe);
+  const [background, setBackground] = useState(candidate_update.background);
 
   const onChangeRegion = (e) => {
     const Region = e.target.value;
@@ -64,7 +58,7 @@ export default function CardSettings(props) {
     setFullName(FullName);
   };
 
-  var res = candidate.data.fullName.split(" ");
+  var res = candidate.fullName.split(" ");
   const updateContent = () => {
     console.log(fullName);
     dispatch(

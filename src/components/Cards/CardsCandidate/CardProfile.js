@@ -17,7 +17,7 @@ export default function CardProfile() {
               <img
                 alt="..."
                 className="pt-4 w-32 h-32 p-1  mt-8 bg-white  rounded-full"
-                src={candidate.data.profilePhoto}
+                src={candidate.profilePhoto}
               />
             </div>
             <div className="w-full px-4 text-center mt-4">
@@ -45,11 +45,11 @@ export default function CardProfile() {
           </div>
           <div className="text-center mt-12">
             <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-              {candidate.data.fullName}
+              {candidate.fullName}
             </h3>
             <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
               <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{" "}
-              {candidate.data.region}, {candidate.data.location}
+              {candidate.region}, {candidate.location}
             </div>
             <div className="mb-2 text-gray-700 mt-10">
               <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
@@ -57,7 +57,7 @@ export default function CardProfile() {
             </div>
             <div className="mb-2 text-gray-700">
               <i className="fas fa-university mr-2 text-lg text-gray-500"></i>
-              {candidate.data.education}
+              {candidate.education}
             </div>
           </div>
         </div>
