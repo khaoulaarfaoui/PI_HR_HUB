@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Logo from "assets/img/hrnavlogo.png";
 // components
 
 export default function Navbar(props) {
@@ -12,10 +12,7 @@ export default function Navbar(props) {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link to="/">
-              <img
-                src={require("assets/img/hrnavlogo.png")}
-                className="mx-auto"
-              />
+              <img src={Logo} className="mx-auto" />
             </Link>
           </div>
         </div>
