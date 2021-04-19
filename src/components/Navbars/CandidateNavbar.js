@@ -1,8 +1,14 @@
 import React from "react";
 //import { Link } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
+import { logout } from "../../Redux/actions/user/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CandidateNavbar(props) {
+  const dispatch = useDispatch();
+  const logOut = () => {
+    dispatch(logout());
+  };
   return (
     <>
       {/* Navbar */}
@@ -29,7 +35,7 @@ export default function CandidateNavbar(props) {
               />
             </div>
           </form>
-          <button onClick={props.close}>LOGOUT</button>
+          <button onClick={logOut}>LOGOUT</button>
           {/* User */}
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
             <DarkMode />

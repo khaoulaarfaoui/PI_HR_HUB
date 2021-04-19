@@ -11,19 +11,21 @@ import { updateCandidate } from "../../../Redux/actions/candidate/candidate";
 export default function CardSettings(props) {
   const checkBtn = useRef();
   const candidate = useSelector((state) => state.userReducer.auth.candidate);
+  const user = useSelector((state) => state.userReducer.auth.user);
+
   const candidate_update = useSelector(
     (state) => state.candidateReducer.candidateCRUD.state.candidate_update
   );
   const dispatch = useDispatch();
 
   const [successful, setSuccessful] = useState(false);
-  const [fullName, setFullName] = useState(candidate_update.fullName);
-  const [location, setLocation] = useState(candidate_update.location);
-  const [phoneNumber, setPhoneNumber] = useState(candidate_update.phoneNumber);
-  const [education, setEducation] = useState(candidate_update.education);
-  const [region, setRegion] = useState(candidate_update.region);
-  const [aboutMe, setAboutme] = useState(candidate_update.aboutMe);
-  const [background, setBackground] = useState(candidate_update.background);
+  const [fullName, setFullName] = useState(candidate.fullName);
+  const [location, setLocation] = useState(candidate.location);
+  const [phoneNumber, setPhoneNumber] = useState(candidate.phoneNumber);
+  const [education, setEducation] = useState(candidate.education);
+  const [region, setRegion] = useState(candidate.region);
+  const [aboutMe, setAboutme] = useState(candidate.aboutMe);
+  const [background, setBackground] = useState(candidate.background);
 
   const onChangeRegion = (e) => {
     const Region = e.target.value;
@@ -126,7 +128,7 @@ export default function CardSettings(props) {
                       <input
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        value={candidate.username}
+                        value={user.username}
                         disabled={true}
                       />
                     </div>
@@ -143,7 +145,7 @@ export default function CardSettings(props) {
                         type="email"
                         disabled={true}
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        defaultValue={candidate.email}
+                        defaultValue={user.email}
                       />
                     </div>
                   </div>
