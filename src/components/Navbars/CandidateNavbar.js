@@ -2,12 +2,14 @@ import React from "react";
 //import { Link } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
 import { logout } from "../../Redux/actions/user/auth";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 export default function CandidateNavbar(props) {
+  let history = useHistory();
   const dispatch = useDispatch();
   const logOut = () => {
     dispatch(logout());
+    history.push("/auth/login");
   };
   return (
     <>
