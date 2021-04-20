@@ -13,6 +13,7 @@ import Dashboard from "views/candidate/Dashboard.js";
 import Tests from "views/candidate/Tests.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
+import Chat from "../components/Chat/App";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
 import NavbarCandidate from "components/Navbars/CandidateNavbar";
 
@@ -30,6 +31,7 @@ export default function Candidate() {
             <Route path="/candidate/tests" exact component={Tests} />
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
+            <Route path="/candidate/chat" exact component={Chat} />
             <Redirect from="/candidate" to="/candidate/dashboard" />
           </Switch>
           <FooterAdmin />

@@ -25,6 +25,11 @@ var cookieParser = require("cookie-parser");
 
 var callback = require("./routes/callback");
 const app = express();
+
+const { Chat } = require("./models/Chat");
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
 var corsOptions = {
   origin: "http://localhost:8081",
 };
@@ -36,6 +41,7 @@ app.use(cors(corsOptions));
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
+app.use("/teams", teams);
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
@@ -98,6 +104,7 @@ db.mongoose
     process.exit();
   });
 
+
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -121,6 +128,7 @@ app.post("/uploadfile", upload.single("file"), (req, res, next) => {
   }
   res.send(file);
 });
+
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {

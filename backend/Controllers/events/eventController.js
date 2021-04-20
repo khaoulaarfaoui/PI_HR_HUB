@@ -1,25 +1,26 @@
 const eventsmodel = require("../../models/events.js");
+const Team = require ("../../models/teams");
 const express = require("express");
 const router = express.Router();
 
 //Add Event
 router.post("/addEvents", async (req, res) => {
-  
-  const eventName = req.body.eventName;
-  const eventDate = req.body.eventDate;
-  const description = req.body.description;
-  const file = req.body.file;
+try {
 
   const ev = new eventsmodel({
-      eventName: eventName, 
-      eventDate: eventDate, 
-      description: description,
-      file: file,
+      eventName: req.body.eventName, 
+      eventDate: req.body.eventDate, 
+      description: req.body.description,
+      file: req.body.file,
+      //teams: req.body.teams,
   });
 
-  try {
-      await ev.save();
+      ev.save();
       res.json(ev);
+      const t = await Team.findById({ _id: ev.teams });
+      console.log(t);
+
+      
       console.log("Event ++");
   }catch(err){
       console.log("Error to add event");

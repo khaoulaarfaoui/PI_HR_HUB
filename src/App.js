@@ -26,6 +26,7 @@ import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
 import Profile from "views/candidate/Settings";
+import Chat from "./components/Chat/App";
 import ProfileCard from "./Linkedin/src/components/ProfileCard";
 
 const App = () => {
@@ -80,6 +81,7 @@ const App = () => {
         <Route path="/admin" component={BoardAdmin} />
         <Route path="/linkedin" component={Linkedin} />
         <Route path="/event3D" component={Event3D} />
+        <Route path="/chat" exact component={Chat} />
         <Route path="/candidate" component={Candidate} />
         <Route
           path="/admin"
