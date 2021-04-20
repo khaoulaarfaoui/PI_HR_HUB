@@ -11,7 +11,9 @@ const addHrTest = (
   color,
   startDate,
   endDate,
+  type,
   user
+  
 ) => {
   console.log("object ", {
     title: title,
@@ -22,7 +24,8 @@ const addHrTest = (
     color: color,
     startDate: startDate,
     endDate: endDate,
-    user: user,
+    type:type,
+    hr: user,
   });
   return axios
     .post(API_URL + "addHrTest", {
@@ -34,11 +37,14 @@ const addHrTest = (
       color: color,
       startDate: startDate,
       endDate: endDate,
-      user: user,
+      type:type,
+      hr: user,
     })
     .then((response) => {
+
+       console.log("response : ",response)
       if (response.data) {
-        localStorage.setItem("HrTest", JSON.stringify(response.data));
+        ///localStorage.setItem("HrTest", JSON.stringify(response.data));
       }
     });
 };
@@ -53,9 +59,23 @@ const updateHrTest = (
   color,
   startDate,
   endDate,
+  hr
 ) => {
+
+   console.log("object update ",{
+    _id: id,
+    title: title,
+    description: description,
+    tags: tags,
+    result: result,
+    companyName: companyName,
+    color: color,
+    startDate: startDate,
+    endDate: endDate,
+    hr:hr
+  })
   return axios
-    .put(API_URL + "updateHR", {
+    .put(API_URL + "updateHrTest", {
       _id: id,
       title: title,
       description: description,
@@ -65,10 +85,11 @@ const updateHrTest = (
       color: color,
       startDate: startDate,
       endDate: endDate,
+      hr:hr
     })
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("HrTest", JSON.stringify(response.data.data));
+      //  localStorage.setItem("HrTest", JSON.stringify(response.data.data));
       }
     });
 };
@@ -121,10 +142,15 @@ const findallHrTestQuestion = (id) => {
 };
 
 const deleteHrTestQuestion = (id) => {
-  return axios.delete(API_URL+ "/deleteTest/" + id).then((response) => {
+
+   console.log("test ",API_URL+ "deleteQuestion/"+localStorage.getItem("idTest")+"/"+id)
+  return axios.delete(API_URL+ "deleteQuestion/"+localStorage.getItem("idTest")+"/"+id).then((response) => {
     if (response.data) {
-      localStorage.setItem("HrTestQuestion", JSON.stringify(response.data));
+    //  localStorage.setItem("HrTestQuestion", JSON.stringify(response.data));
     }
+  }).catch(err=> {
+
+     console.log("okkkkkk err",err)
   });
 };
 

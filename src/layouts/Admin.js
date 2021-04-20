@@ -19,6 +19,10 @@ import Tables from "views/admin/Tables.js";
 import Profile from "views/admin/Profile";
 
 import Tests from "views/admin/Tests";
+
+import AddTest from "views/admin/AddTest";
+import UpdateTest from "views/admin/UpdateTest";
+
 import Question from "views/admin/Question";
 import Response from "views/admin/Response";
 import Tasks from "views/admin/Tasks";
@@ -43,6 +47,10 @@ export default function Admin() {
             <Route path="/admin/response" exact component={Response} />{" "}
             <Route path="/admin/tasks" exact component={Tasks} />{" "}
             <Route path="/admin/UpdateHr" exact component={UpdateHr} />{" "}
+
+            <Route path="/admin/AddTest" exact component={AddTest} />{" "}
+            <Route path="/admin/UpdateTest" exact component={UpdateTest} />{" "}
+
 
             <Route path="/admin/maps" exact component={Maps} />
             <Route path="/admin/tables" exact component={Tables} />

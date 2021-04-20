@@ -1,12 +1,7 @@
 import React, { useEffect, Fragment } from "react";
-
-// components
 import { connect } from "react-redux";
+import { findallHrTest,deleteTestHr } from "../../Redux/actions/hrtest/hrtest";
 
-import { findallHrTest } from "../../Redux/actions/hrtest/hrtest";
-
-// components
-import TableDropdownAction from "components/Dropdowns/HRDropDowns/TableDropdownAction";
 
 const Tests = (props) => {
   useEffect(() => {
@@ -35,7 +30,19 @@ const Tests = (props) => {
                       (color === "light" ? "text-gray-800" : "text-white")
                     }
                   >
-                    Card Test
+                  
+                  <button
+                              className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+
+                                            window.location.href = "/admin/AddTest";
+                              }}
+                            >
+                              Add Test
+                            </button>{" "}
+
                   </h3>
                 </div>
               </div>
@@ -45,6 +52,16 @@ const Tests = (props) => {
               <table className="items-center w-full bg-transparent border-collapse">
                 <thead>
                   <tr>
+                  <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-gray-100 text-gray-600 border-gray-200"
+                          : "bg-blue-800 text-blue-300 border-blue-700")
+                      }
+                    >
+                      Test
+                    </th>
                     <th
                       className={
                         "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
@@ -63,7 +80,7 @@ const Tests = (props) => {
                           : "bg-blue-800 text-blue-300 border-blue-700")
                       }
                     >
-                      Level
+                      Description
                     </th>
                     <th
                       className={
@@ -73,7 +90,7 @@ const Tests = (props) => {
                           : "bg-blue-800 text-blue-300 border-blue-700")
                       }
                     >
-                      Status
+                      Type
                     </th>
                     <th
                       className={
@@ -83,7 +100,7 @@ const Tests = (props) => {
                           : "bg-blue-800 text-blue-300 border-blue-700")
                       }
                     >
-                      Users
+                      Tags
                     </th>
                     <th
                       className={
@@ -103,6 +120,16 @@ const Tests = (props) => {
                           : "bg-blue-800 text-blue-300 border-blue-700")
                       }
                     ></th>
+                      <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-gray-100 text-gray-600 border-gray-200"
+                          : "bg-blue-800 text-blue-300 border-blue-700")
+                      }
+                    >
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -110,12 +137,8 @@ const Tests = (props) => {
                     return (
                       <Fragment key={index}>
                         <tr>
-                          <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left flex items-center">
-                            <img
-                              src={require("assets/img/HR/personnalité.png")}
-                              className="h-12 w-12 bg-white rounded-full border"
-                              alt="..."
-                            ></img>{" "}
+                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left flex items-center">
+                          {index+1}
                             <span
                               className={
                                 "ml-3 font-bold " +
@@ -123,41 +146,26 @@ const Tests = (props) => {
                                   ? "text-gray-700"
                                   : "text-white")
                               }
-                            >
-                              {test.title}{" "}
-                            </span>
+                            ></span>
                           </th>
+                          <th>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            A1
+                          {test.title}{" "}
                           </td>
+                          </th>
+
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            <i className="fas fa-circle text-orange-500 mr-2"></i>{" "}
-                            pending
+                          {test.description}{" "}
                           </td>
+
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            <div className="flex">
-                              <img
-                                src={require("assets/img/team-1-800x800.jpg")}
-                                alt="..."
-                                className="w-10 h-10 rounded-full border-2 border-gray-100 shadow"
-                              ></img>
-                              <img
-                                src={require("assets/img/team-2-800x800.jpg")}
-                                alt="..."
-                                className="w-10 h-10 rounded-full border-2 border-gray-100 shadow -ml-4"
-                              ></img>
-                              <img
-                                src={require("assets/img/team-3-800x800.jpg")}
-                                alt="..."
-                                className="w-10 h-10 rounded-full border-2 border-gray-100 shadow -ml-4"
-                              ></img>
-                              <img
-                                src={require("assets/img/team-4-470x470.png")}
-                                alt="..."
-                                className="w-10 h-10 rounded-full border-2 border-gray-100 shadow -ml-4"
-                              ></img>
-                            </div>
+                            {test.type}{" "}
                           </td>
+
+                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                            {test.tags}{" "}
+                          </td>
+                      
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                             <div className="flex items-center">
                               <span className="mr-2">60%</span>
@@ -182,6 +190,44 @@ const Tests = (props) => {
                               Questions
                             </a>
                           </td>
+                          
+                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+                            
+                          <button
+                              className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+
+                
+                                console.log(props);
+                                props.deleteTestHr(test._id) 
+                              window.location.href = "/admin/tests";
+                              }}
+                            >
+                              Delete
+                            </button>{" "}
+
+
+
+
+                            <button
+                              className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+
+                                localStorage.setItem("idTest",test._id)
+                              
+                              window.location.href = "/admin/UpdateTest";
+                              }}
+                            >
+                              Update
+                            </button>{" "}
+                          </td>
+
+
+                         
                         </tr>
                       </Fragment>
                     );
@@ -202,6 +248,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionToProps = {
   findallHrTest: findallHrTest,
+  deleteTestHr: deleteTestHr
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Tests);

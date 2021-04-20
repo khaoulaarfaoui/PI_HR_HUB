@@ -15,7 +15,7 @@ router.post("/addHrTest", async (req, res) => {
   }
 });
 
-router.put("/updateHR", async (req, res) => {
+router.put("/updateHrTest", async (req, res) => {
 
    console.log(req.body)
   try {
@@ -26,6 +26,28 @@ router.put("/updateHR", async (req, res) => {
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
+});
+router.get("/", async (req, res) => {
+  try {
+    
+    const hrs = await HRTest.find(); ;
+
+    //return new book object, after saving it to Publisher
+    res.status(200).json({ success: true, data: hrs });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+});
+
+router.delete("/deleteTest/:id", function (req, res) {
+  console.log("deleteing a Test ");
+  HRTest.findOneAndDelete(req.params.id, function (err, deleteTest) {
+    if (err) {
+      res.send("error deleting test");
+    } else {
+      res.json(deleteTest);
+    }
+  });
 });
 
 
@@ -42,19 +64,6 @@ router.put("/updateHRQuuestion", async (req, res) => {
  }
 });
 
-
-router.get("/", async (req, res) => {
-  try {
-    
-    const hrs = await HRTest.find(); ;
-
-    //return new book object, after saving it to Publisher
-    res.status(200).json({ success: true, data: hrs });
-  } catch (err) {
-    res.status(400).json({ success: false, message: err.message });
-  }
-});
-
 router.get("/questions/:id", async (req, res) => {
   try {
     
@@ -66,14 +75,14 @@ router.get("/questions/:id", async (req, res) => {
     res.status(400).json({ success: false, message: err.message });
   }
 }); 
-router.delete("/deleteTest/:id", function (req, res) {
-  console.log("deleteing a Test ");
-  HRTest.findOneAndDelete(req.params.id, function (err, deleteTest) {
-    if (err) {
-      res.send("error deleting test");
-    } else {
-      res.json(deleteTest);
-    }
+
+
+router.delete("/deleteQuestion/:id/:idqte", function (req, res) {
+
+  HRTest.findByIdAndUpdate({_id:req.params.id},{ "$pull": { "questions": { _id: req.params.idqte } } }, function (err, item) {
+
+    res.status(200).json({ success: true, message: err,data:item });
+  
   });
 });
 
