@@ -51,7 +51,7 @@ export default function CandidateRegister() {
   const [birthday, setBirthday] = useState("");
   const [location, setLocation] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
+  const [title, setTitle] = useState("");
   const [education, setEducation] = useState();
   const [skills, setSkills] = useState("");
   const [region, setRegion] = useState("");
@@ -63,6 +63,11 @@ export default function CandidateRegister() {
   const [file, setFile] = useState("");
   const [show, toggleShow] = useState(false);
   const [displayImage, setDisplayImage] = useState(false);
+
+  const onChangeTitle = (e) => {
+    const Title = e.target.value;
+    setTitle(Title);
+  };
 
   const onChangeRegion = (e) => {
     const Region = e;
@@ -135,13 +140,16 @@ export default function CandidateRegister() {
     form.append("fullName", fullName);
     form.append("profilePhoto", profilePhoto);
     form.append("birthday", birthday);
-    //form.append("phoneNumber", phoneNumber);
+    form.append("phoneNumber", phoneNumber);
+    console.log("phone number react", phoneNumber);
     form.append("location", location);
     form.append("region", region);
-    // form.append("education", education);
+    form.append("education", education);
+    console.log("education react", education);
     form.append("background", background);
     form.append("skills", skills);
     form.append("aboutMe", aboutMe);
+    form.append("title", title);
     console.log(form);
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.register(form).then(
@@ -356,6 +364,22 @@ export default function CandidateRegister() {
                               isMulti
                               options={skill}
                               onChange={onChangeSkills}
+                            />
+                          </div>
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
+                              Title
+                            </label>
+                            <Input
+                              type="text"
+                              name="title"
+                              value={title}
+                              onChange={onChangeTitle}
+                              className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                              placeholder="Title"
                             />
                           </div>
                           <div className="relative w-full mb-3">

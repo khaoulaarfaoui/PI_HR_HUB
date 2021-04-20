@@ -3,15 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import ButterToast, { Cinnamon } from "butter-toast";
 import { Link } from "react-router-dom";
 
-import Form from "react-validation/build/form";
-import CheckButton from "react-validation/build/button";
-
 import { updateCandidate } from "../../../Redux/actions/candidate/candidate";
 // components
 
 export default function CardSettings(props) {
   const checkBtn = useRef();
-  const candidate = useSelector((state) => state.userReducer.auth.candidate);
+  const candidate = JSON.parse(localStorage.getItem("candidate")).data;
   const user = useSelector((state) => state.userReducer.auth.user);
 
   const candidate_update = useSelector(
@@ -65,7 +62,7 @@ export default function CardSettings(props) {
   const updateContent = () => {
     console.log(fullName);
     dispatch(
-      updateCandidate(candidate.data._id, {
+      updateCandidate(candidate._id, {
         fullName,
         location,
         region,
@@ -96,25 +93,15 @@ export default function CardSettings(props) {
   return (
     <>
       <main>
-        <div className="rounded-t bg-white mb-0 px-6 py-6">
-          <div className="text-center flex justify-between">
-            <h6 className="text-gray-800 text-xl font-bold">My Profile</h6>
-            <Link
-              className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-              to="/resume"
-            >
-              CV Builder
-            </Link>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-              onClick={updateContent}
-            >
-              Update
-            </button>
-          </div>
-        </div>
-        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+        <div className="rounded-t bg-gray-200  py-6"></div>
+        <div className="flex-auto px-2 lg:px-2 py-10 pt-0">
+          <button
+            type="submit"
+            className="bg-blue-500  text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            onClick={updateContent}
+          >
+            Update
+          </button>
           <form>
             {" "}
             {!successful && (

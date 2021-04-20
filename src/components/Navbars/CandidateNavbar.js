@@ -1,21 +1,13 @@
 import React from "react";
-//import { Link } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
-import { logout } from "../../Redux/actions/user/auth";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import UserDropdown from "components/Dropdowns/CandidateDropDowns/UserDropdown";
+
 export default function CandidateNavbar(props) {
-  let history = useHistory();
-  const dispatch = useDispatch();
-  const logOut = () => {
-    dispatch(logout());
-    history.push("/auth/login");
-  };
   return (
     <>
       {/* Navbar */}
-      <nav className="absolute top-0 left-0 w-full z-10  py-1 bg-transparent md:flex-row md:flex-no-wrap md:justify-start flex items-center">
-        <div className="w-full mx-autp items-center flex justify-between md:flex-no-wrap flex-wrap md:px-10 px-4">
+      <nav className="absolute top-0 left-0 w-full z-10  py-0 bg-transparent md:flex-row md:flex-no-wrap md:justify-start flex items-center">
+        <div className="w-full mx-autp items-center flex justify-between md:flex-no-wrap flex-wrap md:px-10 px-2">
           <a
             className="text-white text-sm uppercase  lg:inline-block font-semibold"
             href="#pablo"
@@ -37,10 +29,13 @@ export default function CandidateNavbar(props) {
               />
             </div>
           </form>
-          <button onClick={logOut}>LOGOUT</button>
-          {/* User */}
+
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
             <DarkMode />
+          </ul>
+          {/* User */}
+          <ul className="pl-4 flex-col md:flex-row list-none items-center hidden md:flex">
+            <UserDropdown />
           </ul>
         </div>
       </nav>

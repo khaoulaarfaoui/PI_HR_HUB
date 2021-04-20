@@ -23,7 +23,9 @@ export default function Candidate() {
       <SidebarCandidate />
       <div className="relative md:ml-64 bg-gray-200 md:pt-3 pb-32 pt-12">
         {/* Header */}
-        <div className="px-4 md:px-10 mx-auto w-full mt-20">
+        <HeaderStats />
+
+        <div className="px-4 md:px-10 mx-auto w-full mt-8">
           <Switch>
             <Route path="/candidate/dashboard" exact component={Dashboard} />
             <Route path="/candidate/profile" exact component={Profile} />
