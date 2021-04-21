@@ -27,7 +27,7 @@ const jobReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_JOB_SUCCESS:
       return {
-        ...state.reverse(history.push("/admin/test")),
+        ...state,
 
         jobs: [...state.jobs, action.payload],
       };
@@ -42,7 +42,7 @@ const jobReducer = (state = defaultState, action) => {
     case EDIT_JOB_ERROR:
       return { ...state, error: action.payload };
     case FETCH_JOB_SUCCESS:
-      return { ...state, jobs: action.payload.reverse() };
+      return { ...state, jobs: action.payload };
 
     case FETCH_AllJOB_SUCCESS:
       return { ...state, jobs: action.payload };

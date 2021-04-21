@@ -22,9 +22,10 @@ const candidateSchema = new Schema({
   teamStatus: Boolean,
   cv: String,
   title: String,
+  status: Boolean,
   jobs: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Number,
       ref: "job",
     },
   ],

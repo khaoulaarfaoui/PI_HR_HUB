@@ -10,7 +10,7 @@ const RecomJOb = ({ job }) => {
           src={require("assets/img/team-3-800x800.jpg")}
         />
         <div class="article-details">
-          <h4 class="post-category">{job.salary} </h4>
+          <h4 class="post-category">{job.requirement} </h4>
           <h3 class="post-title"> {job.title} </h3>
           <p class="post-description"> {job.description}</p>
           <div className="flex">

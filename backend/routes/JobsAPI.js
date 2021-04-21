@@ -8,11 +8,6 @@ const hr = require("../models/hr");
 const candidate = require("../models/candidat");
 const ContentBasedRecommender = require("content-based-recommender");
 
-var normalize = require("json-api-normalize");
-const { json } = require("body-parser");
-const { isEqual, include, indexOf } = require("underscore");
-const { ObjectId } = require("bson");
-
 router.get("/jobs", function (req, res) {
   console.log("Get request for all jobs");
   Jobs.find({}).exec(function (err, jobs) {
@@ -84,10 +79,14 @@ router.post("/add/:id", async (req, res) => {
   console.log(req.params);
   let user = req.params;
   let idUser = user.id;
-  const all = await Jobs.find({});
-  console.log(all.length);
+  const all = await Jobs.find({}).sort({ _id: -1 }).limit(1);
 
-  var _id = all.length + 1;
+  for (var i in all) {
+    console.log("all", all[i].id);
+  }
+
+  var _id = all[i].id + 1;
+
   const { title, description, salary, requirement } = req.body;
   const job = await Jobs.create({
     _id,
@@ -114,45 +113,18 @@ router.post("/submit/:id/:ide", async (req, res) => {
 
   const job = await Jobs.findById(ide);
   const cand = await candidate.findById(id);
+  const c = await candidate.findById(id);
+  console.log("candidat", cand);
   cand.SubmittedJobs.push(job);
+  cand.save();
 
-  await cand.save();
+  job.candidateSubmit.push(c);
+  job.save();
 
-  console.log(id);
+  console.log("rrr", id);
   console.log(ide);
   res.send(cand);
   console.log("submitted job add");
-});
-
-router.get("/recjob/:id", async (req, res) => {
-  let user = req.params;
-  let id = user.id;
-  const job = await Jobs.find({}, { _id: 1, requirement: 1 });
-  var test = [];
-  const cand = await candidate.findById(id);
-  const skill = cand.skills;
-  var arr = skill.map(function (obj) {
-    return obj.value;
-  });
-  console.log("arr", arr);
-
-  for (let i in job) {
-    console.log("table", job[i].requirement);
-
-    if (arr.includes(job[i].requirement)) {
-      console.log("recom");
-
-      var jobbyid = await Jobs.findById(job[i]._id);
-      console.log(jobbyid);
-      test.push(jobbyid);
-    } else {
-      console.log("lee");
-    }
-  }
-  console.log(test);
-  res.send(test);
-
-  console.log("Get request recommended job");
 });
 
 router.get("/submittedJobs/:id", function (req, res) {
@@ -170,6 +142,24 @@ router.get("/submittedJobs/:id", function (req, res) {
         console.log("error Submitted jobs");
       } else {
         res.json(jobs);
+      }
+    });
+});
+
+router.get("/submittedCandidates/:id", function (req, res) {
+  console.log("Get request  candidate jobs applied ");
+
+  console.log(req.params);
+  let user = req.params;
+  let id = user.id;
+  Jobs.findById(id)
+    .select("candidateSubmit")
+
+    .exec(function (err, cands) {
+      if (err) {
+        console.log("error candidateSubmit jobs");
+      } else {
+        res.json(cands);
       }
     });
 });
@@ -230,6 +220,77 @@ router.post("/post", function (req, res) {
       console.log(insertedPost);
     }
   });
+});
+
+router.get("/similarJobs/:id", async (req, res) => {
+  const recommender = new ContentBasedRecommender({
+    minScore: 0.1,
+    maxSimilarDocuments: 100,
+  });
+  let id = req.params.id;
+
+  var similar = [];
+  console.log(typeof id);
+  const documents = await Jobs.find({}, { _id: 1, requirement: 1 });
+
+  console.log(documents);
+
+  recommender.train(documents);
+
+  const similarJobs = recommender.getSimilarDocuments(id, 0, 10);
+  console.log(similarJobs);
+
+  for (let i in similarJobs) {
+    console.log(similarJobs[i]);
+    var Sjob = await Jobs.findById(similarJobs[i].id);
+    console.log(Sjob);
+    similar.push(Sjob);
+  }
+  console.log("Get  Similar jobs");
+  res.send(similar);
+});
+
+router.get("/rec/:id", async (req, res) => {
+  let userID = req.params.id;
+  const cand = await candidate.findById(userID);
+  const skill = cand.skills;
+
+  var arr = skill.map(function (obj) {
+    return obj.value;
+  });
+
+  console.log("arr", arr);
+
+  const jobs = await Jobs.find({}, { _id: 1, requirement: 1 });
+  console.log(jobs);
+
+  const tagMap = skill.reduce((acc, tag) => {
+    acc[tag.id] = tag;
+    return acc;
+  }, {});
+
+  const recommendeer = new ContentBasedRecommender();
+
+  recommendeer.trainBidirectional(jobs, skill);
+
+  for (let job of jobs) {
+    var relatedTags = recommendeer.getSimilarDocuments(jobs.id);
+    console.log(job.requirement, "related tags:", skill);
+  }
+  var table = [];
+  console.log(relatedTags);
+  for (let i in relatedTags) {
+    var Sjob = await Jobs.findById(relatedTags[i].id).select(
+      "title salary description requirement"
+    );
+    console.log(Sjob);
+
+    table.push(Sjob);
+  }
+
+  console.log(table);
+  console.log("Get  recommended jobs");
+  res.send(table);
 });
 
 module.exports = router;

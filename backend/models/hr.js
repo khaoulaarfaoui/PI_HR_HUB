@@ -19,7 +19,7 @@ const hrSchema = new Schema({
 
   jobs: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Number,
       ref: "job",
     },
   ],

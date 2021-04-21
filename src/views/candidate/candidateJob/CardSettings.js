@@ -29,6 +29,10 @@ class AllJobs extends Component {
               <h6 className="text-gray-800 text-xl font-bold">All jobs</h6>
               <form class="w-6 ">
                 <div class="flex items-center border-b border-b-2 border-teal py-2">
+                  <span className=" text-gray-400  bg-transparent rounded ">
+                    <i className="fas fa-search"></i>
+                  </span>
+
                   <input
                     class="appearance-none bg-transparent border-none w-full
      text-grey-darker mr-3  px-2 leading-tight focus:outline-none"

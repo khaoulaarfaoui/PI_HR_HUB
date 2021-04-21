@@ -3,46 +3,57 @@ import React from "react";
 const Job = ({ job, onEdit, onDelete }) => {
   return (
     <>
-      <div class=" relative xl:w-4/12 py-10  px-4 rounded overflow-hidden shadow-lg">
+      <Card className="w-full md:w-4/12">
         <img
-          class="w-full"
-          src="https://tailwindcss-v0.netlify.app//img/card-top.jpg"
-          alt="Sunset in the mountains"
+          src={require("assets/img/job.jpg")}
+          alt="image"
+          width={1200}
+          height={600}
+          className="max-w-full h-auto"
         />
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">{job.title}</div>
-          <p class="text-grey-darker text-base">{job.description}</p>
-        </div>
-        <div class="px-6 py-4">
-          <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">
-            {job.requirement}
-          </span>
-          <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">
-            {job.salary}
-          </span>
-          <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker">
-            {job.date}{" "}
-          </span>
-        </div>
-        <button
-          className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          onClick={() => onEdit(job)}
-        >
-          Edit
-        </button>
+        <Card.Body>
+          <Card.Title>{job.title}</Card.Title>
+          <Card.Text>{job.description}</Card.Text>
+          <button
+            className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => onEdit(job)}
+          >
+            Edit
+          </button>
 
-        <button
-          className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          onClick={() => onDelete(job._id)}
-          key={job._id}
-        >
-          Delete
-        </button>
-      </div>
+          <button
+            className="bg-red-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => onDelete(job._id)}
+            key={job._id}
+          >
+            Delete
+          </button>
+        </Card.Body>
+      </Card>
     </>
   );
 };
 
+const Card = ({ className, children }) => (
+  <div
+    className={`${className} relative flex flex-col border-2 border-gray-200 rounded-lg`}
+    style={style}
+  >
+    {children}
+  </div>
+);
+Card.Body = ({ children }) => (
+  <div className="block flex-grow flex-shrink p-5">{children}</div>
+);
+Card.Title = ({ className, children }) => (
+  <div className={`${className} font-medium text-gray-700 mb-3`}>
+    {children}
+  </div>
+);
+Card.Text = ({ children }) => <div className="text-gray-500">{children}</div>;
+const style = {
+  boxShadow: "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
+};
 export default Job;

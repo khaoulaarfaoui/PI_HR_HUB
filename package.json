@@ -43,6 +43,7 @@
     "react-map-gl-geocoder": "^2.1.6",
     "react-mapbox-gl-geocoder": "^1.1.0",
     "react-minimal-pie-chart": "^8.2.0",
+    "react-notifications": "^1.7.2",
     "react-paginate": "^7.1.2",
     "react-places-autocomplete": "^7.3.0",
     "react-redux": "^7.2.2",

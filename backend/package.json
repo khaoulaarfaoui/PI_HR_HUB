@@ -37,6 +37,7 @@
     "multer": "^1.4.2",
     "node-nlp": "^4.0.2",
     "pug": "2.0.0-beta11",
+    "recommender": "^2.0.0",
     "request": "^2.53.0",
     "serve-favicon": "^2.5.0",
     "socket.io": "^4.0.0",

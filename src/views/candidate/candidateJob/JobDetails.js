@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { submitJob } from "Redux/actions/submittedJobs/submittedJob.action";
+import { PieChart, Tooltip, Pie } from "recharts";
 
-import { PieChart } from "react-minimal-pie-chart";
 import Chart from "./Chart";
 import { history } from "helpers/history";
+import Scrollbars from "react-custom-scrollbars";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+
+import "react-notifications/lib/notifications.css";
 
 class JobDetails extends Component {
   constructor(props) {
@@ -32,9 +39,35 @@ class JobDetails extends Component {
 
     console.log(id);
   }
-
+  createNotification = (type) => {
+    return () => {
+      switch (type) {
+        case "info":
+          NotificationManager.info("Info message");
+          break;
+        case "success":
+          NotificationManager.success("Success message", "Title here");
+          break;
+        case "warning":
+          NotificationManager.warning(
+            "Warning message",
+            "Close after 3000ms",
+            3000
+          );
+          break;
+        case "error":
+          NotificationManager.error("Error message", "Click me!", 5000, () => {
+            alert("callback");
+          });
+          break;
+        default:
+          return type;
+      }
+    };
+  };
   handleSubmit(e) {
     history.push(this.SUBMIT_JOB_URL);
+    NotificationManager.success("Success ", "Job submitted", 2000);
 
     this.setState({ black: !this.state.black });
     this.setState({ disable: !this.state.disable });
@@ -48,6 +81,7 @@ class JobDetails extends Component {
       JSON.stringify(this.state.title)
     );
   }
+
   componentWillMount() {
     const props = this.props;
     if (props.location && props.location.state) {
@@ -64,7 +98,10 @@ class JobDetails extends Component {
 
   render() {
     const job = this.props.job;
-
+    const data = [
+      { name: "Accepted", value: 30, fill: "#90cdf4" },
+      { name: "Not accepted", value: 70, fill: "#3182ce" },
+    ];
     let disabled = this.state.disable;
 
     let color = this.state.color
@@ -92,7 +129,9 @@ class JobDetails extends Component {
                   {" "}
                 </i>{" "}
                 Los Angeles, California
-                <i class="fas fa-money-bill-wave px-12"> 3000 dt</i>{" "}
+                <i class="fas fa-money-bill-wave px-12">
+                  {this.state.salary} dt
+                </i>{" "}
                 <button
                   type="button"
                   style={{ color: "white" }}
@@ -109,6 +148,7 @@ class JobDetails extends Component {
                   {" "}
                   Share this job{" "}
                 </div>
+
                 <button
                   className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
@@ -139,6 +179,7 @@ class JobDetails extends Component {
           </div>
           <div></div>
         </div>
+        <NotificationContainer />
         <div className="flex flex-wrap">
           <div className="w-full lg:w-8/12 px-4">
             <div className="w-full  px-10">
@@ -181,42 +222,47 @@ class JobDetails extends Component {
                   Requirement :
                 </h5>{" "}
                 <p className="mb-4 px-12 text-base leading-relaxed text-gray-800">
-                  An artist of considerable range, Jenna the name taken by
-                  Melbourne-raised, Brooklyn-based Nick Murphy writes, performs
-                  and records all of his own music, giving it a warm, intimate
-                  feel with a solid groove structure. An artist of considerable
-                  range. An artist of considerable range, Jenna the name taken
-                  by Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                  performs and records all of his own music, giving it a warm,
-                  intimate feel with a solid groove structure. An artist of
-                  considerable range. An artist of considerable range, Jenna the
-                  name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range. An artist of considerable range, Jenna
-                  the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range. An artist of considerable range, Jenna
-                  the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range. An artist of considerable range, Jenna
-                  the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range. An artist of considerable range, Jenna
-                  the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range.
+                  {this.state.requirement}
                 </p>
               </div>
               <div></div>
             </div>
           </div>
           <div className="w-full lg:w-4/12 px-4">
-            <Chart />
+            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
+              <h5 className="text-gray-800 py-4 px-10 text-center text-2xl font-bold left-100-px ">
+                Job matching
+              </h5>{" "}
+              <div className="px-10">
+                <PieChart width={400} height={200}>
+                  <Pie
+                    dataKey="value"
+                    isAnimationActive={false}
+                    data={data}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    label
+                  />
+
+                  <Tooltip />
+                </PieChart>
+              </div>
+            </div>
+            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
+              <h5 className="text-gray-800 py-4 px-10 text-center text-2xl font-bold left-100-px ">
+                Similar Jobs{" "}
+              </h5>{" "}
+            </div>
+            <Scrollbars autoHide style={{ width: 400, height: 600 }}>
+              {this.props.similar.map((job) => {
+                return (
+                  <>
+                    <Chart key={job._id} job={job} />
+                  </>
+                );
+              })}
+            </Scrollbars>
           </div>
         </div>
         ;
@@ -226,12 +272,14 @@ class JobDetails extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  let id = ownProps.match.params.id;
-
   return {
     job: state.jobDetailData.jobDetail || [],
     error: state.jobDetailData.error || null,
     isLoading: state.jobDetailData.isLoading,
+
+    similar: state.SimilarJob.similarjobs || [],
+    error: state.SimilarJob.error || null,
+    isLoading: state.SimilarJob.isLoading,
   };
 };
 

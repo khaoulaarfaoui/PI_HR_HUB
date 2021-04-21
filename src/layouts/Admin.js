@@ -22,6 +22,7 @@ import CardEditJob from "components/Cards/CardsHR/CardEditJob";
 import CardAddJob from "components/Cards/CardsHR/CardAddJob";
 import TestJob from "components/Cards/CardsHR/testjob";
 import Events from "views/EventManagement/EventsView";
+import { NotificationContainer } from "react-notifications";
 export default function Admin() {
   return (
     <>

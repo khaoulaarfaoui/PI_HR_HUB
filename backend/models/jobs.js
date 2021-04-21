@@ -9,8 +9,7 @@ const jobSchema = new Schema({
   salary: Number,
   requirement: String,
   content: String,
-  //Candidate: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
-
+  candidateSubmit: Array,
   date: {
     type: Date,
     default: Date.now,

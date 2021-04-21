@@ -22,7 +22,7 @@ class CardProfile extends Component {
                 <div className="flex justify-center py-4 lg:pt-4 pt-8">
                   <div className="mr-4 p-3 text-center">
                     <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                      2
+                      {this.props.recJob.length}
                     </span>
                     <span className="text-sm text-gray-500">
                       Recommended Jobs
@@ -34,7 +34,11 @@ class CardProfile extends Component {
 
             <Scrollbars autoHide style={{ width: 350, height: 600 }}>
               {this.props.recJob.map((job) => {
-                return <></>;
+                return (
+                  <>
+                    <RecomJOb key={job._id} job={job} />
+                  </>
+                );
               })}
             </Scrollbars>
           </div>

@@ -24,7 +24,7 @@ let id = str.slice(12);
 //console.log("hrReducer", currentHR);
 console.log(id);
 console.log("initial", initialState);
-if (initialState.isLoggedIn) {
+/*if (initialState.isLoggedIn) {
   const hr = JSON.parse(localStorage.getItem("hr"));
   var hrId = hr.data._id;
   console.log("hr id", hrId);
@@ -32,7 +32,11 @@ if (initialState.isLoggedIn) {
   var ADD_URL = "http://localhost:8082/job/add/" + hrId;
   var UPDATE_URL = "http://localhost:8082/job/job/" + id;
   var DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
-}
+}*/
+var GET_URL = "http://localhost:8082/job/jobs/606cc9bff36ac227e8131519";
+var ADD_URL = "http://localhost:8082/job/add/606cc9bff36ac227e8131519";
+var UPDATE_URL = "http://localhost:8082/job/job/" + id;
+var DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
 //CREATE------------------------------------------------------------------------------------------------------------------------------------------------
 
 export const createJobsSuccess = (data) => {

@@ -17,6 +17,8 @@ import { fetchJobDetails } from "Redux/actions/jobDetails/jobDetailsAction";
 import { fetchSubmittedJobs } from "Redux/actions/submittedJobs/submittedJob.action";
 import { fetchRecomJobs } from "Redux/actions/recomJob/recomJob.action";
 import jobRecom from "../reducers/jobReducers/recomJobReducer";
+import similarjobs from "../reducers/jobReducers/similarJobReducer";
+import { fetchSimilarJobs } from "Redux/actions/smiliarJobs/similar.action";
 
 const middleware = [thunk];
 
@@ -30,6 +32,7 @@ const rootReducer = combineReducers({
   jobDetailData: jobDetail,
   jobSubmitted: submittedjobs,
   RecomJob: jobRecom,
+  SimilarJob: similarjobs,
 });
 const store = createStore(
   rootReducer,
@@ -39,11 +42,12 @@ const store = createStore(
 store.dispatch(AllEvents());
 store.dispatch(fetchSubmittedJobs());
 store.dispatch(fetchRecomJobs());
+store.dispatch(fetchSimilarJobs());
+
+store.dispatch(fetchJobs());
 
 store.dispatch(fetchJobDetails());
 
 store.dispatch(fetchAllJobs());
-
-store.dispatch(fetchJobs());
 
 export default store;
