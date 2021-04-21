@@ -69,6 +69,7 @@ router.post(
         teams: req.body.teams,
       });
       candidate.save();
+      console.log(req.body.experience);
       console.log("aaaaaaaaaaaaaaaaaa", Candidate);
       const user = await User.findById({ _id: candidate.user });
       console.log(user);

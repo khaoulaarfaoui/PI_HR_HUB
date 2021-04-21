@@ -16,8 +16,9 @@ const update = (id, data) => {
     })
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("candidate_update", JSON.stringify(response.data));
+        localStorage.setItem("candidate", JSON.stringify(response.data));
       }
+      return response.data;
     });
 };
 const get = (id) => {

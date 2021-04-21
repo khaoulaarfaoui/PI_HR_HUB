@@ -74,7 +74,7 @@ export const updateCandidate = (id, data) => async (dispatch) => {
 
     dispatch({
       type: UPDATE_CANDIDATE,
-      payload: data,
+      payload: res.data,
     });
 
     return Promise.resolve(res.data);

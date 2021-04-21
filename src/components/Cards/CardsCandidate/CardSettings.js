@@ -2,18 +2,17 @@ import React, { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ButterToast, { Cinnamon } from "butter-toast";
 import { Link } from "react-router-dom";
+import { ToastProvider, useToasts } from "react-toast-notifications";
 
 import { updateCandidate } from "../../../Redux/actions/candidate/candidate";
 // components
 
 export default function CardSettings(props) {
+  const { addToast } = useToasts();
   const checkBtn = useRef();
   const candidate = JSON.parse(localStorage.getItem("candidate")).data;
   const user = useSelector((state) => state.userReducer.auth.user);
 
-  const candidate_update = useSelector(
-    (state) => state.candidateReducer.candidateCRUD.state.candidate_update
-  );
   const dispatch = useDispatch();
 
   const [successful, setSuccessful] = useState(false);
@@ -58,7 +57,6 @@ export default function CardSettings(props) {
     setFullName(FullName);
   };
 
-  var res = candidate.fullName.split(" ");
   const updateContent = () => {
     console.log(fullName);
     dispatch(
@@ -74,19 +72,11 @@ export default function CardSettings(props) {
     )
       .then((response) => {
         console.log("lennan", response);
+        addToast("Saved Successfully", { appearance: "success" });
       })
       .catch((e) => {
-        ButterToast.raise({
-          content: (
-            <Cinnamon.Crisp
-              title="Candidate Notification"
-              content="Updated successfully"
-              scheme={Cinnamon.Crisp.SCHEME_PURPLE}
-              //icon={<AssignmentTurnedIn />}
-            />
-          ),
-        });
         console.log(e);
+        addToast(e.message, { appearance: "error" });
       });
   };
 
@@ -96,7 +86,6 @@ export default function CardSettings(props) {
         <div className="rounded-t bg-gray-200  py-6"></div>
         <div className="flex-auto px-2 lg:px-2 py-10 pt-0">
           <button
-            type="submit"
             className="bg-blue-500  text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
             onClick={updateContent}
           >
