@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 // components
 
 export default function CardProfile() {
-  const candidate = JSON.parse(localStorage.getItem("candidate")).data;
+  const candidate = JSON.parse(localStorage.getItem("candidate"));
+  console.log(candidate);
 
   return (
     <>

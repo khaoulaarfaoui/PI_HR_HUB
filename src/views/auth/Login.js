@@ -22,7 +22,7 @@ const Login = (props) => {
   const checkBtn = useRef();
   const history = useHistory();
   var data = "";
-  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   console.log("current user", currentUser);
   const [isAuthorized, setisAuthorized] = useState(false);
   const [firstName, setfirstName] = useState("");
@@ -119,10 +119,10 @@ const Login = (props) => {
     }
   };
   if (isLoggedIn) {
-    if (currentUser.user.roles[0].name === "admin") {
+    if (currentUser.roles[0].name === "admin") {
       return <Redirect to="/admin" />;
     }
-    if (currentUser.user.roles[0].name === "user") {
+    if (currentUser.roles[0].name === "user") {
       return <Redirect to="/candidate" />;
     }
   }

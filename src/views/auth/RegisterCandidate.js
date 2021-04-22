@@ -55,7 +55,7 @@ export default function CandidateRegister() {
   const [education, setEducation] = useState();
   const [skills, setSkills] = useState("");
   const [region, setRegion] = useState("");
-  const [user, setUser] = useState(currentUser.id);
+  const [user, setUser] = useState(currentUser._id);
   const [successful, setSuccessful] = useState(false);
   const [aboutMe, setAboutme] = useState("");
   const [message, setMessage] = useState("");
@@ -223,9 +223,7 @@ export default function CandidateRegister() {
                               name="user"
                               disabled={true}
                               value={user}
-                              onChange={onChangeUser}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                              placeholder="Full Name"
                             />
                           </div>
                           <div className="relative w-full mb-3">

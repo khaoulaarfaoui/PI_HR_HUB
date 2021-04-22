@@ -16,7 +16,8 @@ const update = (id, data) => {
     })
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("candidate", JSON.stringify(response.data));
+        console.log("yooo", response.data.data);
+        localStorage.setItem("candidate", JSON.stringify(response.data.data));
       }
       return response.data;
     });

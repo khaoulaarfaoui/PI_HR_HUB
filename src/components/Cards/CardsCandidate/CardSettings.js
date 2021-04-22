@@ -10,8 +10,8 @@ import { updateCandidate } from "../../../Redux/actions/candidate/candidate";
 export default function CardSettings(props) {
   const { addToast } = useToasts();
   const checkBtn = useRef();
-  const candidate = JSON.parse(localStorage.getItem("candidate")).data;
-  const user = useSelector((state) => state.userReducer.auth.user);
+  const candidate = JSON.parse(localStorage.getItem("candidate"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const dispatch = useDispatch();
 
@@ -62,12 +62,12 @@ export default function CardSettings(props) {
     dispatch(
       updateCandidate(candidate._id, {
         fullName,
+        phoneNumber,
         location,
         region,
-        phoneNumber,
         education,
-        aboutMe,
         background,
+        aboutMe,
       })
     )
       .then((response) => {

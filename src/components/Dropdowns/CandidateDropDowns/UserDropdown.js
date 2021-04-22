@@ -11,7 +11,7 @@ const UserDropdown = () => {
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   let history = useHistory();
-  const candidate = JSON.parse(localStorage.getItem("candidate")).data;
+  const candidate = JSON.parse(localStorage.getItem("candidate"));
 
   const dispatch = useDispatch();
 

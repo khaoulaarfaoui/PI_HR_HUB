@@ -11,7 +11,7 @@ const candidateSchema = new Schema({
   fullName: String,
   profilePhoto: String,
   birthday: Date,
-  phoneNumber: Number,
+  phoneNumber: String,
   /*country*/
   location: String,
   /*region*/
@@ -23,6 +23,8 @@ const candidateSchema = new Schema({
   experience: {
     jobtitle: String,
     company: String,
+    date: Date,
+    Description: String,
   },
 
   aboutMe: String,
