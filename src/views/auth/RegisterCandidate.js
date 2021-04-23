@@ -9,61 +9,12 @@ import AuthService from "../../service/candidateService/authservice";
 import Select from "react-select";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from "react-country-region-selector";
 import Navbar from "components/Navbars/AuthNavbar.js";
-import { isEmail } from "validator";
-/* FORM VALIDATORS */
-const required = (value) => {
-  if (!value) {
-    return (
-      <div
-        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        role="alert"
-      >
-        <strong className="font-bold">REQUIRED!</strong>
-        <span className="block sm:inline">This field is required.</span>
-        <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-          <svg
-            className="fill-current h-6 w-6 text-red-500"
-            role="button"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <title>Close</title>
-            <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-          </svg>
-        </span>
-      </div>
-    );
-  }
-};
-
-const vpassword = (value) => {
-  if (value.length < 6 || value.length > 40) {
-    return (
-      <div
-        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        role="alert"
-      >
-        <strong className="font-bold">WRONG VALUE!</strong>
-        <span className="block sm:inline">
-          The password must be between 6 and 40 characters.
-        </span>
-        <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-          <svg
-            className="fill-current h-6 w-6 text-red-500"
-            role="button"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <title>Close</title>
-            <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-          </svg>
-        </span>
-      </div>
-    );
-  }
-};
 
 export default function CandidateRegister() {
   useEffect(() => {
@@ -91,11 +42,35 @@ export default function CandidateRegister() {
     { value: "Finance", label: "Finance" },
     { value: "English", label: "English" },
   ];
+  /* FORM VALIDATORS */
+  const required = (value) => {
+    if (!value) {
+      return (
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <strong className="font-bold">REQUIRED!</strong>
+          <span className="block sm:inline">This field is required.</span>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg
+              className="fill-current h-6 w-6 text-red-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+            </svg>
+          </span>
+        </div>
+      );
+    }
+  };
 
   const history = useHistory();
   const checkBtn = useRef();
-  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
-  console.log(currentUser);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   const [fullName, setFullName] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -155,10 +130,7 @@ export default function CandidateRegister() {
     const FullName = e.target.value;
     setFullName(FullName);
   };
-  const onChangeUser = (e) => {
-    const user = e.target.value;
-    setUser(user);
-  };
+
   const onChangeProfilePhoto = (e) => {
     const profilePhoto = e.target.files[0];
     const File = URL.createObjectURL(e.target.files[0]);
@@ -288,6 +260,7 @@ export default function CandidateRegister() {
                               name="fullName"
                               value={fullName}
                               onChange={onChangefullName}
+                              validations={[required]}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                               placeholder="Full Name"
                             />
@@ -303,6 +276,7 @@ export default function CandidateRegister() {
                               type="date"
                               value={birthday}
                               onChange={onChangeBirthday}
+                              validations={[required]}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                               placeholder="birthday"
                             />
@@ -426,6 +400,7 @@ export default function CandidateRegister() {
                               name="title"
                               value={title}
                               onChange={onChangeTitle}
+                              validations={[required]}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                               placeholder="Title"
                             />
@@ -442,6 +417,7 @@ export default function CandidateRegister() {
                               name="aboutMe"
                               value={aboutMe}
                               onChange={onChangeAboutme}
+                              validations={[required]}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                               placeholder="About Me"
                             />
