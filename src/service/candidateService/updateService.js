@@ -4,10 +4,12 @@ const API_URL = "http://localhost:8082/candidate/updateCandidate/";
 
 const update = (id, data) => {
   console.log("dataaaaaaa", data);
+  console.log("exppp", data.experience);
   return axios
     .put(`http://localhost:8082/candidate/updateCandidate/${id}`, {
       location: data.location,
       region: data.region,
+      experience: data.experience,
       phoneNumber: data.phoneNumber,
       education: data.education,
       aboutMe: data.aboutMe,

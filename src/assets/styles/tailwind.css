@@ -974,13 +974,19 @@ video {
   background-color: #2d3748;
   background-color: rgba(45, 55, 72, var(--bg-opacity));
 }
-
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgba(185, 28, 28, var(--tw-text-opacity));
+}
 .bg-gray-900 {
   --bg-opacity: 1;
   background-color: #1a202c;
   background-color: rgba(26, 32, 44, var(--bg-opacity));
 }
-
+.border-red-400 {
+  --tw-border-opacity: 1;
+  border-color: rgba(248, 113, 113, var(--tw-border-opacity));
+}
 .bg-red-200 {
   --bg-opacity: 1;
   background-color: #fed7d7;

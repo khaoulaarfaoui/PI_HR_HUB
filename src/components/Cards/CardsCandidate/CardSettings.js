@@ -23,7 +23,44 @@ export default function CardSettings(props) {
   const [region, setRegion] = useState(candidate.region);
   const [aboutMe, setAboutme] = useState(candidate.aboutMe);
   const [background, setBackground] = useState(candidate.background);
+  const [jobtitle, setJobtitle] = useState(candidate.experience.jobtitle);
+  const [company, setCompany] = useState(candidate.experience.company);
+  const [starting_date, setStartingDate] = useState(
+    candidate.experience.starting_date
+  );
+  const [ending_date, setEndingDate] = useState(
+    candidate.experience.ending_date
+  );
+  const [description, setDescription] = useState(
+    candidate.experience.description
+  );
 
+  const onChangejobtitle = (e) => {
+    const jobtitle = e.target.value;
+    setJobtitle(jobtitle);
+  };
+  const onChangeCompany = (e) => {
+    const company = e.target.value;
+    setCompany(company);
+  };
+  const onChangeStartingDate = (e) => {
+    const date = e.target.value;
+    console.log(e.target.value);
+    console.log(e);
+
+    setStartingDate(date);
+  };
+  const onChangeEndingDate = (e) => {
+    const date = e.target.value;
+    console.log(e.target.value);
+    console.log(e);
+
+    setEndingDate(date);
+  };
+  const onChangeDescription = (e) => {
+    const description = e.target.value;
+    setDescription(description);
+  };
   const onChangeRegion = (e) => {
     const Region = e.target.value;
     setRegion(Region);
@@ -56,7 +93,13 @@ export default function CardSettings(props) {
     const FullName = e.target.value;
     setFullName(FullName);
   };
-
+  const experience = {
+    jobtitle,
+    company,
+    starting_date,
+    ending_date,
+    description,
+  };
   const updateContent = () => {
     console.log(fullName);
     dispatch(
@@ -64,6 +107,7 @@ export default function CardSettings(props) {
         fullName,
         phoneNumber,
         location,
+        experience,
         region,
         education,
         background,
@@ -259,6 +303,8 @@ export default function CardSettings(props) {
                       <input
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangejobtitle}
+                        value={jobtitle}
                       />
                     </div>
                   </div>
@@ -273,6 +319,8 @@ export default function CardSettings(props) {
                       <input
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeCompany}
+                        value={company}
                       />
                     </div>
                   </div>
@@ -282,11 +330,29 @@ export default function CardSettings(props) {
                         className="block uppercase text-gray-700 text-xs font-bold mb-2"
                         htmlFor="grid-password"
                       >
-                        Date
+                        Strating Date
                       </label>
                       <input
                         type="date"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeStartingDate}
+                        value={starting_date}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Ending Date
+                      </label>
+                      <input
+                        type="date"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeEndingDate}
+                        value={ending_date}
                       />
                     </div>
                   </div>
@@ -302,6 +368,8 @@ export default function CardSettings(props) {
                     <textarea
                       type="text"
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      onChange={onChangeDescription}
+                      value={description}
                     />
                   </div>
                 </div>

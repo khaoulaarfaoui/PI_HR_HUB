@@ -28,6 +28,7 @@ const register = (
     .then((response) => {
       if (response.data) {
         localStorage.setItem("hr", JSON.stringify(response.data));
+        localStorage.setItem("candidate", JSON.stringify(null));
       }
     });
 };

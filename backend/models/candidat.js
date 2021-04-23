@@ -23,8 +23,9 @@ const candidateSchema = new Schema({
   experience: {
     jobtitle: String,
     company: String,
-    date: Date,
-    Description: String,
+    starting_date: Date,
+    ending_date: Date,
+    description: String,
   },
 
   aboutMe: String,
