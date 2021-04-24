@@ -16,15 +16,18 @@ import Settings from "views/admin/Settings.js";
 import AddJob from "views/admin/AddJob";
 import Tables from "views/admin/Tables.js";
 import Profile from "views/admin/Profile";
+import SearchCandidate from "views/admin/SearhCandidate";
 import Tests from "views/admin/Tests";
 import JobsDispaly from "views/admin/jobsDisplay";
 import CardEditJob from "components/Cards/CardsHR/CardEditJob";
 import CardAddJob from "components/Cards/CardsHR/CardAddJob";
 import TestJob from "components/Cards/CardsHR/testjob";
 import Events from "views/EventManagement/EventsView";
+import Navbar from "components/Navbars/AdminNavbar";
 export default function Admin() {
   return (
     <>
+      <AdminNavbar />
       <Sidebar />
       <div className="relative md:ml-64 bg-gray-200">
         {/* Header */}
@@ -41,6 +44,7 @@ export default function Admin() {
             <Route path="/admin/jobs" exact component={JobsDispaly} />
             <Route path="/admin/test" exact component={TestJob} />
             <Route path="/admin/edit/:id" exact component={CardEditJob} />
+            <Route path="/admin/search" component={SearchCandidate} />
             <Route path="/admin/event" exact component={Events} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>

@@ -36,6 +36,9 @@ export default function CardProfile() {
               <i className="fas fa-university mr-2 text-lg text-gray-500"></i>
               {candidate.education}
             </div>
+            <span className="mb-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-700 bg-blue-300 uppercase last:mr-0 mr-1">
+              {candidate.skills}
+            </span>
           </div>
         </div>
       </div>

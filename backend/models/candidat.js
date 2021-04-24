@@ -20,13 +20,15 @@ const candidateSchema = new Schema({
   education: String,
   /*speciality*/
   background: Array,
-  experience: {
-    jobtitle: String,
-    company: String,
-    starting_date: Date,
-    ending_date: Date,
-    description: String,
-  },
+  experience: [
+    {
+      jobtitle: String,
+      company: String,
+      starting_date: Date,
+      ending_date: Date,
+      description: String,
+    },
+  ],
 
   aboutMe: String,
   states: String,

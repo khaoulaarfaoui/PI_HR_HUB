@@ -1,4 +1,6 @@
 const express = require("express");
+const candidat = require("../../models/candidat");
+const hr = require("../../models/hr");
 const router = express.Router();
 const HR = require("../../models/hr");
 const User = require("../../models/user");

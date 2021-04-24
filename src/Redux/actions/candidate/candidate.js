@@ -42,7 +42,11 @@ export const register = (
 
       dispatch({
         type: SET_MESSAGE_CANDIDATE,
-        payload: Promise.all([response.data, response.email]),
+        payload: Promise.all([
+          response.data.data,
+          response.email,
+          response.username,
+        ]),
       });
 
       return Promise.resolve();
@@ -88,7 +92,7 @@ export const retrieveCandidate = (id) => async (dispatch) => {
 
     dispatch({
       type: RETRIEVE_CANDIDATE,
-      payload: res.data,
+      payload: res.data.data,
     });
   } catch (err) {
     console.log(err);

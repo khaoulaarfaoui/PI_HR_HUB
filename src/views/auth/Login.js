@@ -143,10 +143,12 @@ const Login = (props) => {
   };
   if (isLoggedIn) {
     if (currentUser.roles[0].name === "admin") {
-      return <Redirect to="/admin" />;
+      history.push("/admin");
+      window.location.reload();
     }
     if (currentUser.roles[0].name === "user") {
-      return <Redirect to="/candidate" />;
+      history.push("/candidate");
+      window.location.reload();
     }
   }
 

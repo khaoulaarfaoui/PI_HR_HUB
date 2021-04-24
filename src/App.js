@@ -145,6 +145,7 @@ const App = () => {
           <Route path="/linkedin" component={Linkedin} />
           <Route path="/event3D" component={Event3D} />
           <Route path="/candidate" component={Candidate} />
+
           <Route
             path="/admin"
             render={() =>

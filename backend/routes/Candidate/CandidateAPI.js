@@ -130,4 +130,13 @@ router.get("/fetch/:id", function (req, res) {
     }
   });
 });
+router.get("/fetchtext/:text", function (req, res) {
+  Candidate.find({ skills: req.params.text }, async (err, Candidate) => {
+    if (!Candidate) {
+      res.status(404).send("No result found");
+    } else {
+      res.status(200).json({ Candidate: Candidate });
+    }
+  });
+});
 module.exports = router;

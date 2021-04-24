@@ -1,4 +1,8 @@
-import { REGISTER_SUCCESS_HR, REGISTER_FAIL_HR } from "../../actions/hr/types";
+import {
+  SEARCH_HR,
+  REGISTER_SUCCESS_HR,
+  REGISTER_FAIL_HR,
+} from "../../actions/hr/types";
 
 const hr = JSON.parse(localStorage.getItem("hr"));
 console.log(hr);
@@ -21,6 +25,7 @@ export default function (state = initialState, action) {
         ...state,
         isLoggedIn: false,
       };
+
     default:
       return state;
   }
