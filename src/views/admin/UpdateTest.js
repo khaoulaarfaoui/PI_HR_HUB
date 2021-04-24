@@ -26,7 +26,6 @@ export default function HR() {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
-
   const onChangeTitle = (e) => {
     const Title = e.target.value;
     setTitle(Title);
@@ -78,7 +77,7 @@ export default function HR() {
 
     form.current.validateAll();
 
-     /*
+    /*
  id,
   title,
   description,
@@ -90,31 +89,31 @@ export default function HR() {
   endDate,
 
      */
-      dispatch(
-        update(
-          localStorage.getItem("idTest"),
-  title,
-  description,
-  tags,
-  result,
-  companyName,
-  color,
-  startDate,
-  endDate,
-  JSON.parse(localStorage.getItem("user")).id
-  )
-      ).then(
-        (response) => {
-         // setMessage(response.data.message);
-          //setSuccessful(true);
-        },
-        (error) => {
-         // setSuccessful(false);
-        }
-      );
+    dispatch(
+      update(
+        localStorage.getItem("idTest"),
+        title,
+        description,
+        tags,
+        result,
+        companyName,
+        color,
+        startDate,
+        endDate,
+        JSON.parse(localStorage.getItem("user"))._id
+      )
+    ).then(
+      (response) => {
+        // setMessage(response.data.message);
+        //setSuccessful(true);
+      },
+      (error) => {
+        // setSuccessful(false);
+      }
+    );
 
-     history.push("/admin/tests");
-    }
+    history.push("/admin/tests");
+  };
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -123,8 +122,7 @@ export default function HR() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
-                  <h6 className="text-gray-600 text-sm font-bold">
-                  </h6>
+                  <h6 className="text-gray-600 text-sm font-bold"></h6>
                 </div>
 
                 <hr className="mt-6 border-b-1 border-gray-400" />
@@ -147,7 +145,7 @@ export default function HR() {
                           type="text"
                           name="user"
                           disabled={true}
-                          value={JSON.parse(localStorage.getItem("user")).id}
+                          value={JSON.parse(localStorage.getItem("user"))._id}
                           onChange={onChangeUser}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Full Name"
@@ -302,7 +300,7 @@ export default function HR() {
 
                       <div className="text-center mt-6">
                         <button className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
-                         Edit Test
+                          Edit Test
                         </button>
                       </div>
                     </div>

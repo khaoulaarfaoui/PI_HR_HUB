@@ -12,20 +12,12 @@ import {
   FETCH_JOB_LOADING,
   FETCH_JOB_ERROR,
 } from "../actions/user/types";
-import { initialState } from "Redux/reducers/hrReducers/hr";
 
 import axios from "axios";
 import { history } from "helpers/history";
 var str = window.location.pathname;
 let id = str.slice(12);
-//console.log("hrReducer", currentHR);
-console.log(id);
-console.log("initial", initialState);
-if (initialState.isLoggedIn) {
-  const hr = JSON.parse(localStorage.getItem("hr"));
-  //  var hrId = hr.data._id;
-  //console.log("hr id", hrId);
-}
+
 const GET_URL = "http://localhost:8082/job/jobs/6058d433e461980052a601cd";
 const ADD_URL = "http://localhost:8082/job/add/6058d433e461980052a601cd";
 const UPDATE_URL = "http://localhost:8082/job/job/" + id;

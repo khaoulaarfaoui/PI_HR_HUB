@@ -7,6 +7,7 @@ const Role = require("../backend/models/Role");
 const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
 const hr = require("./routes/HR/HRAPI");
+const hrTest = require("./routes/HR/HRTEST");
 const response = require("./routes/Candidate/responseApi");
 
 const dbConfig = require("./config/DBconfig");
@@ -23,7 +24,6 @@ var logger = require("morgan");
 var dir = path.join(__dirname, "./public");
 var cookieParser = require("cookie-parser");
 var callback = require("./routes/callback");
-const eventsmodel = require("./Controllers/events/eventController");
 const app = express();
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -68,14 +68,17 @@ app.use(function (req, res, next) {
   err.status = 404;
   next(err);
 });
+// error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
+
   // render the error page
   res.status(err.status || 500);
   console.log(err);
   res.render("error");
+});
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
@@ -110,6 +113,9 @@ app.post("/uploadfile", upload.single("file"), (req, res, next) => {
     return next(error);
   }
   res.send(file);
+});
+app.get("/file/:image", function (req, res) {
+  res.sendFile(__dirname + "/uploads/" + req.params.image);
 });
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
@@ -146,7 +152,5 @@ function initial() {
     }
   });
 }
-app.get("/file/:image", function (req, res) {
-  res.sendFile(__dirname+"/uploads/"+req.params.image);
-}); 
+
 module.exports = router;

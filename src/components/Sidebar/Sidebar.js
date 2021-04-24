@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -6,14 +5,19 @@ export default function SidebarCandidate() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   return (
     <>
-      <nav className="md:left-0 bg-gray-300 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+      <nav className="md:left-0 bg-gray-300 md:block md:fixed md:top-0 md:bottom-2 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-no-wrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           <div className="md:block text-left md:pb-2  text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0">
             <img
               className="w-28 mx-auto mb-3"
-              src={require("../../assets/img//Candidate/profile.svg")}
+              src={
+                "http://localhost:8082/file/" +
+                JSON.parse(localStorage.getItem("hruser")).profilePhoto
+              }
             />
-            <div className="text-center	">HR numberone</div>
+            <div className="text-center ">
+              <a href="/admin/setting"> HR numberone </a>
+            </div>
             <div className="text-center font-light opacity-50">ESPRIT</div>
           </div>
 
@@ -81,6 +85,29 @@ export default function SidebarCandidate() {
                   Tests
                 </Link>
               </li>
+
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/tasks") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/admin/tasks"
+                >
+                  <i
+                    className={
+                      "fas fa-file-alt mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/tasks") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Tasks
+                </Link>
+              </li>
+
               <li className="items-center">
                 <Link
                   className={
@@ -107,11 +134,11 @@ export default function SidebarCandidate() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/tasks") !== -1
+                    (window.location.href.indexOf("/admin/tables") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/admin/tasks"
+                  to="/admin/tables"
                 >
                   <i
                     className={
@@ -125,16 +152,15 @@ export default function SidebarCandidate() {
                 </Link>
               </li>
 
-
               <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/jobs") !== -1
+                    (window.location.href.indexOf("/admin/maps") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/admin/jobs"
+                  to="/admin/maps"
                 >
                   <i
                     className={
