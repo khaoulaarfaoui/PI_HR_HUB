@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import useForm from "./useForm";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import {UpdateTest, CreateTest} from "../../Redux/actions/CandidateTest/CandidateAction";
 import { connect } from "react-redux";
 import ButterToast, { Cinnamon } from "butter-toast";
@@ -9,10 +7,8 @@ import ButterToast, { Cinnamon } from "butter-toast";
 
 const initialFieldValues = {
   title: "",
-  description: "",
   type: "",
-  tags: "",
-  result: "",
+  description: "",
   startDate: "",
   endDate: "",
 };
@@ -30,17 +26,15 @@ const AddTest = ({ ...props }) => {
   const validate = () => {
     let temp = { ...errors };
     temp.title = values.title ? "" : "This field is required.";
-    temp.description = values.description ? "" : "This field is required.";
     temp.type = values.type ? "" : "This field is required.";
-    temp.tags = values.tags ? "" : "This field is required.";
-    temp.result = values.result ? "" : "This field is required.";
+    temp.description = values.description ? "" : "Thiss field is required.";
     temp.startDate = values.startDate ? "" : "This field is required.";
     temp.endDate = values.endDate ? "" : "This field is required.";
     setErrors({
       ...temp,
     });
 
-    return Object.values(temp).every((x) => x === "");
+    return Object.values(temp).every((x) => x == "");
   };
 
   var {
@@ -70,7 +64,7 @@ const AddTest = ({ ...props }) => {
     if (validate()) {
      
       if (props.currentId == 0) props.CreateTest(values, onSuccess);
-      else props.UpdateTest(props.currentId, values, onSuccess);
+      else props.updateTest(props.currentId, values, onSuccess);
     }
   };
 
@@ -81,6 +75,8 @@ const AddTest = ({ ...props }) => {
           <div className="text-center flex justify-between">
             <h6 className="text-gray-800 text-xl font-bold">
               Add & Edit Tests
+              {props.currentId}
+              
             </h6>
           </div>
         </div>
@@ -98,52 +94,32 @@ const AddTest = ({ ...props }) => {
                   </label>
                   <input
                     type="text"
-                    name="eventName"
+                    name="title"
                     value={values.title}
                     onChange={handleInputChange}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                   />
                 </div>
               </div>
-
-
-              <div className="w-full lg:w-6/12 px-4">
-                <br></br>
+              <div className="flex flex-wrap">
+              <div className="w-full lg:w-12/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
+                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
                   >
-                    Test tags
+                    Test type
                   </label>
                   <input
-                      type="text"
-                      name="testDate"
-                      value={values.tags}
-                      onChange={handleInputChange}
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                  />
+                    type="text"
+                    name="type"
+                    value={values.type}
+                    onChange={handleInputChange}
+                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                  ></input>
                 </div>
               </div>
-              <div className="w-full lg:w-6/12 px-4">
-                <br></br>
-                <div className="relative w-full mb-3">
-                  <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                  >
-                    Test result
-                  </label>
-                  <input
-                      type="text"
-                      name="eventDate"
-                      value={values.result}
-                      onChange={handleInputChange}
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                  />
-                </div>
-              </div>
-
+            </div>
               <div className="w-full lg:w-6/12 px-4">
                 <br></br>
                 <div className="relative w-full mb-3">
@@ -155,7 +131,7 @@ const AddTest = ({ ...props }) => {
                   </label>
                   <input
                     type="text"
-                    name="eventDate"
+                    name="description"
                     value={values.description}
                     onChange={handleInputChange}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
@@ -175,7 +151,7 @@ const AddTest = ({ ...props }) => {
                   </label>
                   <input
                       type="date"
-                      name="eventDate"
+                      name="startDate"
                       value={values.startDate}
                       onChange={handleInputChange}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
@@ -193,7 +169,7 @@ const AddTest = ({ ...props }) => {
                   </label>
                   <input
                       type="date"
-                      name="eventDate"
+                      name="endDate"
                       value={values.endDate}
                       onChange={handleInputChange}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
@@ -203,25 +179,7 @@ const AddTest = ({ ...props }) => {
 
             </div>
 
-            <div className="flex flex-wrap">
-              <div className="w-full lg:w-12/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Test type
-                  </label>
-                  <textarea
-                    type="text"
-                    name="description"
-                    value={values.type}
-                    onChange={handleInputChange}
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
+           
             <div className="text-center mt-6">
               <button
                 type="submit"
@@ -243,7 +201,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionToProps = {
   CreateTest: CreateTest,
-  UpdateTest: UpdateTest,
+  updateTest: UpdateTest,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(AddTest);

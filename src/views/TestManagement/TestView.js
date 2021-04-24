@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
-import { AllTests, DeleteTest, UpdateTest, CreateTest } from "../../Redux/actions/CandidateTest/CandidateAction";
-import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
+import { AllTests, DeleteTest,} from "../../Redux/actions/CandidateTest/CandidateAction";
 import AddTest from "./AddTest";
 import ButterToast, { Cinnamon } from "butter-toast";
 
@@ -60,9 +59,6 @@ const ViewTest = (props) => {
                     Description
                     </th>
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                    Result
-                    </th>
-                    <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                     Start Date
                     </th>
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
@@ -89,19 +85,12 @@ const ViewTest = (props) => {
                           {test.description}{" "}
                           </th>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          {test.result}{" "}
-                          </th>
-                          
-                          <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                           {test.startDate.substring(0, 10)}{" "}
                           </th>
                           
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                           {test.endDate.substring(0, 10)}{" "}
                           </th>
-                          
-                          
-
                           
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                             <button

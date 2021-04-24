@@ -79,9 +79,6 @@ class QuizSummary extends Component {
                     <section>
                         <ul>
                             <li>
-                                <Link to ="/play/quiz">Play Again</Link>
-                            </li>
-                            <li>
                                 <Link to ="/">Back to Home</Link>
                             </li>
                         </ul>
@@ -104,12 +101,14 @@ class QuizSummary extends Component {
             );
         }
         return (
-            <Fragment>
+            //  <div style={{ textAlign: 'center' }}>
+          <Fragment class={{ textAlign: 'center' }}>
                 <Helmet><title>Quiz App - Summary</title></Helmet>
                 <div className="quiz-summary">
                     {stats}
                 </div>
             </Fragment>
+           //</div>
         );
     }
 }

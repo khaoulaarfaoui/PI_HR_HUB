@@ -16,6 +16,7 @@ import Auth from "layouts/Auth.js";
 import Index from "views/Index";
 import Event3D from "./views/EventManagement/Event3D";
 import TestLibrary from "./views/TestManagement/TestLibrary";
+import allTests from "./views/TestManagement/App";
 import Play from "./views/TestManagement/Play";
 import QuizSummary from "./views/TestManagement/QuizSummary";
 import BoardUser from "./views/candidate/BoardUser";
@@ -73,6 +74,7 @@ const App = () => {
         <Route path="/candidateadd" component={RegisterCandidate} />
         <Route path="/auth" component={Auth} />
         <Route path="/auth" component={Auth} />
+        
         {/* add routes without layouts */}
 
         <Route path="/user" component={BoardUser} />
@@ -80,12 +82,13 @@ const App = () => {
         <Route path="/event3D" component={Event3D} />
         <Route path ="/TestManagement/TestLibrary" component={TestLibrary} />
         <Route path="/play/quiz" exact component={Play} />
+        <Route path="/play/quizzTable" exact component={allTests} />
         <Route path="/play/quizSummary" exact component={QuizSummary} />
           path="/candidate"
           render={() =>
             currentUser ? <Redirect to="/admin" /> : <Redirect to="/auth" />
           }
-        />
+        
         <Route
           path="/admin"
           render={() =>

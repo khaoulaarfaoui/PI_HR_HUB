@@ -334,6 +334,12 @@ class Play extends Component {
         }, 1000);
     }
 
+
+
+
+
+
+    
     render () {
         const { 
             currentQuestion, 
@@ -344,6 +350,8 @@ class Play extends Component {
             time 
         } = this.state;
 
+
+        
         return (
             <Fragment>
                 <Helmet><title>Quiz Page</title></Helmet>
@@ -386,14 +394,10 @@ class Play extends Component {
                         <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionC}</p>
                         <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionD}</p>
                     </div>
+                  
 
                     <div className="button-container">
-                        <button 
-                            className={classnames('', {'disable': this.state.previousButtonDisabled})}
-                            id="previous-button" 
-                            onClick={this.handleButtonClick}>
-                            Previous
-                        </button>
+                        
                         <button 
                             className={classnames('', {'disable': this.state.nextButtonDisabled})}
                             id="next-button" 
@@ -405,6 +409,9 @@ class Play extends Component {
                             </button>
                     </div>
                 </div>
+
+                   
+                     
             </Fragment>
         );
     }
