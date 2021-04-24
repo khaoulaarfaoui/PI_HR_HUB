@@ -12,7 +12,6 @@ const candidateSchema = new Schema({
   profilePhoto: String,
   birthday: Date,
   phoneNumber: String,
-  /*country*/
   location: String,
   /*region*/
   region: String,

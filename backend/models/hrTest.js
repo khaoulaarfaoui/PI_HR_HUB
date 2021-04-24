@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
+const QuestionSchema = new Schema({
+    titre:String ,
+    response:String 
+})
 const hrTestSchema = new Schema({
   title: String,
   description: String,
@@ -16,6 +19,7 @@ const hrTestSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "HR",
   },
+  questions:[QuestionSchema]
 });
 
 module.exports = mongoose.model("hrTest", hrTestSchema, "hrTest");

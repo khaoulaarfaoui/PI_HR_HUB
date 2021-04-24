@@ -107,11 +107,11 @@ export default function SidebarCandidate() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/tables") !== -1
+                    (window.location.href.indexOf("/admin/tasks") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/admin/tables"
+                  to="/admin/tasks"
                 >
                   <i
                     className={
@@ -125,15 +125,16 @@ export default function SidebarCandidate() {
                 </Link>
               </li>
 
+
               <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/maps") !== -1
+                    (window.location.href.indexOf("/admin/jobs") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/admin/maps"
+                  to="/admin/jobs"
                 >
                   <i
                     className={
