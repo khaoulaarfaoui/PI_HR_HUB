@@ -13,9 +13,44 @@ class AllJobs extends Component {
     console.log(this.props);
     this.state = {
       search: "",
+      offset: 0,
+      tableData: [],
+      orgtableData: [],
+      perPage: 3,
+      currentPage: 0,
     };
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
+  }
+  handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * this.state.perPage;
 
+    this.setState(
+      {
+        currentPage: selectedPage,
+        offset: offset,
+      },
+      () => {
+        this.loadMoreData();
+      }
+    );
+  };
+  loadMoreData() {
+    const data = this.props.jobs;
+
+    const slice = data.slice(
+      this.state.offset,
+      this.state.offset + this.state.perPage
+    );
+    this.setState({
+      pageCount: Math.ceil(data.length / this.state.perPage),
+      tableData: slice,
+    });
+  }
   onChange = (e) => {
     this.setState({ search: e.target.value });
   };
@@ -51,29 +86,37 @@ class AllJobs extends Component {
               </button>
             </div>
           </div>
-          {this.props.jobs.map((job) => {
-            const { search } = this.state;
+          {
+            ((this.slice = this.props.jobs.slice(
+              this.state.offset,
+              this.state.offset + this.state.perPage
+            )),
+            this.slice.map((job) => {
+              const { search } = this.state;
 
-            if (
-              search !== "" &&
-              job.title.toLowerCase().indexOf(search.toLocaleLowerCase()) === -1
-            ) {
-              return null;
-            }
-            return (
-              <>
-                <JobCandidate key={job._id} job={job} />
-              </>
-            );
-          })}
+              if (
+                search !== "" &&
+                job.title.toLowerCase().indexOf(search.toLocaleLowerCase()) ===
+                  -1
+              ) {
+                return null;
+              }
+              return (
+                <>
+                  <JobCandidate key={job._id} job={job} />
+                </>
+              );
+            }))
+          }
           <ReactPaginate
             previousLabel={"prev"}
             nextLabel={"next"}
             breakLabel={"..."}
-            pageCount={5}
+            pageCount={this.props.jobs.length / 2}
             pageRangeDisplayed={5}
             containerClassName={"pagination"}
             activeClassName={"active"}
+            onPageChange={this.handlePageClick}
           />
         </div>
       </>

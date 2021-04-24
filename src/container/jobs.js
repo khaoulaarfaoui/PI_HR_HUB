@@ -18,7 +18,13 @@ class Jobs extends Component {
     console.log(this.props);
     this.state = {
       search: "",
+      offset: 0,
+      tableData: [],
+      orgtableData: [],
+      perPage: 3,
+      currentPage: 0,
     };
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
   onChange = (e) => {
     this.setState({ search: e.target.value });
@@ -33,6 +39,32 @@ class Jobs extends Component {
       state: {
         job: job,
       },
+    });
+  }
+  handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * this.state.perPage;
+
+    this.setState(
+      {
+        currentPage: selectedPage,
+        offset: offset,
+      },
+      () => {
+        this.loadMoreData();
+      }
+    );
+  };
+  loadMoreData() {
+    const data = this.props.jobs;
+
+    const slice = data.slice(
+      this.state.offset,
+      this.state.offset + this.state.perPage
+    );
+    this.setState({
+      pageCount: Math.ceil(data.length / this.state.perPage),
+      tableData: slice,
     });
   }
 
@@ -81,39 +113,46 @@ class Jobs extends Component {
               </div>
             </form>
             <div className="flex flex-wrap">
-              {this.props.jobs.map((job) => {
-                const { search } = this.state;
+              {
+                ((this.slice = this.props.jobs.slice(
+                  this.state.offset,
+                  this.state.offset + this.state.perPage
+                )),
+                this.slice.map((job) => {
+                  const { search } = this.state;
 
-                if (
-                  search !== "" &&
-                  job.title
-                    .toLowerCase()
-                    .indexOf(search.toLocaleLowerCase()) === -1
-                ) {
-                  return null;
-                }
+                  if (
+                    search !== "" &&
+                    job.title
+                      .toLowerCase()
+                      .indexOf(search.toLocaleLowerCase()) === -1
+                  ) {
+                    return null;
+                  }
 
-                return (
-                  <>
-                    <Job
-                      key={job._id}
-                      job={job}
-                      onEdit={this.handleEdit.bind(this)}
-                      onDelete={this.props.onDelete}
-                    />
-                  </>
-                );
-              })}
+                  return (
+                    <>
+                      <Job
+                        key={job._id}
+                        job={job}
+                        onEdit={this.handleEdit.bind(this)}
+                        onDelete={this.props.onDelete}
+                      />
+                    </>
+                  );
+                }))
+              }
               <div></div>{" "}
             </div>
             <ReactPaginate
               previousLabel={"prev"}
               nextLabel={"next"}
               breakLabel={"..."}
-              pageCount={5}
+              pageCount={this.props.jobs.length / 2}
               pageRangeDisplayed={5}
               containerClassName={"pagination"}
               activeClassName={"active"}
+              onPageChange={this.handlePageClick}
             />
           </div>
         </>

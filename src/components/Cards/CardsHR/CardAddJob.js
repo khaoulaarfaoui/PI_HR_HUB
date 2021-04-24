@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { createJob } from "Redux/actions/job.actions";
 import { connect } from "react-redux";
+
 class CardAddJob extends Component {
   constructor(props) {
     super(props);
@@ -97,6 +98,7 @@ class CardAddJob extends Component {
                     />
                   </div>
                 </div>
+
                 <div className="w-full lg:w-6/12 px-4">
                   <div className="relative w-full mb-3">
                     <label

@@ -3,6 +3,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { submitJob } from "Redux/actions/submittedJobs/submittedJob.action";
 import { PieChart, Tooltip, Pie } from "recharts";
+import axios from "axios";
 
 import Chart from "./Chart";
 import { history } from "helpers/history";
@@ -80,9 +81,41 @@ class JobDetails extends Component {
       "Applied Job" + this.state.title,
       JSON.stringify(this.state.title)
     );
+    const name = localStorage.getItem("candidate");
+    var candidateName = JSON.parse(name).data.fullName;
+    const subscriberId = "foo1";
+    let endpoint =
+      "	https://api.ravenhub.io/company/pfxz6Wrhd9/subscribers/" +
+      subscriberId +
+      "/events/lbi7wDLzYn";
+
+    axios.post(
+      endpoint,
+
+      {
+        headers: { "Content-type": "application/json" },
+        candidate: candidateName,
+      }
+    );
   }
 
   componentWillMount() {
+    var str = window.location.pathname;
+
+    let id = str.slice(19);
+    console.log(id);
+
+    function scoree({ score }) {
+      axios
+        .get(
+          "http://localhost:8082/job//match/" + id + "/607c5d570f3bae21e06f5782"
+        )
+        .then((response) => {
+          var score = response.data;
+          console.log(score);
+        });
+    }
+    console.log(scoree);
     const props = this.props;
     if (props.location && props.location.state) {
       const job = props.location.state.job;
@@ -99,8 +132,8 @@ class JobDetails extends Component {
   render() {
     const job = this.props.job;
     const data = [
-      { name: "Accepted", value: 30, fill: "#90cdf4" },
-      { name: "Not accepted", value: 70, fill: "#3182ce" },
+      { name: "Accepted", value: 0.4, fill: "#90cdf4" },
+      { name: "Not accepted", value: 0.6, fill: "#3182ce" },
     ];
     let disabled = this.state.disable;
 

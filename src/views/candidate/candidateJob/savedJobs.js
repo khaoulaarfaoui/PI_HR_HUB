@@ -45,6 +45,7 @@ const SavedJobs = ({ array }) => {
                   backgroundImage: `url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)`,
                 }}
               ></div>
+
               <ul class="details">
                 <p>Salary : {job.salary} DT</p>
                 <li class="date">Aug. 24, 2015</li>

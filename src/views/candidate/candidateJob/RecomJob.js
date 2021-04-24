@@ -1,5 +1,6 @@
 import { history } from "helpers/history";
 import React, { useState } from "react";
+import NotificationCenter from "react-notification-center-component";
 
 const RecomJOb = ({ job }) => {
   return (

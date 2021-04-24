@@ -1,6 +1,7 @@
 import React from "react";
 //import { Link } from "react-router-dom";
 import DarkMode from "../../components/Theme/Dark";
+import NotificationCenter from "react-notification-center-component";
 
 export default function CandidateNavbar(props) {
   return (
@@ -34,6 +35,13 @@ export default function CandidateNavbar(props) {
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
             <DarkMode />
           </ul>
+        </div>
+        <div>
+          <NotificationCenter
+            className="font-semibold"
+            appId="pfxz6Wrhd9"
+            subscriberId="foo1"
+          />
         </div>
       </nav>
       {/* End Navbar */}

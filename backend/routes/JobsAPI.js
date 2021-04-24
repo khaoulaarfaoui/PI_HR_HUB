@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const Jobs = require("../models/jobs");
 const hr = require("../models/hr");
+var stringSimilarity = require("string-similarity");
 
 const candidate = require("../models/candidat");
 const ContentBasedRecommender = require("content-based-recommender");
@@ -247,7 +248,31 @@ router.get("/similarJobs/:id", async (req, res) => {
     similar.push(Sjob);
   }
   console.log("Get  Similar jobs");
+  var similarity = stringSimilarity.compareTwoStrings("heal", "healed");
+  console.log("similarit", similarity);
   res.send(similar);
+});
+
+router.get("/match/:id/:idc", async (req, res) => {
+  let id = req.params.id;
+
+  let idc = req.params.idc;
+
+  const job = await Jobs.findById(id, { _id: 1, requirement: 1 });
+  const cand = await candidate.findById(idc).select("skills.value");
+  console.log(job.requirement);
+  let skill = cand.skills;
+  var arr = skill.map(function (obj) {
+    return obj.value;
+  });
+  console.log(arr.toString());
+
+  var similarity = stringSimilarity.compareTwoStrings(
+    job.requirement,
+    arr.toString()
+  );
+  console.log("similarit", similarity);
+  res.json(similarity);
 });
 
 router.get("/rec/:id", async (req, res) => {
