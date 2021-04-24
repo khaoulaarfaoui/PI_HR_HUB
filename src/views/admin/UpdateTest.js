@@ -131,7 +131,7 @@ export default function HR() {
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-gray-500 text-center mb-3 font-bold">
-                  <small>Add Test</small>
+                  <small>Edit Test</small>
                 </div>
                 <Form onSubmit={handleRegister} ref={form}>
                   {!successful && (
@@ -166,7 +166,7 @@ export default function HR() {
                           value={title}
                           onChange={onChangeTitle}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="Full Name"
+                          placeholder="title"
                         />
                       </div>
 
@@ -182,7 +182,7 @@ export default function HR() {
                           name="description"
                           onChange={onChangeDescription}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="profilePhoto"
+                          placeholder="description"
                         />
                       </div>
                       <div className="relative w-full mb-3">
@@ -196,7 +196,7 @@ export default function HR() {
                           type="text"
                           onChange={onChangeType}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="birthday"
+                          placeholder="type"
                         />
                       </div>
 
@@ -214,7 +214,7 @@ export default function HR() {
                           value={result}
                           onChange={onChangeResult}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="phoneNumber"
+                          placeholder="result"
                         />
                       </div>
 
@@ -230,7 +230,7 @@ export default function HR() {
                           value={companyName}
                           onChange={onChangeCompanyName}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="location"
+                          placeholder="companyName"
                         />
                       </div>
 
@@ -246,7 +246,7 @@ export default function HR() {
                           value={color}
                           onChange={onChangeColor}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="company"
+                          placeholder="color"
                         />
                       </div>
 
@@ -261,7 +261,7 @@ export default function HR() {
                           type="date"
                           onChange={onChangeStartDate}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="companyLogo"
+                          placeholder="start Date"
                         />
                       </div>
 
@@ -276,7 +276,7 @@ export default function HR() {
                           type="date"
                           onChange={onChangeEndDate}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="companyPhotos"
+                          placeholder="end Date"
                         />
                       </div>
 
@@ -302,7 +302,7 @@ export default function HR() {
 
                       <div className="text-center mt-6">
                         <button className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
-                          Create Account
+                         Edit Test
                         </button>
                       </div>
                     </div>

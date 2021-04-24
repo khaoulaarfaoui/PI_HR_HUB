@@ -5,6 +5,8 @@ const router = express.Router();
 const Role = require("../backend/models/Role");
 const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
+const response = require("./routes/Candidate/responseApi");
+
 const hr = require("./routes/HR/HRAPI");
 const hrTest = require("./routes/HR/HRTEST");
 const dbConfig = require("./config/DBconfig");
@@ -45,6 +47,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to hrbub application." });
 });
 app.use("/candidate", candidate);
+app.use("/response", response);
+
 app.use("/hr", hr);
 app.use("/hrTest", hrTest);
 db.mongoose

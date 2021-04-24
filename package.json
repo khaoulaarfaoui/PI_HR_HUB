@@ -51,6 +51,7 @@
     "react-spring": "^9.0.0",
     "react-three-fiber": "^5.3.22",
     "react-validation": "^3.0.7",
+    "react-webcam": "^5.2.3",
     "react-widgets": "^4.6.1",
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",

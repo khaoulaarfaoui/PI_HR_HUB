@@ -254,3 +254,56 @@ export const deleteQuestion = (id) => (dispatch) => {
     }
   );
 };
+
+
+export const AddtestResponse = (
+  response,
+  candidat ,
+  hrTest
+) => (dispatch) => {
+  return HrTestService.testResponse(
+  response,
+  candidat ,
+  hrTest
+  ).then(
+    (response) => {
+
+       console.log("response from actions auth ",response)
+       localStorage.setItem("data",JSON.stringify(response.data))
+      dispatch({
+        type: REGISTER_SUCCESS_HR_TEST,
+        payload: response.data,
+
+      });
+
+      dispatch({
+        type: SET_MESSAGE_HR_TEST,
+        payload: response.data,
+      });
+
+      //history.push("/admin");
+
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: REGISTER_FAIL_HR_TEST,
+      });
+
+      dispatch({
+        type: SET_MESSAGE_HR_TEST,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};

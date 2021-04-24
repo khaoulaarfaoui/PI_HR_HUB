@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8082/hrTest/";
+const API_URL1 = "http://localhost:8082/response/";
 
 const addHrTest = (
   title,
@@ -154,6 +155,32 @@ const deleteHrTestQuestion = (id) => {
   });
 };
 
+const testResponse = (
+  response,
+  candidat ,
+  hrTest
+  
+) => {
+  console.log("object ", {
+    response :response,
+    candidat : candidat,
+    hrTest : hrTest
+  });
+  return axios
+    .post(API_URL1 + "addResponseTest", {
+      response :response,
+      candidat : candidat,
+      hrTest : hrTest
+    })
+    .then((response) => {
+
+       console.log("response : ",response)
+      if (response.data) {
+        ///localStorage.setItem("HrTest", JSON.stringify(response.data));
+      }
+    });
+};
+
 
 export default {
   addHrTest,
@@ -163,5 +190,6 @@ export default {
   updateHRQuestion,
   findallHrTestQuestion,
   deleteHrTestQuestion,
+  testResponse,
 
 };

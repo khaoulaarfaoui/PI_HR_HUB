@@ -14,6 +14,10 @@ import Tests from "views/candidate/Tests.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
+import Question from "views/candidate/Question";
+import webcam from "views/candidate/webcam";
+import WebcamCapture from "views/candidate/WebcamCapture";
+import WebcamStreamCapture from "views/candidate/WebcamStreamCapture";
 
 
 export default function Candidate() {
@@ -30,7 +34,13 @@ export default function Candidate() {
             <Route path="/candidate/tests" exact component={Tests} />
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
+            <Route path="/candidate/question" exact component={Question} />{" "}
+            <Route path="/candidate/webcam" exact component={webcam} />{" "}
+            <Route path="/candidate/webcamCapture" exact component={WebcamCapture} />{" "}
+            <Route path="/candidate/webcamStreamCapture" exact component={WebcamStreamCapture} />{" "}
             <Redirect from="/candidate" to="/candidate/dashboard" />
+            
+
             
           </Switch>
           <FooterAdmin />

@@ -1,11 +1,15 @@
 import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import { findallHrTest, deleteTestHr } from "../../Redux/actions/hrtest/hrtest";
+import { findallHrTestQuestion,deleteQuestion } from "../../Redux/actions/hrtest/hrtest";
 import { forwardRef } from "react";
 
-const Tests = (props) => {
+// components
+
+import TableDropdownQuestion from "components/Dropdowns/HRDropDowns/TableDropdownQuestion";
+
+const Question = (props) => {
   useEffect(() => {
-    props.findallHrTest();
+    props.findallHrTestQuestion(localStorage.getItem("idTest"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const color = "light";
@@ -20,7 +24,6 @@ const Tests = (props) => {
               (color === "light" ? "bg-white" : "bg-blue-900 text-white")
             }
           >
-            {console.log("props : ", props)}
             <div className="rounded-t mb-0 px-4 py-3 border-0">
               <div className="flex flex-wrap items-center">
                 <div className="relative w-full px-4 max-w-full flex-grow flex-1">
@@ -30,17 +33,22 @@ const Tests = (props) => {
                       (color === "light" ? "text-gray-800" : "text-white")
                     }
                   >
-                    <button
-                      className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
+                    <Button
+                              color="danger"
+                              rounded
+                              className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
 
-                        window.location.href = "/admin/AddTest";
-                      }}
-                    >
-                      Add Test
-                    </button>{" "}
+                                // window.location.href="/candidate/webcam"
+                               // window.location.href= "/candidate/webcamCapture"
+                               window.location.href="/candidate/webcamStreamCapture"
+                              }}
+                            >
+                              Repondre video
+                              </Button>{" "}{" "}
+                          
                   </h3>
                 </div>
               </div>
@@ -58,7 +66,7 @@ const Tests = (props) => {
                           : "bg-blue-800 text-blue-300 border-blue-700")
                       }
                     >
-                      Test
+                      Question
                     </th>
                     <th
                       className={
@@ -68,7 +76,7 @@ const Tests = (props) => {
                           : "bg-blue-800 text-blue-300 border-blue-700")
                       }
                     >
-                      Name
+                      Titre
                     </th>
                     <th
                       className={
@@ -78,17 +86,7 @@ const Tests = (props) => {
                           : "bg-blue-800 text-blue-300 border-blue-700")
                       }
                     >
-                      Description
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-gray-100 text-gray-600 border-gray-200"
-                          : "bg-blue-800 text-blue-300 border-blue-700")
-                      }
-                    >
-                      Type
+                      Reponse
                     </th>
 
                     <th
@@ -98,17 +96,8 @@ const Tests = (props) => {
                           ? "bg-gray-100 text-gray-600 border-gray-200"
                           : "bg-blue-800 text-blue-300 border-blue-700")
                       }
-                    >
-                      Complexite
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-gray-100 text-gray-600 border-gray-200"
-                          : "bg-blue-800 text-blue-300 border-blue-700")
-                      }
                     ></th>
+
                     <th
                       className={
                         "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
@@ -122,7 +111,11 @@ const Tests = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {props.TestList.test.list.map((test, index) => {
+                  {console.log(
+                    "propssss TestQuestionList ",
+                    props.TestQuestionList
+                  )}
+                  {props.TestQuestionList.test.list.map((test, index) => {
                     return (
                       <Fragment key={index}>
                         <tr>
@@ -137,48 +130,15 @@ const Tests = (props) => {
                               }
                             ></span>
                           </th>
-                          <th>
-                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                              {test.title}{" "}
-                            </td>
-                          </th>
-
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            {test.description}{" "}
+                            {test.titre}
                           </td>
-
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            {test.type}{" "}
-                          </td>
-
-                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            <div className="flex items-center">
-                              <span className="mr-2">60%</span>
-                              <div className="relative w-full">
-                                <div className="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                                  <div
-                                    style={{ width: "60%" }}
-                                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
-                                  ></div>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
-                            <a
-                              href="/admin/question"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                localStorage.setItem("idTest", test._id);
-                                window.location.href = "/admin/question";
-                              }}
-                            >
-                              Questions
-                            </a>
+                            {test.response}
                           </td>
 
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
-                            <Button
+                          <Button
                               color="danger"
                               rounded
                               className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -186,32 +146,17 @@ const Tests = (props) => {
                               onClick={(e) => {
                                 e.preventDefault();
 
-                                console.log(props);
-                                props.deleteTestHr(test._id);
-                                window.location.href = "/admin/tests";
+                                // window.location.href="/candidate/webcam"
+                               // window.location.href= "/candidate/webcamCapture"
+                               window.location.href="/candidate/webcamStreamCapture"
                               }}
                             >
-                              Delete
-                            </Button>{" "}
-                           
-
-                            <Button color="warning" rounded
-                           
-                              className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                              type="button"
-                              onClick={(e) => {
-                                e.preventDefault();
-
-                                localStorage.setItem("idTest", test._id);
-
-                                window.location.href = "/admin/UpdateTest";
-                              }}
-                            >
-                              Edit
-                           
-                            </Button>{" "}
-
+                              Repondre
+                              </Button>{" "}{" "}
                           </td>
+
+
+                          
                         </tr>
                       </Fragment>
                     );
@@ -219,23 +164,23 @@ const Tests = (props) => {
                 </tbody>
               </table>
             </div>
-          </div>
+          </div>{" "}
         </div>
       </div>
     </>
   );
 };
-
 const mapStateToProps = (state) => ({
-  TestList: state.testReducers,
+  TestQuestionList: state.testReducers,
 });
 
 const mapActionToProps = {
-  findallHrTest: findallHrTest,
-  deleteTestHr: deleteTestHr,
+  findallHrTestQuestion: findallHrTestQuestion,
+  deleteQuestion:deleteQuestion
 };
 
-export default connect(mapStateToProps, mapActionToProps)(Tests);
+export default connect(mapStateToProps, mapActionToProps)(Question);
+
 
 export const RoundedButtonPage = () => (
   <div className="space-x-1 mb-4 md:space-x-6 space-y-3">
