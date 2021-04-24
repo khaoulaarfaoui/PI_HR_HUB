@@ -197,7 +197,7 @@ const AddEvent = ({ ...props }) => {
 };
 
 const mapStateToProps = (state) => ({
-  EventsList: state.eventsReducer.list,
+  EventsList: state.eventsReducer.list, 
 });
 
 const mapActionToProps = {

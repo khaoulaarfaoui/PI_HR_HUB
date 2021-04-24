@@ -72,7 +72,7 @@ const ViewEvent = (props) => {
                             {event.eventName}{" "}
                           </th>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                            {event.eventDate}{" "}
+                            {event.eventDate.substring(0, 10)}{" "}
                           </th>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                             {event.description}{" "}
