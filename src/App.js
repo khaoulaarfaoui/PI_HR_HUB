@@ -143,6 +143,7 @@ const App = () => {
           <Route path="/resume" component={Templates} />
           <Route path="/basic" component={Basic} />
           <Route path="/user" component={BoardUser} />
+          <Route path="/chat" component={Chat} />
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/linkedin" component={Linkedin} />
           <Route path="/event3D" component={Event3D} />

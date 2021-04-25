@@ -97,6 +97,7 @@ import JobsDispaly from "views/admin/jobsDisplay";
 import CardEditJob from "components/Cards/CardsHR/CardEditJob";
 import TestJob from "components/Cards/CardsHR/testjob";
 import Events from "views/EventManagement/EventsView";
+import Teams from "views/TeamManagement/TeamView";
 export default function Admin() {
   return (
     <>

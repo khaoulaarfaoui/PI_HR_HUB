@@ -10,6 +10,8 @@ import eventsReducer from "../reducers/eventReducers/EventReducer";
 import jobs from "../reducers/jobReducers/job.reducer";
 import teamsReducer from "../reducers/teamReducers/TeamReducer";
 import candidate from "../reducers/candidateReducers/candidate";
+import testReducers from "../reducers/testReducers";
+import { findallHrTest } from "../actions/hrtest/hrtest";
 
 const middleware = [thunk];
 

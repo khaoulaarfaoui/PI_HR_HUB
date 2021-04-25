@@ -153,7 +153,7 @@ const EventView = (props) => {
                 {event.eventName}{" "}
               </h3>
               <p className="text-gray-600 text-lg leading-relaxed mt-4 mb-4">
-                {event.eventDate}{" "}
+                {event.eventDate.substring(0, 10)}{" "}
               </p>
               <p className="text-gray-600 text-lg leading-relaxed mt-4 mb-4">
                 {event.description}{" "}
