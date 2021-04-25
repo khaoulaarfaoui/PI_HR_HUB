@@ -42,16 +42,41 @@ export default function CandidateRegister() {
     { value: "Finance", label: "Finance" },
     { value: "English", label: "English" },
   ];
+  /* FORM VALIDATORS */
+  const required = (value) => {
+    if (!value) {
+      return (
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <strong className="font-bold">REQUIRED!</strong>
+          <span className="block sm:inline">This field is required.</span>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg
+              className="fill-current h-6 w-6 text-red-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+            </svg>
+          </span>
+        </div>
+      );
+    }
+  };
 
   const history = useHistory();
   const checkBtn = useRef();
-  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   const [fullName, setFullName] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
   const [birthday, setBirthday] = useState("");
   const [location, setLocation] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
+  const [title, setTitle] = useState("");
   const [education, setEducation] = useState();
   const [skills, setSkills] = useState("");
   const [region, setRegion] = useState("");
@@ -63,6 +88,11 @@ export default function CandidateRegister() {
   const [file, setFile] = useState("");
   const [show, toggleShow] = useState(false);
   const [displayImage, setDisplayImage] = useState(false);
+
+  const onChangeTitle = (e) => {
+    const Title = e.target.value;
+    setTitle(Title);
+  };
 
   const onChangeRegion = (e) => {
     const Region = e;
@@ -100,10 +130,7 @@ export default function CandidateRegister() {
     const FullName = e.target.value;
     setFullName(FullName);
   };
-  const onChangeUser = (e) => {
-    const user = e.target.value;
-    setUser(user);
-  };
+
   const onChangeProfilePhoto = (e) => {
     const profilePhoto = e.target.files[0];
     const File = URL.createObjectURL(e.target.files[0]);
@@ -135,13 +162,16 @@ export default function CandidateRegister() {
     form.append("fullName", fullName);
     form.append("profilePhoto", profilePhoto);
     form.append("birthday", birthday);
-    //form.append("phoneNumber", phoneNumber);
+    form.append("phoneNumber", phoneNumber);
+    console.log("phone number react", phoneNumber);
     form.append("location", location);
     form.append("region", region);
-    // form.append("education", education);
+    form.append("education", education);
+    console.log("education react", education);
     form.append("background", background);
     form.append("skills", skills);
     form.append("aboutMe", aboutMe);
+    form.append("title", title);
     console.log(form);
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.register(form).then(
@@ -162,6 +192,7 @@ export default function CandidateRegister() {
         }
       );
       history.push("/candidate");
+      window.location.reload();
     }
   };
   return (
@@ -215,9 +246,7 @@ export default function CandidateRegister() {
                               name="user"
                               disabled={true}
                               value={user}
-                              onChange={onChangeUser}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                              placeholder="Full Name"
                             />
                           </div>
                           <div className="relative w-full mb-3">
@@ -232,6 +261,7 @@ export default function CandidateRegister() {
                               name="fullName"
                               value={fullName}
                               onChange={onChangefullName}
+                              validations={[required]}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                               placeholder="Full Name"
                             />
@@ -247,6 +277,7 @@ export default function CandidateRegister() {
                               type="date"
                               value={birthday}
                               onChange={onChangeBirthday}
+                              validations={[required]}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                               placeholder="birthday"
                             />
@@ -363,6 +394,23 @@ export default function CandidateRegister() {
                               className="block uppercase text-gray-700 text-xs font-bold mb-2"
                               htmlFor="grid-password"
                             >
+                              Title
+                            </label>
+                            <Input
+                              type="text"
+                              name="title"
+                              value={title}
+                              onChange={onChangeTitle}
+                              validations={[required]}
+                              className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                              placeholder="Title"
+                            />
+                          </div>
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
                               About Me
                             </label>
                             <textarea
@@ -370,6 +418,7 @@ export default function CandidateRegister() {
                               name="aboutMe"
                               value={aboutMe}
                               onChange={onChangeAboutme}
+                              validations={[required]}
                               className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                               placeholder="About Me"
                             />

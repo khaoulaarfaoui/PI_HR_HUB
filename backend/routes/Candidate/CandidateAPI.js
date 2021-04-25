@@ -68,6 +68,7 @@ router.post(
         tests: req.body.tests,
         teams: req.body.teams,
       });
+      console.log("herreeeeeeeeee", req.body.experience);
       candidate.save();
       console.log("aaaaaaaaaaaaaaaaaa", Candidate);
       const user = await User.findById({ _id: candidate.user });
@@ -126,6 +127,15 @@ router.get("/fetch/:id", function (req, res) {
       const user = await User.findById({ _id: Candidate.user });
       const email = user.email;
       res.status(200).json({ Candidate: Candidate, Email: email });
+    }
+  });
+});
+router.get("/fetchtext/:text", function (req, res) {
+  Candidate.find({ skills: req.params.text }, async (err, Candidate) => {
+    if (!Candidate) {
+      res.status(404).send("No result found");
+    } else {
+      res.status(200).json({ Candidate: Candidate });
     }
   });
 });

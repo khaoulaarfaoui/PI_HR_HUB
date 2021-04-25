@@ -4,13 +4,12 @@ import { useSelector } from "react-redux";
 // components
 
 export default function CardProfile() {
-  const candidate = useSelector(
-    (state) => state.candidateReducer.candidate.state.candidate
-  );
+  const candidate = JSON.parse(localStorage.getItem("candidate"));
+  console.log(candidate);
 
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
+      <div className="mt-16 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
         <div className="px-6">
           <div className="flex flex-wrap justify-center">
             <div className="w-full px-4 flex justify-center">
@@ -19,28 +18,6 @@ export default function CardProfile() {
                 className="pt-4 w-32 h-32 p-1  mt-8 bg-white  rounded-full"
                 src={candidate.profilePhoto}
               />
-            </div>
-            <div className="w-full px-4 text-center mt-4">
-              <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                <div className="mr-4 p-3 text-center">
-                  <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                    22
-                  </span>
-                  <span className="text-sm text-gray-500">Friends</span>
-                </div>
-                <div className="mr-4 p-3 text-center">
-                  <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                    10
-                  </span>
-                  <span className="text-sm text-gray-500">Photos</span>
-                </div>
-                <div className="lg:mr-4 p-3 text-center">
-                  <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                    89
-                  </span>
-                  <span className="text-sm text-gray-500">Comments</span>
-                </div>
-              </div>
             </div>
           </div>
           <div className="text-center mt-12">
@@ -53,12 +30,15 @@ export default function CardProfile() {
             </div>
             <div className="mb-2 text-gray-700 mt-10">
               <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
-              Solution Manager - Creative Tim Officer
+              {candidate.title}
             </div>
             <div className="mb-2 text-gray-700">
               <i className="fas fa-university mr-2 text-lg text-gray-500"></i>
               {candidate.education}
             </div>
+            <span className="mb-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-700 bg-blue-300 uppercase last:mr-0 mr-1">
+              {candidate.skills}
+            </span>
           </div>
         </div>
       </div>

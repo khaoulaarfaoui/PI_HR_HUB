@@ -7,22 +7,24 @@ const Role = require("../backend/models/Role");
 const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
 const hr = require("./routes/HR/HRAPI");
+const hrTest = require("./routes/HR/HRTEST");
+const response = require("./routes/Candidate/responseApi");
 
 const dbConfig = require("./config/DBconfig");
 const cv = require("./cv/app");
 const multer = require("multer");
 var path = require("path");
 const job = require("./routes/JobsAPI");
-var debug = require("debug")("server:server");
 var http = require("http");
-var socket = require("socket.io");
+var debug = require("debug")("server:server");
 var connectIo = require("./chatbotService");
+var socket = require("socket.io");
 const eventsmodel = require("./Controllers/events/eventController");
 const teams = require ("./Controllers/teams/teamsController");
 var dir = path.join(__dirname, "./public");
 var logger = require("morgan");
+var dir = path.join(__dirname, "./public");
 var cookieParser = require("cookie-parser");
-
 var callback = require("./routes/callback");
 const app = express();
 
@@ -37,7 +39,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
-
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
@@ -49,10 +50,8 @@ app.listen(PORT, () => {
 });
 require("../backend/routes/User/auth")(app);
 require("../backend/routes/User/userRoute")(app);
-
 require("./routes/User/auth")(app);
 require("./routes/User/userRoute")(app);
-// view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(logger("dev"));
@@ -60,23 +59,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use("/candidate", candidate);
 app.use("/hr", hr);
 app.use(express.static(path.join(__dirname, "../build")));
 app.use("/callback", callback);
-
 app.get("/linkedin", (req, res) => {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
-
+app.use("/response", response);
+app.use("/hrTest", hrTest);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
-
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
@@ -88,8 +85,6 @@ app.use(function (err, req, res, next) {
   console.log(err);
   res.render("error");
 });
-// simple route
-
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
@@ -104,7 +99,6 @@ db.mongoose
     process.exit();
   });
 
-
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -114,7 +108,6 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
   },
 });
-
 var upload = multer({ storage: storage });
 app.get("/", function (req, res) {
   res.send("Hello HR HUB");
@@ -128,7 +121,9 @@ app.post("/uploadfile", upload.single("file"), (req, res, next) => {
   }
   res.send(file);
 });
-
+app.get("/file/:image", function (req, res) {
+  res.sendFile(__dirname + "/uploads/" + req.params.image);
+});
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {

@@ -1,18 +1,18 @@
 import React, { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import AuthService from "../../service/HRservice/authservice";
+import { register, uploadFile } from "../../Redux/actions/hr/hr";
 
 export default function HR() {
   const form = useRef();
   const history = useHistory();
 
   const checkBtn = useRef();
-  const { user: currentUser } = useSelector((state) => state.userReducer.auth);
+  //const { user: currentUser } = useSelector((state) => state.userReducer.auth);
   const [fullName, setFullName] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -21,7 +21,7 @@ export default function HR() {
   const [companyLogo, setCompanyLogo] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [companyPhotos, setCompanyPhotos] = useState("");
-  const [user, setUser] = useState(currentUser.id);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")).id);
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -31,11 +31,12 @@ export default function HR() {
   };
   const onChangeUser = (e) => {
     const user = e.target.value;
-    setUser(user);
+    //setUser(user);
   };
   const onChangeProfilePhoto = (e) => {
-    const ProfilePhoto = e.target.value;
-    setProfilePhoto(ProfilePhoto);
+    const file = e.target.files[0]; // accesing file
+    console.log(file);
+    setProfilePhoto(file);
   };
   const onChangeBirthday = (e) => {
     const Birthday = e.target.value;
@@ -49,18 +50,23 @@ export default function HR() {
     const Location = e.target.value;
     setLocation(Location);
   };
-  const onChangeComapnyLogo = (e) => {
-    const companyLogo = e.target.value;
-    setCompanyLogo(companyLogo);
-  };
+
   const onChangeComapny = (e) => {
     const company = e.target.value;
     setCompany(company);
   };
-  const onChangeComapnyPhotos = (e) => {
-    const companyPhotos = e.target.value;
-    setCompanyPhotos(companyPhotos);
+
+  const dispatch = useDispatch();
+
+  const onChangeCampanyLogo = (e) => {
+    const file = e.target.files[0]; // accesing file
+    setCompanyLogo(file);
   };
+  const onChangeCompanyPhotos = (e) => {
+    const file = e.target.files[0]; // accesing file
+    setCompanyPhotos(file);
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -70,33 +76,45 @@ export default function HR() {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(
-        fullName,
-        profilePhoto,
-        birthday,
-        phoneNumber,
-        location,
-        company,
-        companyLogo,
-        companyPhotos,
-        user
+      dispatch(uploadFile(profilePhoto))
+        .then(() => {})
+        .catch(() => {
+          //setSuccessful(false);
+        });
+
+      dispatch(uploadFile(companyLogo))
+        .then(() => {})
+        .catch(() => {
+          //setSuccessful(false);
+        });
+
+      dispatch(uploadFile(companyPhotos))
+        .then(() => {})
+        .catch(() => {
+          //setSuccessful(false);
+        });
+      dispatch(
+        register(
+          fullName,
+          profilePhoto.name,
+          birthday,
+          phoneNumber,
+          location,
+          company,
+          companyLogo.name,
+          companyPhotos.name,
+          JSON.parse(localStorage.getItem("user")).id
+        )
       ).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
         },
         (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setMessage(resMessage);
           setSuccessful(false);
         }
       );
+
       history.push("/admin");
     }
   };
@@ -133,7 +151,7 @@ export default function HR() {
                           type="text"
                           name="user"
                           disabled={true}
-                          value={user}
+                          value={JSON.parse(localStorage.getItem("user")).id}
                           onChange={onChangeUser}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Full Name"
@@ -166,7 +184,6 @@ export default function HR() {
                         <Input
                           type="file"
                           name="profilephoto"
-                          value={profilePhoto}
                           onChange={onChangeProfilePhoto}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="profilePhoto"
@@ -198,6 +215,7 @@ export default function HR() {
                         <input
                           type="text"
                           name="username"
+                          defaultCountry="TN"
                           value={phoneNumber}
                           onChange={onChangephoneNumber}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
@@ -242,12 +260,11 @@ export default function HR() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          companyLogo
+                          CompanyLogo
                         </label>
                         <input
                           type="file"
-                          value={companyLogo}
-                          onChange={onChangeComapnyLogo}
+                          onChange={onChangeCampanyLogo}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="companyLogo"
                         />
@@ -262,8 +279,7 @@ export default function HR() {
                         </label>
                         <input
                           type="file"
-                          value={companyPhotos}
-                          onChange={onChangeComapnyPhotos}
+                          onChange={onChangeCompanyPhotos}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="companyPhotos"
                         />

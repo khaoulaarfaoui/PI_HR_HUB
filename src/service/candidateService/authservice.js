@@ -9,12 +9,15 @@ const register = (form) => {
     data: form,
     headers: { "Content-Type": "multipart/form-data" },
   }).then((response) => {
-    console.log("response", response);
-    if (response.data) {
+    console.log("responseone", response);
+    console.log("responsetwo", response.data);
+    console.log("responsethree", response.data.data);
+
+    if (response) {
       console.log("herrre from react");
       localStorage.setItem(
         "candidate",
-        JSON.stringify(response.data, response.email, response.username)
+        JSON.stringify(response.data.data, response.email, response.username)
       );
       localStorage.setItem("hr", JSON.stringify(null));
     }

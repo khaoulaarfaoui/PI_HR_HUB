@@ -1,6 +1,7 @@
 import {
   REGISTER_SUCCESS_CANDIDATE,
   REGISTER_FAIL_CANDIDATE,
+  UPDATE_CANDIDATE,
 } from "../../actions/candidate/types";
 import {
   REGISTER_SUCCESS,
@@ -32,6 +33,12 @@ export default function (state = initialState, action) {
         ...state,
         isLoggedIn: false,
       };
+    case UPDATE_CANDIDATE:
+      if (candidate.id === payload.id) {
+        return { ...state, payload };
+      } else {
+        return candidate;
+      }
 
     default:
       return state;
