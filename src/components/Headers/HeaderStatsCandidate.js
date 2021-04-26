@@ -8,8 +8,8 @@ export default function HeaderStatsCandidate() {
   return (
     <>
       {/* Header */}
-      <div className="relative bg-gray-300 md:pt-32 pb-32 pt-12">
-        <div className="px-4 md:px-10 mx-auto w-full">
+      <div className="relative bg-hr-hub pt-12 pb-2">
+        <div className="px-2 md:px-10 mx-auto w-full">
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap">

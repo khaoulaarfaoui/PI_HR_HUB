@@ -974,13 +974,27 @@ video {
   background-color: #2d3748;
   background-color: rgba(45, 55, 72, var(--bg-opacity));
 }
-
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgba(185, 28, 28, var(--tw-text-opacity));
+}
+.bg-blue-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(147, 197, 253, var(--tw-bg-opacity));
+}
+.text-blue-700 {
+  --tw-text-opacity: 1;
+  color: rgba(29, 78, 216, var(--tw-text-opacity));
+}
 .bg-gray-900 {
   --bg-opacity: 1;
   background-color: #1a202c;
   background-color: rgba(26, 32, 44, var(--bg-opacity));
 }
-
+.border-red-400 {
+  --tw-border-opacity: 1;
+  border-color: rgba(248, 113, 113, var(--tw-border-opacity));
+}
 .bg-red-200 {
   --bg-opacity: 1;
   background-color: #fed7d7;
@@ -1058,11 +1072,29 @@ video {
   background-color: #38b2ac;
   background-color: rgba(56, 178, 172, var(--bg-opacity));
 }
-
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
 .bg-blue-200 {
   --bg-opacity: 1;
   background-color: #bee3f8;
   background-color: rgba(190, 227, 248, var(--bg-opacity));
+}
+.from-yellow-400 {
+  --tw-gradient-from: #fbbf24;
+  --tw-gradient-stops: var(--tw-gradient-from),
+    var(--tw-gradient-to, rgba(251, 191, 36, 0));
+}
+.via-red-500 {
+  --tw-gradient-stops: var(--tw-gradient-from), #ef4444,
+    var(--tw-gradient-to, rgba(239, 68, 68, 0));
+}
+.to-pink-500 {
+  --tw-gradient-to: #ec4899;
+}
+.bg-hr-hub {
+  --bg-opacity: 1;
+  background-color: #3158a3;
 }
 
 .bg-blue-300 {
@@ -1407,6 +1439,9 @@ video {
 
 .h-20 {
   height: 5rem;
+}
+.h-32 {
+  height: 8rem;
 }
 
 .h-auto {
@@ -1994,6 +2029,9 @@ video {
 .pt-24 {
   padding-top: 6rem;
 }
+.pt-26 {
+  padding-top: 7rem;
+}
 
 .pt-32 {
   padding-top: 8rem;
@@ -2403,8 +2441,17 @@ video {
 .w-16 {
   width: 4rem;
 }
+.w-20 {
+  width: 5rem;
+}
+.w-24 {
+  width: 6rem;
+}
 .w-28 {
   width: 7rem;
+}
+.w-32 {
+  width: 8rem;
 }
 .w-auto {
   width: auto;
@@ -2914,15 +2961,39 @@ video {
   .xl\:w-8\/12 {
     width: 66.666667%;
   }
-/**
+  /**
  * EVENT 3D CSS + LOADER
  */
 
- canvas {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+  canvas {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .loading {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #171717;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loading-bar-container {
+    width: 200px;
+    height: 3px;
+    background: #272727;
+  }
+
+  .loading-bar {
+    height: 3px;
+    background: white;
+  }
 }
 
 .loading {
@@ -2946,6 +3017,4 @@ video {
 .loading-bar {
   height: 3px;
   background: white;
-}
-
 }

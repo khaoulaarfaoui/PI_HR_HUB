@@ -8,7 +8,6 @@ const hrSchema = new Schema({
     ref: "User",
     index: true,
   },
-
   fullName: String,
   profilePhoto: String,
   birthday: Date,

@@ -14,6 +14,7 @@ import Tests from "views/candidate/Tests.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
+import NavbarCandidate from "components/Navbars/CandidateNavbar";
 import Question from "views/candidate/Question";
 import webcam from "views/candidate/webcam";
 import WebcamCapture from "views/candidate/WebcamCapture";
@@ -23,11 +24,13 @@ import WebcamStreamCapture from "views/candidate/WebcamStreamCapture";
 export default function Candidate() {
   return (
     <>
+      <NavbarCandidate />
       <SidebarCandidate />
-      <div className="relative md:ml-64 bg-gray-200">
+      <div className="relative md:ml-64 bg-gray-200 md:pt-3 pb-32 pt-12">
         {/* Header */}
         <HeaderStats />
-        <div className="px-4 md:px-10 mx-auto w-full -m-24">
+
+        <div className="px-4 md:px-10 mx-auto w-full mt-8">
           <Switch>
             <Route path="/candidate/dashboard" exact component={Dashboard} />
             <Route path="/candidate/profile" exact component={Profile} />

@@ -2,7 +2,7 @@ import {
   REGISTER_SUCCESS_HR_TEST,
   REGISTER_FAIL_HR_TEST,
   SET_MESSAGE_HR_TEST,
-  REGISTER_SUCCESS_HR_TEST_QUESTION
+  REGISTER_SUCCESS_HR_TEST_QUESTION,
 } from "./types";
 
 import HrTestService from "../../../service/HRservice/HrTestService";
@@ -64,13 +64,11 @@ export const AddTest = (
     hr
   ).then(
     (response) => {
-
-       console.log("response from actions auth ",response)
-       localStorage.setItem("data",JSON.stringify(response.data))
+      console.log("response from actions auth ", response);
+      localStorage.setItem("data", JSON.stringify(response.data));
       dispatch({
         type: REGISTER_SUCCESS_HR_TEST,
         payload: response.data,
-
       });
 
       dispatch({
@@ -79,7 +77,6 @@ export const AddTest = (
       });
 
       //history.push("/admin");
-
 
       return Promise.resolve();
     },
@@ -105,7 +102,6 @@ export const AddTest = (
   );
 };
 
-
 export const update = (
   id,
   title,
@@ -116,7 +112,7 @@ export const update = (
   companyName,
   color,
   startDate,
-  endDate,
+  endDate
 ) => (dispatch) => {
   return HrTestService.updateHrTest(
     id,
@@ -128,10 +124,10 @@ export const update = (
     companyName,
     color,
     startDate,
-    endDate,
+    endDate
   ).then(
     (response) => {
-    /*  dispatch({
+      /*  dispatch({
         type: REGISTER_SUCCESS_HR_TEST,
       });
 
@@ -200,7 +196,6 @@ export const findallHrTestQuestion = (id) => (dispatch) => {
 export const deleteTestHr = (id) => (dispatch) => {
   return HrTestService.deleteHrTest(id).then(
     (response) => {
-      
       return Promise.resolve();
     },
     (error) => {
@@ -226,11 +221,10 @@ export const deleteTestHr = (id) => (dispatch) => {
 };
 
 export const deleteQuestion = (id) => (dispatch) => {
-
-   console.log("okkkkkkkk id ",id)
+  console.log("okkkkkkkk id ", id);
   return HrTestService.deleteHrTestQuestion(id).then(
     (response) => {
-      console.log("okkkk ",response)
+      console.log("okkkk ", response);
       return Promise.resolve();
     },
     (error) => {
@@ -255,25 +249,14 @@ export const deleteQuestion = (id) => (dispatch) => {
   );
 };
 
-
-export const AddtestResponse = (
-  response,
-  candidat ,
-  hrTest
-) => (dispatch) => {
-  return HrTestService.testResponse(
-  response,
-  candidat ,
-  hrTest
-  ).then(
+export const AddtestResponse = (response, candidat, hrTest) => (dispatch) => {
+  return HrTestService.testResponse(response, candidat, hrTest).then(
     (response) => {
-
-       console.log("response from actions auth ",response)
-       localStorage.setItem("data",JSON.stringify(response.data))
+      console.log("response from actions auth ", response);
+      localStorage.setItem("data", JSON.stringify(response.data));
       dispatch({
         type: REGISTER_SUCCESS_HR_TEST,
         payload: response.data,
-
       });
 
       dispatch({
@@ -282,7 +265,6 @@ export const AddtestResponse = (
       });
 
       //history.push("/admin");
-
 
       return Promise.resolve();
     },

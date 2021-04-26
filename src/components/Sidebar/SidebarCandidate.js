@@ -1,25 +1,29 @@
 /*eslint-disable*/
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function SidebarCandidate() {
+  const candidate = useSelector(
+    (state) => state.candidateReducer.candidate.state.candidate
+  );
+  console.log("helloooo", candidate);
+
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   return (
     <>
-      <nav className="md:left-0 bg-gray-300 md:block md:fixed md:top-0 md:bottom-2 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+      <nav className="md:left-0 bg-gray-300 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-no-wrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
-          <div className="md:block text-left md:pb-2  text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0">
+          <div className="md:block text-left md:pb-2   text-gray-700  mt-8 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0">
             <img
-              className="w-28 mx-auto mb-3"
-              src={require("../../assets/img//Candidate/profile.svg")}
+              className=" mt-8  w-auto mx-auto"
+              src={require("assets/img/HR HUB CANDIDATE.png")}
             />
-            <div className="text-center	">Candidate numberone</div>
-            <div className="text-center font-light opacity-50">ESPRIT</div>
           </div>
 
           <div
             className={
-              "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
+              "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-2 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
               collapseShow
             }
           >
@@ -147,13 +151,6 @@ export default function SidebarCandidate() {
                   ></i>{" "}
                   Events
                 </Link>
-              </li>
-              <li className="items-center">
-                <img
-                  alt="..."
-                  src={require("assets/img/hrnavlogo.png")}
-                  className="mx-auto"
-                />
               </li>
             </ul>
           </div>
