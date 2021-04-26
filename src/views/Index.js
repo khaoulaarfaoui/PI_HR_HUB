@@ -49,12 +49,12 @@ export default function Index() {
         </div>
         <div className="absolute  right-0 sm:w-6/12 ">
           <AliceCarousel autoPlay infinite autoPlayInterval="250">
-            <img src={image1} className="sliderimg" alt="" />
-            <img src={image3} className="sliderimg" alt="" />
-            <img src={image4} alt="" />
-            <img src={image5} className="sliderimg" alt="" />
-            <img src={image6} className="sliderimg" alt="" />
-            <img src={image7} className="sliderimg" alt="" />
+            <img src={image1} className="sliderimg" alt="human resources " />
+            <img src={image3} className="sliderimg" alt="jobs online " />
+            <img src={image4} alt="jobs online " />
+            <img src={image5} className="sliderimg" alt="test online" />
+            <img src={image6} className="sliderimg" alt="online events " />
+            <img src={image7} className="sliderimg" alt="hr intelligent " />
           </AliceCarousel>
         </div>
       </section>
