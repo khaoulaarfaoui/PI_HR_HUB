@@ -22,7 +22,7 @@ import CardEditJob from "components/Cards/CardsHR/CardEditJob";
 import CardAddJob from "components/Cards/CardsHR/CardAddJob";
 import TestJob from "components/Cards/CardsHR/testjob";
 import Events from "views/EventManagement/EventsView";
-import Tests from "views/TestManagement/TestView";
+
 
 export default function Admin() {
   return (
@@ -35,7 +35,6 @@ export default function Admin() {
           <Switch>
             <Route path="/admin/dashboard" exact component={Dashboard} />
             <Route path="/admin/profile" exact component={Profile} />
-            <Route path="/admin/tests" exact component={Tests} />{" "}
             <Route path="/admin/maps" exact component={Maps} />
             <Route path="/admin/settings" exact component={Settings} />
             <Route path="/admin/tables" exact component={Tables} />

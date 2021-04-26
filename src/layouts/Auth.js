@@ -10,7 +10,7 @@ import FooterSmall from "components/Footers/FooterSmall.js";
 
 import Login from "views/auth/Login.js";
 import Register from "views/auth/Register.js";
-import TestLibrary from "views/TestManagement/TestLibrary.js"
+
 export default function Auth() {
   return (
     <>
@@ -19,7 +19,6 @@ export default function Auth() {
         <section className="relative w-full h-full py-20 min-h-screen">
           <div className="absolute top-0 w-full h-full bg-no-repeat bg-full"></div>
           <Switch>
-            <Route path="/TestManagement/TestLibrary" exact component={TestLibrary} />
             <Route path="/auth/login" exact component={Login} />
             <Route path="/auth/register" exact component={Register} />
             <Redirect from="/auth" to="/auth/login" />

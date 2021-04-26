@@ -65,16 +65,16 @@ export default function SidebarCandidate() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/candidate/tests") !== -1
+                    (window.location.href.indexOf("/candidate/login") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/candidate/tests"
+                  to="/candidate/login"
                 >
                   <i
                     className={
                       "fas fa-file-alt mr-2 text-sm " +
-                      (window.location.href.indexOf("/candidate/tests") !== -1
+                      (window.location.href.indexOf("/candidate/login") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }

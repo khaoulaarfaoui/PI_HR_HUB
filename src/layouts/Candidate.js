@@ -1,6 +1,5 @@
-import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
 // components
 
 //import CandidateNavbar from "components/Navbars/CandidateNavbar";
@@ -11,13 +10,19 @@ import FooterAdmin from "components/Footers/FooterCandidate.js";
 import Profile from "views/candidate/Profile.js";
 import Dashboard from "views/candidate/Dashboard.js";
 import Tests from "views/candidate/Tests.js";
-import E_learning from "views/TestManagement/App.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
 
+import Taketest from "../component/TakeTest.component";
+import Login from "../component/LoginRegister.component";
+import dashboard from "../component/Dashboard.component";
+import Testresult from "../component/TestResult.component";
+import Ques from "../component/Question.component";
+
 
 export default function Candidate() {
+  const [loggedin, setloggedin] = useState(false);
   return (
     <>
       <SidebarCandidate />
@@ -29,9 +34,17 @@ export default function Candidate() {
             <Route path="/candidate/dashboard" exact component={Dashboard} />
             <Route path="/candidate/profile" exact component={Profile} />
             <Route path="/candidate/tests" exact component={Tests} />
-            <Route path="/candidate/E-learning" exact component={E_learning} />
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
+            <Route exact path="/candidate/take" component={Taketest} />
+            <Route exact path="/candidate/abouttest" component={Testresult} />
+            <Route
+                exact path={["/candidate/login", "/candidate/register"]}
+                render={() => <Login setloggedin={setloggedin} />}
+              />
+            <Route exact path="/candidate/dashboard" component={dashboard} />
+          
+            <Route exact path="/candidate/test" component={Ques} />  
             <Redirect from="/candidate" to="/candidate/dashboard" />
             
           </Switch>

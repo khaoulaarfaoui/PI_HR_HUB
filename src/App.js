@@ -15,10 +15,6 @@ import Auth from "layouts/Auth.js";
 // views without layouts
 import Index from "views/Index";
 import Event3D from "./views/EventManagement/Event3D";
-import TestLibrary from "./views/TestManagement/TestLibrary";
-import allTests from "./views/TestManagement/App";
-import Play from "./views/TestManagement/Play";
-import QuizSummary from "./views/TestManagement/QuizSummary";
 import BoardUser from "./views/candidate/BoardUser";
 import BoardAdmin from "./views/candidate/BoardAdmin";
 
@@ -28,6 +24,13 @@ import { clearMessage } from "./Redux/actions/user/message";
 import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
+import Homenav from "./component/HomeHeader.component";
+import Loginnav from "./component/LoginNav.component";
+import Taketest from "./component/TakeTest.component";
+import Login from "./component/LoginRegister.component";
+import dashboard from "./component/Dashboard.component";
+import Testresult from "./component/TestResult.component";
+import Ques from "./component/Question.component";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -53,7 +56,7 @@ const App = () => {
   const logOut = () => {
     dispatch(logout());
   };
-
+  const [loggedin, setloggedin] = useState(false);
   return (
     <Router history={history}>
       {currentUser && (
@@ -76,14 +79,22 @@ const App = () => {
         <Route path="/auth" component={Auth} />
         
         {/* add routes without layouts */}
-
+        <Route exact path="/take" component={Taketest} />
+        <Route exact path="/abouttest" component={Testresult} />
+        <Route
+            exact path={["/login", "/register"]}
+            render={() => <Login setloggedin={setloggedin} />}
+          />
+        <Route exact path="/dashboard" component={dashboard} />
+      
+        <Route exact path="/test" component={Ques} />  
         <Route path="/user" component={BoardUser} />
         <Route path="/admin" component={BoardAdmin} />
         <Route path="/event3D" component={Event3D} />
-        <Route path ="/TestManagement/TestLibrary" component={TestLibrary} />
-        <Route path="/play/quiz" exact component={Play} />
-        <Route path="/play/quizzTable" exact component={allTests} />
-        <Route path="/play/quizSummary" exact component={QuizSummary} />
+    
+  
+       
+
           path="/candidate"
           render={() =>
             currentUser ? <Redirect to="/admin" /> : <Redirect to="/auth" />

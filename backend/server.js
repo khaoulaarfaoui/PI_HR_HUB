@@ -5,7 +5,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Role = require("../backend/models/Role");
 const db = require("../backend/models");
-var Question = require("../backend/models/schema");
+
 const candidate = require("./routes/Candidate/CandidateAPI");
 const test = require("./Controllers/candidateTests/testController");
 const hr = require("./routes/HR/HRAPI");
@@ -19,14 +19,20 @@ const http = require("http");
 const socket = require("socket.io");
 const connectIo = require("./chatbotService");
 const eventsmodel = require("./Controllers/events/eventController");
+const userRouter = require("./routes/Test/user");
+const testRouter = require("./routes/Test/test");
+require("dotenv").config();
+const morgan = require("morgan");
 const app = express();
 const corsOptions = {
   origin: "http://localhost:8081",
 };
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cors());
+app.use(express.json());
 app.use(cors(corsOptions));
+app.use(morgan("tiny"));
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', ' * ');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -36,11 +42,23 @@ app.use(function(req, res, next) {
   res.setHeader('Cache-Control', 'no-cache');
   next();
 });
+
+app.use("/api/user", userRouter);
+app.use("/api/test", testRouter);
 app.use("/test", test);
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
+if (
+  process.env.NODE_ENV === "production" ||
+  process.env.NODE_ENV === "staging"
+) {
+  app.use(express.static("client/build"));
 
+  app.all("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
@@ -60,31 +78,7 @@ app.get("/", (req, res) => {
 app.use('/api', router);
 //starts the server and listens for requests
 
-
-router.route('/questions')
-	.get(function(req, res) {
-	//looks at our Question Schema
-		Question.find(function(err, dataFromDB) {
-			if (err){
-				res.send(err);
-			}
-			//responds with a json object of our database questions.
-			res.json(dataFromDB);
-		});
- 	})
- 	//post new question to the database
- 	.post(function(req, res) {
- 		var question 		= new Question();
- 		question.question 	= req.body.question;
-		question.options 	= req.body.options;
-		question.key 		= req.body.key;
-
-		question.save(function(err) {
-	 		if (err)
-	 			res.send(err);
-	 		res.json({ message:'Question successfully added!' });
- 		});
- 	});
+ 
 app.use("/candidate", candidate);
 app.use("/hr", hr);
 db.mongoose
