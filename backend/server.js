@@ -1,8 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const router = express.Router();
 const mongoose = require("mongoose");
+require("dotenv").config();
+const path = require("path");
+const morgan = require("morgan");
+const router = express.Router();
 const Role = require("../backend/models/Role");
 const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
@@ -13,18 +16,24 @@ const response = require("./routes/Candidate/responseApi");
 const dbConfig = require("./config/DBconfig");
 const cv = require("./cv/app");
 const multer = require("multer");
-var path = require("path");
 const job = require("./routes/JobsAPI");
 var http = require("http");
 var debug = require("debug")("server:server");
 var connectIo = require("./chatbotService");
 var socket = require("socket.io");
 const eventsmodel = require("./Controllers/events/eventController");
+const teams = require ("./Controllers/teams/teamsController");
+var dir = path.join(__dirname, "./public");
 var logger = require("morgan");
 var dir = path.join(__dirname, "./public");
 var cookieParser = require("cookie-parser");
 var callback = require("./routes/callback");
 const app = express();
+
+const { Chat } = require("./models/Chat");
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
 var corsOptions = {
   origin: "http://localhost:8081",
 };
@@ -35,8 +44,7 @@ app.use(cors(corsOptions));
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
-app.use("/public", express.static(dir));
-
+app.use("/teams", teams);
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
@@ -91,6 +99,10 @@ app.get("/file/:image", function (req, res) {
   console.log(__dirname + "/public/" + req.params.image);
   res.sendFile(__dirname + "/public/" + req.params.image);
 });
+const userRouter = require("./routes/Test/user");
+const testRouter = require("./routes/Test/test");
+app.use("/api/user", userRouter);
+app.use("/api/test", testRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error("Not Found");
@@ -122,7 +134,31 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
+  },
+});
+var upload = multer({ storage: storage });
+app.get("/", function (req, res) {
+  res.send("Hello HR HUB");
+});
+app.post("/uploadfile", upload.single("file"), (req, res, next) => {
+  const file = req.file;
+  const error = new Error("Please upload a file");
+  if (!file) {
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  res.send(file);
+});
+app.get("/file/:image", function (req, res) {
+  res.sendFile(__dirname + "/uploads/" + req.params.image);
+});
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
@@ -160,3 +196,4 @@ function initial() {
 }
 
 module.exports = router;
+
