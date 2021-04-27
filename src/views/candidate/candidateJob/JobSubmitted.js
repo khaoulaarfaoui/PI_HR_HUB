@@ -34,7 +34,7 @@ export default function JobSubmitted({ color, job }) {
             <i className="fas fa-circle text-orange-500 mr-2"></i> Processed
           </td>
           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-            <h1 className="text-xl">Microsoft</h1>
+            <h1 className="text-xl">{job.company}</h1>
           </td>
           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
             <button

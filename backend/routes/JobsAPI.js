@@ -8,6 +8,7 @@ var stringSimilarity = require("string-similarity");
 
 const candidate = require("../models/candidat");
 const ContentBasedRecommender = require("content-based-recommender");
+const { include } = require("underscore");
 
 router.get("/jobs", function (req, res) {
   console.log("Get request for all jobs");
@@ -85,6 +86,8 @@ router.post("/add/:id", async (req, res) => {
   for (var i in all) {
     console.log("all", all[i].id);
   }
+  var hrUser = await hr.findById(idUser);
+  var company = hrUser.company;
 
   var _id = all[i].id + 1;
 
@@ -95,6 +98,7 @@ router.post("/add/:id", async (req, res) => {
     description,
     salary,
     requirement,
+    company,
   });
   await job.save();
 
@@ -102,7 +106,7 @@ router.post("/add/:id", async (req, res) => {
 
   userById.jobs.push(job);
   await userById.save();
-
+  console.log("hrrrrr");
   return res.send(userById);
 });
 
@@ -271,6 +275,13 @@ router.get("/match/:id/:idc", async (req, res) => {
     job.requirement,
     arr.toString()
   );
+
+  if (job.requirement.toString().includes(arr.toString().replace(/,/g, " "))) {
+    console.log("include");
+    similarity = 1;
+  } else console.log("not included");
+  console.log("jobs", typeof arr.toString());
+
   console.log("similarit", similarity);
   res.json(similarity);
 });

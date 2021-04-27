@@ -24,6 +24,8 @@ class JobDetails extends Component {
     console.log(id);
 
     this.state = {
+      responseData: 0,
+
       _id: 0,
       title: "",
       description: "",
@@ -105,17 +107,16 @@ class JobDetails extends Component {
     let id = str.slice(19);
     console.log(id);
 
-    function scoree({ score }) {
-      axios
-        .get(
-          "http://localhost:8082/job//match/" + id + "/607c5d570f3bae21e06f5782"
-        )
-        .then((response) => {
-          var score = response.data;
-          console.log(score);
-        });
-    }
-    console.log(scoree);
+    axios
+      .get(
+        "http://localhost:8082/job//match/" + id + "/607c5d570f3bae21e06f5782"
+      )
+      .then((response) => {
+        var score = response.data;
+
+        console.log(score);
+        this.setState({ responseData: response.data });
+      });
     const props = this.props;
     if (props.location && props.location.state) {
       const job = props.location.state.job;
@@ -132,8 +133,12 @@ class JobDetails extends Component {
   render() {
     const job = this.props.job;
     const data = [
-      { name: "Accepted", value: 0.4, fill: "#90cdf4" },
-      { name: "Not accepted", value: 0.6, fill: "#3182ce" },
+      { name: "Accepted", value: this.state.responseData, fill: "#90cdf4" },
+      {
+        name: "Not accepted",
+        value: 1 - this.state.responseData,
+        fill: "#3182ce",
+      },
     ];
     let disabled = this.state.disable;
 

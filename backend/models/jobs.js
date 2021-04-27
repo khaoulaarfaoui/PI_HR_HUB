@@ -10,6 +10,7 @@ const jobSchema = new Schema({
   requirement: String,
   content: String,
   candidateSubmit: Array,
+  company: String,
   date: {
     type: Date,
     default: Date.now,

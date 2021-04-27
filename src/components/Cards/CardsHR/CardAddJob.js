@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { createJob } from "Redux/actions/job.actions";
 import { connect } from "react-redux";
+import NotificationCenter from "react-notification-center-component";
 
 class CardAddJob extends Component {
   constructor(props) {
@@ -58,6 +59,13 @@ class CardAddJob extends Component {
           <div className="rounded-t bg-white mb-0 px-6 py-6">
             <div className="text-center flex justify-between">
               <h6 className="text-gray-800 text-xl font-bold">Add new job</h6>
+              <div>
+                <NotificationCenter
+                  className="font-semibold relative"
+                  appId="pfxz6Wrhd9"
+                  subscriberId="foo1"
+                />
+              </div>
             </div>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -81,7 +89,7 @@ class CardAddJob extends Component {
               </h6>
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
+                  <div className=" w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
                       htmlFor="grid-password"
@@ -100,7 +108,7 @@ class CardAddJob extends Component {
                 </div>
 
                 <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
+                  <div className=" w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
                       htmlFor="grid-password"
@@ -118,7 +126,7 @@ class CardAddJob extends Component {
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
+                  <div className=" w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
                       htmlFor="grid-password"
@@ -136,7 +144,7 @@ class CardAddJob extends Component {
                   </div>
                 </div>
                 <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
+                  <div className=" w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
                       htmlFor="grid-password"
