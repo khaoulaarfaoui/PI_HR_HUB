@@ -48,7 +48,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "gulp": "^4.0.2",
+    "gulp": "^3.8.10",
     "gulp-print": "^5.0.0",
     "gulp-run": "^1.6.6",
     "gulp-util": "^3.0.2",
