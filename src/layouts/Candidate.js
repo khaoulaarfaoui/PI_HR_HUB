@@ -20,13 +20,12 @@ import webcam from "views/candidate/webcam";
 import WebcamCapture from "views/candidate/WebcamCapture";
 import WebcamStreamCapture from "views/candidate/WebcamStreamCapture";
 
-
 export default function Candidate() {
   return (
     <>
       <NavbarCandidate />
       <SidebarCandidate />
-      <div className="relative md:ml-64 bg-gray-200 md:pt-3 pb-32 pt-12">
+      <div className="relative md:ml-64  md:pt-3 pb-32 pt-12">
         {/* Header */}
         <HeaderStats />
 
@@ -39,12 +38,17 @@ export default function Candidate() {
             <Route path="/candidate/tables" exact component={Tables} />
             <Route path="/candidate/question" exact component={Question} />{" "}
             <Route path="/candidate/webcam" exact component={webcam} />{" "}
-            <Route path="/candidate/webcamCapture" exact component={WebcamCapture} />{" "}
-            <Route path="/candidate/webcamStreamCapture" exact component={WebcamStreamCapture} />{" "}
+            <Route
+              path="/candidate/webcamCapture"
+              exact
+              component={WebcamCapture}
+            />{" "}
+            <Route
+              path="/candidate/webcamStreamCapture"
+              exact
+              component={WebcamStreamCapture}
+            />{" "}
             <Redirect from="/candidate" to="/candidate/dashboard" />
-            
-
-            
           </Switch>
           <FooterAdmin />
         </div>

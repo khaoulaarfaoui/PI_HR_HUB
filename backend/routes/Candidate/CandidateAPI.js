@@ -62,6 +62,7 @@ router.post(
         ratio: req.body.ratio,
         teamStatus: req.body.teamStatus,
         cv: req.body.cv,
+        HR_viewed: req.body.HR_viewed,
         title: req.body.title,
         jobs: req.body.jobs,
         events: req.body.events,
@@ -99,8 +100,11 @@ router.put("/updateCandidate/:id", function (req, res) {
   const id = req.params.id;
   console.log("iddddd", id);
 
-  Candidate.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  Candidate.findByIdAndUpdate(id, req.body, {
+    useFindAndModify: false,
+  })
     .then((data) => {
+      console.log("dta", data);
       if (!data) {
         res.status(404).send({
           message: `Cannot update Candidate with id=${id}. Maybe Candidate was not found!`,
@@ -113,6 +117,40 @@ router.put("/updateCandidate/:id", function (req, res) {
       }
     })
     .catch((err) => {
+      console.log("errrrr", err);
+      res.status(500).send({
+        message: "Error updating Candidate with id=" + id,
+      });
+    });
+});
+router.put("/updateHRVIEW/:id", function (req, res) {
+  console.log("update Candidate");
+  const id = req.params.id;
+  console.log("iddddd", id);
+
+  Candidate.findByIdAndUpdate(
+    id,
+    { $push: { HR_viewed: req.body.HR_viewed } },
+    {
+      useFindAndModify: false,
+    }
+  )
+    .then((data) => {
+      console.log("yooooooo", req.body.HR_viewed);
+      console.log("dta", data);
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Candidate with id=${id}. Maybe Candidate was not found!`,
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          data: data,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("errrrr", err);
       res.status(500).send({
         message: "Error updating Candidate with id=" + id,
       });
@@ -130,6 +168,7 @@ router.get("/fetch/:id", function (req, res) {
     }
   });
 });
+
 router.get("/fetchtext/:text", function (req, res) {
   Candidate.find({ skills: req.params.text }, async (err, Candidate) => {
     if (!Candidate) {

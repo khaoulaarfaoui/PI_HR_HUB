@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function SidebarCandidate() {
+  const hr = JSON.parse(localStorage.getItem("hr"));
+  //  console.log(hr.data.profilePhoto);
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   return (
     <>
@@ -10,10 +12,8 @@ export default function SidebarCandidate() {
           <div className="md:block text-left md:pb-2  text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0">
             <img
               className="w-28 mx-auto mb-3"
-              src={
-                "http://localhost:8082/file/" +
-                JSON.parse(localStorage.getItem("hruser")).profilePhoto
-              }
+              src={`http://localhost:8082/file/${hr.data.profilePhoto}`}
+              alt="hr"
             />
             <div className="text-center ">
               <a href="/admin/setting"> HR numberone </a>

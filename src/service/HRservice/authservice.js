@@ -101,8 +101,8 @@ const uploadFile = (file) => {
   const formData = new FormData();
   formData.append("file", file);
   return axios.post(API_URL_UPLOAD, formData).then((response) => {
-    if (response.data) {
-      ///   localStorage.setItem("user", JSON.stringify(response.data));
+    if (response) {
+      console.log(response);
     }
   });
 };

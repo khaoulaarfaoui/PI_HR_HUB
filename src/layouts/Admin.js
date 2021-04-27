@@ -1,4 +1,4 @@
-/*import React from "react";
+import React from "react";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 
 // components
@@ -35,24 +35,19 @@ export default function Admin() {
     <>
       <AdminNavbar />
       <Sidebar />
-      <div className="relative md:ml-64 bg-gray-200">
-     
-        <div className="px-4 md:px-10 mx-auto w-full m-24">
+      <div className="relative md:ml-64">
+        <div className="px-4 md:px-10 mx-auto w-full m-24 mt-24">
           <Switch>
             <Route path="/admin/dashboard" exact component={Dashboard} />
             <Route path="/admin/profile" exact component={Profile} />
             <Route path="/admin/setting" exact component={Settings} />
-
             <Route path="/admin/tests" exact component={Tests} />{" "}
             <Route path="/admin/question" exact component={Question} />{" "}
             <Route path="/admin/response" exact component={Response} />{" "}
             <Route path="/admin/tasks" exact component={Tasks} />{" "}
             <Route path="/admin/UpdateHr" exact component={UpdateHr} />{" "}
-
             <Route path="/admin/AddTest" exact component={AddTest} />{" "}
             <Route path="/admin/UpdateTest" exact component={UpdateTest} />{" "}
-
-
             <Route path="/admin/maps" exact component={Maps} />
             <Route path="/admin/tables" exact component={Tables} />
             <Route path="/admin/addJob" exact component={AddJob} />
@@ -69,7 +64,8 @@ export default function Admin() {
     </>
   );
 }
-*/
+
+/*
 import React from "react";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 
@@ -107,7 +103,7 @@ export default function Admin() {
     <>
       <Sidebar />
       <div className="relative md:ml-64 bg-gray-200">
-        {/* Header */}
+  
         <div className="px-4 md:px-10 mx-auto w-full m-24">
           <Switch>
             <Route path="/admin/dashboard" exact component={Dashboard} />
@@ -135,3 +131,4 @@ export default function Admin() {
     </>
   );
 }
+*/

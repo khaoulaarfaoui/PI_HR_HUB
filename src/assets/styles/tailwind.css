@@ -982,6 +982,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgba(147, 197, 253, var(--tw-bg-opacity));
 }
+.bg-blue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));
+}
 .text-blue-700 {
   --tw-text-opacity: 1;
   color: rgba(29, 78, 216, var(--tw-text-opacity));

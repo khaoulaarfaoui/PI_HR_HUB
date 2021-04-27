@@ -24,6 +24,7 @@ export default function CardSettings(props) {
   const [aboutMe, setAboutme] = useState(candidate.aboutMe);
   const [background, setBackground] = useState(candidate.background);
   const [jobtitle, setJobtitle] = useState(candidate.experience.jobtitle);
+
   const [company, setCompany] = useState(candidate.experience.company);
   const [starting_date, setStartingDate] = useState(
     candidate.experience.starting_date

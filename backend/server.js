@@ -62,6 +62,35 @@ app.get("/linkedin", (req, res) => {
 });
 app.use("/response", response);
 app.use("/hrTest", hrTest);
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
+  },
+});
+console.log("storageeeeeeeeeeeeeeeeeeee", storage);
+var upload = multer({ storage: storage });
+app.get("/", function (req, res) {
+  res.send("Hello HR HUB");
+});
+app.post("/uploadfile", upload.single("file"), (req, res, next) => {
+  console.log("first file upload");
+  const file = req.file;
+  console.log("first file upload", file);
+  const error = new Error("Please upload a file");
+  if (!file) {
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  res.send(file);
+});
+app.get("/file/:image", function (req, res) {
+  console.log(__dirname + "/public/" + req.params.image);
+  res.sendFile(__dirname + "/public/" + req.params.image);
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error("Not Found");
@@ -79,6 +108,7 @@ app.use(function (err, req, res, next) {
   console.log(err);
   res.render("error");
 });
+
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
@@ -92,31 +122,7 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-// SET STORAGE
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
-  },
-});
-var upload = multer({ storage: storage });
-app.get("/", function (req, res) {
-  res.send("Hello HR HUB");
-});
-app.post("/uploadfile", upload.single("file"), (req, res, next) => {
-  const file = req.file;
-  const error = new Error("Please upload a file");
-  if (!file) {
-    error.httpStatusCode = 400;
-    return next(error);
-  }
-  res.send(file);
-});
-app.get("/file/:image", function (req, res) {
-  res.sendFile(__dirname + "/uploads/" + req.params.image);
-});
+
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {

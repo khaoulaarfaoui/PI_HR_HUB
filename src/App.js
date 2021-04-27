@@ -76,8 +76,11 @@ const App = () => {
     return (
       <div className="app">
         <div className="left">
+          <Link to="/candidate/settings">
+            <i className="mt-4 p-3 w-full fas fa-arrow-circle-left"></i>
+          </Link>
           <div className={myClasses.headerLeft}>
-            <Link to="/resume">
+            <Link to="/candidate/settings">
               <img src={Logo} alt="logo" className={myClasses.img2} />
             </Link>
           </div>

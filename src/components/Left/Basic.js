@@ -89,6 +89,9 @@ function Left() {
       <div className="left">
         <div className={myClasses.headerLeft}>
           <div styles={{ flexGrow: 2 }}>
+            <Link to="/candidate/settings">
+              <i className="mt-4 p-3 w-full fas fa-arrow-circle-left"></i>
+            </Link>
             <Link to="/" style={{ display: "inline" }}>
               <img src={logo} alt="logo" />
             </Link>
