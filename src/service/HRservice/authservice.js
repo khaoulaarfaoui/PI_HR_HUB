@@ -41,8 +41,7 @@ const register = (
       (response) => {
         console.log(" profilePhoto", response.data.data.profilePhoto);
         if (response.data) {
-          localStorage.setItem("hr", JSON.stringify(response.data));
-          localStorage.setItem("hruser", JSON.stringify(response.data.data));
+          localStorage.setItem("hr", JSON.stringify(response.data.data));
         }
       },
       (err) => {
@@ -76,7 +75,7 @@ const update = (
     })
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("hruser", JSON.stringify(response.data.data));
+        localStorage.setItem("hr", JSON.stringify(response.data.data));
       }
     });
 };
@@ -101,8 +100,8 @@ const uploadFile = (file) => {
   const formData = new FormData();
   formData.append("file", file);
   return axios.post(API_URL_UPLOAD, formData).then((response) => {
-    if (response) {
-      console.log(response);
+    if (response.data) {
+      ///   localStorage.setItem("user", JSON.stringify(response.data));
     }
   });
 };

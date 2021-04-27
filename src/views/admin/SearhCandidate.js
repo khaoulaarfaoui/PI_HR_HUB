@@ -22,8 +22,8 @@ export default function SearchCandidate(props) {
 
   const ViewProfile = (id) => {
     console.log("idddd", id);
-    const HR_view = JSON.parse(localStorage.getItem("hr"));
-    const HR_viewed = HR_view.data;
+    const HR_viewed = JSON.parse(localStorage.getItem("hr"));
+
     console.log(HR_viewed);
     dispatch(
       updateCandidate(id, {

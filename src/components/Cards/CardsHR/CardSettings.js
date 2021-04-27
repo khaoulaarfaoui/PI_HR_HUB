@@ -69,13 +69,13 @@ const CardSettings = (props) => {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                     Name
+                    Name
                   </label>
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue={
-                      JSON.parse(localStorage.getItem("hruser")).fullName
+                      JSON.parse(localStorage.getItem("hr")).fullName
                     }
                   />
                 </div>
@@ -92,7 +92,7 @@ const CardSettings = (props) => {
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue={
-                      JSON.parse(localStorage.getItem("hruser")).birthday
+                      JSON.parse(localStorage.getItem("hr")).birthday
                     }
                   />
                 </div>
@@ -117,7 +117,7 @@ const CardSettings = (props) => {
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue={
-                      JSON.parse(localStorage.getItem("hruser")).location
+                      JSON.parse(localStorage.getItem("hr")).location
                     }
                   />
                 </div>
@@ -134,7 +134,7 @@ const CardSettings = (props) => {
                     type="email"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue={
-                      JSON.parse(localStorage.getItem("hruser")).company
+                      JSON.parse(localStorage.getItem("hr")).company
                     }
                   />
                 </div>
@@ -151,7 +151,7 @@ const CardSettings = (props) => {
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue={
-                      JSON.parse(localStorage.getItem("hruser")).phoneNumber
+                      JSON.parse(localStorage.getItem("hr")).phoneNumber
                     }
                   />
                 </div>

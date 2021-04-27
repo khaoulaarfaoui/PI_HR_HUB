@@ -2,7 +2,7 @@ import React from "react";
 
 // components
 const CardProfile = (props) => {
-  const hr = JSON.parse(localStorage.getItem("hruser"));
+  const hr = JSON.parse(localStorage.getItem("hr"));
 
   return (
     <>

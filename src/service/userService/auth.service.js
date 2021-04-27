@@ -12,6 +12,7 @@ const register = (username, email, password, roles) => {
     })
     .then((response) => {
       if (response.data) {
+        console.log("herreeeee");
         localStorage.setItem("user", JSON.stringify(response.data));
       }
     });
