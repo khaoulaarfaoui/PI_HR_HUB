@@ -69,16 +69,16 @@ export default function SidebarCandidate() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/candidate/login") !== -1
+                    (window.location.href.indexOf("/candidate/tests") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/candidate/login"
+                  to="/candidate/tests"
                 >
                   <i
                     className={
                       "fas fa-file-alt mr-2 text-sm " +
-                      (window.location.href.indexOf("/candidate/login") !== -1
+                      (window.location.href.indexOf("/candidate/tests") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }
@@ -130,6 +130,55 @@ export default function SidebarCandidate() {
                   Notification Center
                 </Link>
               </li>
+
+
+
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/candidate/taketest") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/candidate/taketest"
+                >
+                  <i
+                    className={
+                      "fas fa-tv mr-2 text-sm " +
+                      (window.location.href.indexOf("/candidate/taketest") !==
+                      -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                 Pass A Test
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/candidate/login") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/candidate/login"
+                >
+                  <i
+                    className={
+                      "fas fa-tv mr-2 text-sm " +
+                      (window.location.href.indexOf("/candidate/login") !==
+                      -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  E-learning Dashbord
+                </Link>
+              </li>
+
+
 
               <li className="items-center">
                 <Link

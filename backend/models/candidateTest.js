@@ -7,8 +7,7 @@ const candidateTestSchema = new Schema({
   description: String,
   type: String,
   tags: Array,
-  score: Number,
-  AssesmentScore : Number,
+  result: Number,
   startDate: Date,
   endDate: Date,
   candidate: {

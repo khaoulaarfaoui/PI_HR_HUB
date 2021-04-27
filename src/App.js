@@ -35,6 +35,7 @@ import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
 import Profile from "views/candidate/Settings";
 import Chat from "./components/Chat/App";
+
 import ProfileCard from "./Linkedin/src/components/ProfileCard";
 import Logo from "assets/img/HR HUB CANDIDATE.png";
 

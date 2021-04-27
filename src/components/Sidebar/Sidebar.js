@@ -54,13 +54,13 @@ export default function SidebarCandidate() {
                   to="/admin/dashboard"
                 >
                   <i
-    className={
-        "fas fa-tv mr-2 text-sm " +
-        (window.location.href.indexOf("/admin/dashboard") !== -1
-            ? "opacity-75"
-            : "text-gray-400")
-    }
-    />{" "}
+                    className={
+                      "fas fa-tv mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/dashboard") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
                   Dashboard
                 </Link>
               </li>

@@ -1,12 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const router = express.Router();
 const mongoose = require("mongoose");
+require("dotenv").config();
+const path = require("path");
+const morgan = require("morgan");
+const router = express.Router();
 const Role = require("../backend/models/Role");
 const db = require("../backend/models");
 const candidate = require("./routes/Candidate/CandidateAPI");
-const test = require("./Controllers/candidateTests/testController");
 const hr = require("./routes/HR/HRAPI");
 const hrTest = require("./routes/HR/HRTEST");
 const response = require("./routes/Candidate/responseApi");
@@ -14,7 +16,6 @@ const response = require("./routes/Candidate/responseApi");
 const dbConfig = require("./config/DBconfig");
 const cv = require("./cv/app");
 const multer = require("multer");
-var path = require("path");
 const job = require("./routes/JobsAPI");
 var http = require("http");
 var debug = require("debug")("server:server");
@@ -69,6 +70,12 @@ app.get("/linkedin", (req, res) => {
 });
 app.use("/response", response);
 app.use("/hrTest", hrTest);
+
+const userRouter = require("./routes/Test/user");
+const testRouter = require("./routes/Test/test");
+app.use("/api/user", userRouter);
+app.use("/api/test", testRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error("Not Found");
@@ -99,7 +106,6 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-// SET STORAGE
 
 // SET STORAGE
 var storage = multer.diskStorage({

@@ -1,4 +1,4 @@
-
+/*eslint-disable*/
 import React from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -299,8 +299,6 @@ export default function Index() {
         </div>
       </section>
       <Footer />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css"></link>
     </>
   );
-  
 }

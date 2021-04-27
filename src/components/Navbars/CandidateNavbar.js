@@ -13,7 +13,7 @@ export default function CandidateNavbar(props) {
             href="#pablo"
             onClick={(e) => e.preventDefault()}
           >
-            <div> {localStorage.getItem("name")}</div>
+            <div> {props.User}</div>
           </a>
           {/* Form */}
           <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">

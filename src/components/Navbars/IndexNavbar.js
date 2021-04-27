@@ -91,7 +91,6 @@ export default function Navbar(props) {
                   </button>{" "}
                 </Link>
               </li>
-             
             </ul>
           </div>
         </div>
