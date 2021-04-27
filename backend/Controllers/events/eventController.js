@@ -1,9 +1,14 @@
 const eventsmodel = require("../../models/events.js");
+<<<<<<< HEAD
+=======
+const Team = require ("../../models/teams");
+>>>>>>> Ghassen
 const express = require("express");
 const router = express.Router();
 
 //Add Event
 router.post("/addEvents", async (req, res) => {
+<<<<<<< HEAD
   
   const eventName = req.body.eventName;
   const eventDate = req.body.eventDate;
@@ -18,6 +23,24 @@ router.post("/addEvents", async (req, res) => {
   try {
       await ev.save();
       res.json(ev);
+=======
+try {
+
+  const ev = new eventsmodel({
+      eventName: req.body.eventName, 
+      eventDate: req.body.eventDate, 
+      description: req.body.description,
+      file: req.body.file,
+      //teams: req.body.teams,
+  });
+
+      ev.save();
+      res.json(ev);
+      const t = await Team.findById({ _id: ev.teams });
+      console.log(t);
+
+      
+>>>>>>> Ghassen
       console.log("Event ++");
   }catch(err){
       console.log("Error to add event");
@@ -45,7 +68,12 @@ router.put("/updateEvent/:id", function (req, res) {
         $set: {
           eventName: req.body.eventName,
           eventDate: req.body.eventDate,
+<<<<<<< HEAD
           description: req.body.description
+=======
+          description: req.body.description,
+          file: req.body.file,
+>>>>>>> Ghassen
         },
       },
   

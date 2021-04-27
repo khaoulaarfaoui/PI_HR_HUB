@@ -1,8 +1,11 @@
 import React from "react";
 
 // components
+const CardProfile = (props) => {
 
-export default function CardProfile() {
+
+   
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -10,10 +13,13 @@ export default function CardProfile() {
           <div className="flex flex-wrap justify-center">
             <div className="w-full px-4 flex justify-center">
               <div className="relative">
+                
                 <img
+                 className="w-28 mx-auto mb-3"
                   alt="..."
-                  src={require("assets/img/team-2-800x800.jpg")}
-                  className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                  src={"http://localhost:8082/file/"+JSON.parse(localStorage.getItem("hruser")).companyLogo}
+                  height="80"
+                 width="50"
                 />
               </div>
             </div>
@@ -82,3 +88,5 @@ export default function CardProfile() {
     </>
   );
 }
+
+export default CardProfile;

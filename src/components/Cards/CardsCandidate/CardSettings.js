@@ -1,10 +1,132 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import ButterToast, { Cinnamon } from "butter-toast";
+import { Link } from "react-router-dom";
+import { ToastProvider, useToasts } from "react-toast-notifications";
 
+import { updateCandidate } from "../../../Redux/actions/candidate/candidate";
 // components
 
-export default function CardSettings() {
+export default function CardSettings(props) {
+  const { addToast } = useToasts();
+  const checkBtn = useRef();
+  const candidate = JSON.parse(localStorage.getItem("candidate"));
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const dispatch = useDispatch();
+
+  const [successful, setSuccessful] = useState(false);
+  const [fullName, setFullName] = useState(candidate.fullName);
+  const [location, setLocation] = useState(candidate.location);
+  const [phoneNumber, setPhoneNumber] = useState(candidate.phoneNumber);
+  const [education, setEducation] = useState(candidate.education);
+  const [region, setRegion] = useState(candidate.region);
+  const [aboutMe, setAboutme] = useState(candidate.aboutMe);
+  const [background, setBackground] = useState(candidate.background);
+  const [jobtitle, setJobtitle] = useState(candidate.experience.jobtitle);
+  const [company, setCompany] = useState(candidate.experience.company);
+  const [starting_date, setStartingDate] = useState(
+    candidate.experience.starting_date
+  );
+  const [ending_date, setEndingDate] = useState(
+    candidate.experience.ending_date
+  );
+  const [description, setDescription] = useState(
+    candidate.experience.description
+  );
+
+  const onChangejobtitle = (e) => {
+    const jobtitle = e.target.value;
+    setJobtitle(jobtitle);
+  };
+  const onChangeCompany = (e) => {
+    const company = e.target.value;
+    setCompany(company);
+  };
+  const onChangeStartingDate = (e) => {
+    const date = e.target.value;
+    console.log(e.target.value);
+    console.log(e);
+
+    setStartingDate(date);
+  };
+  const onChangeEndingDate = (e) => {
+    const date = e.target.value;
+    console.log(e.target.value);
+    console.log(e);
+
+    setEndingDate(date);
+  };
+  const onChangeDescription = (e) => {
+    const description = e.target.value;
+    setDescription(description);
+  };
+  const onChangeRegion = (e) => {
+    const Region = e.target.value;
+    setRegion(Region);
+  };
+  const onChangeBackground = (e) => {
+    const Background = e.target.value;
+    setBackground(Background);
+  };
+
+  const onChangeAboutme = (e) => {
+    const AboutMe = e.target.value;
+    setAboutme(AboutMe);
+  };
+  const onChangeEducation = (e) => {
+    const Education = e.target.value;
+
+    setEducation(Education);
+  };
+
+  const onChangephoneNumber = (e) => {
+    const PhoneNumber = e.target.value;
+    setPhoneNumber(PhoneNumber);
+  };
+  const onChangeLocation = (e) => {
+    const Location = e.target.value;
+    setLocation(Location);
+  };
+
+  const onChangefullName = (e) => {
+    const FullName = e.target.value;
+    setFullName(FullName);
+  };
+  const experience = {
+    jobtitle,
+    company,
+    starting_date,
+    ending_date,
+    description,
+  };
+  const updateContent = () => {
+    console.log(fullName);
+    dispatch(
+      updateCandidate(candidate._id, {
+        fullName,
+        phoneNumber,
+        location,
+        experience,
+        region,
+        education,
+        background,
+        aboutMe,
+      })
+    )
+      .then((response) => {
+        console.log("lennan", response);
+        addToast("Saved Successfully", { appearance: "success" });
+      })
+      .catch((e) => {
+        console.log(e);
+        addToast(e.message, { appearance: "error" });
+      });
+  };
+
   return (
     <>
+<<<<<<< HEAD
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
@@ -18,167 +140,284 @@ export default function CardSettings() {
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+=======
+      <main>
+        <div className="rounded-t bg-gray-200  py-6"></div>
+        <div className="flex-auto px-2 lg:px-2 py-10 pt-0">
+          <button
+            className="bg-blue-500  text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            onClick={updateContent}
+          >
+            Update
+          </button>
+>>>>>>> Ghassen
           <form>
-            <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
-              User Information
-            </h6>
-            <div className="flex flex-wrap">
-              <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="lucky.jesse"
-                  />
+            {" "}
+            {!successful && (
+              <div>
+                <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+                  User Information
+                </h6>
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Username
+                      </label>
+                      <input
+                        type="text"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        value={user.username}
+                        disabled={true}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Email address
+                      </label>
+                      <input
+                        type="email"
+                        disabled={true}
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        defaultValue={user.email}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Email address
-                  </label>
-                  <input
-                    type="email"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="jesse@example.com"
-                  />
+                <div className="w-full lg:w-12/12 px-4">
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      onChange={onChangefullName}
+                      value={fullName}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Lucky"
-                  />
-                </div>
-              </div>
-              <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Jesse"
-                  />
-                </div>
-              </div>
-            </div>
 
-            <hr className="mt-6 border-b-1 border-gray-400" />
-
-            <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
-              Contact Information
-            </h6>
-            <div className="flex flex-wrap">
-              <div className="w-full lg:w-12/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                  />
+                <hr className="mt-6 border-b-1 border-gray-400" />
+                <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+                  Contact Information
+                </h6>
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Phone Number
+                      </label>
+                      <input
+                        type="text"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangephoneNumber}
+                        value={phoneNumber}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        City
+                      </label>
+                      <input
+                        type="email"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeRegion}
+                        value={region}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Country
+                      </label>
+                      <input
+                        type="text"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeLocation}
+                        value={location}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <hr className="mt-6 border-b-1 border-gray-400" />
+                <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+                  Education
+                </h6>
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        University
+                      </label>
+                      <input
+                        type="email"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeEducation}
+                        value={education}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Speciality
+                      </label>
+                      <input
+                        type="text"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeBackground}
+                        value={background}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <hr className="mt-6 border-b-1 border-gray-400" />
+                <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+                  Experience
+                </h6>
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        JOB TITLE
+                      </label>
+                      <input
+                        type="text"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangejobtitle}
+                        value={jobtitle}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        COMPANY
+                      </label>
+                      <input
+                        type="text"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeCompany}
+                        value={company}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Strating Date
+                      </label>
+                      <input
+                        type="date"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeStartingDate}
+                        value={starting_date}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Ending Date
+                      </label>
+                      <input
+                        type="date"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        onChange={onChangeEndingDate}
+                        value={ending_date}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full lg:w-12/12 px-4">
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      DESCRIPTION
+                    </label>
+                    <textarea
+                      type="text"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      onChange={onChangeDescription}
+                      value={description}
+                    />
+                  </div>
+                </div>
+                <hr className="mt-6 border-b-1 border-gray-400" />
+                <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+                  About Me
+                </h6>
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        About me
+                      </label>
+                      <textarea
+                        type="text"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                        defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
+                        rows="4"
+                        onChange={onChangeAboutme}
+                        value={aboutMe}
+                      ></textarea>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="w-full lg:w-4/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    City
-                  </label>
-                  <input
-                    type="email"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="New York"
-                  />
-                </div>
-              </div>
-              <div className="w-full lg:w-4/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Country
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="United States"
-                  />
-                </div>
-              </div>
-              <div className="w-full lg:w-4/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Postal Code
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Postal Code"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <hr className="mt-6 border-b-1 border-gray-400" />
-
-            <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
-              About Me
-            </h6>
-            <div className="flex flex-wrap">
-              <div className="w-full lg:w-12/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    About me
-                  </label>
-                  <textarea
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
-                    rows="4"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
+            )}
           </form>
         </div>
-      </div>
+      </main>
     </>
   );
 }

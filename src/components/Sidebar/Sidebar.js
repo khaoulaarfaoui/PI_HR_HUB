@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -11,9 +10,14 @@ export default function SidebarCandidate() {
           <div className="md:block text-left md:pb-2  text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0">
             <img
               className="w-28 mx-auto mb-3"
-              src={require("../../assets/img//Candidate/profile.svg")}
+              src={
+                "http://localhost:8082/file/" +
+                JSON.parse(localStorage.getItem("hruser")).profilePhoto
+              }
             />
-            <div className="text-center	">HR numberone</div>
+            <div className="text-center ">
+              <a href="/admin/setting"> HR numberone </a>
+            </div>
             <div className="text-center font-light opacity-50">ESPRIT</div>
           </div>
 
@@ -71,41 +75,38 @@ export default function SidebarCandidate() {
                   to="/admin/tests"
                 >
                   <i
-    className={
-        "fas fa-file-alt mr-2 text-sm " +
-        (window.location.href.indexOf("/admin/tests") !== -1
-            ? "opacity-75"
-            : "text-gray-400")
-    }
-    />{" "}
+                    className={
+                      "fas fa-file-alt mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/tests") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
                   Tests
                 </Link>
               </li>
 
-
-                <li className="items-center">
-                    <Link
-                        className={
-                            "text-xs uppercase py-3 font-bold block " +
-                            (window.location.href.indexOf("/admin/Elearning") !== -1
-                                ? "text-blue-500 hover:text-blue-600"
-                                : "text-gray-800 hover:text-gray-600")
-                        }
-                        to="/admin/Elearning"
-                    >
-                        <i
-    className={
-        "fas fa-file-alt mr-2 text-sm " +
-        (window.location.href.indexOf("/admin/Elearning") !== -1
-            ? "opacity-75"
-            : "text-gray-400")
-    }
-    />{" "}
-                        E-Learning
-                    </Link>
-                </li>
-
-
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/tasks") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/admin/tasks"
+                >
+                  <i
+                    className={
+                      "fas fa-file-alt mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/tasks") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Tasks
+                </Link>
+              </li>
 
               <li className="items-center">
                 <Link
@@ -155,27 +156,6 @@ export default function SidebarCandidate() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/maps") !== -1
-                      ? "text-blue-500 hover:text-blue-600"
-                      : "text-gray-800 hover:text-gray-600")
-                  }
-                  to="/admin/maps"
-                >
-                  <i
-                    className={
-                      "fas fa-calendar-alt mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/maps") !== -1
-                        ? "opacity-75"
-                        : "text-gray-400")
-                    }
-                  ></i>{" "}
-                  Events
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/admin/event") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
@@ -184,13 +164,57 @@ export default function SidebarCandidate() {
                 >
                   <i
                     className={
-                      "fas fa-newspaper text-gray-500 mr-2 text-sm" +
+                      "fas fa-calendar-alt mr-2 text-sm" +
                       (window.location.href.indexOf("/admin/event") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }
                   ></i>{" "}
                   Event Management
+                </Link>
+                </li>
+
+                <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/teams") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/admin/teams"
+                >
+                  <i
+                    className={
+                      "fas fa-newspaper text-gray-500 mr-2 text-sm" +
+                      (window.location.href.indexOf("/admin/teams") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Team Management
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/chat") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/admin/chat"
+                >
+                  <i
+                    className={
+                      "fas fa-bell mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/chat") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Chat
                 </Link>
               </li>
             </ul>

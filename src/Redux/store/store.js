@@ -6,26 +6,29 @@ import userReducer from "../reducers/userReducers";
 import hrReducer from "../reducers/hrReducers";
 import candidateReducer from "../reducers/candidateReducers";
 import { AllEvents } from "../actions/event/EventAction";
-import { AllTests } from "../actions/CandidateTest/CandidateAction";
 import eventsReducer from "../reducers/eventReducers/EventReducer";
-import TestReducers from "../reducers/TestReducer/TestReducer";
 import jobs from "../reducers/jobReducers/job.reducer";
+import teamsReducer from "../reducers/teamReducers/TeamReducer";
+import candidate from "../reducers/candidateReducers/candidate";
+import testReducers from "../reducers/testReducers";
+import { findallHrTest } from "../actions/hrtest/hrtest";
 
 const middleware = [thunk];
 
 const rootReducer = combineReducers({
+  testReducers,
   userReducer,
   hrReducer,
   candidateReducer,
-  TestReducers,
   eventsReducer,
   jobData: jobs,
+  teamsReducer,
 });
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(...middleware))
 );
-store.dispatch(AllTests());
-store.dispatch(AllEvents());
-//store.dispatch(fetchJobs());
+store.dispatch(findallHrTest());
+store.dispatch(fetchJobs());
+
 export default store;

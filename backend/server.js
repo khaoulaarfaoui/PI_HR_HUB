@@ -5,60 +5,45 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Role = require("../backend/models/Role");
 const db = require("../backend/models");
-
 const candidate = require("./routes/Candidate/CandidateAPI");
 const test = require("./Controllers/candidateTests/testController");
 const hr = require("./routes/HR/HRAPI");
+const hrTest = require("./routes/HR/HRTEST");
+const response = require("./routes/Candidate/responseApi");
+
 const dbConfig = require("./config/DBconfig");
 const cv = require("./cv/app");
 const multer = require("multer");
-const path = require("path");
+var path = require("path");
 const job = require("./routes/JobsAPI");
-const debug = require("debug")("server:server");
-const http = require("http");
-const socket = require("socket.io");
-const connectIo = require("./chatbotService");
+var http = require("http");
+var debug = require("debug")("server:server");
+var connectIo = require("./chatbotService");
+var socket = require("socket.io");
 const eventsmodel = require("./Controllers/events/eventController");
-const userRouter = require("./routes/Test/user");
-const testRouter = require("./routes/Test/test");
-require("dotenv").config();
-const morgan = require("morgan");
+const teams = require ("./Controllers/teams/teamsController");
+var dir = path.join(__dirname, "./public");
+var logger = require("morgan");
+var dir = path.join(__dirname, "./public");
+var cookieParser = require("cookie-parser");
+var callback = require("./routes/callback");
 const app = express();
-const corsOptions = {
+
+const { Chat } = require("./models/Chat");
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+var corsOptions = {
   origin: "http://localhost:8081",
 };
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-app.use(express.json());
-app.use(cors(corsOptions));
-app.use(morgan("tiny"));
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', ' * ');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers');
-  //and remove cacheing so we get the most recent questions
-  res.setHeader('Cache-Control', 'no-cache');
-  next();
-});
 
-app.use("/api/user", userRouter);
-app.use("/api/test", testRouter);
-app.use("/test", test);
+app.use(cors(corsOptions));
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
-if (
-  process.env.NODE_ENV === "production" ||
-  process.env.NODE_ENV === "staging"
-) {
-  app.use(express.static("client/build"));
-
-  app.all("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-  });
-}
+app.use("/teams", teams);
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
@@ -66,21 +51,41 @@ app.listen(PORT, () => {
 });
 require("../backend/routes/User/auth")(app);
 require("../backend/routes/User/userRoute")(app);
-
 require("./routes/User/auth")(app);
 require("./routes/User/userRoute")(app);
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to hrbub application." });
-});
-//Use our router configuration when we call /api
-app.use('/api', router);
-//starts the server and listens for requests
-
- 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.use(logger("dev"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/candidate", candidate);
 app.use("/hr", hr);
+app.use(express.static(path.join(__dirname, "../build")));
+app.use("/callback", callback);
+app.get("/linkedin", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
+app.use("/response", response);
+app.use("/hrTest", hrTest);
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  var err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  console.log(err);
+  res.render("error");
+});
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
@@ -105,7 +110,6 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
   },
 });
-
 var upload = multer({ storage: storage });
 app.get("/", function (req, res) {
   res.send("Hello HR HUB");
@@ -118,6 +122,9 @@ app.post("/uploadfile", upload.single("file"), (req, res, next) => {
     return next(error);
   }
   res.send(file);
+});
+app.get("/file/:image", function (req, res) {
+  res.sendFile(__dirname + "/uploads/" + req.params.image);
 });
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
@@ -156,3 +163,4 @@ function initial() {
 }
 
 module.exports = router;
+

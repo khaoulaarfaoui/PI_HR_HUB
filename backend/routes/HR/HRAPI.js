@@ -16,4 +16,31 @@ router.post("/addHR", async (req, res) => {
   }
 });
 
+router.put("/updateHR", async (req, res) => {
+
+   console.log(req.body)
+  try {
+   const tt= await HR.findByIdAndUpdate({_id:req.body._id},req.body,{new:true});
+
+    //return new book object, after saving it to Publisher
+    res.status(200).json({ success: true, data: tt });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+});
+
+
+router.get("/", async (req, res) => {
+  try {
+    
+    const hrs = await HR.find(); ;
+
+    //return new book object, after saving it to Publisher
+    res.status(200).json({ success: true, data: hrs });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+});
+ 
+
 module.exports = router;

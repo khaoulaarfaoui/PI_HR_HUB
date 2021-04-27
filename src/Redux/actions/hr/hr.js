@@ -25,14 +25,22 @@ export const register = (
     user
   ).then(
     (response) => {
+
+       console.log("response from actions auth ",response)
+       localStorage.setItem("data",JSON.stringify(response.data))
       dispatch({
         type: REGISTER_SUCCESS_HR,
+        payload: response.data,
+
       });
 
       dispatch({
         type: SET_MESSAGE_HR,
         payload: response.data,
       });
+
+      //history.push("/admin");
+
 
       return Promise.resolve();
     },
@@ -61,8 +69,6 @@ export const register = (
 export const update = (
   id,
   fullName,
-  username,
-  password,
   profilePhoto,
   birthday,
   email,
@@ -75,8 +81,6 @@ export const update = (
   return HrService.update(
     id,
     fullName,
-    username,
-    password,
     profilePhoto,
     birthday,
     email,
@@ -158,6 +162,43 @@ export const deleteHr = () => (dispatch) => {
 
 export const findallHr = () => (dispatch) => {
   return HrService.findallHr().then(
+    (response) => {
+      dispatch({
+        type: REGISTER_SUCCESS_HR,
+      });
+
+      dispatch({
+        type: SET_MESSAGE_HR,
+        payload: response.data,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: REGISTER_FAIL_HR,
+      });
+
+      dispatch({
+        type: SET_MESSAGE_HR,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
+
+
+export const uploadFile = (file) => (dispatch) => {
+  return HrService.uploadFile(file).then(
     (response) => {
       dispatch({
         type: REGISTER_SUCCESS_HR,
