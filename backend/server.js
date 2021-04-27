@@ -20,11 +20,18 @@ var debug = require("debug")("server:server");
 var connectIo = require("./chatbotService");
 var socket = require("socket.io");
 const eventsmodel = require("./Controllers/events/eventController");
+const teams = require ("./Controllers/teams/teamsController");
+var dir = path.join(__dirname, "./public");
 var logger = require("morgan");
 var dir = path.join(__dirname, "./public");
 var cookieParser = require("cookie-parser");
 var callback = require("./routes/callback");
 const app = express();
+
+const { Chat } = require("./models/Chat");
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
 var corsOptions = {
   origin: "http://localhost:8081",
 };
@@ -35,8 +42,7 @@ app.use(cors(corsOptions));
 app.use("/job", job);
 app.use("/cv", cv);
 app.use("/events", eventsmodel);
-app.use("/public", express.static(dir));
-
+app.use("/teams", teams);
 // set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
@@ -92,6 +98,7 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -154,3 +161,4 @@ function initial() {
 }
 
 module.exports = router;
+
