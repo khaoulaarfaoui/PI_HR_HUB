@@ -1712,7 +1712,9 @@ video {
 .mt-48 {
   margin-top: 12rem;
 }
-
+.mt-50 {
+  margin-top: 14rem;
+}
 .mr-auto {
   margin-right: auto;
 }

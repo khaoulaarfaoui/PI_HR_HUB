@@ -26,10 +26,14 @@ function Register() {
     };
 
     axios
-      .post("http://localhost:8082/api/user/add", { name, email, password }, options)
+      .post(
+        "http://localhost:8082/api/user/add",
+        { name, email, password },
+        options
+      )
       .then((res) => {
         alert("account created");
-        history.push("/candidate/alltests");
+        history.push("/candidate/login");
       })
       .catch((err) => {
         alert(err.response.data.message);

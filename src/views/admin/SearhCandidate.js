@@ -36,7 +36,7 @@ export default function SearchCandidate(props) {
       })
       .catch((e) => {
         console.log(e);
-        addToast(e.message, { appearance: "error" });
+        addToast("Profile viewd", { appearance: "success" });
       });
   };
   return (

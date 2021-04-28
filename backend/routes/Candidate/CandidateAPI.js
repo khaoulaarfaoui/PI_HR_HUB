@@ -69,7 +69,7 @@ router.post(
         tests: req.body.tests,
         teams: req.body.teams,
       });
-      console.log("herreeeeeeeeee", req.body);
+      console.log("herreeeeeeeeee", req.body.experience);
       candidate.save();
       console.log("aaaaaaaaaaaaaaaaaa", Candidate);
       const user = await User.findById({ _id: candidate.user });
@@ -136,7 +136,7 @@ router.put("/updateHRVIEW/:id", function (req, res) {
     }
   )
     .then((data) => {
-      console.log("yooooooo", req.body.HR_viewed);
+      console.log(req.body.HR_viewed);
       console.log("dta", data);
       if (!data) {
         res.status(404).send({

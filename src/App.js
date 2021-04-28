@@ -40,7 +40,6 @@ import ProfileCard from "./Linkedin/src/components/ProfileCard";
 import Logo from "assets/img/HR HUB CANDIDATE.png";
 
 const App = () => {
-  
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
 
@@ -169,7 +168,6 @@ const App = () => {
         </Switch>
       </Router>
     </ResumeContextProvider>
-       
   );
 };
 

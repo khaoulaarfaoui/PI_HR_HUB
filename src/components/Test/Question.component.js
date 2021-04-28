@@ -9,7 +9,7 @@ function Question(props) {
 
   const res = props.location.state.res;
   const mins = res.time.split(":")[0];
-  const secs = (res.time.split(":")[1])? res.time.split(":")[1] : 0 ;
+  const secs = res.time.split(":")[1] ? res.time.split(":")[1] : 0;
   const length = res.results.length;
   const [ques, setques] = useState(0);
   const [options, setoptions] = useState([]);
@@ -17,6 +17,7 @@ function Question(props) {
   const [answers, setanswers] = useState({});
 
   const submithandler = () => {
+    console.log("subbbbbb");
     let name = localStorage.getItem("name");
     let email = localStorage.getItem("email");
     let pin = localStorage.getItem("pin");
@@ -46,7 +47,7 @@ function Question(props) {
       )
       .then((res) => {
         console.log(res);
-        history.push("/candidate/login");
+        history.push("/candidate/taketest");
       })
       .catch((err) => console.log(err));
     console.log(score);
@@ -170,7 +171,7 @@ function Question(props) {
           &#8249;
         </a>
         <a
-onClick={(e) => {
+          onClick={(e) => {
             if (ques == length - 1) {
             } else {
               setques(ques + 1);

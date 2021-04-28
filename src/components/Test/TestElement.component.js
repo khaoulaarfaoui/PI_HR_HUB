@@ -8,7 +8,7 @@ function Testelement(props) {
   return (
     <Fragment>
       <Link
-        to={{ pathname: "/abouttest", state: { ...props } }}
+        to={{ pathname: "/candidate/abouttest", state: { ...props } }}
         style={{ textDecoration: "none", color: "black" }}
       >
         <div className={styles.row}>
