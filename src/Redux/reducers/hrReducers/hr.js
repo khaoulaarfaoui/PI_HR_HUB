@@ -2,7 +2,7 @@ import { REGISTER_SUCCESS_HR, REGISTER_FAIL_HR } from "../../actions/hr/types";
 
 const hr = JSON.parse(localStorage.getItem("hr"));
 console.log(hr);
-const initialState = hr
+export const initialState = hr
   ? { isLoggedIn: true, hr }
   : { isLoggedIn: false, hr: null };
 

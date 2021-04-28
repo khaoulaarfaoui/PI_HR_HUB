@@ -37,12 +37,14 @@ const candidateSchema = new Schema({
   cv: String,
   title: String,
   HR_viewed: [{}],
+  status: Boolean,
   jobs: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Number,
       ref: "job",
     },
   ],
+
   events: [
     {
       type: Schema.Types.ObjectId,

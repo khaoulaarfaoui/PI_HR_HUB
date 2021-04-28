@@ -32,6 +32,7 @@ import UpdateTest from "views/admin/UpdateTest";
 import Question from "views/admin/Question";
 import Response from "views/admin/Response";
 import Tasks from "views/admin/Tasks";
+import { NotificationContainer } from "react-notifications";
 export default function Admin() {
   return (
     <>
@@ -122,7 +123,6 @@ export default function Admin() {
             <Route path="/admin/UpdateTest" exact component={UpdateTest} />{" "}
             <Route path="/admin/maps" exact component={Maps} />
             <Route path="/admin/tables" exact component={Tables} />
-            <Route path="/admin/addJob" exact component={AddJob} />
             <Route path="/admin/jobs" exact component={JobsDispaly} />
             <Route path="/admin/test" exact component={TestJob} />
             <Route path="/admin/edit/:id" exact component={CardEditJob} />

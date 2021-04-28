@@ -8,6 +8,7 @@ import { history } from "helpers/history";
 import { deleteJob } from "Redux/actions/job.actions";
 import { fetchJobs } from "Redux/actions/job.actions";
 import Pagination from "react-js-pagination";
+import ReactPaginate from "react-paginate";
 
 // components
 
@@ -17,7 +18,13 @@ class Jobs extends Component {
     console.log(this.props);
     this.state = {
       search: "",
+      offset: 0,
+      tableData: [],
+      orgtableData: [],
+      perPage: 3,
+      currentPage: 0,
     };
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
   onChange = (e) => {
     this.setState({ search: e.target.value });
@@ -32,6 +39,32 @@ class Jobs extends Component {
       state: {
         job: job,
       },
+    });
+  }
+  handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * this.state.perPage;
+
+    this.setState(
+      {
+        currentPage: selectedPage,
+        offset: offset,
+      },
+      () => {
+        this.loadMoreData();
+      }
+    );
+  };
+  loadMoreData() {
+    const data = this.props.jobs;
+
+    const slice = data.slice(
+      this.state.offset,
+      this.state.offset + this.state.perPage
+    );
+    this.setState({
+      pageCount: Math.ceil(data.length / this.state.perPage),
+      tableData: slice,
     });
   }
 
@@ -65,34 +98,63 @@ class Jobs extends Component {
     } else {
       return (
         <>
-          <input
-            type="text"
-            onChange={this.onChange}
-            placeholder="Search here..."
-            className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
-          />
-          {this.props.jobs.map((job) => {
-            const { search } = this.state;
-
-            if (
-              search !== "" &&
-              job.title.toLowerCase().indexOf(search.toLocaleLowerCase()) === -1
-            ) {
-              return null;
-            }
-
-            return (
-              <>
-                <Job
-                  key={job._id}
-                  job={job}
-                  onEdit={this.handleEdit.bind(this)}
-                  onDelete={this.props.onDelete}
+          <div className="flex flex-col lg:ml-auto mr-3">
+            <form className="flex flex-col flex-wrap lg:ml-auto mr-3 ">
+              <div className="relative flex w-full flex-wrap ">
+                <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+                  <i className="fas fa-search"></i>
+                </span>
+                <input
+                  onChange={this.onChange}
+                  type="text"
+                  placeholder="Search here..."
+                  className="px-3 py-3 placeholder-gray-400 text-gray-700  bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
                 />
-              </>
-            );
-          })}
-          <div></div>
+              </div>
+            </form>
+            <div className="flex flex-wrap">
+              {
+                ((this.slice = this.props.jobs.slice(
+                  this.state.offset,
+                  this.state.offset + this.state.perPage
+                )),
+                this.slice.map((job) => {
+                  const { search } = this.state;
+
+                  if (
+                    search !== "" &&
+                    job.title
+                      .toLowerCase()
+                      .indexOf(search.toLocaleLowerCase()) === -1
+                  ) {
+                    return null;
+                  }
+
+                  return (
+                    <>
+                      <Job
+                        key={job._id}
+                        job={job}
+                        onEdit={this.handleEdit.bind(this)}
+                        onDelete={this.props.onDelete}
+                      />
+                    </>
+                  );
+                }))
+              }
+              <div></div>{" "}
+            </div>
+            <ReactPaginate
+              previousLabel={"prev"}
+              nextLabel={"next"}
+              breakLabel={"..."}
+              pageCount={this.props.jobs.length / 2}
+              pageRangeDisplayed={5}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+              onPageChange={this.handlePageClick}
+            />
+          </div>
         </>
       );
     }
