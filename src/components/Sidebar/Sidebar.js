@@ -2,28 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function SidebarCandidate() {
+  const hr = JSON.parse(localStorage.getItem("hr"));
+  //  console.log(hr.data.profilePhoto);
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   return (
     <>
-      <nav className="md:left-0 bg-gray-300 md:block md:fixed md:top-0 md:bottom-2 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+      <nav className="md:left-0 bg-gray-300 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-no-wrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
-          <div className="md:block text-left md:pb-2  text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0">
+          <div className="md:block text-left md:pb-2   text-gray-700  mt-8 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0">
             <img
-              className="w-28 mx-auto mb-3"
-              src={
-                "http://localhost:8082/file/" +
-                JSON.parse(localStorage.getItem("hruser")).profilePhoto
-              }
+              className=" mt-8  w-auto mx-auto"
+              src={require("assets/img/HR HUB CANDIDATE.png")}
+              alt="logo"
             />
-            <div className="text-center ">
-              <a href="/admin/setting"> HR numberone </a>
-            </div>
-            <div className="text-center font-light opacity-50">ESPRIT</div>
           </div>
 
           <div
             className={
-              "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
+              "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-2 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
               collapseShow
             }
           >
@@ -64,6 +60,28 @@ export default function SidebarCandidate() {
                   Dashboard
                 </Link>
               </li>
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/setting") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/admin/setting"
+                >
+                  <i
+                    className={
+                      "fas fa-user mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/setting") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Profile
+                </Link>
+              </li>
+
               <li className="items-center">
                 <Link
                   className={
@@ -172,9 +190,9 @@ export default function SidebarCandidate() {
                   ></i>{" "}
                   Event Management
                 </Link>
-                </li>
+              </li>
 
-                <li className="items-center">
+              <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
@@ -193,28 +211,6 @@ export default function SidebarCandidate() {
                     }
                   ></i>{" "}
                   Team Management
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/chat") !== -1
-                      ? "text-blue-500 hover:text-blue-600"
-                      : "text-gray-800 hover:text-gray-600")
-                  }
-                  to="/admin/chat"
-                >
-                  <i
-                    className={
-                      "fas fa-bell mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/chat") !== -1
-                        ? "opacity-75"
-                        : "text-gray-400")
-                    }
-                  ></i>{" "}
-                  Chat
                 </Link>
               </li>
             </ul>

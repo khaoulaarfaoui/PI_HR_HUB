@@ -23,17 +23,12 @@ export default function CardSettings(props) {
   const [region, setRegion] = useState(candidate.region);
   const [aboutMe, setAboutme] = useState(candidate.aboutMe);
   const [background, setBackground] = useState(candidate.background);
-  const [jobtitle, setJobtitle] = useState(candidate.experience.jobtitle);
-  const [company, setCompany] = useState(candidate.experience.company);
-  const [starting_date, setStartingDate] = useState(
-    candidate.experience.starting_date
-  );
-  const [ending_date, setEndingDate] = useState(
-    candidate.experience.ending_date
-  );
-  const [description, setDescription] = useState(
-    candidate.experience.description
-  );
+  const [jobtitle, setJobtitle] = useState();
+
+  const [company, setCompany] = useState();
+  const [starting_date, setStartingDate] = useState();
+  const [ending_date, setEndingDate] = useState();
+  const [description, setDescription] = useState();
 
   const onChangejobtitle = (e) => {
     const jobtitle = e.target.value;
@@ -127,7 +122,7 @@ export default function CardSettings(props) {
   return (
     <>
       <main>
-        <div className="rounded-t bg-gray-200  py-6"></div>
+        <div className="rounded-t  py-6"></div>
         <div className="flex-auto px-2 lg:px-2 py-10 pt-0">
           <button
             className="bg-blue-500  text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"

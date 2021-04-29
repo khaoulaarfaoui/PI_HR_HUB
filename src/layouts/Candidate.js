@@ -1,6 +1,5 @@
-import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
 // components
 
 //import CandidateNavbar from "components/Navbars/CandidateNavbar";
@@ -14,20 +13,29 @@ import Tests from "views/candidate/Tests.js";
 import Settings from "views/candidate/Settings.js";
 import Tables from "views/candidate/Tables.js";
 import Chat from "../components/Chat/App";
+import Question from "views/candidate/Question";
+
+import taketest from "../components/Test/TakeTest.component";
 import SidebarCandidate from "components/Sidebar/SidebarCandidate";
 import NavbarCandidate from "components/Navbars/CandidateNavbar";
-import Question from "views/candidate/Question";
+import Event3D from "views/EventManagement/Event3D";
 import webcam from "views/candidate/webcam";
 import WebcamCapture from "views/candidate/WebcamCapture";
 import WebcamStreamCapture from "views/candidate/WebcamStreamCapture";
-
+import Homenav from "../components/Test/HomeHeader.component";
+import Loginnav from "../components/Test/LoginNav.component";
+import Login from "../components/Test/LoginRegister.component";
+import alltests from "../components/Test/Dashboard.component";
+import Testresult from "../components/Test/TestResult.component";
+import Ques from "../components/Test/Question.component";
 
 export default function Candidate() {
+  const [loggedin, setloggedin] = useState(false);
   return (
     <>
       <NavbarCandidate />
       <SidebarCandidate />
-      <div className="relative md:ml-64 bg-gray-200 md:pt-3 pb-32 pt-12">
+      <div className="relative md:ml-64  md:pt-3 pb-32 pt-12">
         {/* Header */}
         <HeaderStats />
 
@@ -38,15 +46,41 @@ export default function Candidate() {
             <Route path="/candidate/tests" exact component={Tests} />
             <Route path="/candidate/settings" exact component={Settings} />
             <Route path="/candidate/tables" exact component={Tables} />
-            <Route path="/candidate/chat" exact component={Chat} />
             <Route path="/candidate/question" exact component={Question} />{" "}
+            <Route path="/event3D" exact component={Event3D} />{" "}
             <Route path="/candidate/webcam" exact component={webcam} />{" "}
-            <Route path="/candidate/webcamCapture" exact component={WebcamCapture} />{" "}
-            <Route path="/candidate/webcamStreamCapture" exact component={WebcamStreamCapture} />{" "}
+            <Route
+              path="/candidate/webcamCapture"
+              exact
+              component={WebcamCapture}
+            />{" "}
+            <Route
+              path="/candidate/webcamStreamCapture"
+              exact
+              component={WebcamStreamCapture}
+            />{" "}
+            <Route path="/candidate/chat" exact component={Chat} />
+            <Route path="/candidate/abouttest" exact component={Testresult} />
+            <Route path="/candidate/login" exact component={Login} />
+            <Route
+              exact
+              path={["/login", "/register"]}
+              render={() => <Login setloggedin={setloggedin} />}
+            />
+            <Route path="/candidate/ques" exact component={Ques} />
+            <Route path="/candidate/alltests" exact component={alltests} />
+            <Route path="/candidate/taketest" exact component={taketest} />
+            <Route
+              path="/candidate/webcamCapture"
+              exact
+              component={WebcamCapture}
+            />{" "}
+            <Route
+              path="/candidate/webcamStreamCapture"
+              exact
+              component={WebcamStreamCapture}
+            />{" "}
             <Redirect from="/candidate" to="/candidate/dashboard" />
-            
-
-            
           </Switch>
           <FooterAdmin />
         </div>

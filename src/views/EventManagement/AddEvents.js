@@ -64,7 +64,7 @@ const AddEvent = ({ ...props }) => {
     };
     if (validate()) {
       // eslint-disable-next-line eqeqeq
-      if  (props.currentId == 0){
+      if (props.currentId == 0) {
         props.createEvents(values, onSuccess);
         ButterToast.raise({
           content: (
@@ -77,16 +77,14 @@ const AddEvent = ({ ...props }) => {
           ),
         });
         resetForm();
-
-      }
-      
-      else props.updateEvents(props.currentId, values, onSuccess);
+      } else props.updateEvents(props.currentId, values, onSuccess);
     }
+    window.location.reload();
   };
 
   const reset = (e) => {
     resetForm();
-  }
+  };
 
   return (
     <>
@@ -158,37 +156,31 @@ const AddEvent = ({ ...props }) => {
                 </div>
               </div>
             </div>
-       
+
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
-
-                    <button
+                  <button
                     type="submit"
-                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-1 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   >
                     Confirm
                   </button>
-  
                 </div>
               </div>
 
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
-
-                    <button
+                  <button
                     type="submit"
                     onClick={() => reset()}
-                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-1 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   >
                     Reset
                   </button>
-                  
                 </div>
               </div>
-
             </div>
-
           </form>
         </div>
       </div>
@@ -197,7 +189,7 @@ const AddEvent = ({ ...props }) => {
 };
 
 const mapStateToProps = (state) => ({
-  EventsList: state.eventsReducer.list, 
+  EventsList: state.eventsReducer.list,
 });
 
 const mapActionToProps = {

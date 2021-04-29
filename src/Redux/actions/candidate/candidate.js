@@ -48,7 +48,7 @@ export const register = (
           response.username,
         ]),
       });
-
+      console.log(response);
       return Promise.resolve();
     },
     (error) => {

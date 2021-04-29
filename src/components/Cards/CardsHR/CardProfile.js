@@ -2,9 +2,7 @@ import React from "react";
 
 // components
 const CardProfile = (props) => {
-
-
-   
+  const hr = JSON.parse(localStorage.getItem("hr"));
 
   return (
     <>
@@ -13,13 +11,12 @@ const CardProfile = (props) => {
           <div className="flex flex-wrap justify-center">
             <div className="w-full px-4 flex justify-center">
               <div className="relative">
-                
                 <img
-                 className="w-28 mx-auto mb-3"
+                  className="w-28 mx-auto mb-3"
                   alt="..."
-                  src={"http://localhost:8082/file/"+JSON.parse(localStorage.getItem("hruser")).companyLogo}
+                  src={`http://localhost:8082/file/${hr.profilePhoto}`}
                   height="80"
-                 width="50"
+                  width="50"
                 />
               </div>
             </div>
@@ -87,6 +84,6 @@ const CardProfile = (props) => {
       </div>
     </>
   );
-}
+};
 
 export default CardProfile;

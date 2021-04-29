@@ -172,8 +172,10 @@ export default function CandidateRegister() {
     form.append("skills", skills);
     form.append("aboutMe", aboutMe);
     form.append("title", title);
+    form.append("experience", {});
     console.log(form);
     if (checkBtn.current.context._errors.length === 0) {
+      console.log("hererrrrrr");
       AuthService.register(form).then(
         (response) => {
           setMessage(response.data);
@@ -192,7 +194,6 @@ export default function CandidateRegister() {
         }
       );
       history.push("/candidate");
-      window.location.reload();
     }
   };
   return (
