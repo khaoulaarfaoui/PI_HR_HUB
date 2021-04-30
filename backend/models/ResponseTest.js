@@ -7,7 +7,7 @@ const responseSchema = new Schema({
     response:String,
   hrTest: {
     type: Schema.Types.ObjectId,
-    ref: "hTest",
+    ref: "hrTest",
   },
   candidat: {
     type: Schema.Types.ObjectId,

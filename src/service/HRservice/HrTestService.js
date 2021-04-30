@@ -16,7 +16,7 @@ const addHrTest = (
   user
   
 ) => {
-  console.log("object ", {
+  console.log("addHrTest ", {
     title: title,
     description: description,
     tags: tags,
@@ -26,7 +26,7 @@ const addHrTest = (
     startDate: startDate,
     endDate: endDate,
     type:type,
-    hr: user,
+    hr: JSON.parse(localStorage.getItem("user"))._id,
   });
   return axios
     .post(API_URL + "addHrTest", {
@@ -39,7 +39,7 @@ const addHrTest = (
       startDate: startDate,
       endDate: endDate,
       type:type,
-      hr: user,
+      hr: JSON.parse(localStorage.getItem("user"))._id,
     })
     .then((response) => {
 
@@ -141,6 +141,13 @@ const updateHRQuestion = (
 const findallHrTestQuestion = (id) => {
   return axios.get(API_URL+"questions/"+ id);
 };
+
+
+const findallResponse = () => {
+  return axios.get(API_URL+"response/");
+};
+
+
 
 const deleteHrTestQuestion = (id) => {
 

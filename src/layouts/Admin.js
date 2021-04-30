@@ -29,6 +29,9 @@ import Teams from "views/TeamManagement/TeamView";
 import AddTest from "views/admin/AddTest";
 import UpdateTest from "views/admin/UpdateTest";
 
+import AddQuestion from "views/admin/AddQuestion";
+import Updatequestion from "views/admin/UpdateQuestion";
+
 import Question from "views/admin/Question";
 import Response from "views/admin/Response";
 import Tasks from "views/admin/Tasks";
@@ -50,6 +53,10 @@ export default function Admin() {
             <Route path="/admin/UpdateHr" exact component={UpdateHr} />{" "}
             <Route path="/admin/AddTest" exact component={AddTest} />{" "}
             <Route path="/admin/UpdateTest" exact component={UpdateTest} />{" "}
+
+            <Route path="/admin/AddQuestion" exact component={AddQuestion} />{" "}
+            <Route path="/admin/Updatequestion" exact component={Updatequestion} />{" "}
+
             <Route path="/admin/maps" exact component={Maps} />
             <Route path="/admin/tables" exact component={Tables} />
             <Route path="/admin/addJob" exact component={AddJob} />

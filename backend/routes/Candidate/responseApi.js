@@ -6,8 +6,13 @@ const ResponseTest = require("../../models/ResponseTest");
 router.post("/addResponseTest", async (req, res) => {
   try {
     const candidateResponse = new ResponseTest(req.body);
-    await candidateResponse.save();
+   const response= await candidateResponse.save();
 
+    response.populate("hrTest",function(err,item){
+
+ console.log("responseeee ",response)
+   
+    })
     //return new book object, after saving it to Publisher
     res.status(200).json({ success: true, data: candidateResponse });
   } catch (err) {
@@ -30,7 +35,12 @@ router.put("/updateCandateTest", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     
-    const hrs = await ResponseTest.find(); ;
+    const hrs = await ResponseTest.find().populate({
+    path : 'hrTest',
+    populate : {
+      path : 'hr'
+    }
+  });
 
     //return new book object, after saving it to Publisher
     res.status(200).json({ success: true, data: hrs });

@@ -85,7 +85,7 @@ const WebcamStreamCapture = () => {
       AddtestResponse(
         Photos.name,
         JSON.parse(localStorage.getItem("user")).id,
-        localStorage.getItem("idTestc")
+        localStorage.getItem("idTest")
       )
     )
       .then(() => {})

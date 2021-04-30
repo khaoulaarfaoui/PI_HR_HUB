@@ -159,7 +159,7 @@ const Tests = (props) => {
                               href="/candidate/question"
                               onClick={(e) => {
                                 e.preventDefault();
-                                localStorage.setItem("idTestc", test._id);
+                                localStorage.setItem("idTest", test._id);
                                 window.location.href = "/candidate/question";
                               }}
                             >

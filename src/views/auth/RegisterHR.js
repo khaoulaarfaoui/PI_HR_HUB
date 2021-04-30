@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import PhoneInput from "react-phone-number-input";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -25,6 +26,12 @@ export default function HR() {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [image, setImage] = useState("");
+
+  const [imageCompany, setImageCompany] = useState("");
+
+  const [imageLogo, setLogo] = useState("");
+
   const onChangefullName = (e) => {
     const FullName = e.target.value;
     setFullName(FullName);
@@ -37,6 +44,16 @@ export default function HR() {
     const file = e.target.files[0]; // accesing file
     console.log(file);
     setProfilePhoto(file);
+    dispatch(uploadFile(file))
+        .then((file) => {
+
+          console.log("file 1",file.data.filename)
+          setImage(file.data.filename);
+        })
+        .catch(() => {
+          //setSuccessful(false);
+        });
+
   };
   const onChangeBirthday = (e) => {
     const Birthday = e.target.value;
@@ -61,10 +78,26 @@ export default function HR() {
   const onChangeCampanyLogo = (e) => {
     const file = e.target.files[0]; // accesing file
     setCompanyLogo(file);
+    dispatch(uploadFile(file))
+    .then((file) => {
+      setImageCompany(file.data.filename);
+    })
+    .catch(() => {
+      //setSuccessful(false);
+    });
+
   };
   const onChangeCompanyPhotos = (e) => {
     const file = e.target.files[0]; // accesing file
     setCompanyPhotos(file);
+    dispatch(uploadFile(file))
+    .then((file) => {
+      setLogo(file.data.filename);
+    })
+    .catch(() => {
+      //setSuccessful(false);
+    });
+
   };
 
   const handleRegister = (e) => {
@@ -76,33 +109,24 @@ export default function HR() {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(uploadFile(profilePhoto))
-        .then(() => {})
-        .catch(() => {
-          //setSuccessful(false);
-        });
+    
+     
+    
+      console.log("image ssssss", image);
+      console.log("image ssssss", imageLogo);
+      console.log("image ssssss", imageLogo);
 
-      dispatch(uploadFile(companyLogo))
-        .then(() => {})
-        .catch(() => {
-          //setSuccessful(false);
-        });
-
-      dispatch(uploadFile(companyPhotos))
-        .then(() => {})
-        .catch(() => {
-          //setSuccessful(false);
-        });
+      localStorage.setItem("photo", image);
       dispatch(
         register(
           fullName,
-          profilePhoto.name,
+          image,
           birthday,
           phoneNumber,
           location,
           company,
-          companyLogo.name,
-          companyPhotos.name,
+          imageLogo,
+          imageCompany,
           JSON.parse(localStorage.getItem("user")).id
         )
       ).then(
@@ -211,10 +235,11 @@ export default function HR() {
                         >
                           phoneNumber
                         </label>
-                        <input
-                          type="text"
-                          name="username"
-                          defaultCountry="TN"
+                        <PhoneInput
+                        
+                        international
+                        countryCallingCodeEditable={false}
+                        defaultCountry="TN"
                           value={phoneNumber}
                           onChange={onChangephoneNumber}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"

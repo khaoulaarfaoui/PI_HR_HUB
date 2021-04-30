@@ -89,7 +89,7 @@ export default function HR() {
         startDate,
         endDate,
         type,
-        JSON.parse(localStorage.getItem("user"))._id
+        user
       )
     ).then(
       (response) => {
@@ -101,8 +101,8 @@ export default function HR() {
       }
     );
 
-    history.push("/admin/tests");
-    window.location.reload();
+   history.push("/admin/tests");
+   window.location.reload();
   };
   return (
     <>
