@@ -1,6 +1,7 @@
 import React from "react";
 import DarkMode from "../../components/Theme/Dark";
 import UserDropdown from "components/Dropdowns/CandidateDropDowns/UserDropdown";
+import PagesDropdown from "components/Dropdowns/CandidateDropDowns/PagesDropdown.js";
 
 export default function CandidateNavbar(props) {
   return (
@@ -29,7 +30,11 @@ export default function CandidateNavbar(props) {
               />
             </div>
           </form>
-
+          <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
+            <li className="flex items-center">
+              <PagesDropdown />
+            </li>
+          </ul>
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
             <DarkMode />
           </ul>

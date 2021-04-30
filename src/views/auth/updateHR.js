@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
-import {useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { update,uploadFile } from "../../Redux/actions/hr/hr";
+import { update, uploadFile } from "../../Redux/actions/hr/hr";
 
 export default function HR() {
   const form = useRef();
@@ -13,13 +13,23 @@ export default function HR() {
 
   const checkBtn = useRef();
   //const { user: currentUser } = useSelector((state) => state.userReducer.auth);
-  const [fullName, setFullName] = useState(JSON.parse(localStorage.getItem("hruser")).fullName);
+  const [fullName, setFullName] = useState(
+    JSON.parse(localStorage.getItem("hr")).fullName
+  );
   const [profilePhoto, setProfilePhoto] = useState("");
-  const [birthday, setBirthday] = useState(JSON.parse(localStorage.getItem("hruser")).birthday);
-  const [location, setLocation] = useState(JSON.parse(localStorage.getItem("hruser")).location);
-  const [company, setCompany] = useState(JSON.parse(localStorage.getItem("hruser")).company);
+  const [birthday, setBirthday] = useState(
+    JSON.parse(localStorage.getItem("hr")).birthday
+  );
+  const [location, setLocation] = useState(
+    JSON.parse(localStorage.getItem("hr")).location
+  );
+  const [company, setCompany] = useState(
+    JSON.parse(localStorage.getItem("hr")).company
+  );
   const [companyLogo, setCompanyLogo] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(JSON.parse(localStorage.getItem("hruser")).phoneNumber);
+  const [phoneNumber, setPhoneNumber] = useState(
+    JSON.parse(localStorage.getItem("hr")).phoneNumber
+  );
   const [companyPhotos, setCompanyPhotos] = useState("");
   //const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")).id);
   const [successful, setSuccessful] = useState(false);
@@ -55,19 +65,17 @@ export default function HR() {
     const company = e.target.value;
     setCompany(company);
   };
-  
+
   const dispatch = useDispatch();
 
   const onChangeCampanyLogo = (e) => {
     const file = e.target.files[0]; // accesing file
     setCompanyLogo(file);
-    
   };
   const onChangeCompanyPhotos = (e) => {
     const file = e.target.files[0]; // accesing file
     setCompanyPhotos(file);
   };
-  
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -78,41 +86,26 @@ export default function HR() {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
+      dispatch(uploadFile(profilePhoto))
+        .then(() => {})
+        .catch(() => {
+          //setSuccessful(false);
+        });
 
-      dispatch(uploadFile(profilePhoto)).then(()=> {
-      
-      }).catch(() => {
-        //setSuccessful(false);
-      });
-  
-  
-      
-      dispatch(uploadFile(companyLogo)).then(()=> {
-        
-      }).catch(() => {
-        //setSuccessful(false);
-      }); 
-  
-  
-      dispatch(uploadFile(companyPhotos)).then(()=> {
-        
-      }).catch(() => {
-        //setSuccessful(false);
-      });
+      dispatch(uploadFile(companyLogo))
+        .then(() => {})
+        .catch(() => {
+          //setSuccessful(false);
+        });
+
+      dispatch(uploadFile(companyPhotos))
+        .then(() => {})
+        .catch(() => {
+          //setSuccessful(false);
+        });
 
       console.log(
-        JSON.parse(localStorage.getItem("hruser"))._id,
-        fullName,
-        profilePhoto.name,
-        birthday,
-        phoneNumber,
-        location,
-        company,
-        companyLogo.name,
-        companyPhotos.name,
-        JSON.parse(localStorage.getItem("user")).id)
-      dispatch(update(
-        JSON.parse(localStorage.getItem("hruser"))._id,
+        JSON.parse(localStorage.getItem("hr"))._id,
         fullName,
         profilePhoto.name,
         birthday,
@@ -122,21 +115,31 @@ export default function HR() {
         companyLogo.name,
         companyPhotos.name,
         JSON.parse(localStorage.getItem("user")).id
-      )).then(
+      );
+      dispatch(
+        update(
+          JSON.parse(localStorage.getItem("hr"))._id,
+          fullName,
+          profilePhoto.name,
+          birthday,
+          phoneNumber,
+          location,
+          company,
+          companyLogo.name,
+          companyPhotos.name,
+          JSON.parse(localStorage.getItem("user")).id
+        )
+      ).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
-
         },
         (error) => {
-           
           setSuccessful(false);
         }
       );
 
-      
-    history.push("/admin");
-
+      history.push("/admin");
     }
   };
   return (
@@ -147,9 +150,7 @@ export default function HR() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
-                  <h6 className="text-gray-600 text-sm font-bold">
-                    Update HR
-                  </h6>
+                  <h6 className="text-gray-600 text-sm font-bold">Update HR</h6>
                 </div>
 
                 <hr className="mt-6 border-b-1 border-gray-400" />
@@ -172,7 +173,7 @@ export default function HR() {
                           type="text"
                           name="user"
                           disabled={true}
-                          value={JSON.parse(localStorage.getItem("hruser"))._id}
+                          value={JSON.parse(localStorage.getItem("hr"))._id}
                           onChange={onChangeUser}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Full Name"
@@ -208,7 +209,6 @@ export default function HR() {
                           onChange={onChangeProfilePhoto}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="profilePhoto"
-                          
                         />
                       </div>
                       <div className="relative w-full mb-3">
@@ -219,7 +219,6 @@ export default function HR() {
                           birthday
                         </label>
                         <input
-                          
                           type="date"
                           value={birthday}
                           onChange={onChangeBirthday}
@@ -286,7 +285,6 @@ export default function HR() {
                         </label>
                         <input
                           type="file"
-                         
                           onChange={onChangeCampanyLogo}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="companyLogo"
@@ -315,7 +313,6 @@ export default function HR() {
                             type="checkbox"
                             className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                           />
-                          
                         </label>
                       </div>
 

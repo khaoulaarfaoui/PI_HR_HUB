@@ -35,11 +35,11 @@ import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
 import Profile from "views/candidate/Settings";
 import Chat from "./components/Chat/App";
+
 import ProfileCard from "./Linkedin/src/components/ProfileCard";
 import Logo from "assets/img/HR HUB CANDIDATE.png";
 
 const App = () => {
-  
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
 
@@ -78,8 +78,11 @@ const App = () => {
     return (
       <div className="app">
         <div className="left">
+          <Link to="/candidate/settings">
+            <i className="mt-4 p-3 w-full fas fa-arrow-circle-left"></i>
+          </Link>
           <div className={myClasses.headerLeft}>
-            <Link to="/resume">
+            <Link to="/candidate/settings">
               <img src={Logo} alt="logo" className={myClasses.img2} />
             </Link>
           </div>
@@ -165,7 +168,6 @@ const App = () => {
         </Switch>
       </Router>
     </ResumeContextProvider>
-       
   );
 };
 

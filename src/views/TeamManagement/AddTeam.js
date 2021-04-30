@@ -12,7 +12,6 @@ const initialFieldValues = {
 };
 
 const AddEvent = ({ ...props }) => {
-
   useEffect(() => {
     if (props.currentId != 0) {
       setValues({
@@ -25,7 +24,9 @@ const AddEvent = ({ ...props }) => {
   const validate = () => {
     let temp = { ...errors };
     temp.teamName = values.teamName ? "" : "This field is required.";
-    temp.participantNumber = values.participantNumber ? "" : "This field is required.";
+    temp.participantNumber = values.participantNumber
+      ? ""
+      : "This field is required.";
     temp.description = values.description ? "" : "This field is required.";
     setErrors({
       ...temp,
@@ -45,14 +46,12 @@ const AddEvent = ({ ...props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const onSuccess = () => {
-       
-    };
+    const onSuccess = () => {};
     if (validate()) {
       // eslint-disable-next-line eqeqeq
       if (props.currentId == 0) {
-         props.createTeams(values, onSuccess);
-         ButterToast.raise({
+        props.createTeams(values, onSuccess);
+        ButterToast.raise({
           content: (
             <Cinnamon.Crisp
               title="Submitted Successfully"
@@ -62,10 +61,9 @@ const AddEvent = ({ ...props }) => {
             />
           ),
         });
+        window.location.reload();
         resetForm();
-      }
-       
-      else {
+      } else {
         props.updateTeams(props.currentId, values, onSuccess);
         ButterToast.raise({
           content: (
@@ -78,17 +76,13 @@ const AddEvent = ({ ...props }) => {
           ),
         });
         resetForm();
-        
       }
-        
     }
   };
 
-
   const reset = (e) => {
     resetForm();
-  }
-  
+  };
 
   return (
     <>
@@ -161,35 +155,29 @@ const AddEvent = ({ ...props }) => {
               </div>
             </div>
 
-       
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
-
-                    <button
+                  <button
                     type="submit"
-                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-1 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   >
                     Confirm
                   </button>
-  
                 </div>
               </div>
 
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
-
-                    <button
+                  <button
                     type="submit"
                     onClick={() => reset()}
-                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-1 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   >
                     Reset
                   </button>
-                  
                 </div>
               </div>
-
             </div>
           </form>
         </div>

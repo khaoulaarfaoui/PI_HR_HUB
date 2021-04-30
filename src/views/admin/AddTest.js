@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { SketchPicker } from "react-color";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -101,6 +102,7 @@ export default function HR() {
     );
 
     history.push("/admin/tests");
+    window.location.reload();
   };
   return (
     <>
@@ -227,6 +229,7 @@ export default function HR() {
                         >
                           color
                         </label>
+
                         <input
                           type="text"
                           value={color}
@@ -234,6 +237,7 @@ export default function HR() {
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="color"
                         />
+                        <SketchPicker />
                       </div>
 
                       <div className="relative w-full mb-3">

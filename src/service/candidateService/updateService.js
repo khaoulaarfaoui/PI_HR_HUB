@@ -15,6 +15,7 @@ const update = (id, data) => {
       aboutMe: data.aboutMe,
       background: data.background,
       fullName: data.fullName,
+      HR_viewed: data.HR_viewed,
     })
     .then((response) => {
       if (response.data) {
