@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Test from "./TestElement.component";
+import Chart from "./chart";
 import styles from "./Dashboard.module.css";
 import axios from "axios";
 import Modal from "react-modal";
@@ -7,6 +8,9 @@ import { Link, useHistory } from "react-router-dom";
 import modalstyles from "./Modal.module.css";
 import teststyles from "./Testelement.module.css";
 import resultstyles from "./TestResult.module.css";
+import TodoList from './TodoList';
+import './App.css';
+
 
 const topics = [
   { id: 1, name: "<--select category-->" },
@@ -73,7 +77,7 @@ function Dashboard(props) {
         setTests(res.data);
       })
       .catch((err) => {
-        if (!localStorage.getItem("auth-token")) history.push("/");
+        if (!localStorage.getItem("auth-token")) history.push("/candidate/login");
         else alert("couldn't fetch please reload");
       });
   }, [modalIsOpen]);
@@ -103,7 +107,7 @@ function Dashboard(props) {
       <div>
         <h1
           className={styles.heading}
-          style={{ background: "white", fontSize: "3em", padding: "2%" }}
+          style={{ background: "#ffff", fontSize: "2.5em", padding: "2%", color: "Black" }}
         >
           Welcome {localStorage.getItem("name")}
         </h1>
@@ -117,7 +121,7 @@ function Dashboard(props) {
       >
         + Add Test
       </button>
-    
+   
       <div className={styles.buttons}>
           <Link
             to="/candidate/login"
@@ -128,10 +132,13 @@ function Dashboard(props) {
           </Link>
           <br />
         </div>
+      
         <br />
       <br />
       <br />
-   
+      <br />
+      <TodoList  />
+      <br />
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setmodalIsOpen(false)}
@@ -221,8 +228,16 @@ function Dashboard(props) {
           ))}
         </div>
       </div>
-      <br />
-      <br />
+      <br/>
+      <br/>
+      
+      <h1
+          className={styles.heading}
+          style={{ background: "#ffff", fontSize: "2.5em", padding: "2%", color: "Black" }}
+        >
+          Statistics
+        </h1>
+      < Chart />
     </React.Fragment>
     </>
   );

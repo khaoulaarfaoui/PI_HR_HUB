@@ -69,6 +69,16 @@ router.route("/getresults").post(async (req, res) => {
     return res.status(400).send();
   }
 });
+router.get("/getall", function (req,res) {
+  console.log("Get all results");
+  result.find({}).exec(function (err, ev) {
+    if (err) {
+      console.log("Error View All results ");
+    } else {
+      res.json(ev);
+    }
+  });
+});
 
 router.route("/addtest").post(async (req, res) => {
   const pin = (await test.countDocuments({}).exec()) + 1000;

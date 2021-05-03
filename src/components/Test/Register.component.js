@@ -29,7 +29,7 @@ function Register() {
       .post("http://localhost:8082/api/user/add", { name, email, password }, options)
       .then((res) => {
         alert("account created");
-        history.push("/candidate/alltests");
+        history.push("/candidate/login");
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -37,8 +37,22 @@ function Register() {
   };
 
   return (
+    
     <div className={styles.parent}>
+      <br/>
       <div className={styles.child}>
+      <button
+    className={styles.buttons}
+    style={{ float: "left", display: "block" }}
+    onClick={() => history.goBack()} > 
+   
+    &lt;- Back
+    </button>
+    <br/>
+    <br/>
+   
+    <br/>
+    <br/>
         <h1 className={styles.heading}>Register</h1>
         <form onSubmit={submithandler}>
           <label htmlFor="name" className={styles.labels}>

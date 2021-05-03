@@ -134,7 +134,7 @@ function Question(props) {
       </div>
       <div id="options">
         {options.map((option, index) => (
-          <div key={index} className={styles.container} onClick={changeclass}>
+          <div key={index} className={styles.container} onClick={styles.qcontainer}>
             <input
               className={styles.radios}
               type="radio"
@@ -154,8 +154,7 @@ function Question(props) {
           justifyContent: "center",
         }}
       >
-        <a
-          onClick={(e) => {
+        <a onClick={(e) => {
             if (ques == 0) {
             } else {
               setques(ques - 1);

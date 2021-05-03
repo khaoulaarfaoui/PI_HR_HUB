@@ -31,15 +31,7 @@ function Timer(props) {
       if (altsecs.length == 1) altsecs = "0" + altsecs;
       setmins(altmins);
       setsecs(altsecs);
-      return () => {
-        if (window.performance) {
-          if (performance.navigation.type == 1) {
-            alert('reloaded encountered, Submitting the test');
-            props.submithandler();
-          } 
-}
-        
-      };
+      return () => {};
   });
 
   useEffect(() => {

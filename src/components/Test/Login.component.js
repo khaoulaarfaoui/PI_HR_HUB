@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./LoginRegister.module.css";
 import { useHistory } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,9 +35,13 @@ function Login(props) {
   };
 
   return (
+  
+    
+   
     <div className={styles.parent}>
       <div className={styles.child}>
         <h1 className={styles.heading}>Login</h1>
+        
         <form onSubmit={onSubmit}>
           <label className={styles.labels} htmlFor="email">
             Email:
@@ -64,6 +68,29 @@ function Login(props) {
           <button type="submit" className={styles.buttons}>
             Login
           </button>
+         <br/>
+              <li className="items-center">
+                <Link
+                  className={
+                   
+                    (window.location.href.indexOf("/candidate/register") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/candidate/register"
+                >
+                  <i
+                    className={
+                   
+                      (window.location.href.indexOf("/candidate/register") !==
+                      -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                 Register
+                </Link>
+              </li>
           <br />
         </form>
       </div>

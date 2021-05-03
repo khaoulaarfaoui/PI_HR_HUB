@@ -25,10 +25,13 @@ import WebcamStreamCapture from "views/candidate/WebcamStreamCapture";
 import Homenav from "../components/Test/HomeHeader.component";
 import Loginnav from "../components/Test/LoginNav.component";
 import Login from "../components/Test/LoginRegister.component";
+import register from "../components/Test/Register.component";
 import alltests from "../components/Test/Dashboard.component";
 import Testresult from "../components/Test/TestResult.component";
 import Ques from "../components/Test/Question.component";
-
+import schedule from "../components/Test/schedule";
+import index from "../components/Test/index";
+import chart from "../components/Test/chart";
 export default function Candidate() {
   const [loggedin, setloggedin] = useState(false);
   return (
@@ -48,14 +51,16 @@ export default function Candidate() {
             <Route path="/candidate/tables" exact component={Tables} />
             <Route path="/candidate/chat" exact component={Chat} />
             
-           
-           
+            <Route path="/candidate/schedule" exact component={schedule} />
+            <Route path="/candidate/index" exact component={index} />
            
             <Route path="/candidate/abouttest" exact component={Testresult} />
           
             <Route path="/candidate/taketest" exact component={taketest} />
-
+            <Route path="/candidate/chart" exact component={chart} />
+        
             <Route path="/candidate/login" exact component={Login} />
+            <Route path="/candidate/register" exact component={register} />
             <Route
             exact path={["/login", "/register"]}
             render={() => <Login setloggedin={setloggedin} />}

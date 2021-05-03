@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import styles from "./Taketest.module.css";
+import style from"./Dashboard.module.css";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Taketest() {
   let history = useHistory();
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [pin, setpin] = useState("");
+  
+  const logout = () => {
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("loggedin");
+  };
 
   const submithandler = (e) => {
     e.preventDefault();
@@ -41,6 +48,15 @@ function Taketest() {
         >
         Welcome in our E-learning platform
         </h1>
+        <div  className={style.buttons}>
+          <Link
+            to="/candidate/taketest"
+            onClick={logout}
+          >
+            Logout
+          </Link>
+          <br />
+        </div>
     <div className={styles.parent}>
       <div className={styles.taketest}>
         <h1 className={styles.heading}>Take Test</h1>
