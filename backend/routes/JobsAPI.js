@@ -119,17 +119,26 @@ router.post("/submit/:id/:ide", async (req, res) => {
   const job = await Jobs.findById(ide);
   const cand = await candidate.findById(id);
   const c = await candidate.findById(id);
-  console.log("candidat", cand);
-  cand.SubmittedJobs.push(job);
-  cand.save();
 
-  job.candidateSubmit.push(c);
-  job.save();
+  var test = [];
+  for (let i in cand.SubmittedJobs) {
+    test.push(cand.SubmittedJobs[i]._id);
+  }
+  console.log(test);
 
-  console.log("rrr", id);
-  console.log(ide);
-  res.send(cand);
-  console.log("submitted job add");
+  if (test.includes(job._id)) {
+    console.log("job already exist");
+    res.send("job already exist");
+  } else {
+    cand.SubmittedJobs.push(job);
+    cand.save();
+
+    job.candidateSubmit.push(c);
+    job.save();
+
+    res.send("job not exist");
+    console.log("not exist");
+  }
 });
 
 router.get("/submittedJobs/:id", function (req, res) {
@@ -140,6 +149,7 @@ router.get("/submittedJobs/:id", function (req, res) {
   let id = user.id;
   candidate
     .findById(id)
+
     .select("SubmittedJobs")
 
     .exec(function (err, jobs) {
@@ -158,6 +168,9 @@ router.get("/submittedCandidates/:id", function (req, res) {
   let user = req.params;
   let id = user.id;
   Jobs.findById(id)
+    .populate({
+      path: "candidateSubmit",
+    })
     .select("candidateSubmit")
 
     .exec(function (err, cands) {

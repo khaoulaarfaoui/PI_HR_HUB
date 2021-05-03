@@ -25,14 +25,16 @@ class JobDetails extends Component {
 
     this.state = {
       responseData: 0,
+      jobStatus: "",
 
       _id: 0,
       title: "",
       description: "",
       salary: 0,
       requirement: "",
-
+      status: "",
       black: true,
+
       disable: false,
       SUBMIT_JOB_URL: "http://localhost:8082/job/submit/",
 
@@ -69,15 +71,36 @@ class JobDetails extends Component {
     };
   };
   handleSubmit(e) {
+    const status = localStorage.getItem("candidate");
+    var candidateStatus = JSON.parse(status).data.status;
+
+    console.log(candidateStatus);
+    var str = window.location.pathname;
+    let idJOb = str.slice(19);
     history.push(this.SUBMIT_JOB_URL);
-    NotificationManager.success("Success ", "Job submitted", 2000);
+
+    axios
+      .post(
+        "http://localhost:8082/job/submit/607c5d570f3bae21e06f5782/" + idJOb
+      )
+      .then((response) => {
+        var test = response.data;
+
+        console.log(test);
+        this.setState({ jobStatus: response.data });
+
+        if (this.state.jobStatus === "job already exist") {
+          NotificationManager.error("Error ", "Job already submitted", 3000);
+        } else {
+          NotificationManager.success("Success ", "Job submitted", 3000);
+        }
+      });
 
     this.setState({ black: !this.state.black });
     this.setState({ disable: !this.state.disable });
+
     this.setState({ color: !this.state.color });
     e.preventDefault();
-
-    this.props.onAdd(this.state);
 
     localStorage.setItem(
       "Applied Job" + this.state.title,
@@ -109,7 +132,7 @@ class JobDetails extends Component {
 
     axios
       .get(
-        "http://localhost:8082/job//match/" + id + "/607c5d570f3bae21e06f5782"
+        "http://localhost:8082/job/match/" + id + "/607c5d570f3bae21e06f5782"
       )
       .then((response) => {
         var score = response.data;
@@ -117,6 +140,11 @@ class JobDetails extends Component {
         console.log(score);
         this.setState({ responseData: response.data });
       });
+
+    if (!true === true) {
+      this.setState({ disable: !this.state.disable });
+      this.setState({ color: !this.state.color });
+    }
     const props = this.props;
     if (props.location && props.location.state) {
       const job = props.location.state.job;
@@ -289,7 +317,7 @@ class JobDetails extends Component {
             </div>
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
               <h5 className="text-gray-800 py-4 px-10 text-center text-2xl font-bold left-100-px ">
-                Similar Jobs{" "}
+                Similar Jobs
               </h5>{" "}
             </div>
             <Scrollbars autoHide style={{ width: 400, height: 600 }}>
