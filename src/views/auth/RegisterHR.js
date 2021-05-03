@@ -1,13 +1,43 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import PhoneInput from "react-phone-number-input";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { register, uploadFile } from "../../Redux/actions/hr/hr";
+import PhoneInput from "react-phone-number-input";
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from "react-country-region-selector";
 
+  /* FORM VALIDATORS */
+  const required = (value) => {
+    if (!value) {
+      return (
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <strong className="font-bold">REQUIRED!</strong>
+          <span className="block sm:inline">This field is required.</span>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg
+              className="fill-current h-6 w-6 text-red-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+            </svg>
+          </span>
+        </div>
+      );
+    }
+  };
 export default function HR() {
   const form = useRef();
   const history = useHistory();
@@ -60,11 +90,11 @@ export default function HR() {
     setBirthday(Birthday);
   };
   const onChangephoneNumber = (e) => {
-    const PhoneNumber = e.target.value;
+    const PhoneNumber = e;
     setPhoneNumber(PhoneNumber);
   };
   const onChangeLocation = (e) => {
-    const Location = e.target.value;
+    const Location = e;
     setLocation(Location);
   };
 
@@ -139,7 +169,7 @@ export default function HR() {
         }
       );
 
-      history.push("/admin");
+      history.push("/auth/login");
     }
   };
   return (
@@ -192,6 +222,7 @@ export default function HR() {
                           name="username"
                           value={fullName}
                           onChange={onChangefullName}
+                          validations={[required]}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Full Name"
                         />
@@ -223,6 +254,7 @@ export default function HR() {
                           type="date"
                           value={birthday}
                           onChange={onChangeBirthday}
+                          validations={[required]}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="birthday"
                         />
@@ -236,12 +268,12 @@ export default function HR() {
                           phoneNumber
                         </label>
                         <PhoneInput
-                        
-                        international
-                        countryCallingCodeEditable={false}
-                        defaultCountry="TN"
+                              international
+                              countryCallingCodeEditable={false}
+                              defaultCountry="TN"
                           value={phoneNumber}
                           onChange={onChangephoneNumber}
+                          validations={[required]}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="phoneNumber"
                         />
@@ -254,10 +286,11 @@ export default function HR() {
                         >
                           location
                         </label>
-                        <input
+                        <CountryDropdown
                           type="text"
                           value={location}
                           onChange={onChangeLocation}
+                          validations={[required]}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="location"
                         />
@@ -274,6 +307,7 @@ export default function HR() {
                           type="text"
                           value={company}
                           onChange={onChangeComapny}
+                          validations={[required]}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="company"
                         />

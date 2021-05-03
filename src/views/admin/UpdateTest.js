@@ -13,7 +13,7 @@ export default function HR() {
 
   const checkBtn = useRef();
   //const { user: currentUser } = useSelector((state) => state.userReducer.auth);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(JSON.parse(localStorage.getItem("Test")).title);
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [tags, setTags] = useState("");

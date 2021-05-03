@@ -80,7 +80,7 @@ export default function CandidateRegister() {
   const [education, setEducation] = useState();
   const [skills, setSkills] = useState("");
   const [region, setRegion] = useState("");
-  const [user, setUser] = useState(currentUser.id);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")).id);
   const [successful, setSuccessful] = useState(false);
   const [aboutMe, setAboutme] = useState("");
   const [message, setMessage] = useState("");

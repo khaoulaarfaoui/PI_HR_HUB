@@ -212,6 +212,7 @@ const Tests = (props) => {
                                 e.preventDefault();
 
                                 localStorage.setItem("idTest", test._id);
+                                localStorage.setItem("Test",JSON.stringify(test));
 
                                 window.location.href = "/admin/UpdateTest";
                               }}

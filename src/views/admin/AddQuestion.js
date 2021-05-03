@@ -1,12 +1,11 @@
 import React, { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { SketchPicker } from "react-color";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { AddTest } from "../../Redux/actions/hrtest/hrtest";
+import { AddQuestion } from "../../Redux/actions/hrtest/hrtest";
 
 export default function HR() {
   const form = useRef();
@@ -14,61 +13,26 @@ export default function HR() {
 
   const checkBtn = useRef();
   //const { user: currentUser } = useSelector((state) => state.userReducer.auth);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [type, setType] = useState("");
-  const [tags, setTags] = useState("");
-  const [result, setResult] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [color, setColor] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")).id);
+  const [question, setQuestion] = useState("");
+  const [response, setResponse] = useState("");
+  const [user, setUser] = useState(localStorage.getItem("idTest"));
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onChangeTitle = (e) => {
-    const Title = e.target.value;
-    setTitle(Title);
-  };
   const onChangeUser = (e) => {
     const user = e.target.value;
     setUser(user);
   };
-  const onChangeDescription = (e) => {
-    const Description = e.target.value;
-    setDescription(Description);
+  const onChangeQuestion = (e) => {
+    const Question = e.target.value;
+    setQuestion(Question);
   };
-  const onChangeType = (e) => {
-    const Type = e.target.value;
-    setType(Type);
-  };
-  const onChangeResult = (e) => {
-    const Result = e.target.value;
-    setResult(Result);
-  };
-
-  const onChangeCompanyName = (e) => {
-    const CompanyName = e.target.value;
-    setCompanyName(CompanyName);
+  const onChangeResponse = (e) => {
+    const Response = e.target.value;
+    setResponse(Response);
   };
 
   const dispatch = useDispatch();
-
-  const onChangeColor = (e) => {
-    const Color = e.target.value;
-    setColor(Color);
-  };
-
-  const onChangeStartDate = (e) => {
-    const StartDate = e.target.value;
-    setStartDate(StartDate);
-  };
-
-  const onChangeEndDate = (e) => {
-    const EndDate = e.target.value;
-    setEndDate(EndDate);
-  };
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -76,20 +40,15 @@ export default function HR() {
     setMessage("");
     setSuccessful(false);
 
-    form.current.validateAll();
-
+   form.current.validateAll();
+     console.log("obj", localStorage.getItem("idTest"),
+     question,
+     response)
     dispatch(
-      AddTest(
-        title,
-        description,
-        tags,
-        result,
-        companyName,
-        color,
-        startDate,
-        endDate,
-        type,
-        JSON.parse(localStorage.getItem("user"))._id
+      AddQuestion(
+        localStorage.getItem("idTest"),
+        question,
+        response
       )
     ).then(
       (response) => {
@@ -101,8 +60,8 @@ export default function HR() {
       }
     );
 
-    history.push("/admin/tests");
-    window.location.reload();
+   history.push("/admin/question");
+   window.location.reload();
   };
   return (
     <>
@@ -129,13 +88,13 @@ export default function HR() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          HR
+                          Test
                         </label>
                         <Input
                           type="text"
                           name="user"
                           disabled={true}
-                          value={JSON.parse(localStorage.getItem("user"))._id}
+                          value={localStorage.getItem("idTest")}
                           onChange={onChangeUser}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                           placeholder="Full Name"
@@ -146,15 +105,15 @@ export default function HR() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          title
+                          Question
                         </label>
                         <Input
                           type="text"
-                          name="username"
-                          value={title}
-                          onChange={onChangeTitle}
+                          name="Question"
+                          value={question}
+                          onChange={onChangeQuestion}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="title"
+                          placeholder="Question"
                         />
                       </div>
 
@@ -163,110 +122,14 @@ export default function HR() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          description
+                          Response
                         </label>
                         <Input
                           type="text"
-                          name="description"
-                          onChange={onChangeDescription}
+                          name="response"
+                          onChange={onChangeResponse}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="description"
-                        />
-                      </div>
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          type
-                        </label>
-                        <input
-                          type="text"
-                          onChange={onChangeType}
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="type"
-                        />
-                      </div>
-
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          result
-                        </label>
-                        <input
-                          type="text"
-                          name="username"
-                          defaultCountry="TN"
-                          value={result}
-                          onChange={onChangeResult}
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="result"
-                        />
-                      </div>
-
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          companyName
-                        </label>
-                        <input
-                          type="text"
-                          value={companyName}
-                          onChange={onChangeCompanyName}
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="company name"
-                        />
-                      </div>
-
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          color
-                        </label>
-
-                        <input
-                          type="text"
-                          value={color}
-                          onChange={onChangeColor}
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="color"
-                        />
-                        <SketchPicker />
-                      </div>
-
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          startDate
-                        </label>
-                        <input
-                          type="date"
-                          onChange={onChangeStartDate}
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="start Date"
-                        />
-                      </div>
-
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          endDate
-                        </label>
-                        <input
-                          type="date"
-                          onChange={onChangeEndDate}
-                          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                          placeholder="end Date"
+                          placeholder="response"
                         />
                       </div>
 
@@ -292,7 +155,7 @@ export default function HR() {
 
                       <div className="text-center mt-6">
                         <button className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
-                          Add test
+                          Add Question
                         </button>
                       </div>
                     </div>

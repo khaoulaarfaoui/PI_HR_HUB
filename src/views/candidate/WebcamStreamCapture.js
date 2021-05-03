@@ -8,6 +8,8 @@ import { AddtestResponse } from "../../Redux/actions/hrtest/hrtest";
 
 const WebcamStreamCapture = () => {
   const [Photos, setPhotos] = useState("");
+  const [image, setImage] = useState("");
+
   const dispatch = useDispatch();
 
   const webcamRef = React.useRef(null);
@@ -74,24 +76,29 @@ const WebcamStreamCapture = () => {
     e.preventDefault();
 
     dispatch(uploadFile(Photos))
-      .then(() => {})
+      .then((file) => {
+
+         console.log("file ",file.data.filename )
+         setImage(file.data.filename)
+         dispatch(
+          AddtestResponse(
+            file.data.filename,
+            JSON.parse(localStorage.getItem("user")).id,
+            localStorage.getItem("idTest")
+          )
+        )
+          .then(() => {})
+          .catch(() => {
+            //setSuccessful(false);
+          });
+        })
       .catch(() => {
         //setSuccessful(false);
       });
 
     console.log("user ", JSON.parse(localStorage.getItem("user")).id);
 
-    dispatch(
-      AddtestResponse(
-        Photos.name,
-        JSON.parse(localStorage.getItem("user")).id,
-        localStorage.getItem("idTest")
-      )
-    )
-      .then(() => {})
-      .catch(() => {
-        //setSuccessful(false);
-      });
+    
   };
 
   return (
