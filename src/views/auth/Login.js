@@ -176,19 +176,15 @@ const Login = (props) => {
                 </button>
               </div>
               <hr className="mt-6 border-b-1 border-gray-400" />
-              {isAuthorized && (
-                // <Redirect
-                //   to={{
-                //     pathname: "/profile",
-                //     state: { firstName: firstName },
-                //   }}
-                // />
-                <ProfileCard
-                  firstName={firstName}
-                  lastName={LastName}
-                  pictureURL={pictureURL}
-                />
-              )}
+              {isAuthorized
+                ? localStorage.setItem(
+                    "CandidateLinkedin",
+                    JSON.stringify({ firstName, LastName, pictureURL })
+                  )
+                : localStorage.setItem(
+                    "CandidateLinkedin",
+                    JSON.stringify(null)
+                  )}
             </div>
 
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
