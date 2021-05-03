@@ -102,7 +102,6 @@ export default function HR() {
     );
 
     history.push("/admin/tests");
-    window.location.reload();
   };
   return (
     <>

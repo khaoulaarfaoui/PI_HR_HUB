@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function SidebarCandidate() {
-  const candidate = useSelector(
-    (state) => state.candidateReducer.candidate.state.candidate
-  );
+  const candidate = JSON.parse(localStorage.getItem("candidate"));
+
+  // const candidate = useSelector((state) => state.candidateReducer.candidate);
   console.log("helloooo", candidate);
 
   const [collapseShow, setCollapseShow] = React.useState("hidden");

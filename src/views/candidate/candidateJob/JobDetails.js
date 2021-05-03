@@ -84,7 +84,7 @@ class JobDetails extends Component {
       JSON.stringify(this.state.title)
     );
     const name = localStorage.getItem("candidate");
-    var candidateName = JSON.parse(name).data.fullName;
+    var candidateName = JSON.parse(name).fullName;
     const subscriberId = "foo1";
     let endpoint =
       "	https://api.ravenhub.io/company/pfxz6Wrhd9/subscribers/" +
@@ -109,7 +109,7 @@ class JobDetails extends Component {
 
     axios
       .get(
-        "http://localhost:8082/job//match/" + id + "/607c5d570f3bae21e06f5782"
+        "http://localhost:8082/job//match/" + id + "/606103742c55cc92ce70e473"
       )
       .then((response) => {
         var score = response.data;

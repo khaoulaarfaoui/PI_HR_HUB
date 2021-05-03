@@ -16,19 +16,15 @@
   display: block;
 }
 
-.radios {
-  visibility: hidden;
-}
-
 .container:hover {
   background: #ddd;
 }
 
 .containeractive {
-  background: white;
+  background: #6699cc;
   padding: 15px 50px;
   border-radius: 20px;
-  margin: 10px 10%;
+  margin: 15px 20%;
   font-size: 1.17em;
   display: block;
 }

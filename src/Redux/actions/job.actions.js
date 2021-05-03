@@ -33,8 +33,8 @@ console.log("initial", initialState);
   var UPDATE_URL = "http://localhost:8082/job/job/" + id;
   var DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
 }*/
-var GET_URL = "http://localhost:8082/job/jobs/606cc9bff36ac227e8131519";
-var ADD_URL = "http://localhost:8082/job/add/606cc9bff36ac227e8131519";
+var GET_URL = "http://localhost:8082/job/jobs/608757c177af18ddd73b7c58";
+var ADD_URL = "http://localhost:8082/job/add/608757c177af18ddd73b7c58";
 var UPDATE_URL = "http://localhost:8082/job/job/" + id;
 var DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
 //CREATE------------------------------------------------------------------------------------------------------------------------------------------------

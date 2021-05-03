@@ -5,7 +5,7 @@ import {
 } from "../user/types";
 import axios from "axios";
 
-var SUBMIT_JOB_URL = "http://localhost:8082/job/rec/607c5d570f3bae21e06f5782";
+var SUBMIT_JOB_URL = "http://localhost:8082/job/rec/606103742c55cc92ce70e473";
 
 export const fetchRecomjobsuccess = (data) => {
   console.log(data[0]);
