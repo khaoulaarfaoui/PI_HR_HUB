@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import useForm from "./useForm";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import {
   CreateEvents,
   UpdateEvents,

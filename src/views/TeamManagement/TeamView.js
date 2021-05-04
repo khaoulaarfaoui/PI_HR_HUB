@@ -3,9 +3,32 @@ import { connect } from "react-redux";
 import * as actions from "../../Redux/actions/team/TeamAction";
 import AddTeam from "./AddTeam";
 import ButterToast, { Cinnamon } from "butter-toast";
+import AffectTeam from "./AffectTeam";
+import ViewAllCand from "./ViewAllCand";
+import axios from "axios";
+import TeamStats from "components/TeamStats/TeamStats";
 
 const ViewTeam = (props) => {
   const [currentId, setCurrentId] = useState(0);
+
+
+  const [data, setData] = useState( [] );
+
+  useEffect (()=>{
+
+    const fetchData = async () => {
+      const result = await axios(
+        'http://localhost:8082/teams/allcand',
+      );
+ 
+      setData(result.data);
+      console.log(result.data);
+
+    };
+ 
+    fetchData();
+
+  }, []);
 
   useEffect(() => {
     props.fetchAll();
@@ -69,7 +92,7 @@ const ViewTeam = (props) => {
                       <Fragment key={index}>
                         <tr>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                            {team.teamName}{" "}
+                            {team.teamName}{" "} 
                           </th>
                           <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                             {team.participantNumber}{" "}
@@ -103,11 +126,27 @@ const ViewTeam = (props) => {
               </table>
             </div>
           </div>
+
+          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div className="rounded-t mb-0 px-4 py-3 border-0">
+              <div className="flex flex-wrap items-center">
+                <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                  <h3 className="font-semibold text-base text-gray-800">
+                    Teams Chart
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div className="block w-full overflow-x-auto">
+                  <TeamStats />
+            </div>
+          </div>
           
         </div>
 
         <div className="w-full lg:w-4/12 px-4">
           <AddTeam {...{ currentId, setCurrentId }} />
+          
         </div>
       </div>
   

@@ -59,7 +59,7 @@ const App = (props) => {
               <div className=" bannerdarkmode flex flex-wrap justify-center bg-white shadow-xl rounded-lg -mt-64 py-16 px-12 relative z-10">
                 <div className="w-full text-center lg:w-8/12">
                   <h3 className="font-semibold text-3xl">
-                    Welcome to Chat Room
+                    Welcome to Live Chat Room
                   </h3>
 
                   <div className="sm:block flex flex-col mt-10">

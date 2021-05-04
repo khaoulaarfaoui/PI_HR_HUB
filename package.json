@@ -29,7 +29,7 @@
     "antd": "^4.15.2",
     "axios": "^0.21.1",
     "butter-toast": "^3.3.5",
-    "chart.js": "^2.9.3",
+    "chart.js": "^3.2.1",
     "drei": "^2.2.21",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
@@ -81,7 +81,7 @@
     "xlsx": "^0.16.9"
   },
   "scripts": {
-    "start": "PORT=5000 react-scripts start",
+    "start": "set PORT=5000 &&  react-scripts start",
     "postinstall": "npx patch-package",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test",
