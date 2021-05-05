@@ -17,6 +17,8 @@ import NavbarCandidate from "./components/Navbars/CandidateNavbar";
 import ChatBotRobot from "./components/Chatbot/Chatbot.compoenent";
 
 import Admin from "layouts/Admin";
+import Linkedin from "layouts/Linkedin";
+
 import Candidate from "layouts/Candidate";
 import Auth from "layouts/Auth.js";
 
@@ -25,10 +27,10 @@ import Index from "views/Index";
 import Event3D from "./views/EventManagement/Event3D";
 import BoardUser from "./views/candidate/BoardUser";
 import BoardAdmin from "./views/candidate/BoardAdmin";
+import LinkedinProfile from "./views/linkedin/LinkedinProfile";
 
 import { logout } from "./Redux/actions/user/auth";
 import { clearMessage } from "./Redux/actions/user/message";
-import Linkedin from "./Linkedin/src/Linkedin";
 
 import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
@@ -138,6 +140,7 @@ const App = () => {
             )
           }
         /> */}
+          <Route path="/LinkedinProfile" component={LinkedinProfile} />
           <Route path="/profile" component={ProfileCard} />
           <Route path="/admin" component={Admin} />
           <Route path="/candidateadd" component={RegisterCandidate} />
@@ -148,6 +151,7 @@ const App = () => {
           <Route path="/user" component={BoardUser} />
           <Route path="/chat" component={Chat} />
           <Route path="/admin" component={BoardAdmin} />
+
           <Route path="/linkedin" component={Linkedin} />
           <Route path="/event3D" component={Event3D} />
           <Route path="/candidate" component={Candidate} />

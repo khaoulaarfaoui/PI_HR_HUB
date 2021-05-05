@@ -8,7 +8,6 @@ router.get("/", function (req, res, next) {
   requestAccessToken(req.query.code, req.query.state)
     .then((response) => {
       requestProfile(response.body.access_token).then((response) => {
-        console.log(response.body);
         res.render("callback", { profile: response.body });
       });
     })
@@ -33,6 +32,13 @@ function requestProfile(token) {
   return request
     .get(
       "https://api.linkedin.com/v2/me?projection=(id,localizedFirstName,localizedLastName,profilePicture(displayImage~digitalmediaAsset:playableStreams))"
+    )
+    .set("Authorization", `Bearer ${token}`);
+}
+function requestEmail(token) {
+  return request
+    .get(
+      "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))"
     )
     .set("Authorization", `Bearer ${token}`);
 }
