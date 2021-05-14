@@ -116,6 +116,7 @@ export default function HR() {
       );
 
       history.push("/admin");
+      window.location.reload();
     }
   };
   return (

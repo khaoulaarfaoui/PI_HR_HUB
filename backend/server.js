@@ -23,6 +23,7 @@ var connectIo = require("./chatbotService");
 var socket = require("socket.io");
 const eventsmodel = require("./Controllers/events/eventController");
 const teams = require("./Controllers/teams/teamsController");
+const { MongoClient } = require("mongodb");
 
 var logger = require("morgan");
 
@@ -64,16 +65,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 var dir = path.join(__dirname, "public");
+app.use("/callback", callback);
 
 app.use("/public", express.static(dir));
 console.log(__dirname);
 app.use("/candidate", candidate);
 app.use("/hr", hr);
-app.use(express.static(path.join(__dirname, "../build")));
-app.use("/callback", callback);
-app.get("/linkedin", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build", "index.html"));
-});
+
 app.use("/response", response);
 app.use("/hrTest", hrTest);
 
@@ -111,7 +109,12 @@ app.get("/file/:image", function (req, res) {
   console.log(__dirname + "/public/" + req.params.image);
   res.sendFile(__dirname + "/public/" + req.params.image);
 });
-
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../build")));
+  app.get("/*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+  });
+}
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error("Not Found");
@@ -129,8 +132,22 @@ app.use(function (err, req, res, next) {
   console.log(err);
   res.render("error");
 });
-
-db.mongoose
+const url =
+  "mongodb+srv://HR_HUB:root2021@cluster0.1ymld.mongodb.net/HR_HUB?retryWrites=true&w=majority";
+const connectionParams = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+};
+mongoose
+  .connect(url, connectionParams)
+  .then(() => {
+    console.log("Connected to database ");
+  })
+  .catch((err) => {
+    console.error(`Error connecting to the database. \n${err}`);
+  });
+/*db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -143,7 +160,7 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-
+*/
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {

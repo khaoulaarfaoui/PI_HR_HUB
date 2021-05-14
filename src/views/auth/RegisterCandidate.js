@@ -194,6 +194,7 @@ export default function CandidateRegister() {
         }
       );
       history.push("/candidate");
+      window.location.reload();
     }
   };
   return (
