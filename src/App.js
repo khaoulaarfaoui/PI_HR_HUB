@@ -37,11 +37,14 @@ import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
 import Profile from "views/candidate/Settings";
 import Chat from "./components/Chat/App";
-
+import Chart from "./components/Test/chart";
 import ProfileCard from "./Linkedin/src/components/ProfileCard";
 import Logo from "assets/img/HR HUB CANDIDATE.png";
 
+
+
 const App = () => {
+  
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
 
@@ -105,6 +108,9 @@ const App = () => {
                 The Basic
               </Button>
             </div>
+              
+           
+
             {/* Placeholder for a second template */}
             {/* <div className={myClasses.templateCard}>
           <img src={thumbn} alt="thumbnail" className={myClasses.imgThumb} />
@@ -150,6 +156,7 @@ const App = () => {
           <Route path="/basic" component={Basic} />
           <Route path="/user" component={BoardUser} />
           <Route path="/chat" component={Chat} />
+          <Route path="/chart" component={Chart} />
           <Route path="/admin" component={BoardAdmin} />
 
           <Route path="/linkedin" component={Linkedin} />

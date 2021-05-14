@@ -223,6 +223,29 @@ export default function SidebarCandidate() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/candidate/index") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/candidate/index"
+                >
+                  <i
+                    className={
+                      "fas fa-calendar-alt mr-2 text-sm " +
+                      (window.location.href.indexOf("/candidate/index") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  CALENDER
+                </Link>
+              </li>
+
+
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/candidate/taketest") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
@@ -259,7 +282,7 @@ export default function SidebarCandidate() {
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  E-learning Dashbord
+                  E-learning Dashboard
                 </Link>
               </li>
 
