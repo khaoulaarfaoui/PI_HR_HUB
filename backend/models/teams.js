@@ -10,9 +10,9 @@ const teamsSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "HR",
   },
-  candidate: {
+  candidate:[ {
     type: Schema.Types.ObjectId,
     ref: "Candidate",
-  },
+}],
 });
 module.exports = mongoose.model("teams", teamsSchema, "teams");

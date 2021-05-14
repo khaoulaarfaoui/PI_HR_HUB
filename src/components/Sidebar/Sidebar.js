@@ -182,7 +182,7 @@ export default function SidebarCandidate() {
                 >
                   <i
                     className={
-                      "fas fa-calendar-alt mr-2 text-sm" +
+                      "fas fa-calendar-alt text-gray-500 mr-2 text-sm" +
                       (window.location.href.indexOf("/admin/event") !== -1
                         ? "opacity-75"
                         : "text-gray-400")

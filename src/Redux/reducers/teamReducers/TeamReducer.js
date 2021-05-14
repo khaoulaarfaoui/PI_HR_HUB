@@ -25,7 +25,6 @@ const teamReducer = (state = defaultState, action) =>{
                 ...state,
                 list:  state.list.map( t => t._id == action.payload._id ? action.payload : t ) 
             }
-
         case DELETE_TEAM_SUCCESS:
             return {
                 ...state,

@@ -1,5 +1,5 @@
 const eventsmodel = require("../../models/events.js");
-const Team = require ("../../models/teams");
+const teamsmodel = require ("../../models/teams.js");
 const express = require("express");
 const router = express.Router();
 
@@ -17,9 +17,6 @@ try {
 
       ev.save();
       res.json(ev);
-      const t = await Team.findById({ _id: ev.teams });
-      console.log(t);
-
       
       console.log("Event ++");
   }catch(err){
@@ -81,6 +78,43 @@ router.put("/updateEvent/:id", function (req, res) {
     });
 
   });
+
+//Affect Candidate to Team
+router.post("/affectTeam/:idt/:id", async(req,res)=>{
+
+  let id = req.params.id;
+  let idt = req.params.idt;
+  
+  
+  const tt = await teamsmodel.findById(idt)
+            .populate({ path: "candidate",})
+            .select("teamName");
+
+  const ev = await  eventsmodel.findById(id);
+  
+  ev.teams.push(tt);
+  ev.save();
+ 
+  console.log("Team affect to Event");
+  res.json("Team affect to Event ");
+  
+  })
+
+//Get Team by Events
+router.get("/teamEvent/:id", async(req,res)=>{
+
+  let id = req.params.id;
+
+    const ev = await eventsmodel.findById(id)
+              .populate({ path: "teams",})
+              .select("teams");
+
+    res.json(ev)
+
+})
+
+
+
 
 
 module.exports = router;

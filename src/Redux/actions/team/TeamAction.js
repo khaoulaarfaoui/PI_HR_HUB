@@ -1,5 +1,4 @@
 import {
-    ADD_TEAM_SUCCESS,
     DELETE_TEAM_SUCCESS,
     EDIT_TEAM_SUCCESS,
     FETCH_TEAM_SUCCESS,
@@ -13,6 +12,8 @@ export const FetchTeams = () => axios.get(URL + "allTeams");
 export const AddTeams = () => axios.post(URL + "addTeams");
 export const UpdateT = (id, updatedTeam) => axios.put(URL + "updateTeam/" + id, updatedTeam);
 export const DeleteT = (id) => axios.delete(URL + "deleteTeam/" + id);
+export const FetchCandTeam = (id) => axios.get(URL + "teamCand/" + id);
+export const AffectCand = (id,team) => axios.post(URL + "affect/" + id + "/"+ team );
 
 
 //FETCH-------------------
@@ -28,20 +29,7 @@ export const AllTeams = () => (dispatch) => {
       .catch((err) => console.log(err));
   };
 
-//ADD------------------
-/*
-export const CreateTeams = (data, onSuccess) => dispatch => {
-    AddTeams(data)
-        .then(res =>{
-            dispatch({
-                type: ADD_TEAM_SUCCESS,
-                payload: res.data,
-            })
-            onSuccess()
-        })
-        .catch(err => console.log(err))
-    };
-*/
+//ADD--------------------
 export const CreateTeams = (team) => {
   
   const data = {
@@ -95,9 +83,30 @@ export const DeleteTeams = (id, onSuccess) => (dispatch) => {
       })
       .catch((error) => console.log(error));
   };
+ 
+//FETCH CAND-----------------
+export const ViewCandTeam = (id, onSuccess) => (dispatch) => {
+  FetchCandTeam(id)
+    .then((res) => {
+      dispatch({
+        payload: res.data
+      });
+      onSuccess();
+    })
+    .catch((error) => console.log(error));
+};
 
-  
-  
+//Affect CAND-----------------
+export const CandToTeam = (id, data, onSuccess) => (dispatch) => {
+  AffectCand(id,data)
+    .then((res) => {
+      dispatch({
+        payload: res.data
+      });
+      onSuccess();
+    })
+    .catch((error) => console.log(error));
+};  
 
 
   

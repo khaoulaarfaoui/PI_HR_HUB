@@ -10,9 +10,9 @@ import axios from "axios";
 const URL = "http://localhost:8082/events/";
 export const FetchEvents = () => axios.get(URL + "allEvents");
 export const AddEvents = () => axios.post(URL + "addEvents");
-export const UpdateEv = (id, updatedEvent) =>
-  axios.put(URL + "updateEvent/" + id, updatedEvent);
+export const UpdateEv = (id, updatedEvent) => axios.put(URL + "updateEvent/" + id, updatedEvent);
 export const DeleteEv = (id) => axios.delete(URL + "deleteEvent/" + id);
+export const AffectTe = (idt , id) => axios.post(URL + "affectTeam/" + idt + "/" + id);
 
 //FETCH-------------------
 export const AllEvents = () => (dispatch) => {
@@ -86,6 +86,20 @@ export const DeleteEvents = (id, onSuccess) => (dispatch) => {
         payload: id,
       });
       onSuccess();
+    })
+    .catch((error) => console.log(error));
+};
+
+
+
+//Affect-----------------
+export const AffectTeamEvent = (idt, id) => (dispatch) => {
+  AffectTe(idt, id)
+    .then((res) => {
+      dispatch({
+        type: EDIT_EV_SUCCESS,
+        payload: res.data,
+      });
     })
     .catch((error) => console.log(error));
 };

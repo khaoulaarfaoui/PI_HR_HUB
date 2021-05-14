@@ -58,12 +58,12 @@ const candidateSchema = new Schema({
       ref: "candidateTest",
     },
   ],
-  teams: [
+  teams: 
     {
       type: Schema.Types.ObjectId,
       ref: "teams",
     },
-  ],
+  
 });
 
 module.exports = mongoose.model("Candidate", candidateSchema, "Candidate");

@@ -10,10 +10,10 @@ const eventsSchema = new Schema({
   },
   description: String,
   file: String,
-  teams: {
+  teams: [{
     type: Schema.Types.ObjectId,
     ref: "teams",
-  },
+  }],
 
 });
 module.exports = mongoose.model("event", eventsSchema, "event");

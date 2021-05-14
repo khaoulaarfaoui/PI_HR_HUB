@@ -25,7 +25,7 @@ import CardAddJob from "components/Cards/CardsHR/CardAddJob";
 import TestJob from "components/Cards/CardsHR/testjob";
 import Events from "views/EventManagement/EventsView";
 import Teams from "views/TeamManagement/TeamView";
-
+import TeamStats from "../components/TeamStats/TeamStats"
 import AddTest from "views/admin/AddTest";
 import UpdateTest from "views/admin/UpdateTest";
 
@@ -60,6 +60,7 @@ export default function Admin() {
             <Route path="/admin/search" component={SearchCandidate} />
             <Route path="/admin/event" exact component={Events} />
             <Route path="/admin/teams" exact component={Teams} />
+            <Route path="/admin/teamStats" exact component={TeamStats} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />
