@@ -24,6 +24,16 @@ const Tests = (props) => {
             <div className="rounded-t mb-0 px-4 py-3 border-0">
               <div className="flex flex-wrap items-center">
                 <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+
+                <h3
+                    className={
+                      "font-semibold text-lg " +
+                      (color === "light" ? "text-gray-800" : "text-white")
+                    }
+                  >
+                    Card Tests
+                  </h3>
+                  </div>
                   <h3
                     className={
                       "font-semibold text-lg " +
@@ -42,7 +52,7 @@ const Tests = (props) => {
                       Add Test
                     </button>{" "}
                   </h3>
-                </div>
+                
               </div>
             </div>
             <div className="block w-full overflow-x-auto">
@@ -202,6 +212,7 @@ const Tests = (props) => {
                                 e.preventDefault();
 
                                 localStorage.setItem("idTest", test._id);
+                                localStorage.setItem("Test",JSON.stringify(test));
 
                                 window.location.href = "/admin/UpdateTest";
                               }}

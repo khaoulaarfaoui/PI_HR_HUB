@@ -36,7 +36,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:3000",
 };
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -83,14 +83,14 @@ app.use("/api/test", testRouter);
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./public/");
+    cb(null, __dirname+"/public/");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
   },
 });
 console.log("storageeeeeeeeeeeeeeeeeeee", storage);
-var upload = multer({ storage: storage });
+var upload = multer({ storage: storage,limits:500000 });
 app.get("/", function (req, res) {
   res.send("Hello HR HUB");
 });
@@ -103,10 +103,9 @@ app.post("/uploadfile", upload.single("file"), (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
-  res.send(file);
+  res.status(200).json(file);
 });
 app.get("/file/:image", function (req, res) {
-  console.log(__dirname + "/public/" + req.params.image);
   res.sendFile(__dirname + "/public/" + req.params.image);
 });
 if (process.env.NODE_ENV === "production") {

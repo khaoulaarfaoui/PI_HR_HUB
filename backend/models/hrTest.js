@@ -17,7 +17,7 @@ const hrTestSchema = new Schema({
   endDate: Date,
   hr: {
     type: Schema.Types.ObjectId,
-    ref: "HR",
+    ref: "User",
   },
   questions:[QuestionSchema]
 });

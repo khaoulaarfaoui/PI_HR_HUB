@@ -161,13 +161,22 @@ export const update = (
   );
 };
 
-export const findallHrTestQuestion = (id) => (dispatch) => {
-  return HrTestService.findallHrTestQuestion(id).then(
+export const AddQuestion = (id, title, response) => (dispatch) => {
+  return HrTestService.updateHRQuestion(id, title, response).then(
     (response) => {
+      console.log("response from actions auth ", response);
+      localStorage.setItem("data", JSON.stringify(response.data));
       dispatch({
-        type: REGISTER_SUCCESS_HR_TEST_QUESTION,
-        payload: response.data.data,
+        type: REGISTER_SUCCESS_HR_TEST,
+        payload: response.data,
       });
+
+      dispatch({
+        type: SET_MESSAGE_HR_TEST,
+        payload: response.data,
+      });
+
+      //history.push("/admin");
 
       return Promise.resolve();
     },
@@ -196,6 +205,38 @@ export const findallHrTestQuestion = (id) => (dispatch) => {
 export const deleteTestHr = (id) => (dispatch) => {
   return HrTestService.deleteHrTest(id).then(
     (response) => {
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: REGISTER_FAIL_HR_TEST,
+      });
+
+      dispatch({
+        type: SET_MESSAGE_HR_TEST,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
+
+export const findallHrTestQuestion = (id) => (dispatch) => {
+  return HrTestService.findallHrTestQuestion(id).then(
+    (response) => {
+      dispatch({
+        type: REGISTER_SUCCESS_HR_TEST_QUESTION,
+        payload: response.data.data,
+      });
+
       return Promise.resolve();
     },
     (error) => {

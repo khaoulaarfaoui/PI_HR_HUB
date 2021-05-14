@@ -35,7 +35,27 @@ const Question = (props) => {
                   >
                     Card Question
                   </h3>
+
+                  
                 </div>
+                <h3
+                    className={
+                      "font-semibold text-lg " +
+                      (color === "light" ? "text-gray-800" : "text-white")
+                    }
+                  >
+                    <button
+                      className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+
+                        window.location.href = "/admin/AddQuestion";
+                      }}
+                    >
+                      Add Question
+                    </button>{" "}
+                  </h3>
               </div>
             </div>
             <div className="block w-full overflow-x-auto">
@@ -137,8 +157,24 @@ const Question = (props) => {
                             >
                               Delete
                               </Button>{" "}{" "}
-                          </td>
 
+                              <Button
+                              color="warning"
+                              rounded
+                              className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+
+                                localStorage.setItem("idTest", test._id);
+                                localStorage.setItem("Question", JSON.stringify(test));
+
+                                window.location.href = "/admin/Updatequestion";
+                              }}
+                            >
+                              Edit
+                            </Button>{" "}
+                          </td>
 
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
                             <TableDropdownQuestion />

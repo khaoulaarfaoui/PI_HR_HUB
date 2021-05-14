@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 // fake data generator
-const getItems = (count, offset = 0) =>
-  Array.from({ length: count }, (v, k) => k).map((k) => ({
+const getItems = (count,title, offset = 0) =>
+Array.from({ length: count }, (v, k) => k).map((k) => ({
     id: `item-${k + offset}-${new Date().getTime()}`,
-    content: `item ${k + offset}`,
+    content:  ` ${title}`,
   }));
 
 const reorder = (list, startIndex, endIndex) => {
@@ -54,7 +54,14 @@ const getListStyle = (isDraggingOver) => ({
 });
 
 export default function DraggableView() {
-  const [state, setState] = useState([getItems(10), getItems(5, 10)]);
+  const [title, setTitle] = useState("");
+
+  const [state, setState] = useState([getItems(0,title), getItems(0,title, 0)]);
+
+  const onChangeTitle = (e) => {
+    const title = e.target.value;
+    setTitle(title);
+  };
 
   function onDragEnd(result) {
     const { source, destination } = result;
@@ -97,7 +104,11 @@ export default function DraggableView() {
                 </svg>
                 Pannels
               </button>
-              <input type="text" className="bg-blue-300 rounded p-2"></input>
+              <input
+                type="text"
+                onChange={onChangeTitle}
+                className="bg-blue-300 rounded p-2"
+              ></input>
             </div>
 
             <div className="flex items-center ml-auto">
@@ -105,7 +116,7 @@ export default function DraggableView() {
                 className="bg-blue-light rounded h-8 w-16 font-bold text-white text-sm mr-2"
                 type="button"
                 onClick={() => {
-                  setState([...state, getItems(1)]);
+                  setState([...state, getItems(1,title)]);
                 }}
               >
                 + NEW GROUPE
@@ -114,7 +125,7 @@ export default function DraggableView() {
                 className="bg-blue-light rounded h-8 w-16 font-bold text-white text-sm mr-2"
                 type="button"
                 onClick={() => {
-                  setState([...state, getItems(1)]);
+                  setState([...state, getItems(1,title)]);
                 }}
               >
                 + NEW ITEM
@@ -146,7 +157,7 @@ export default function DraggableView() {
           <div className="flex px-4 pb-8 items-start overflow-x-scroll">
             <div className="rounded bg-grey-light  flex-no-shrink w-64 p-2 mr-3">
               <div className="flex justify-between py-1">
-                <h3 className="text-sm">TO DO THIS WEEK</h3>
+                <h3 className="text-sm">-------TO DO THIS WEEK</h3>
                 <svg
                   className="h-4 fill-current text-grey-dark cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +169,7 @@ export default function DraggableView() {
             </div>
             <div className="rounded bg-grey-light flex-no-shrink w-64 p-2 mr-3">
               <div className="flex justify-between py-1">
-                <h3 className="text-sm">GONNA DO TODAY</h3>
+                <h3 className="text-sm">--------GONNA DO TODAY</h3>
                 <svg
                   className="h-4 fill-current text-grey-dark cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +181,7 @@ export default function DraggableView() {
             </div>
             <div className="rounded bg-grey-light flex-no-shrink w-64 p-2 mr-3">
               <div className="flex justify-between py-1">
-                <h3 className="text-sm">TO REVIEW</h3>
+                <h3 className="text-sm">----------TO REVIEW</h3>
                 <svg
                   className="h-4 fill-current text-grey-dark cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
