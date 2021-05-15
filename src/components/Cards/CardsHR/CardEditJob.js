@@ -295,7 +295,7 @@ class CardEditJob extends Component {
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                             <i className="fas fa-circle text-orange-500 mr-2"></i>{" "}
-                            {cand.status ? "true" : "false"}{" "}
+                            {cand.status ? "true" : "false"}
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                             <button

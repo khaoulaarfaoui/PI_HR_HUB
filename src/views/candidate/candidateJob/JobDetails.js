@@ -71,6 +71,9 @@ class JobDetails extends Component {
     };
   };
   handleSubmit(e) {
+    const status = localStorage.getItem("candidate");
+    var candidateStatus = JSON.parse(status).data.status;
+    console.log(candidateStatus);
     var str = window.location.pathname;
     let idJOb = str.slice(19);
     history.push(this.SUBMIT_JOB_URL);
