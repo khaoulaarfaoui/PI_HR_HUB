@@ -55,7 +55,7 @@ router.all("/upload", function (req, res) {
   // READ
 });
 dataPath = "cv/compiled/ErnaniJoppert P Martins.pdf.json";
-
+console.log("rrer");
 router.get("/data", (req, res) => {
   fs.readFile(dataPath, "utf8", (err, data) => {
     if (err) {
