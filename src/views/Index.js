@@ -34,12 +34,14 @@ export default function Index() {
                 <a
                   target="_blank"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  href="/admin/jobs"
                 >
                   For HR
                 </a>
                 <a
                   className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                   target="_blank"
+                  href="/candidate/jobs"
                 >
                   Find a job
                 </a>

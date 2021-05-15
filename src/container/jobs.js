@@ -74,7 +74,7 @@ class Jobs extends Component {
     } else if (this.props.error) {
       return (
         <div
-          class="bg-red-lightest border border-red-light text-red-dark pl-4 pr-8 py-3 rounded relative"
+          class="bg-red-lightest border border-red-light text-red-dark pl-4 pr-8 py-3 rounded "
           role="alert"
         >
           <strong class="font-bold">Error!</strong>
@@ -100,8 +100,8 @@ class Jobs extends Component {
         <>
           <div className="flex flex-col lg:ml-auto mr-3">
             <form className="flex flex-col flex-wrap lg:ml-auto mr-3 ">
-              <div className="relative flex w-full flex-wrap ">
-                <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+              <div className=" flex w-full flex-wrap ">
+                <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400  bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
                   <i className="fas fa-search"></i>
                 </span>
                 <input

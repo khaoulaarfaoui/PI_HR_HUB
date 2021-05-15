@@ -43,7 +43,7 @@ const UserDropdown = () => {
           <img
             alt="logged user"
             className="my-2  w-12 h-12 text-sm text-white bg-gray-300 inline-flex items-center justify-center rounded-full"
-            src={candidate.profilePhoto}
+            //            src={candidate.profilePhoto}
           />
         </div>
       </a>

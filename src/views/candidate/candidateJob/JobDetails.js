@@ -25,14 +25,16 @@ class JobDetails extends Component {
 
     this.state = {
       responseData: 0,
+      jobStatus: "",
 
       _id: 0,
       title: "",
       description: "",
       salary: 0,
       requirement: "",
-
+      status: "",
       black: true,
+
       disable: false,
       SUBMIT_JOB_URL: "http://localhost:8082/job/submit/",
 
@@ -69,21 +71,42 @@ class JobDetails extends Component {
     };
   };
   handleSubmit(e) {
+    const status = localStorage.getItem("candidate");
+    var candidateStatus = JSON.parse(status).data.status;
+    console.log(candidateStatus);
+    var str = window.location.pathname;
+    let idJOb = str.slice(19);
     history.push(this.SUBMIT_JOB_URL);
-    NotificationManager.success("Success ", "Job submitted", 2000);
+
+    axios
+      .post(
+        "http://localhost:8082/job/submit/607c5d570f3bae21e06f5782/" + idJOb
+      )
+      .then((response) => {
+        var test = response.data;
+
+        console.log(test);
+        this.setState({ jobStatus: response.data });
+
+        if (this.state.jobStatus === "job already exist") {
+          NotificationManager.error("Error ", "Job already submitted", 3000);
+        } else {
+          NotificationManager.success("Success ", "Job submitted", 3000);
+        }
+      });
 
     this.setState({ black: !this.state.black });
     this.setState({ disable: !this.state.disable });
+
     this.setState({ color: !this.state.color });
     e.preventDefault();
-
-    this.props.onAdd(this.state);
 
     localStorage.setItem(
       "Applied Job" + this.state.title,
       JSON.stringify(this.state.title)
     );
     const name = localStorage.getItem("candidate");
+    console.log(JSON.parse(name).fullName);
     var candidateName = JSON.parse(name).fullName;
     const subscriberId = "foo1";
     let endpoint =
@@ -109,7 +132,7 @@ class JobDetails extends Component {
 
     axios
       .get(
-        "http://localhost:8082/job//match/" + id + "/606103742c55cc92ce70e473"
+        "http://localhost:8082/job/match/" + id + "/607c5d570f3bae21e06f5782"
       )
       .then((response) => {
         var score = response.data;
@@ -117,6 +140,11 @@ class JobDetails extends Component {
         console.log(score);
         this.setState({ responseData: response.data });
       });
+
+    if (!true === true) {
+      this.setState({ disable: !this.state.disable });
+      this.setState({ color: !this.state.color });
+    }
     const props = this.props;
     if (props.location && props.location.state) {
       const job = props.location.state.job;
@@ -133,10 +161,14 @@ class JobDetails extends Component {
   render() {
     const job = this.props.job;
     const data = [
-      { name: "Accepted", value: this.state.responseData, fill: "#90cdf4" },
+      {
+        name: "Accepted",
+        value: this.state.responseData,
+        fill: "#90cdf4",
+      },
       {
         name: "Not accepted",
-        value: 1 - this.state.responseData,
+        value: 1.0 - this.state.responseData,
         fill: "#3182ce",
       },
     ];
@@ -226,35 +258,7 @@ class JobDetails extends Component {
                   Description :
                 </h5>{" "}
                 <p className="mb-4 px-12 text-base leading-relaxed text-gray-800">
-                  An artist of considerable range, Jenna the name taken by
-                  Melbourne-raised, Brooklyn-based Nick Murphy writes, performs
-                  and records all of his own music, giving it a warm, intimate
-                  feel with a solid groove structure. An artist of considerable
-                  range. An artist of considerable range, Jenna the name taken
-                  by Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                  performs and records all of his own music, giving it a warm,
-                  intimate feel with a solid groove structure. An artist of
-                  considerable range. An artist of considerable range, Jenna the
-                  name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range. An artist of considerable range, Jenna
-                  the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range. An artist of considerable range, Jenna
-                  the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range. An artist of considerable range, Jenna
-                  the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range. An artist of considerable range, Jenna
-                  the name taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                  writes, performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An artist
-                  of considerable range.
+                  {this.state.description}
                 </p>
                 <h5 className="text-gray-800 py-4 px-12 text-2xl font-bold left-100-px ">
                   Requirement :
@@ -271,15 +275,15 @@ class JobDetails extends Component {
               <h5 className="text-gray-800 py-4 px-10 text-center text-2xl font-bold left-100-px ">
                 Job matching
               </h5>{" "}
-              <div className="px-10">
-                <PieChart width={400} height={200}>
+              <div className=" ">
+                <PieChart width={400} height={250}>
                   <Pie
                     dataKey="value"
-                    isAnimationActive={false}
+                    isAnimationActive={true}
                     data={data}
                     cx="50%"
                     cy="50%"
-                    outerRadius={80}
+                    outerRadius={70}
                     label
                   />
 
@@ -289,7 +293,7 @@ class JobDetails extends Component {
             </div>
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
               <h5 className="text-gray-800 py-4 px-10 text-center text-2xl font-bold left-100-px ">
-                Similar Jobs{" "}
+                Similar Jobs
               </h5>{" "}
             </div>
             <Scrollbars autoHide style={{ width: 400, height: 600 }}>

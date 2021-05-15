@@ -46,12 +46,11 @@
     "leaflet": "^1.7.1",
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.3",
-<<<<<<< HEAD
+
     "node-sass": "^4.0.0",
     "ng2-charts": "^2.4.2",
-=======
+
     "nodemailer": "^6.6.0",
->>>>>>> Amir
     "pdf-text-extract": "^1.5.0",
     "popper.js": "^1.16.1",
     "react": "16.13.1",
@@ -112,11 +111,7 @@
     "xlsx": "^0.16.9"
   },
   "scripts": {
-<<<<<<< HEAD
     "start": "PORT=5000  react-scripts start",
-=======
-    "start": "react-scripts start",
->>>>>>> Amir
     "postinstall": "npx patch-package",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test",
