@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ToastProvider, useToasts } from "react-toast-notifications";
 
 import { updateCandidate } from "../../../Redux/actions/candidate/candidate";
+import axios from "axios";
 // components
 
 export default function CardSettings(props) {
@@ -14,6 +15,14 @@ export default function CardSettings(props) {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const dispatch = useDispatch();
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    summary: "",
+    phone: "",
+    skills: "",
+    education: "",
+  });
 
   const [successful, setSuccessful] = useState(false);
   const [fullName, setFullName] = useState(candidate.fullName);
@@ -118,17 +127,38 @@ export default function CardSettings(props) {
         addToast(e.message, { appearance: "error" });
       });
   };
+  const save = () => {
+    axios.get("http://localhost:8082/cv/index/data").then((response) => {
+      var score = response.data;
 
+      console.log(score.name);
+      setData({
+        name: score.name,
+        email: score.email,
+        summary: score.summary,
+        phone: score.phone,
+        education: score.education,
+        skills: score.skills,
+      });
+    });
+  };
   return (
     <>
       <main>
         <div className="rounded-t  py-6"></div>
-        <div className="flex-auto px-2 lg:px-2 py-10 pt-0">
+        <div className="flex-auto  px-2 lg:px-2 py-10 pt-0">
           <button
             className="bg-blue-500  text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
             onClick={updateContent}
           >
             Update
+          </button>
+          <button
+            type="button"
+            className="bg-green-500  text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            onClick={save}
+          >
+            save
           </button>
           <form>
             {" "}
@@ -149,8 +179,7 @@ export default function CardSettings(props) {
                       <input
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        value={user.username}
-                        disabled={true}
+                        defaultValue={data.name}
                       />
                     </div>
                   </div>
@@ -166,7 +195,7 @@ export default function CardSettings(props) {
                         type="email"
                         disabled={true}
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        defaultValue={user.email}
+                        defaultValue={data.email}
                       />
                     </div>
                   </div>
@@ -183,7 +212,7 @@ export default function CardSettings(props) {
                       type="text"
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       onChange={onChangefullName}
-                      value={fullName}
+                      defaultValue={data.name}
                     />
                   </div>
                 </div>
@@ -205,7 +234,7 @@ export default function CardSettings(props) {
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                         onChange={onChangephoneNumber}
-                        value={phoneNumber}
+                        defaultValue={data.phone}
                       />
                     </div>
                   </div>
@@ -261,7 +290,7 @@ export default function CardSettings(props) {
                         type="email"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                         onChange={onChangeEducation}
-                        value={education}
+                        defaultValue={data.education}
                       />
                     </div>
                   </div>
@@ -271,13 +300,13 @@ export default function CardSettings(props) {
                         className="block uppercase text-gray-700 text-xs font-bold mb-2"
                         htmlFor="grid-password"
                       >
-                        Speciality
+                        Skills
                       </label>
                       <input
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                         onChange={onChangeBackground}
-                        value={background}
+                        defaultValue={data.skills}
                       />
                     </div>
                   </div>
@@ -384,10 +413,9 @@ export default function CardSettings(props) {
                       <textarea
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
+                        defaultValue={data.summary}
                         rows="4"
                         onChange={onChangeAboutme}
-                        value={aboutMe}
                       ></textarea>
                     </div>
                   </div>

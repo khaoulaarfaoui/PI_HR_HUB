@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 // components
@@ -16,7 +17,7 @@ export default function CardProfile() {
               <img
                 alt="..."
                 className="pt-4 w-32 h-32 p-1  mt-8 bg-white  rounded-full"
-                src={candidate.profilePhoto}
+                //                src={candidate.profilePhoto}
               />
             </div>
           </div>
@@ -30,7 +31,7 @@ export default function CardProfile() {
             </div>
             <div className="mb-2 text-gray-700 mt-10">
               <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
-              {candidate.title}
+              {candidate.skills}
             </div>
             <div className="mb-2 text-gray-700">
               <i className="fas fa-university mr-2 text-lg text-gray-500"></i>

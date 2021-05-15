@@ -38,7 +38,7 @@ const Job = ({ job, onEdit, onDelete }) => {
 
 const Card = ({ className, children }) => (
   <div
-    className={`${className} relative flex flex-col border-2 border-gray-200 rounded-lg`}
+    className={`${className}  flex flex-col border-2 border-gray-200 rounded-lg`}
     style={style}
   >
     {children}
