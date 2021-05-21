@@ -23,7 +23,9 @@ export default function HR() {
   const [color, setColor] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user"))._id);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user"))._id
+  );
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -77,7 +79,7 @@ export default function HR() {
     setSuccessful(false);
 
     form.current.validateAll();
- console.log("user id ",user)
+    console.log("user id ", user);
     dispatch(
       AddTest(
         title,
@@ -101,8 +103,7 @@ export default function HR() {
       }
     );
 
-   history.push("/admin/tests");
-   window.location.reload();
+    history.push("/admin/tests");
   };
   return (
     <>
@@ -135,10 +136,8 @@ export default function HR() {
                           type="text"
                           name="user"
                           disabled={true}
-                          value={JSON.parse(localStorage.getItem("user")).id}
-                      
+                          value={JSON.parse(localStorage.getItem("user"))._id}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                         
                         />
                       </div>
                       <div className="relative w-full mb-3">

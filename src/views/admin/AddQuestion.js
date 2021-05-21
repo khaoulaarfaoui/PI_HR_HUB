@@ -40,16 +40,10 @@ export default function HR() {
     setMessage("");
     setSuccessful(false);
 
-   form.current.validateAll();
-     console.log("obj", localStorage.getItem("idTest"),
-     question,
-     response)
+    form.current.validateAll();
+    console.log("obj", localStorage.getItem("idTest"), question, response);
     dispatch(
-      AddQuestion(
-        localStorage.getItem("idTest"),
-        question,
-        response
-      )
+      AddQuestion(localStorage.getItem("idTest"), question, response)
     ).then(
       (response) => {
         setMessage(response.data.message);
@@ -60,8 +54,7 @@ export default function HR() {
       }
     );
 
-   history.push("/admin/question");
-   window.location.reload();
+    history.push("/admin/question");
   };
   return (
     <>

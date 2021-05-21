@@ -83,14 +83,14 @@ app.use("/api/test", testRouter);
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, __dirname+"/public/");
+    cb(null, __dirname + "/public/");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
   },
 });
 console.log("storageeeeeeeeeeeeeeeeeeee", storage);
-var upload = multer({ storage: storage,limits:500000 });
+var upload = multer({ storage: storage, limits: 500000 });
 app.get("/", function (req, res) {
   res.send("Hello HR HUB");
 });
@@ -131,13 +131,14 @@ app.use(function (err, req, res, next) {
   console.log(err);
   res.render("error");
 });
-const url =
+/*const url =
   "mongodb+srv://HR_HUB:root2021@cluster0.1ymld.mongodb.net/HR_HUB?retryWrites=true&w=majority";
 const connectionParams = {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
 };
+
 mongoose
   .connect(url, connectionParams)
   .then(() => {
@@ -146,7 +147,8 @@ mongoose
   .catch((err) => {
     console.error(`Error connecting to the database. \n${err}`);
   });
-/*db.mongoose
+  */
+db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -159,7 +161,7 @@ mongoose
     console.error("Connection error", err);
     process.exit();
   });
-*/
+
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {

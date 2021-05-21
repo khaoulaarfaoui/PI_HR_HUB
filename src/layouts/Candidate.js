@@ -30,7 +30,6 @@ import alltests from "../components/Test/Dashboard.component";
 import Testresult from "../components/Test/TestResult.component";
 import Ques from "../components/Test/Question.component";
 import schedule from "../components/Test/schedule";
-import index from "../components/Test/index";
 import chart from "../components/Test/chart";
 import Alljobs from "views/candidate/candidateJob/allJobs";
 import savedJobs from "views/candidate/candidateJob/savedJobs";
@@ -58,16 +57,13 @@ export default function Candidate() {
             <Route path="/candidate/tables" exact component={Tables} />
             <Route path="/candidate/jobs" exact component={Alljobs} />
             <Route path="/candidate/map" exact component={Maps} />
-
             <Route path="/candidate/details/:id" exact component={JobDetails} />
             <Route
               path="/candidate/submittedJobs"
               exact
               component={AppliedJobs}
             />
-
             <Route path="/candidate/savedJobs" exact component={savedJobs} />
-
             <Route path="/candidate/question" exact component={Question} />{" "}
             <Route path="/event3D" exact component={Event3D} />{" "}
             <Route path="/candidate/webcam" exact component={webcam} />{" "}
@@ -82,15 +78,10 @@ export default function Candidate() {
               component={WebcamStreamCapture}
             />{" "}
             <Route path="/candidate/chat" exact component={Chat} />
-            
             <Route path="/candidate/schedule" exact component={schedule} />
-            <Route path="/candidate/index" exact component={index} />
-           
             <Route path="/candidate/abouttest" exact component={Testresult} />
-          
             <Route path="/candidate/taketest" exact component={taketest} />
             <Route path="/candidate/chart" exact component={chart} />
-        
             <Route path="/candidate/login" exact component={Login} />
             <Route path="/candidate/register" exact component={register} />
             <Route

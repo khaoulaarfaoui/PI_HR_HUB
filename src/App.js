@@ -41,10 +41,9 @@ import Chart from "./components/Test/chart";
 import ProfileCard from "./Linkedin/src/components/ProfileCard";
 import Logo from "assets/img/HR HUB CANDIDATE.png";
 
-
+import calender from "../src/components/Test/index";
 
 const App = () => {
-  
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
 
@@ -108,8 +107,6 @@ const App = () => {
                 The Basic
               </Button>
             </div>
-              
-           
 
             {/* Placeholder for a second template */}
             {/* <div className={myClasses.templateCard}>
@@ -146,6 +143,7 @@ const App = () => {
             )
           }
         /> */}
+          <Route path="/candidate/calender" exact component={calender} />
           <Route path="/LinkedinProfile" component={LinkedinProfile} />
           <Route path="/profile" component={ProfileCard} />
           <Route path="/admin" component={Admin} />

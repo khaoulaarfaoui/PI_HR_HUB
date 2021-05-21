@@ -17,7 +17,7 @@ export default function CardProfile() {
               <img
                 alt="..."
                 className="pt-4 w-32 h-32 p-1  mt-8 bg-white  rounded-full"
-                //                src={candidate.profilePhoto}
+                src={candidate.profilePhoto}
               />
             </div>
           </div>

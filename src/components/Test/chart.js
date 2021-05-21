@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Bar , Doughnut, Pie } from "react-chartjs-2";
+import { Bar, Doughnut, Pie } from "react-chartjs-2";
 import axios from "axios";
 
 const Dankmemes = () => {
@@ -12,7 +12,7 @@ const Dankmemes = () => {
     let empAge = [];
     axios
       .get("http://localhost:8082/api/test/getall")
-      .then(res => {
+      .then((res) => {
         console.log(res);
         for (const dataObj of res.data) {
           empSal.push(parseInt(dataObj.score));
@@ -24,13 +24,13 @@ const Dankmemes = () => {
             {
               label: "SCORE",
               data: empSal,
-              backgroundColor: ["rgba(75, 192, 192, 0.6)"],
-              borderWidth: 4
-            }
-          ]
+              backgroundColor: ["rgb(61, 105, 175)"],
+              borderWidth: 4,
+            },
+          ],
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
     console.log(empSal, empAge);
@@ -40,41 +40,39 @@ const Dankmemes = () => {
     chart();
   }, []);
   return (
-      <>
-      
-    <div >
-   
+    <>
       <div>
-        <Bar
-          data={chartData}
-          options={{
-            responsive: true,
-            title: { text: "TEST STATISTICS", display: true },
-            scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    autoSkip: true,
-                    maxTicksLimit: 10,
-                    beginAtZero: true
+        <div className="bg-gray-100">
+          <Bar
+            data={chartData}
+            options={{
+              responsive: true,
+              title: { text: "TEST STATISTICS", display: true },
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      autoSkip: true,
+                      maxTicksLimit: 10,
+                      beginAtZero: true,
+                    },
+                    gridLines: {
+                      display: true,
+                    },
                   },
-                  gridLines: {
-                    display: true
-                  }
-                }
-              ],
-              xAxes: [
-                {
-                  gridLines: {
-                    display: true
-                  }
-                }
-              ]
-            }
-          }}
-        />
+                ],
+                xAxes: [
+                  {
+                    gridLines: {
+                      display: true,
+                    },
+                  },
+                ],
+              },
+            }}
+          />
+        </div>
       </div>
-    </div>
     </>
   );
 };
