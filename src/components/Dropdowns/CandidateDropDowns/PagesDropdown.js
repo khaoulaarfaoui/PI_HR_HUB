@@ -6,7 +6,7 @@ import BellIcon from "react-bell-icon";
 
 const PagesDropdown = () => {
   const candidate = JSON.parse(localStorage.getItem("candidate"));
-  console.log(candidate.HR_viewed);
+  //  console.log(candidate.HR_viewed);
   const [result, setResult] = useState([]);
   const [closenotif, setClosenotif] = useState(true);
 
@@ -17,13 +17,13 @@ const PagesDropdown = () => {
   };
 
   //crudservice.get(candidate.HR_viewed);
-  useEffect(() => {
+  /*useEffect(() => {
     candidate.HR_viewed.map((i) =>
       crudservice.get(i._id).then((response) => {
         setResult(response.data.hr);
       })
     );
-  }, []); // second param [] is a list of dependency to watch and run useEffect
+  }, []); // second param [] is a list of dependency to watch and run useEffect*/
   console.log("resss", result);
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { createJob } from "Redux/actions/job.actions";
 import { connect } from "react-redux";
+
+import fetchCandidates from "../../../views/hr/fetchCandidates";
 class CardEditJob extends Component {
   constructor(props) {
     super(props);
@@ -14,8 +16,12 @@ class CardEditJob extends Component {
       description: "",
       salary: 0,
       requirement: "",
+      search: "",
     };
   }
+  onChange = (e) => {
+    this.setState({ search: e.target.value });
+  };
 
   handleSubmit(e) {
     e.preventDefault();
@@ -48,6 +54,7 @@ class CardEditJob extends Component {
         description: job.description,
         salary: job.salary,
         requirement: job.requirement,
+        candidateSubmit: job.candidateSubmit,
       });
     }
   }
@@ -161,6 +168,161 @@ class CardEditJob extends Component {
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+        <div className="relative py-10 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0 ">
+          <div className="rounded-t bg-white mb-0 px-6 py-6">
+            <div className="text-center flex justify-between ">
+              <h6 className="text-gray-800 text-xl font-bold"></h6>
+              <form class="w-6 ">
+                <div class="flex items-center border-b border-b-2 border-teal py-2">
+                  <input
+                    class="appearance-none bg-transparent border-none w-full
+     text-grey-darker mr-3  px-2 leading-tight focus:outline-none"
+                    type="text"
+                    placeholder="Search here..."
+                    onChange={this.onChange}
+                    aria-label="Full name"
+                  />
+                </div>
+              </form>
+              <button
+                className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                type="button"
+              >
+                refresh
+              </button>
+            </div>
+          </div>
+          <div
+            className={
+              "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
+              "bg-white"
+            }
+          >
+            <div className="rounded-t mb-0 px-4 py-3 border-0">
+              <div className="flex flex-wrap items-center">
+                <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                  <h3 className={"font-semibold text-lg " + "text-gray-800"}>
+                    Candidates Submission
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div className="block w-full overflow-x-auto">
+              {/* Projects table */}
+              <table className="items-center w-full bg-transparent border-collapse">
+                <thead>
+                  <tr>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
+                        "bg-gray-100 text-gray-600 border-gray-200"
+                      }
+                    >
+                      Candidate
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
+                        "bg-gray-100 text-gray-600 border-gray-200"
+                      }
+                    >
+                      Skills
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
+                        "bg-gray-100 text-gray-600 border-gray-200"
+                      }
+                    >
+                      Status
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
+                        "bg-gray-100 text-gray-600 border-gray-200"
+                      }
+                    >
+                      CV{" "}
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
+                        "bg-gray-100 text-gray-600 border-gray-200"
+                      }
+                    >
+                      Action{" "}
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left " +
+                        "bg-gray-100 text-gray-600 border-gray-200"
+                      }
+                    ></th>
+                  </tr>
+                </thead>
+                {this.state.candidateSubmit.map((cand) => {
+                  const { search } = this.state;
+
+                  if (
+                    search !== "" &&
+                    cand.fullName
+                      .toLowerCase()
+                      .indexOf(search.toLocaleLowerCase()) === -1
+                  ) {
+                    return null;
+                  }
+                  return (
+                    <>
+                      {" "}
+                      <tbody>
+                        <tr>
+                          <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left flex items-center">
+                            <img
+                              src={require("assets/img/bootstrap.jpg")}
+                              className="h-12 w-12 bg-white rounded-full border"
+                              alt="..."
+                            ></img>{" "}
+                            <span className={"ml-3 font-bold "}>
+                              {cand.fullName}{" "}
+                            </span>
+                          </th>
+                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                            {cand.skills.map((skill) => {
+                              return <>{skill.value}</>;
+                            })}
+                          </td>
+                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                            <i className="fas fa-circle text-orange-500 mr-2"></i>{" "}
+                            {cand.status ? "true" : "false"}
+                          </td>
+                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                            <button
+                              className="bg-orange-500 px-4 py-2 text-white active:bg-blue-600 font-bold uppercase 
+                      text-xs  py-0 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                              type="button"
+                            >
+                              View PDF{" "}
+                            </button>{" "}
+                          </td>
+                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                            <button
+                              className="bg-green-500 px-4 py-2 text-white active:bg-blue-600 font-bold uppercase 
+                      text-xs  py-0 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                              type="button"
+                            >
+                              Accepte{" "}
+                            </button>
+                          </td>
+                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right"></td>
+                        </tr>
+                      </tbody>
+                    </>
+                  );
+                })}
+              </table>
+            </div>
           </div>
         </div>
       </>

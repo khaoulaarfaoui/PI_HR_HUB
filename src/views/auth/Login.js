@@ -36,13 +36,12 @@ const Login = (props) => {
   };
 
   useEffect(() => {
-    let mounted = true;
-
     window.addEventListener("message", handlePostMessage);
 
     console.log("waaaaaaaaaaaa", firstName);
     // return () => window.removeEventListener("message", handlePostMessage);
   }, []);
+  console.log("from outside", firstName);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

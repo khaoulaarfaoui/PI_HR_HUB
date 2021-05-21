@@ -135,7 +135,11 @@ function Question(props) {
       </div>
       <div id="options">
         {options.map((option, index) => (
-          <div key={index} className={styles.container} onClick={changeclass}>
+          <div
+            key={index}
+            className={styles.container}
+            onClick={styles.container}
+          >
             <input
               className={styles.radios}
               type="radio"

@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
 const hrSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -19,7 +18,7 @@ const hrSchema = new Schema({
 
   jobs: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Number,
       ref: "job",
     },
   ],

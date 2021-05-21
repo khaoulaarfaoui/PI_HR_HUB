@@ -1,39 +1,37 @@
-'use strict';
-const path     = require('path'),
-      _        = require('underscore'),
-      textract = require('textract'),
-      mime     = require('mime'),
-      fs       = require('fs'),
-      logger   = require('tracer').colorConsole();
+var path = require("path");
+var _ = require("underscore");
+var textract = require("textract");
+var mime = require("mime");
+var fs = require("fs");
 
 module.exports.run = processFile;
 
 /**
- *
- * @param file
- * @param cbAfterProcessing
- */
+*
+
+@param file
+@param cbAfterProcessing
+*/
 function processFile(file, cbAfterProcessing) {
   extractText(file, function (PreparedFile) {
+    console.log(file);
     if (_.isFunction(cbAfterProcessing)) {
-
       cbAfterProcessing(PreparedFile);
     } else {
-      return logger.error('cbAfterProcessing should be a function');
+      return console.error("cbAfterProcessing should be a function");
     }
   });
 }
-
 /**
- *
- * @param data
- * @returns {string}
- */
+*
+
+@param data
+@returns {string}
+*/
 function cleanTextByRows(data) {
   var rows,
-      clearRow,
-      clearRows = [];
-
+    clearRow,
+    clearRows = [];
   rows = data.split("\n");
   for (var i = 0; i < rows.length; i++) {
     clearRow = cleanStr(rows[i]);
@@ -46,35 +44,34 @@ function cleanTextByRows(data) {
 }
 
 /**
- *
- * @param file
- * @param cbAfterExtract
- */
+*
+
+@param file
+@param cbAfterExtract
+*/
 function extractText(file, cbAfterExtract) {
-  logger.trace(file)
-  textract.fromFileWithPath(file, {preserveLineBreaks: true}, function (err, data) {
+  textract(file, { preserveLineBreaks: true }, function (err, data) {
     if (err) {
-      return logger.error(err);
+      return console.log(err);
     }
     if (_.isFunction(cbAfterExtract)) {
       data = cleanTextByRows(data);
-      var File = new PreparedFile(file, data.replace(/^\s/gm, ''));
+      var File = new PreparedFile(file, data.replace(/^\s/gm, ""));
       cbAfterExtract(File);
     } else {
-      return logger.error('cbAfterExtract should be a function');
+      return console.error("cbAfterExtract should be a function");
     }
   });
 }
-
 /**
- *
- * @param str
- * @returns {string}
- */
-function cleanStr(str) {
-  return str.replace(/\r?\n|\r|\t|\n/g, '').trim();
-}
+*
 
+@param str
+@returns {string}
+*/
+function cleanStr(str) {
+  return str.replace(/\r?\n|\r|\t|\n/g, "").trim();
+}
 function PreparedFile(file, raw) {
   this.path = file;
   this.mime = mime.lookup(file);
@@ -84,21 +81,25 @@ function PreparedFile(file, raw) {
 }
 
 /**
- *
- * @param Resume
- */
+*
+
+@param Resume
+*/
 PreparedFile.prototype.addResume = function (Resume) {
   this.resume = Resume;
 };
-
 PreparedFile.prototype.saveResume = function (path, cbSavedResume) {
   path = path || __dirname;
 
   if (!_.isFunction(cbSavedResume)) {
-    return logger.error('cbSavedResume should be a function');
+    return console.error("cbSavedResume should be a function");
   }
 
   if (fs.statSync(path).isDirectory() && this.resume) {
-    fs.writeFile(path + '/' + this.name + '.json', this.resume.jsoned(), cbSavedResume);
+    fs.writeFile(
+      path + "/" + this.name + ".json",
+      this.resume.jsoned(),
+      cbSavedResume
+    );
   }
 };

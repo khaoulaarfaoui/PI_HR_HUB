@@ -11,18 +11,32 @@ import {
   FETCH_JOB_SUCCESS,
   FETCH_JOB_LOADING,
   FETCH_JOB_ERROR,
+  FETCH_AllJOB_SUCCESS,
+  FETCH_AllJOB_LOADING,
+  FETCH_AllJOB_ERROR,
 } from "../actions/user/types";
+import { initialState } from "Redux/reducers/hrReducers/hr";
 
 import axios from "axios";
 import { history } from "helpers/history";
 var str = window.location.pathname;
 let id = str.slice(12);
-
-const GET_URL = "http://localhost:8082/job/jobs/6058d433e461980052a601cd";
-const ADD_URL = "http://localhost:8082/job/add/6058d433e461980052a601cd";
-const UPDATE_URL = "http://localhost:8082/job/job/" + id;
-const DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
-
+//console.log("hrReducer", currentHR);
+console.log(id);
+console.log("initial", initialState);
+/*if (initialState.isLoggedIn) {
+  const hr = JSON.parse(localStorage.getItem("hr"));
+  var hrId = hr.data._id;
+  console.log("hr id", hrId);
+  var GET_URL = "http://localhost:8082/job/jobs/" + hrId;
+  var ADD_URL = "http://localhost:8082/job/add/" + hrId;
+  var UPDATE_URL = "http://localhost:8082/job/job/" + id;
+  var DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
+}*/
+var GET_URL = "http://localhost:8082/job/jobs/607cbc9fadc16504dc571f40";
+var ADD_URL = "http://localhost:8082/job/add/607cbc9fadc16504dc571f40";
+var UPDATE_URL = "http://localhost:8082/job/job/" + id;
+var DELETE_URL = "http://localhost:8082/job/deleteJob" + id;
 //CREATE------------------------------------------------------------------------------------------------------------------------------------------------
 
 export const createJobsSuccess = (data) => {
@@ -56,6 +70,7 @@ export const createJob = (job) => {
 
     return (dispatch) => {
       return axios
+
         .post(ADD_URL, data)
         .then((response) => {
           dispatch(createJobsSuccess(response.data));

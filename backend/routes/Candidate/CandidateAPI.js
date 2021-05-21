@@ -179,4 +179,5 @@ router.get("/fetchtext/:text", function (req, res) {
     }
   });
 });
+
 module.exports = router;

@@ -12,12 +12,10 @@ import {
 } from "../../actions/user/types";
 const candidate = JSON.parse(localStorage.getItem("candidate"));
 console.log(candidate);
+export const initialState = candidate
+  ? { isLoggedIn: true, candidate }
+  : { isLoggedIn: false, candidate: null };
 
-const initialState = {
-  state: candidate
-    ? { isLoggedIn: true, candidate }
-    : { isLoggedIn: false, candidate: null },
-};
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
