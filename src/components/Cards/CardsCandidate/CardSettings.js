@@ -6,6 +6,7 @@ import { ToastProvider, useToasts } from "react-toast-notifications";
 
 import { updateCandidate } from "../../../Redux/actions/candidate/candidate";
 import axios from "axios";
+import Education from "components/Left/Education";
 // components
 
 export default function CardSettings(props) {
@@ -179,7 +180,7 @@ export default function CardSettings(props) {
                       <input
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        defaultValue={data.name}
+                        defaultValue={user.username}
                       />
                     </div>
                   </div>
@@ -195,7 +196,7 @@ export default function CardSettings(props) {
                         type="email"
                         disabled={true}
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        defaultValue={data.email}
+                        defaultValue={user.email}
                       />
                     </div>
                   </div>
@@ -212,7 +213,7 @@ export default function CardSettings(props) {
                       type="text"
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       onChange={onChangefullName}
-                      defaultValue={data.name}
+                      defaultValue={fullName}
                     />
                   </div>
                 </div>
@@ -234,7 +235,7 @@ export default function CardSettings(props) {
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                         onChange={onChangephoneNumber}
-                        defaultValue={data.phone}
+                        defaultValue={phoneNumber}
                       />
                     </div>
                   </div>
@@ -290,7 +291,7 @@ export default function CardSettings(props) {
                         type="email"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                         onChange={onChangeEducation}
-                        defaultValue={data.education}
+                        defaultValue={Education}
                       />
                     </div>
                   </div>
@@ -306,7 +307,7 @@ export default function CardSettings(props) {
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                         onChange={onChangeBackground}
-                        defaultValue={data.skills}
+                        defaultValue={background}
                       />
                     </div>
                   </div>
@@ -413,7 +414,7 @@ export default function CardSettings(props) {
                       <textarea
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        defaultValue={data.summary}
+                        defaultValue={aboutMe}
                         rows="4"
                         onChange={onChangeAboutme}
                       ></textarea>

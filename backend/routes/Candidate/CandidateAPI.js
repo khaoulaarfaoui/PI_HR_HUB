@@ -69,7 +69,7 @@ router.post(
         tests: req.body.tests,
         teams: req.body.teams,
       });
-      console.log("herreeeeeeeeee", req.body);
+      console.log("herreeeeeeeeee from node", req.body);
 
       candidate.save();
       console.log("aaaaaaaaaaaaaaaaaa", Candidate);
@@ -85,6 +85,7 @@ router.post(
         username: username,
       });
     } catch (err) {
+      console.log("ereuuuuuuuuuuu", err);
       res.status(400).json({ success: false, message: err.message });
     }
   }

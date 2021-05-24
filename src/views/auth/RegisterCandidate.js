@@ -80,7 +80,7 @@ export default function CandidateRegister() {
   const [education, setEducation] = useState();
   const [skills, setSkills] = useState("");
   const [region, setRegion] = useState("");
-  const [user, setUser] = useState(currentUser.id);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")).id);
   const [successful, setSuccessful] = useState(false);
   const [aboutMe, setAboutme] = useState("");
   const [message, setMessage] = useState("");
@@ -178,6 +178,7 @@ export default function CandidateRegister() {
       console.log("hererrrrrr");
       AuthService.register(form).then(
         (response) => {
+          console.log("responseeee", response);
           setMessage(response.data);
           setSuccessful(true);
         },
@@ -205,7 +206,7 @@ export default function CandidateRegister() {
           <div className="container mx-auto px-4 h-full">
             <div className="flex content-center items-center justify-center h-full">
               <div className="w-full lg:w-6/12 px-4">
-                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg  border-0">
                   <div className="rounded-t mb-0 px-6 py-6">
                     <div className="text-center mb-3">
                       <h6 className="text-gray-600 text-sm font-bold">

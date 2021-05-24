@@ -6,7 +6,7 @@ import BellIcon from "react-bell-icon";
 
 const PagesDropdown = () => {
   const candidate = JSON.parse(localStorage.getItem("candidate"));
-  //  console.log(candidate.HR_viewed);
+  //console.log(candidate.HR_viewed);
   const [result, setResult] = useState([]);
   const [closenotif, setClosenotif] = useState(true);
 

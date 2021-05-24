@@ -20,7 +20,7 @@ function Testelement(props) {
           </div>
           <div className={styles.element}>
             <span className={styles.mobileinfo}>
-              <strong>Topic : </strong>
+              <strong>Topic:</strong>
             </span>
             {props.topicname}
           </div>

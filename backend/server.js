@@ -23,6 +23,7 @@ var connectIo = require("./chatbotService");
 var socket = require("socket.io");
 const eventsmodel = require("./Controllers/events/eventController");
 const teams = require("./Controllers/teams/teamsController");
+const { MongoClient } = require("mongodb");
 
 var logger = require("morgan");
 
@@ -35,7 +36,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:3000",
 };
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -64,16 +65,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 var dir = path.join(__dirname, "public");
+app.use("/callback", callback);
 
 app.use("/public", express.static(dir));
 console.log(__dirname);
 app.use("/candidate", candidate);
 app.use("/hr", hr);
-app.use(express.static(path.join(__dirname, "../build")));
-app.use("/callback", callback);
-app.get("/linkedin", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build", "index.html"));
-});
+
 app.use("/response", response);
 app.use("/hrTest", hrTest);
 
@@ -85,14 +83,14 @@ app.use("/api/test", testRouter);
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./public/");
+    cb(null, __dirname + "/public/");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
   },
 });
 console.log("storageeeeeeeeeeeeeeeeeeee", storage);
-var upload = multer({ storage: storage });
+var upload = multer({ storage: storage, limits: 500000 });
 app.get("/", function (req, res) {
   res.send("Hello HR HUB");
 });
@@ -105,13 +103,17 @@ app.post("/uploadfile", upload.single("file"), (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
-  res.send(file);
+  res.status(200).json(file);
 });
 app.get("/file/:image", function (req, res) {
-  console.log(__dirname + "/public/" + req.params.image);
   res.sendFile(__dirname + "/public/" + req.params.image);
 });
-
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../build")));
+  app.get("/*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+  });
+}
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error("Not Found");
@@ -129,7 +131,23 @@ app.use(function (err, req, res, next) {
   console.log(err);
   res.render("error");
 });
+/*const url =
+  "mongodb+srv://HR_HUB:root2021@cluster0.1ymld.mongodb.net/HR_HUB?retryWrites=true&w=majority";
+const connectionParams = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+};
 
+mongoose
+  .connect(url, connectionParams)
+  .then(() => {
+    console.log("Connected to database ");
+  })
+  .catch((err) => {
+    console.error(`Error connecting to the database. \n${err}`);
+  });
+  */
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,

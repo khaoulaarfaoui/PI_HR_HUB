@@ -198,37 +198,7 @@ export const findallHr = () => (dispatch) => {
 
 
 export const uploadFile = (file) => (dispatch) => {
-  return HrService.uploadFile(file).then(
-    (response) => {
-      dispatch({
-        type: REGISTER_SUCCESS_HR,
-      });
 
-      dispatch({
-        type: SET_MESSAGE_HR,
-        payload: response.data,
-      });
-
-      return Promise.resolve();
-    },
-    (error) => {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-
-      dispatch({
-        type: REGISTER_FAIL_HR,
-      });
-
-      dispatch({
-        type: SET_MESSAGE_HR,
-        payload: message,
-      });
-
-      return Promise.reject();
-    }
-  );
+  return HrService.uploadFile(file)
+  
 };

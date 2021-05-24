@@ -17,6 +17,8 @@ import NavbarCandidate from "./components/Navbars/CandidateNavbar";
 import ChatBotRobot from "./components/Chatbot/Chatbot.compoenent";
 
 import Admin from "layouts/Admin";
+import Linkedin from "layouts/Linkedin";
+
 import Candidate from "layouts/Candidate";
 import Auth from "layouts/Auth.js";
 
@@ -25,19 +27,21 @@ import Index from "views/Index";
 import Event3D from "./views/EventManagement/Event3D";
 import BoardUser from "./views/candidate/BoardUser";
 import BoardAdmin from "./views/candidate/BoardAdmin";
+import LinkedinProfile from "./views/linkedin/LinkedinProfile";
 
 import { logout } from "./Redux/actions/user/auth";
 import { clearMessage } from "./Redux/actions/user/message";
-import Linkedin from "./Linkedin/src/Linkedin";
 
 import { history } from "./helpers/history";
 import RegisterCandidate from "views/auth/RegisterCandidate";
 import RegisterHR from "views/auth/RegisterHR";
 import Profile from "views/candidate/Settings";
 import Chat from "./components/Chat/App";
-
+import Chart from "./components/Test/chart";
 import ProfileCard from "./Linkedin/src/components/ProfileCard";
 import Logo from "assets/img/HR HUB CANDIDATE.png";
+
+import calender from "../src/components/Test/index";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -103,6 +107,7 @@ const App = () => {
                 The Basic
               </Button>
             </div>
+
             {/* Placeholder for a second template */}
             {/* <div className={myClasses.templateCard}>
           <img src={thumbn} alt="thumbnail" className={myClasses.imgThumb} />
@@ -138,6 +143,8 @@ const App = () => {
             )
           }
         /> */}
+          <Route path="/candidate/calender" exact component={calender} />
+          <Route path="/LinkedinProfile" component={LinkedinProfile} />
           <Route path="/profile" component={ProfileCard} />
           <Route path="/admin" component={Admin} />
           <Route path="/candidateadd" component={RegisterCandidate} />
@@ -147,7 +154,9 @@ const App = () => {
           <Route path="/basic" component={Basic} />
           <Route path="/user" component={BoardUser} />
           <Route path="/chat" component={Chat} />
+          <Route path="/chart" component={Chart} />
           <Route path="/admin" component={BoardAdmin} />
+
           <Route path="/linkedin" component={Linkedin} />
           <Route path="/event3D" component={Event3D} />
           <Route path="/candidate" component={Candidate} />

@@ -131,6 +131,7 @@ router.post("/submit/:id/:ide", async (req, res) => {
     res.send("job already exist");
   } else {
     cand.SubmittedJobs.push(job);
+    console.log("saveeeeeeeeee", cand.SubmittedJobs.push(job));
     cand.save();
 
     job.candidateSubmit.push(c);
@@ -303,7 +304,7 @@ router.get("/rec/:id", async (req, res) => {
   let userID = req.params.id;
   const cand = await candidate.findById(userID);
   const skill = cand.skills;
-
+  console.log(skill);
   var arr = skill.map(function (obj) {
     return obj.value;
   });

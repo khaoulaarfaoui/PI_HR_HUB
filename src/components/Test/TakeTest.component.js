@@ -58,53 +58,59 @@ function Taketest() {
         <div className={styles.taketest}>
           <h1 className={styles.heading}>Take Test</h1>
           <br />
-          <form onSubmit={submithandler}>
-            <label className={styles.labels} htmlFor="name">
-              Name:
-            </label>
-            <input
-              className={styles.inputs}
-              onChange={(e) => setname(e.target.value)}
-              id="name"
-              name="name"
-              type="text"
-            />
+        </div>
+        <div className={styles.parent}>
+          <div className={styles.taketest}>
+            <h1 className={styles.heading}>Take Test</h1>
             <br />
-            <label className={styles.labels} htmlFor="email">
-              Email:
-            </label>
-            <input
-              className={styles.inputs}
-              id="email"
-              name="email"
-              type="email"
-              onChange={(e) => setemail(e.target.value)}
-            />
-            <br />
-            <label className={styles.labels} htmlFor="pin">
-              Pin:
-            </label>
-            <input
-              className={styles.inputs}
-              onChange={(e) => setpin(e.target.value)}
-              id="pin"
-              name="pin"
-              type="text"
-            />
-            <br />
-            <button type="submit" className={styles.buttons}>
-              Submit
-            </button>
-            <button
-              className={styles.buttons}
-              style={{ float: "left", display: "block" }}
-              onClick={() => history.goBack()}
-            >
-              &lt;- Back
-            </button>
-            <br />
-            <br />
-          </form>
+            <form onSubmit={submithandler}>
+              <label className={styles.labels} htmlFor="name">
+                Name:
+              </label>
+              <input
+                className={styles.inputs}
+                onChange={(e) => setname(e.target.value)}
+                id="name"
+                name="name"
+                type="text"
+              />
+              <br />
+              <label className={styles.labels} htmlFor="email">
+                Email:
+              </label>
+              <input
+                className={styles.inputs}
+                id="email"
+                name="email"
+                type="email"
+                onChange={(e) => setemail(e.target.value)}
+              />
+              <br />
+              <label className={styles.labels} htmlFor="pin">
+                Pin:
+              </label>
+              <input
+                className={styles.inputs}
+                onChange={(e) => setpin(e.target.value)}
+                id="pin"
+                name="pin"
+                type="text"
+              />
+              <br />
+              <button type="submit" className={styles.buttons}>
+                Submit
+              </button>
+              <button
+                className={styles.buttons}
+                style={{ float: "left", display: "block" }}
+                onClick={() => history.goBack()}
+              >
+                &lt;- Back
+              </button>
+              <br />
+              <br />
+            </form>
+          </div>
         </div>
       </div>
     </>

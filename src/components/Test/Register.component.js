@@ -41,8 +41,22 @@ function Register() {
   };
 
   return (
+    
     <div className={styles.parent}>
+      <br/>
       <div className={styles.child}>
+      <button
+    className={styles.buttons}
+    style={{ float: "left", display: "block" }}
+    onClick={() => history.goBack()} > 
+   
+    &lt;- Back
+    </button>
+    <br/>
+    <br/>
+   
+    <br/>
+    <br/>
         <h1 className={styles.heading}>Register</h1>
         <form onSubmit={submithandler}>
           <label htmlFor="name" className={styles.labels}>

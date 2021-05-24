@@ -72,15 +72,16 @@ class JobDetails extends Component {
   };
   handleSubmit(e) {
     const status = localStorage.getItem("candidate");
-    var candidateStatus = JSON.parse(status).data.status;
+    var candidateStatus = JSON.parse(status).status;
     console.log(candidateStatus);
     var str = window.location.pathname;
     let idJOb = str.slice(19);
+    console.log(idJOb);
     history.push(this.SUBMIT_JOB_URL);
 
     axios
       .post(
-        "http://localhost:8082/job/submit/607c5d570f3bae21e06f5782/" + idJOb
+        "http://localhost:8082/job/submit/606a1b420280f8e8ca03dc0a/" + idJOb
       )
       .then((response) => {
         var test = response.data;
@@ -132,7 +133,7 @@ class JobDetails extends Component {
 
     axios
       .get(
-        "http://localhost:8082/job/match/" + id + "/607c5d570f3bae21e06f5782"
+        "http://localhost:8082/job/match/" + id + "/606a1b420280f8e8ca03dc0a"
       )
       .then((response) => {
         var score = response.data;

@@ -18,10 +18,10 @@ console.log(id);
 var candidateID = candidate.data._id;
 console.log(candidateID);*/
 var SUBMIT_JOB_URL =
-  "http://localhost:8082/job/submit/607c5d570f3bae21e06f5782/" + id;
+  "http://localhost:8082/job/submit/606a1b420280f8e8ca03dc0a/" + id;
 
 var GET_SUBMITJOB_URL =
-  "http://localhost:8082/job/submittedJobs/607c5d570f3bae21e06f5782";
+  "http://localhost:8082/job/submittedJobs/606a1b420280f8e8ca03dc0a";
 export const submitJobsSuccess = (data) => {
   return {
     type: SUBMIT_JOB_SUCCESS,

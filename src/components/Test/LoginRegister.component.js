@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./LoginRegister.module.css";
 import Login from "./Login.component";
-import Register from "./Register.component";
+
 
 function LoginRegister(props) {
   let history = useHistory();
@@ -11,7 +11,7 @@ function LoginRegister(props) {
     <>
     <div className={styles.container}>
       <Login {...props} />
-      <Register />
+      
     </div>
     </>
   );

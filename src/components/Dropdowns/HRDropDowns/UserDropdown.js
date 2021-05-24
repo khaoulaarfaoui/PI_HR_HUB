@@ -43,7 +43,7 @@ const UserDropdown = () => {
           <img
             alt="logged user"
             className="my-2  w-12 h-12 text-sm text-white bg-gray-300 inline-flex items-center justify-center rounded-full"
-            //src={`http://localhost:8082/file/${hr.profilePhoto}`}
+            src={`http://localhost:8082/file/${hr.profilePhoto}`}
           />
         </div>
       </a>
@@ -58,9 +58,9 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
           }
-          to="/candidate/settings"
+          to="/admin/setting"
         >
-          Profile
+          Profiles
         </Link>
         <a
           href="#pablo"

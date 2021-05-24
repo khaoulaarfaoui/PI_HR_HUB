@@ -28,18 +28,17 @@ const Login = (props) => {
   const [firstName, setfirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [pictureURL, setpictureURL] = useState("");
+
   const handlePostMessage = (event) => {
     if (event.data.type === "profile") {
       updateProfile(event.data.profile);
-      console.log("3&", isAuthorized);
     }
   };
 
   useEffect(() => {
     window.addEventListener("message", handlePostMessage);
 
-    console.log("waaaaaaaaaaaa", firstName);
-    // return () => window.removeEventListener("message", handlePostMessage);
+    return () => window.removeEventListener("message", handlePostMessage);
   }, []);
   console.log("from outside", firstName);
 
@@ -84,7 +83,7 @@ const Login = (props) => {
     setPassword(password);
   };
   const requestProfile = () => {
-    var oauthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77vfbhloepwrqa&scope=r_liteprofile&state=123456&redirect_uri=http://localhost:8082/callback`;
+    var oauthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77vfbhloepwrqa&scope=r_liteprofile%20r_emailaddress&state=123456&redirect_uri=http://localhost:8082/callback`;
     var width = 450,
       height = 730,
       left = window.screen.width / 2 - width / 2,
@@ -103,7 +102,20 @@ const Login = (props) => {
         left
     );
   };
-
+  const redirectOnlinkedinLogin = () => {
+    console.log("redirect", isAuthorized);
+    localStorage.setItem(
+      "CandidateLinkedin",
+      JSON.stringify({
+        firstName: firstName,
+        LastName: LastName,
+        pictureURL: pictureURL,
+      })
+    );
+  };
+  const handleLoginLinkedin = () => {
+    history.push("/linkedin/LinkedinProfile");
+  };
   const updateProfile = (profile) => {
     console.log("aaaaaa", profile);
     data = profile;
@@ -176,21 +188,8 @@ const Login = (props) => {
                 </button>
               </div>
               <hr className="mt-6 border-b-1 border-gray-400" />
-              {isAuthorized && (
-                // <Redirect
-                //   to={{
-                //     pathname: "/profile",
-                //     state: { firstName: firstName },
-                //   }}
-                // />
-                <ProfileCard
-                  firstName={firstName}
-                  lastName={LastName}
-                  pictureURL={pictureURL}
-                />
-              )}
+              {redirectOnlinkedinLogin()}
             </div>
-
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
               <div className="text-gray-500 text-center mb-3 font-bold">
                 <small>Or sign in with credentials</small>
@@ -254,6 +253,12 @@ const Login = (props) => {
                   >
                     {loading && <span></span>}
                     Sign In
+                  </button>
+                  <button
+                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    onClick={handleLoginLinkedin}
+                  >
+                    Sign In with Linkedin Auth
                   </button>
                 </div>
                 {message && (
