@@ -2,10 +2,10 @@ import React from "react";
 
 // components
 
-import CardLineChart from "components/Cards/CardLineChart.js";
-import CardBarChart from "components/Cards/CardBarChart.js";
-import CardPageVisits from "components/Cards/CardPageVisits.js";
-import CardSocialTraffic from "components/Cards/CardSocialTraffic.js";
+import CardLineChart from "components/Cards/CardsHR/CardLineChart.js";
+import CardBarChart from "components/Cards/CardsHR/CardBarChart.js";
+import CardPageVisits from "components/Cards/CardsHR/CardPageVisits.js";
+import CardSocialTraffic from "components/Cards/CardsHR/CardSocialTraffic.js";
 
 export default function Dashboard() {
   return (
